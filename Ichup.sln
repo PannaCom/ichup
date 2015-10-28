@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2012 for Web
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ichup", "Ichup\Ichup.csproj", "{656640FB-85EA-4733-BC6F-860F33E0043D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{656640FB-85EA-4733-BC6F-860F33E0043D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{656640FB-85EA-4733-BC6F-860F33E0043D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{656640FB-85EA-4733-BC6F-860F33E0043D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{656640FB-85EA-4733-BC6F-860F33E0043D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
