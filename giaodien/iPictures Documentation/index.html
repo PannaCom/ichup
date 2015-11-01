@@ -1,0 +1,560 @@
+<!doctype html>  
+<!--[if IE 6 ]><html lang="en-us" class="ie6"> <![endif]-->
+<!--[if IE 7 ]><html lang="en-us" class="ie7"> <![endif]-->
+<!--[if IE 8 ]><html lang="en-us" class="ie8"> <![endif]-->
+<!--[if (gt IE 7)|!(IE)]><!-->
+<html lang="en-us"><!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	
+	<title>iPictures - Documentation</title>
+	
+	<meta name="description" content="Documentation for iPictures site template." />
+	<meta name="author" content="Moosethemes" />
+	<meta name="copyright" content="Moosethemes" />
+	<meta name="generator" content="Documenter v1.3 http://rxa.li/documenter" />
+	
+	
+	<link rel="stylesheet" href="css/documenter_style.css" media="all" />
+	
+	<script src="js/jquery.1.5.1.js"></script>
+	
+	<script src="js/jquery.scrollTo-1.4.2-min.js"></script>
+	<script src="js/jquery.easing.js"></script>
+	
+	<link rel="stylesheet" href="css/shDocumenter.css" media="screen" />
+	<script src="js/shCore.js"></script>
+	<script src="js/shBrushCss.js"></script>
+    <script src="js/shBrushXml.js"></script>
+	<script src="js/shBrushJScript.js"></script>
+	<script>SyntaxHighlighter.defaults['toolbar'] = false;SyntaxHighlighter.all();</script>
+
+	<script>document.createElement('section');var duration=500,easing='swing';</script>
+	<script src="js/script.js"></script>
+	
+	<style>
+		html{background-color:#f9f7f5;color:#383838;}
+		::-moz-selection{background:#fcd355;}
+		::selection{background:#fcd355;}
+		#documenter_sidebar #documenter_logo{background-image:url(assets/images/logo.png);}
+		a{color:#ED4D24;}
+		hr{border-top:1px solid #e3e3e3;border-bottom:1px solid #FFFFFF;}
+		#documenter_sidebar, #documenter_sidebar ol a{background:#25292D;color:#888;}
+		#documenter_sidebar ol a{-webkit-text-shadow:1px 1px 0px #B9F2EF;-moz-text-shadow:0px 1px 0px #C8E9EC;text-shadow:0px 1px 0px #C8E9EC;}
+		#documenter_sidebar ol a{background:#9DC6C9; border-bottom:1px solid #81a9ac;border-top:1px solid #b6dcdf;color:#122b31;}
+		#documenter_sidebar ol a:hover{background:#F3594F;color:#FBFFE4;border-top:1px solid #e65248;border-bottom:1px solid #ec544a;}
+		#documenter_sidebar ol a.current{background:#F3594F;color:#FBFFE4;border-top:1px solid #e65248;border-bottom:1px solid #ec544a;}
+		#documenter_copyright{display:block !important;visibility:visible !important;}
+	</style>
+	
+</head>
+<body>
+	<div id="documenter_sidebar">
+		<a href="http://themeforest.net/user/Moosethemes" id="documenter_logo"></a>
+		<ol id="documenter_nav">
+			<li><a class="current" href="#documenter_cover">Start</a></li>
+			<li><a href="#folder_structure">Folder Structure</a></li>
+			<li><a href="#html_structure">HTML Structure</a></li>
+			<li><a href="#css_files_and_structure">CSS Files and Structure</a></li>
+			<li><a href="#javascript">JavaScript</a></li>
+			<li><a href="#psd_files">PSD Files</a></li>
+			<li><a href="#sources_and_credits">Sources and Credits</a></li>
+
+		</ol>
+		<div id="documenter_copyright">Copyright Cruzyayo 2013<br>
+		made with the <a href="http://rxa.li/documenter">Documenter v1.3</a> 
+		</div>
+	</div>
+	<div id="documenter_content">
+	
+	<section id="documenter_cover">
+		<h1>iPictures</h1>
+		<h2>Premium HTML 5 Stock Images Website</h2><hr>
+		<ul>
+			<li>Created: June 2013.</li>
+			<li>By: azyrusmax- Envato author</li><li><a href="http://themeforest.net/user/azyrusmax/portfolio">Portfolio</a></li>
+			<li>Developed By: Moosethemes- Envato author</li><li><a href="http://themeforest.net/user/MooseThemes/portfolio"> Portfolio </a></li>
+		</ul>
+		<p>Thank you for purchasing our theme. If you have any questions that are beyond the scope of this help file, please feel free to email us via our user page contact form <a href="http://themeforest.net/user/Moosethemes">here</a>. Thank you very much!
+		<br /><br />
+		<strong>iPictures</strong> is Html5 + CSS3 Stock Images Website template and works fine in all major browsers and IE from version 8. It's powered by jQuery and you'll find nice and discreet interactivity. Also. The code is clearly written and you will find comments for each considerable parts.
+		<br /><br />
+		Lets take a closer look at the structure of Html, Css, JavaScript</p>
+	</section>
+
+	<section id="folder_structure">
+	
+		<h3>Folder Structure</h3><hr class="notop">
+		<p>When you unpack downloaded archive from ThemeForest.net you'll get folder containing 4 folders.</p>
+		<p>Here they are, sorted alphabetically:</p>
+		<ol>
+			<li><strong>HTML</strong> - Main folder for template</li>
+			<li><strong>Documentation</strong> - Documentation for iPictures site template</li>
+			<li><strong>PSD</strong> - Photoshop files are not included in this Theme, you can purchase the PSD format files on <a href="http://themeforest.net/item/ipictures-stock-images-website/4670659">Themeforest</a></li>
+		</ol>
+	</section>
+
+	<section id="html_structure">
+		<h3>HTML Structure</h3><hr class="notop">
+		<p>
+			Body part of the Html file is divided in three main sections and each of these sections is further divided into smaller parts:
+		</p>
+		<ol>
+			<li>HEADER
+				<ul>
+					<li><strong>header</strong> - logo and navigation</li>
+					<li><strong>slider</strong> - slider holder</li>
+				</ul>
+			</li>
+			<li>SECTION
+				<p>Main building blocks of &quot;section part&quot; is <strong>SECTION</strong>. In most cases that part is divided in: &quot;page-header&quot; and &quot;content&quot;. <br />
+				Default settings for section looks like this:
+				<pre class="brush: html">
+          <div class="navbar navbar-inverse-blue navbar-fixed-top">
+            <div class="navbar-inner">
+              <div class="container">
+                
+                
+                <div class="navigation">
+                  <ul class="nav">
+                    <li class="active dropdown">
+
+                      <a href="#" class="dropdown-toggle btn-navbar-blue" data-toggle="dropdown">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                      </a>
+
+                      <ul class="dropdown-menu">
+                        <li><a href="cart.html">Cart</a></li>
+                        <li><a href="image-page.html">Images</a></li>
+                        <li><a href="image-upload.html">Uploads</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                        <li><a href="single-post.html">Single Post</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="search-results.html">Search Results</a></li>
+                      </ul>
+
+                    </li>
+                    
+                  </ul> <!-- end nav -->
+                </div><!--/.nav-collapse -->
+        </pre>
+			</li>
+			<li>FOOTER
+				<ul>
+					<li><strong>footer-text</strong> - Copyright text.</li>
+					<li><strong>footer-links</strong> - Footer links.</li>
+				</ul>
+			</li>
+      <li> Search Input Box
+        <p>This is the structure that was use to develop the search from, you need to include the <strong>placeholder.js</strong> file. </p>
+
+        <pre class="brush: html">
+          
+          <!-- ============================  Main Picture Start ============================ -->
+
+          <section class="main-pictures-cotainer">
+            <div class="container">
+              <div class="row">
+                <div class="span6 offset3">
+                  <div class="search-form">
+
+                    <form action="search-results.html" method="get" >
+                      <div class="input-append">
+                        <input class="span5 seachPlaceholder" id="appendedInputButton" type="text" placeholder="Enter Keywords " name="searchItems">
+                        <button class="btn" type="submit"><i class="icon-search icon-2x"></i></button>
+                      </div>
+                    </form>
+                    
+                  </div> <!-- end search-form -->
+                </div> <!-- end span6 -->
+              </div> <!-- end row -->
+              
+            </div><!--  end container -->
+            
+
+          </section> <!-- end main-pictures-container -->
+
+
+          <!-- ============================  Main Picture Ends ============================ -->
+        </pre>
+        
+      </li>
+      <li>Sections Structures
+        <p>Every Section has been commented in this way so it will easy for you to change / replace the code without having to look where does the section ends? </p>
+
+        <pre class="brush: html">
+          
+          <!-- ============================  Main Picture Start ============================ -->
+
+          <section class="main-pictures-cotainer">
+
+            <div class="container">
+              <div class="row">
+                <div class="span12">
+                  <div class="content-text">
+                    <h1 class="title">Download Thousands of pictures for Free</h1>
+                    <h4 class="subtitle">Stock p<span class='style-border'>hotos, illustrations, video and music -handpicked by creatives all over th</span>e world.</h4>
+                  </div><!--  end content-text -->
+                </div> <!-- end span12 -->
+              </div> <!-- end row -->
+            </div><!--  end container -->
+          </section> <!-- end main-pictures-container -->
+
+          <!-- ============================  Main Picture Ends ============================ -->
+
+        </pre>
+      </li>
+      
+		</ol>
+		
+		<br /><br />
+		<h5>Top Navigation structure:</h5><hr />
+		<p>If don't want fixed navbar remove <strong>navbar-fixed-top</strong> class.</p>
+		<pre class="brush: html">
+		<nav class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <div class="nav-collapse collapse">
+                        <ul class="dropdown-menu">
+                          <li><a href="cart.html">Cart</a></li>
+                          <li><a href="image-page.html">Images</a></li>
+                          <li><a href="image-upload.html">Uploads</a></li>
+                          <li><a href="blog.html">Blog</a></li>
+                          <li><a href="single-post.html">Single Post</a></li>
+                          <li><a href="pricing.html">Pricing</a></li>
+                          <li><a href="search-results.html">Search Results</a></li>
+                        </ul>
+                    </ul>
+                </div>
+            </div>
+        </nav></pre>
+		
+        <br /><br />
+		<h5>Grid:</h5><hr />
+        <p>Based on Bootstrap, a sleek, intuitive, and powerful front-end framework.</p>
+        <p>Bootstrap makes use of certain HTML elements and CSS properties that require the use of the HTML5 doctype. Include it at the beginning of all your projects.</p>
+        <pre class="brush: html">
+		&lt;!DOCTYPE html&gt;
+        &lt;html lang="en"&gt;
+            ...
+        &lt;/html&gt;</pre>
+        <p>The default Bootstrap grid system utilizes 16 columns, the grid adapts to be 724px and 1170px wide depending on your viewport. Below 767px viewports, the columns stack vertically.</p>
+        <p>For a simple two column layout, create a <code>.row</code> and add the appropriate number of <code>.span*</code> columns. As this is a 16-column grid, each <code>.span*</code> spans a number of those 16 columns, and should always add up to 16 for each row (or the number of columns in the parent).</p>
+        <pre class="brush: html">
+		&lt;div class="row-fluid"&gt;
+		  	&lt;div class="span4"&gt;...&lt;/div&gt;
+		  	&lt;div class="span12"&gt;...&lt;/div&gt;
+		&lt;/div&gt;</pre>
+        <p>Given this example, we have .span4 and .span12, making for 16 total columns and a complete row.</p>
+        <p>Move columns to the right using <code>.offset*</code> classes. Each class increases the left margin of a column by a whole column. For example, <code>.offset4</code> moves <code>.span4</code> over four columns.</p>
+        <pre class="brush: html">
+		&lt;div class="row-fluid"&gt;
+            &lt;div class="span4"&gt;...&lt;/div&gt;
+            &lt;div class="span4 offset2"&gt;...&lt;/div&gt;
+        &lt;/div&gt;</pre>
+        
+        <br /><br />
+        <h5>Buttons:</h5><hr />
+        <p>Button styles can be applied to anything with the <code>.btn</code> class applied. However, typically you'll want to apply these to only <code>&lt;a&gt;</code> and <code>&lt;button&gt;</code> elements for the best rendering.</p>
+        <table class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th>Button</th>
+                <th>class=""</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><button type="button" class="btn">Default</button></td>
+                <td><code>btn</code></td>
+                <td>Standard gray button with gradient</td>
+              </tr>
+              <tr>
+                <td><button type="button" class="btn btn-primary">Primary</button></td>
+                <td><code>btn btn-primary</code></td>
+                <td>Provides extra visual weight and identifies the primary action in a set of buttons</td>
+              </tr>
+              <tr>
+                <td><button type="button" class="btn btn-info">Info</button></td>
+                <td><code>btn btn-info</code></td>
+                <td>Used as an alternative to the default styles</td>
+              </tr>
+              <tr>
+                <td><button type="button" class="btn btn-success">Success</button></td>
+                <td><code>btn btn-success</code></td>
+                <td>Indicates a successful or positive action</td>
+              </tr>
+              <tr>
+                <td><button type="button" class="btn btn-warning">Warning</button></td>
+                <td><code>btn btn-warning</code></td>
+                <td>Indicates caution should be taken with this action</td>
+              </tr>
+              <tr>
+                <td><button type="button" class="btn btn-danger">Danger</button></td>
+                <td><code>btn btn-danger</code></td>
+                <td>Indicates a dangerous or potentially negative action</td>
+              </tr>
+              <tr>
+                <td><button type="button" class="btn btn-inverse">Inverse</button></td>
+                <td><code>btn btn-inverse</code></td>
+                <td>Alternate dark gray button, not tied to a semantic action or use</td>
+              </tr>
+              <tr>
+                <td><button type="button" class="btn btn-link">Link</button></td>
+                <td><code>btn btn-link</code></td>
+                <td>Deemphasize a button by making it look like a link while maintaining button behavior</td>
+              </tr>
+            </tbody>
+          </table>
+
+	</section>
+
+	<section id="css_files_and_structure">
+		
+		<h3>CSS Files and Structure</h3><hr class="notop">
+		<p>In folder &quot;css&quot; you will find 10 CSS files and 3 LESS files:</p>
+		<p>
+			<ol>
+				<li>bootstrap.css</li>
+				<li>bootstrap-responsive.css</li>
+        <li>font-awesome.css</li>
+				<li>mixins.less</li>
+        <li>sytles.less</li>
+				<li>buttons.less</li>
+			</ol>
+		</p>
+		<p>Description:</p>
+		<ol>
+			<li>
+				In <strong>base.css</strong> which is main style sheet for &quot;iPictures&quot; site template. This file contains all of the specific stylings for the page.
+				<p>To edit a specific part of the page, simply find the appropriate label in the CSS file, and then scroll down until you find the appropriate style that needs to be edited. In example:</p>
+				<pre class="brush: css">
+					.navbar-inner { change styles here }</pre>
+                <p>We have also provided the LESS file for this you can chnage the style and compile it.</p>
+			</li>
+            <li><p><span>bootstrap.css</span> - grid structure based on <a target="_blank" href="http://twitter.github.com/bootstrap/">Bootstrap Framework</a>.</p></li>
+            <li><p><span>bootstrap-responsive-large.css</span> - grid structure for large viewport.</p></li>
+			
+      <li>Placeholders Styles
+      <p>This are the styles that serve to place 2 rows inside of the input placeholder</p>
+        <pre class="brush: css">
+              .watermark_container{
+                  .placeholder-title{
+                          color: #49536b;
+                          font-weight: bold;
+                          font-size: 18px;
+                      }
+                      .placeholder-subtitle{
+                          color: #51545c;
+                          font-weight: 400;
+                          font-size: 14px;
+                      }
+              }
+        </pre>
+      </li>
+
+      <li>Css Structure Styles 
+      <p>This are the structures
+        <pre class="brush: css">
+          /* ===================================================================================
+ * iPictures
+ * Developed by Moosethemes
+ * http://innovacionesweb.info/ipictures/
+ * ===================================================================================
+ * 1. Entypo Font Face
+ * 2. NAVIGATION
+ * 3. PICTUES CONTAINER
+ * 4. TOP IMAGES
+ * 5. Single Post STYLES
+ * 6. FOOTER STYLES
+ * 7. MAIN PAGINATION
+ * 8. Cart Items
+ * 9. Search Results 
+ * 10. Check Box and Radio Styles
+ * 11. Portfolio Animation Styles
+ * 12. Pricing Tables Styles
+ * 13. Media Queries
+ * 14. IE8 Styles Fallbacks
+ * ================================================================================= */
+        </pre>
+      </li>
+
+		</ol>
+	</section>
+		
+	<section id="javascript">
+		
+		<h3>JavaScript</h3><hr class="notop">
+		<p>
+		In folder <strong>js</strong> you will find 5 javascript files, but all adjustments are in just one file: <strong>&quot;main.js&quot;</strong>.</p>
+		<p>
+		All JavaScript files:</p>
+		<ol>
+			<li><strong>jQuery</strong> - jquery-1.9.1.min.js</li>
+            <li><strong>Bootstrap</strong> - bootstrap.min.js</li>
+			<li><strong>Main</strong> - main.js (custom script for this template)</li>
+      <li><strong>Easings</strong> - easings.min.js</li>
+      <li><strong>Isotope</strong> - isotope.min.js</li>
+      <li><strong>NoUislider</strong> - jquery.nouislider.min.js</li>
+      <li><strong>Modernizr</strong> - modernizr.min.js</li>
+      <li><strong>Placeholders</strong> - placeholders.js</li>
+		</ol>
+		<p>Description:</p>
+		<ol>
+			<li>jQuery is a Javascript library that greatly reduces the amount of code that you must write.</li>
+			<li>Bootstrap part <a target="_blank" href="http://twitter.github.com/bootstrap/">Bootstrap Framework</a>.</li>
+			<li>
+				Most of the settings you can adjust in &quot;main.js&quot;. Every considerable part of <strong>main.js</strong> is commented so you can have a clue for what is used.
+			</li>
+      <li>Javascript functions
+      <p>This section will describe the <strong>main.js</strong> file.</p>
+      <pre class="bursh: html">
+          //Placeholder Home page Effect
+          var $searchPlaceholder = $('.seachPlaceholder');
+
+          if( $searchPlaceholder.length > 0) {
+                $searchPlaceholder.watermark('<p class="placeholder-title">Enter Keywords</p> <p class="placeholder-subtitle"><small>Use comma (,) to enter more keywords</small></p>  ', {left: -2, top: 35,  fallback: false});
+          };
+
+          //Input File Triggers
+          
+          $('#file-trigger').on('click', function (e) {
+            e.preventDefault();
+            $(this).parent().find('input[type="file"]').click();
+          });
+          
+          $('#comment-file-trigger').on('click', function(e) {
+                e.preventDefault();
+                $('input[type="file"]').click();
+          });
+          
+
+          //Dropw down menus Effect
+          var dropdownMenu = function (elem){
+            $(elem).on('mouseenter', function () {
+                $(this).find('>.dropdown-menu').stop(true,true).delay(200).slideDown();
+            }).on('mouseleave', function () {
+                $(this).find('>.dropdown-menu').stop(true,true).delay(200).fadeOut();
+            });
+          };
+
+          dropdownMenu('ul.nav li.dropdown');
+
+          dropdownMenu('ul.user-interaction li.dropdown');
+
+          //Range Slider Effects / contruction
+          var $uiSlider = $('.noUiSlider');
+          
+          if( $uiSlider.length > 0  ){
+            
+
+            $uiSlider.noUiSlider({
+               range: [0, 100],
+               start: [30, 70],
+               step: 5,
+               orientation: "horizontal",
+               handles: 2,
+               connect: true
+
+
+            });
+          };
+
+          //Checkbox and Radio Styles
+          
+          (function () {
+             // Custom checkbox and radios
+                var setupLabel = function () {
+                    // Checkbox
+                    var checkBox = ".checkbox";
+                    var checkBoxInput = checkBox + " input[type='checkbox']";
+                    var checkBoxChecked = "checked";
+                    var checkBoxDisabled = "disabled";
+                
+                    // Radio
+                    var radio = ".radio";
+                    var radioInput = radio + " input[type='radio']";
+                    var radioOn = "checked";
+                    var radioDisabled = "disabled";
+                
+                    // Checkboxes
+                    if ($(checkBoxInput).length) {
+                        $(checkBox).each(function(){
+                            $(this).removeClass(checkBoxChecked);
+                        });
+                        $(checkBoxInput + ":checked").each(function(){
+                            $(this).parent(checkBox).addClass(checkBoxChecked);
+                        });
+                        $(checkBoxInput + ":disabled").each(function(){
+                            $(this).parent(checkBox).addClass(checkBoxDisabled);
+                        });
+                    };
+                
+                    // Radios
+                    if ($(radioInput).length) {
+                        $(radio).each(function(){
+                            $(this).removeClass(radioOn);
+                        });
+                        $(radioInput + ":checked").each(function(){
+                            $(this).parent(radio).addClass(radioOn);
+                        });
+                        $(radioInput + ":disabled").each(function(){
+                            $(this).parent(radio).addClass(radioDisabled);
+                        });
+                    };
+                };
+                
+                
+                // First let's prepend icons (needed for effects)
+                $(".checkbox, .radio").prepend("<span class='icon'></span><span class='icon-to-fade'></span>");
+            
+                $(".checkbox, .radio").on('click', function(){
+                    setupLabel();
+                });
+                setupLabel();
+                
+
+          })();
+      </pre>
+      </li>
+		</ol>
+	</section>
+
+
+
+
+	<section id="psd_files">
+		
+		<h3>PSD Files</h3><hr class="notop">
+		<li>Photoshop files are not included in this Theme, you can purchase the PSD format files on 
+        <a href="http://themeforest.net/item/ipictures-stock-images-website/4670659">Themeforest</a>
+        </li>
+	</section>
+
+
+	<section id="sources_and_credits">
+		
+		<h3>Sources and Credits</h3><hr class="notop">
+		<p>I&#39;ve used the following images, icons or other files as listed.</p>
+		
+		<ul>
+			<li><a href="http://jquery.com/">jQuery</a> - JavaScript Library</li>
+      <li><a href="http://twitter.github.com/bootstrap/">Bootstrap</a> - Bootstrap by Twitter</li>
+      <li><a href="http://isotope.metafizzy.co">Isotope</a> Isotope Layouts</li>
+      <li><a href="http://gsgd.co.uk/sandbox/jquery/easing/">Easings</a> jQuery Easings</li>
+      <li><a href="http://mario.ec/static/jq-watermark/">Placeholders</a> Custom Placeholders</li>
+			<li><a href="http://themeforest.revaxarts.com/documenter/">Documenter</a> - Last but not least. Used for writing documentation. Thanks a lot revaxarts.</li>
+		</ul>	
+		<hr />
+		<p>Once again, thank you for purchasing this Theme. As mentioned at the beginning of this documentation, we would be glad to help you if you have any questions related to this Theme. For more general question related to this Theme on ThemeForest, you might consider visiting the forums and asking your question in the &quot;Item Discussion&quot; section.</p>
+		<p>If you are satisfied with &quot;iPictures - site template&quot; please go to your downloads section on ThemeForest.net and rate iPictures with 5 stars. Otherwise, <a href="http://themeforest.net/user/Moosethemes">send an Email</a> and I will try to find nice and easy solution for you :)</p>
+		<p>Hope that you will enjoy in iPictures as much as I've enjoyed designing this template.</p>
+		<p>Kind Regards,<br /><strong>azyrusmax</strong></p>
+	</section>
+
+	</div>
+</body>
+</html>
