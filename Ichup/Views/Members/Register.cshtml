@@ -1,0 +1,139 @@
+﻿@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="picture-categories">
+
+      <div class="container">
+        <div class="row">
+          <div class="span12">
+            <div class="single-image-container">
+              
+            </div> <!-- end single-image-container -->
+          </div> <!-- end span12 -->
+
+        </div> <!-- end row -->
+
+        <div class="single-image-title">
+          <div class="row">
+            <div class="span6">
+              <h4 class="title">Đăng Ký Thành Viên</h4>
+            </div> <!-- end span6 -->
+            <div class="span6">
+              <a href="#" class="btn pull-right">Được ưu đãi, chăm sóc</a>
+            </div> <!-- end span6 -->
+          </div> <!-- end row -->
+        </div> <!-- end single-image-title -->
+      </div> <!-- end container -->
+
+    </section> <!-- end picture-categories -->
+
+
+
+    <!-- ============================  Categories End ============================ -->
+
+    <!-- ============================  Image Decription Starts ============================ -->
+
+
+    <section class="image-decription-container">
+      <div class="container">
+        <div class="row">
+          <div class="span12">
+            <figure>
+              <input class="span10"  id=name name=name type="text" placeholder="tên truy cập">
+			  <input class="span10"  id=pass name=pass type="password" placeholder="mật khẩu">
+			  <input class="span10"  id=pass2 name=pass2 type="password" placeholder="gõ lại mật khẩu">
+			  <input class="span10"  id=email name=email type="text" placeholder="email">
+			  <input class="span10"  id=phone name=phone type="text" placeholder="điện thoại">
+			  <textarea class="span10"  id=address name=address placeholder="địa chỉ"></textarea>
+			  <input class="span10"  id=passport name=passport type="text" placeholder="Số chứng minh thư/ Hộ chiếu">
+              <div class="span10">
+              <a href="@Url.Action("SignUp")"> 
+                  <img alt="Captcha" src="@Url.Action("CaptchaImage")" style="" border="1"/> 
+              </a> 
+              nhập mã (chứng minh bạn không phải robot):<input type="text" id="captchaText" name="captchaText">
+              </div>  
+			  <input class="span10" type=button value="Đăng ký" onclick="AddNew();" id="btnSA">
+            </figure>
+          </div> <!-- end span6 -->
+          
+        </div> <!-- end row -->
+      </div> <!-- end container -->
+    </section> <!-- end image-description-container -->
+
+  <!-- ============================  Image Decription Ends ============================ -->
+<script>
+    function AddNew() {
+        var formdata = new FormData(); //FormData object
+        var name = document.getElementById("name").value;
+        var pass = document.getElementById("pass").value;
+        var pass2 = document.getElementById("pass2").value;
+        var email = document.getElementById("email").value;
+        var phone = document.getElementById("phone").value;
+        var address = document.getElementById("address").value;
+        var passport = document.getElementById("passport").value;
+        var captcha = document.getElementById("captchaText").value;
+        
+
+        if (name == "") {
+            alert("Nhập tên truy cập");
+            return;
+        }
+        if (pass == "") {
+            alert("Nhập mật khẩu");
+            return;
+        }
+        if (pass != pass2) {
+            alert("Nhập mật khẩu không khớp nhau");
+            return;
+        }
+        if (email == "") {
+            alert("Nhập email");
+            return;
+        }
+        if (phone == "") {
+            alert("Nhập điện thoại");
+            return;
+        }
+        if (address == "") {
+            alert("Nhập địa chỉ");
+            return;
+        }
+        if (passport == "") {
+            alert("Nhập số chứng minh thư hoặc passport, bạn cần điền vì sau này khi trả tiền bản quyền bán ảnh bạn cần xuất cmt");
+            return;
+        }
+        if (captcha == "") {
+            alert("Nhập mã an ninh");
+            return;
+        }
+        
+        document.getElementById("btnSA").disabled = true;
+        formdata.append("name", name);
+        formdata.append("pass", pass);
+        formdata.append("email", email);
+        formdata.append("phone", phone);
+        formdata.append("address", address);
+        formdata.append("passport", passport);
+        formdata.append("captcha", captcha);
+        formdata.append("id", @ViewBag.id);
+        
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/members/Update');
+        xhr.send(formdata);
+        var content = "";
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                if (xhr.responseText != "0") {
+                    //updateGI(xhr.responseText);
+                    //updatePrice(xhr.responseText);
+                    window.location.href = "/Home/index";
+                } else {
+                    document.getElementById("btnSA").disabled = false;
+                    alert("Có lỗi trong quá trình cập nhật dữ liệu! Bạn");
+                }
+            }
+
+        }
+    }
+</script>
