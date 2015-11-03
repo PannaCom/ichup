@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ichupModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="ichupModelStoreContainer">
+          <EntitySet Name="category" EntityType="ichupModel.Store.category" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="images" EntityType="ichupModel.Store.images" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="members" EntityType="ichupModel.Store.members" store:Type="Tables" Schema="dbo" />
+        </EntityContainer>
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="images">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="150" />
+          <Property Name="des" Type="ntext" />
+          <Property Name="keyword" Type="nvarchar" MaxLength="550" />
+          <Property Name="link0" Type="nvarchar" MaxLength="150" />
+          <Property Name="link1" Type="nvarchar" MaxLength="150" />
+          <Property Name="total_views1" Type="int" />
+          <Property Name="link2" Type="nvarchar" MaxLength="150" />
+          <Property Name="total_views2" Type="int" />
+          <Property Name="total_buy" Type="int" />
+          <Property Name="total_download" Type="int" />
+          <Property Name="member_id" Type="int" />
+          <Property Name="date_post" Type="datetime" />
+          <Property Name="cate_id" Type="int" />
+          <Property Name="free_price" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="members">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="nvarchar" MaxLength="150" />
+          <Property Name="pass" Type="nvarchar" MaxLength="150" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" />
+          <Property Name="phone" Type="nvarchar" MaxLength="50" />
+          <Property Name="address" Type="nvarchar" MaxLength="505" />
+          <Property Name="passport" Type="nvarchar" MaxLength="50" />
+          <Property Name="total_views" Type="int" />
+          <Property Name="date_reg" Type="datetime" />
+        </EntityType>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ichupModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ichupEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="categories" EntityType="ichupModel.category" />
+          <EntitySet Name="images" EntityType="ichupModel.image" />
+          <EntitySet Name="members" EntityType="ichupModel.member" />
+          </EntityContainer>
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="image">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int64" Name="id" Nullable="false" />
+          <Property Type="String" Name="name" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="des" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="keyword" MaxLength="550" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="link0" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="link1" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="total_views1" />
+          <Property Type="String" Name="link2" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="total_views2" />
+          <Property Type="Int32" Name="total_buy" />
+          <Property Type="Int32" Name="total_download" />
+          <Property Type="Int32" Name="member_id" />
+          <Property Type="DateTime" Name="date_post" Precision="3" />
+          <Property Type="Int32" Name="cate_id" />
+          <Property Type="Byte" Name="free_price" />
+        </EntityType>
+        <EntityType Name="member">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="name" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="pass" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="email" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="phone" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="address" MaxLength="505" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="passport" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="total_views" />
+          <Property Type="DateTime" Name="date_reg" Precision="3" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ichupModelStoreContainer" CdmEntityContainer="ichupEntities">
+          <EntitySetMapping Name="categories">
+            <EntityTypeMapping TypeName="ichupModel.category">
+              <MappingFragment StoreEntitySet="category">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="images">
+            <EntityTypeMapping TypeName="ichupModel.image">
+              <MappingFragment StoreEntitySet="images">
+                <ScalarProperty Name="free_price" ColumnName="free_price" />
+                <ScalarProperty Name="cate_id" ColumnName="cate_id" />
+                <ScalarProperty Name="date_post" ColumnName="date_post" />
+                <ScalarProperty Name="member_id" ColumnName="member_id" />
+                <ScalarProperty Name="total_download" ColumnName="total_download" />
+                <ScalarProperty Name="total_buy" ColumnName="total_buy" />
+                <ScalarProperty Name="total_views2" ColumnName="total_views2" />
+                <ScalarProperty Name="link2" ColumnName="link2" />
+                <ScalarProperty Name="total_views1" ColumnName="total_views1" />
+                <ScalarProperty Name="link1" ColumnName="link1" />
+                <ScalarProperty Name="link0" ColumnName="link0" />
+                <ScalarProperty Name="keyword" ColumnName="keyword" />
+                <ScalarProperty Name="des" ColumnName="des" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="members">
+            <EntityTypeMapping TypeName="ichupModel.member">
+              <MappingFragment StoreEntitySet="members">
+                <ScalarProperty Name="date_reg" ColumnName="date_reg" />
+                <ScalarProperty Name="total_views" ColumnName="total_views" />
+                <ScalarProperty Name="passport" ColumnName="passport" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="pass" ColumnName="pass" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
