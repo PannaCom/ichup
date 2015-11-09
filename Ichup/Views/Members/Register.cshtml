@@ -52,7 +52,20 @@
                   <img alt="Captcha" src="@Url.Action("CaptchaImage")" style="" border="1"/> 
               </a> 
               nhập mã (chứng minh bạn không phải robot):<input type="text" id="captchaText" name="captchaText">
-              </div>  
+              </div>
+              <div class="span10"><h2>Xin đọc kỹ quy định và thỏa thuận thành viên dưới đây</h2>
+			      <p style="width:100%;">Thỏa thuận thành viên với Ichup.com <br>
+			      - <b>Về nội dung ảnh:</b><br>
+					    +Không đăng ảnh có nội dung đồi trụy, đi ngược thuần phong mỹ tục văn hóa Việt Nam<br>
+					    +Không đăng ảnh có nội dung liên quan đến chính trị, chống phá nhà nước, chính quyền<br>
+					    +Không đăng ảnh nói xấu các tổ chức, cá nhân, doanh nghiệp<br>
+					    +Không đăng các ảnh không thuộc quyền sở hữu của bạn, hoặc có tranh chấp bản quyền với bên thứ ba<br>
+			      -	<b>Về thanh toán tiền bán ảnh</b>:<br>
+					    +Bạn được 30% số tiền bán mỗi ảnh, 70% còn lại thuộc về Ichup.com(đội ngũ biên tập, server, thuế..) <br>
+					    +Bạn được thanh toán tiền ảnh mỗi tháng một lần tại trụ sở Ichup.com hoặc chuyển khoản<br>
+			      </p>
+			      <input type=checkbox id=agree>Đồng ý với các điều khoản trên<br>
+              </div>      
 			  <input class="span10" type=button value="Đăng ký" onclick="AddNew();" id="btnSA">
             </figure>
           </div> <!-- end span6 -->
@@ -74,7 +87,7 @@
         var passport = document.getElementById("passport").value;
         var captcha = document.getElementById("captchaText").value;
         
-
+        
         if (name == "") {
             alert("Nhập tên truy cập");
             return;
@@ -107,7 +120,10 @@
             alert("Nhập mã an ninh");
             return;
         }
-        
+        if (document.getElementById("agree").checked==false){
+            alert("Bạn phải chấp nhận các quy định và thỏa thuận thành viên ở trên. Click vào đồng ý!");
+            return;
+        }
         document.getElementById("btnSA").disabled = true;
         formdata.append("name", name);
         formdata.append("pass", pass);

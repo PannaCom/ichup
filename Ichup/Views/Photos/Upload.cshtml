@@ -1,0 +1,97 @@
+﻿@{
+    ViewBag.Title = "Upload";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- ============================  Categories Start ============================ -->
+
+    <section class="picture-categories">
+
+      <div class="container">
+        <div class="row">
+          <div class="span12">
+            <div class="single-image-container">
+              <div class="row-fluid">
+                <div class="span1">
+
+                  <h4 class="title">Upload</h4>
+                  
+                </div> <!-- end span1 -->
+
+                <div class="span11">
+                    <ul class="nav nav-tabs">
+                      <li class="active"><a href="#"><i class="icon-picture icon-large"></i></a></li>
+                      <li><a href="#"><i class="icon-facetime-video icon-large"></i></a></li>
+                      <li><a href="#"><i class="icon-music icon-large"></i></a></li>
+                    </ul>
+                </div> <!-- end span8 -->
+               
+              </div><!--  end row-fluid -->
+            </div> <!-- end single-image-container -->
+          </div> <!-- end span12 -->
+
+        </div> <!-- end row -->
+
+        <div class="single-image-title v2">
+          <div class="row">
+            <div class="span12">
+              <form action="">
+                <input type="text" class="span3" id="name" placeholder="Nhập tên ảnh">
+              </form>
+            </div> <!--end span12-->
+          </div> <!-- end row -->
+        </div> <!-- end single-image-title -->
+      </div> <!-- end container -->
+
+    </section> <!-- end picture-categories -->
+
+
+
+    <!-- ============================  Categories End ============================ -->
+
+    <!-- ============================  Image Decription Starts ============================ -->
+
+
+    <section class="image-decription-container">
+      <div class="container">
+        <div class="row">
+          <div class="span6">
+            <div class="upload-box">
+              <div class="upload-controller">
+                <form action="" enctype ='multipart/form-data'>
+                  <button type="button" class="btn btn-large" id="file-trigger">Upload File</button>
+                  <input type="file" id="file">
+                </form>
+              </div> <!-- end upload-controller -->
+            </div> <!-- end upload-box -->
+          </div> <!-- end span6 -->
+          <div class="span6">
+            <div class="item-description">
+              <h5 class="title">Thông tin ảnh</h5>
+            
+            <div class="item-license v2">
+              <h4 class="title">Bản quyền</h4>
+              <form action="">
+                  <input type="radio" name="chkFree" value="0">Ảnh miễn phí
+                  <input type="radio" name="chkFree" value="1" checked> Ảnh để bán
+              </form>
+            </div> <!-- end item-license -->
+
+            <div class="form-item-description">
+              <form>
+                <fieldset>
+                  <legend>Từ khóa</legend>
+                  <input type="text" id="keyword" style="width:100%;">
+                  <legend>Chú thích, mô tả ảnh</legend>
+                  <textarea name="des" id="" rows="8" placeholder="Gõ nội dung vào đây"></textarea>
+                  <button type="button" class="btn btn-primary btn-large span2" style="padding-left:0px;margin-left:0px;">Gửi</button>
+                </fieldset>
+              </form>
+            </div>
+            </div> <!-- end item-description -->
+          </div> <!-- end span6 -->
+        </div> <!-- end row -->
+      </div> <!-- end container -->
+    </section> <!-- end image-description-container -->
+
+  <!-- ============================  Image Decription Ends ============================ -->

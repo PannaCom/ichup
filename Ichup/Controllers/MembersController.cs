@@ -26,6 +26,15 @@ namespace Ichup.Controllers
             ViewBag.id = id;
             return View();
         }
+        public ActionResult Login() {
+            return View();
+        }
+        public string checkLogin(string name,string pass) {
+            MD5 md5Hash = MD5.Create();
+            pass = Config.GetMd5Hash(md5Hash, pass);
+            bool p = db.members.Any(o => o.name == name && o.pass == pass);
+            if (p) return "1"; else return "0";
+        }
         [HttpPost]
         public string Update(string name,string pass,string email,string phone,string address,string passport,string captcha,int id) {
             MD5 md5Hash = MD5.Create();

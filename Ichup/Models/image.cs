@@ -19,12 +19,19 @@ namespace Ichup.Models
         public string des { get; set; }
         public string keyword { get; set; }
         public string link0 { get; set; }
+        public string link0w { get; set; }
         public string link1 { get; set; }
-        public Nullable<int> total_views1 { get; set; }
+        public string link1w { get; set; }
         public string link2 { get; set; }
+        public string link2w { get; set; }
+        public Nullable<int> total_views0 { get; set; }
+        public Nullable<int> total_views1 { get; set; }
         public Nullable<int> total_views2 { get; set; }
-        public Nullable<int> total_buy { get; set; }
-        public Nullable<int> total_download { get; set; }
+        public Nullable<int> total_buy1 { get; set; }
+        public string total_buy2 { get; set; }
+        public Nullable<int> total_download0 { get; set; }
+        public string total_download1 { get; set; }
+        public string total_download2 { get; set; }
         public Nullable<int> member_id { get; set; }
         public Nullable<System.DateTime> date_post { get; set; }
         public Nullable<int> cate_id { get; set; }

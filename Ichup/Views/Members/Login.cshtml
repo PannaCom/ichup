@@ -1,0 +1,92 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<section class="picture-categories">
+
+      <div class="container">
+        <div class="row">
+          <div class="span12">
+            <div class="single-image-container">
+              
+            </div> <!-- end single-image-container -->
+          </div> <!-- end span12 -->
+
+        </div> <!-- end row -->
+
+        <div class="single-image-title">
+          <div class="row">
+            <div class="span6">
+              <h4 class="title">Đăng Nhập Thành Viên</h4>
+            </div> <!-- end span6 -->
+            <div class="span6">
+              <a href="#" class="btn pull-right">Bán ảnh</a>
+            </div> <!-- end span6 -->
+          </div> <!-- end row -->
+        </div> <!-- end single-image-title -->
+      </div> <!-- end container -->
+
+    </section> <!-- end picture-categories -->
+
+
+
+    <!-- ============================  Categories End ============================ -->
+
+    <!-- ============================  Image Decription Starts ============================ -->
+
+
+    <section class="image-decription-container">
+      <div class="container">
+        <div class="row">
+          <div class="span12">
+            <figure>
+              <input class="span10"  id=name name=name type="text" placeholder="tên truy cập">
+			  <input class="span10"  id=pass name=pass type="password" placeholder="mật khẩu">
+			 
+			  <input class="span10" type=button value="Đăng nhập" onclick="Login();" id="btnSA">
+            </figure>
+          </div> <!-- end span6 -->
+          
+        </div> <!-- end row -->
+      </div> <!-- end container -->
+    </section> <!-- end image-description-container -->
+
+  <!-- ============================  Image Decription Ends ============================ -->
+<script>
+    function Login() {
+        var formdata = new FormData(); //FormData object
+        var name = document.getElementById("name").value;
+        var pass = document.getElementById("pass").value;
+        
+        
+        if (name == "") {
+            alert("Nhập tên truy cập");
+            return;
+        }
+        if (pass == "") {
+            alert("Nhập mật khẩu");
+            return;
+        }
+        
+        
+        document.getElementById("btnSA").disabled = true;
+        formdata.append("name", name);
+        formdata.append("pass", pass);
+       
+        
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/members/checkLogin');
+        xhr.send(formdata);
+        var content = "";
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                if (xhr.responseText != "0") {
+                    window.location.href = "/Home/index";
+                } else {
+                    document.getElementById("btnSA").disabled = false;
+                    alert("Không tìm thấy user và pass này! Kiểm tra lại pass và tên truy cập!");
+                }
+            }
+        }
+    }
+</script>
