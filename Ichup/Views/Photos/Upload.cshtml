@@ -35,9 +35,7 @@
         <div class="single-image-title v2">
           <div class="row">
             <div class="span12">
-              <form action="">
-                <input type="text" class="span3" id="name" placeholder="Nhập tên ảnh">
-              </form>
+              
             </div> <!--end span12-->
           </div> <!-- end row -->
         </div> <!-- end single-image-title -->
@@ -57,10 +55,10 @@
         <div class="row">
           <div class="span6">
             <div class="upload-box">
-              <div class="upload-controller">
+              <div class="upload-controller" id="divPR1">
                 <form action="" enctype ='multipart/form-data'>
-                  <button type="button" class="btn btn-large" id="file-trigger">Upload File</button>
-                  <input type="file" id="file">
+                  
+                  
                 </form>
               </div> <!-- end upload-controller -->
             </div> <!-- end upload-box -->
@@ -69,22 +67,19 @@
             <div class="item-description">
               <h5 class="title">Thông tin ảnh</h5>
             
-            <div class="item-license v2">
-              <h4 class="title">Bản quyền</h4>
-              <form action="">
-                  <input type="radio" name="chkFree" value="0">Ảnh miễn phí
-                  <input type="radio" name="chkFree" value="1" checked> Ảnh để bán
-              </form>
-            </div> <!-- end item-license -->
 
             <div class="form-item-description">
+              <input type="file" name="imageFile" id="imageFile" multiple="multiple"  runat="server" onchange="uploadProcess();">
               <form>
-                <fieldset>
+                <fieldset>                  
                   <legend>Từ khóa</legend>
                   <input type="text" id="keyword" style="width:100%;">
                   <legend>Chú thích, mô tả ảnh</legend>
                   <textarea name="des" id="" rows="8" placeholder="Gõ nội dung vào đây"></textarea>
-                  <button type="button" class="btn btn-primary btn-large span2" style="padding-left:0px;margin-left:0px;">Gửi</button>
+                  <button type="button" class="btn btn-primary btn-large span2" style="padding-left:0px;margin-left:0px;">Save</button>
+                  @*<div id="divPR1">
+         
+                  </div>*@
                 </fieldset>
               </form>
             </div>
@@ -95,3 +90,100 @@
     </section> <!-- end image-description-container -->
 
   <!-- ============================  Image Decription Ends ============================ -->
+<script>
+    var totalindex = -1;
+    var fileInput = document.getElementById('imageFile');
+    var totalItemImage = -1;
+    function uploadProcess() {
+       
+        for (i = totalItemImage+1; i < fileInput.files.length + totalItemImage+1; i++) {
+            var pr = "<div style=\"background-color:#ffffff;width:200px;height:auto;display:block;possition:relative;float:left;margin-right:5px;margin-bottom:1px;\">";
+            pr += "<div id=img" + i + " class=\"progressbar\" style=\"background-color:#fff;margin-top:5px;width:200px;height:126px;display:block;possition:relative;float:left;\">";
+            pr += "<div id=\"progresslabel" + i + "\" class=\"progressbarlabel\" style=\"background-color:green;width:1px;height:9px;display:block;possition:relative;float:left;\">uploading...</div>";
+            pr += "</div>";
+            //pr += "<div style=\"background-color:#ffffff;width:200px;height:auto;display:block;possition:relative;float:left;margin-top:2px;\"><textarea id=title_" + i + " style=\"width:100%;\" placeholder=\"Chú thích ảnh\"></textarea></div>";
+            pr += "</div>";
+            $("#divPR1").append(pr);
+        }
+        totalindex = -1;
+        newupload(fileInput.files[0].name, fileInput.files[0]);
+        return false;
+    }
+    function newupload(filename, fileobj) {
+        totalindex++;
+        totalItemImage++;
+        if (totalindex >= fileInput.files.length) return;
+        //alert(totalindex);
+        filename = fileInput.files[totalindex].name;
+        fileobj = fileInput.files[totalindex];
+        //alert(filename + "," + fileobj);
+        var formdata = new FormData();
+        formdata.append(filename, fileobj);  
+        //formdata.append("a", 10);
+        var xhr = new XMLHttpRequest();
+        xhr.upload.addEventListener("progress", function (evt) {
+            if (evt.lengthComputable) {
+                var progress = Math.round(evt.loaded * 100 / evt.total);
+                progress = progress * 200 / 100;
+                $("#progresslabel" + totalItemImage).css("width", progress);//.progressbar("value", progress);//.html(progress);//
+                //$("#progresslabel" + index).html(progress);
+                //alert("ok"+totalindex);
+            }
+        }, false);
+
+        xhr.open('POST', '/Photos/UploadImageProcess');//UploadImageProcess
+        xhr.send(formdata);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                //alert(xhr.responseText);
+                $('#img' + totalItemImage).html("<img src=\"" + xhr.responseText + "\" width=200 height=126 id=\"image_" + totalItemImage + "\">");
+                //$('#image').val(xhr.responseText);
+                //hideLoadingImage();
+                newupload(filename, fileobj);
+            }
+            //alert(xhr.readyState);
+        }
+    }
+    //function post() {
+    //    var formdata = new FormData(); //FormData object
+    //    if (document.getElementById("keyword").value == "") {
+    //        alert("Nhập từ khóa ảnh!");
+    //        document.getElementById("keyword").focus();
+    //        return;
+    //    }
+    //    if (document.getElementById("des").value == "") {
+    //        alert("Nhập mô tả ảnh!");
+    //        document.getElementById("des").focus();
+    //        return;
+    //    }
+    //    if (totalItemImage<0) {
+    //        alert("Upload ít nhất một ảnh!");
+    //        return;
+    //    }
+    //    formdata.append("keyword", document.getElementById("keyword").value);
+    //    formdata.append("des", document.getElementById("des").value);
+    //    //formdata.append("totalitem", totalItemImage);
+    //    //for (var i = 0; i < totalItemImage; i++) {
+    //    //    if (document.getElementById("title") && document.getElementById("title").value != "") {
+    //    //        formdata.append("title" + i, document.getElementById("title_" + i).value);
+    //    //        formdata.append("image" + i, $("#image_"+i).attr("src"));
+    //    //    }
+    //    //}
+
+    //    var xhr = new XMLHttpRequest();
+    //    xhr.open('POST', '/News/addNew');
+    //    xhr.send(formdata);
+    //    var content = "";
+    //    xhr.onreadystatechange = function () {
+    //        if (xhr.readyState == 4 && xhr.status == 200) {
+    //            if (xhr.responseText == "1") {
+    //                alert("Cập nhật thành công");
+    //                window.location.href = "/Home";
+    //            } else {
+    //                alert("Chương trình đang cập nhật, xin quay lại sau!");
+    //            }
+    //        }
+    //    }
+    //}
+    
+</script>

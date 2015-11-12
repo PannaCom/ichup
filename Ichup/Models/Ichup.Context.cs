@@ -28,5 +28,6 @@ namespace Ichup.Models
         public DbSet<category> categories { get; set; }
         public DbSet<member> members { get; set; }
         public DbSet<image> images { get; set; }
+        public DbSet<title> titles { get; set; }
     }
 }
