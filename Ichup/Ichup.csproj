@@ -226,6 +226,9 @@
     <Compile Include="Models\member.cs">
       <DependentUpon>Ichup.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\title.cs">
+      <DependentUpon>Ichup.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -56,10 +56,7 @@
           <div class="span6">
             <div class="upload-box">
               <div class="upload-controller" id="divPR1">
-                <form action="" enctype ='multipart/form-data'>
-                  
-                  
-                </form>
+                
               </div> <!-- end upload-controller -->
             </div> <!-- end upload-box -->
           </div> <!-- end span6 -->
@@ -116,11 +113,11 @@
         //alert(totalindex);
         filename = fileInput.files[totalindex].name;
         fileobj = fileInput.files[totalindex];
-        //alert(filename + "," + fileobj);
+        alert(filename + "," + fileobj);
         var formdata = new FormData();
         formdata.append(filename, fileobj);  
-        //formdata.append("a", 10);
-        var xhr = new XMLHttpRequest();
+        //formdata.append("a", "10");
+        var xhr = new XMLHttpRequest();       
         xhr.upload.addEventListener("progress", function (evt) {
             if (evt.lengthComputable) {
                 var progress = Math.round(evt.loaded * 100 / evt.total);
@@ -130,19 +127,19 @@
                 //alert("ok"+totalindex);
             }
         }, false);
-
+        //alert("111");
         xhr.open('POST', '/Photos/UploadImageProcess');//UploadImageProcess
-        xhr.send(formdata);
+        xhr.send(formdata);//formdata
+        //alert("222");
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
-                //alert(xhr.responseText);
+                alert(xhr.responseText);
                 $('#img' + totalItemImage).html("<img src=\"" + xhr.responseText + "\" width=200 height=126 id=\"image_" + totalItemImage + "\">");
-                //$('#image').val(xhr.responseText);
-                //hideLoadingImage();
                 newupload(filename, fileobj);
             }
-            //alert(xhr.readyState);
+            
         }
+        
     }
     //function post() {
     //    var formdata = new FormData(); //FormData object

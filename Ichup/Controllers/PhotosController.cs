@@ -21,8 +21,9 @@ namespace Ichup.Controllers
             return View();
         }
         [HttpPost]
-        public string test(string a) {
-            return a;
+        public string test(HttpPostedFileBase file)
+        {
+            return "21";
         }
         [HttpPost]
         [AcceptVerbs(HttpVerbs.Post)]
