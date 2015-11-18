@@ -4,12 +4,11 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ichupModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="ichupModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="ichupModelStoreContainer">
           <EntitySet Name="category" EntityType="ichupModel.Store.category" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="images" EntityType="ichupModel.Store.images" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="members" EntityType="ichupModel.Store.members" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="title" EntityType="ichupModel.Store.title" store:Type="Tables" Schema="dbo" />
         </EntityContainer>
         <EntityType Name="category">
           <Key>
@@ -22,9 +21,9 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="bigint" Nullable="false" />
-          <Property Name="title_id" Type="int" />
-          <Property Name="token" Type="nvarchar" MaxLength="150" />
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="keywords" Type="nvarchar" MaxLength="688" />
+          <Property Name="cat_id" Type="int" />
           <Property Name="link" Type="nvarchar" MaxLength="150" />
           <Property Name="link_watermark" Type="nvarchar" MaxLength="150" />
           <Property Name="link_thumbail" Type="nvarchar" MaxLength="150" />
@@ -33,6 +32,14 @@
           <Property Name="total_download" Type="int" />
           <Property Name="member_id" Type="int" />
           <Property Name="date_post" Type="datetime" />
+          <Property Name="filter_1" Type="nvarchar" MaxLength="568" />
+          <Property Name="filter_2" Type="nvarchar" MaxLength="568" />
+          <Property Name="filter_3" Type="nvarchar" MaxLength="568" />
+          <Property Name="filter_4" Type="nvarchar" MaxLength="568" />
+          <Property Name="filter_5" Type="nvarchar" MaxLength="568" />
+          <Property Name="price" Type="decimal" Precision="12" />
+          <Property Name="token" Type="nvarchar" MaxLength="56" />
+          <Property Name="stt" Type="int" />
         </EntityType>
         <EntityType Name="members">
           <Key>
@@ -44,29 +51,21 @@
           <Property Name="email" Type="nvarchar" MaxLength="50" />
           <Property Name="phone" Type="nvarchar" MaxLength="50" />
           <Property Name="address" Type="nvarchar" MaxLength="505" />
-          <Property Name="passport" Type="nvarchar" MaxLength="50" />
+          <Property Name="passport" Type="nvarchar" MaxLength="150" />
+          <Property Name="image" Type="nvarchar" MaxLength="150" />
           <Property Name="total_views" Type="int" />
           <Property Name="date_reg" Type="datetime" />
         </EntityType>
-        <EntityType Name="title">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="des" Type="nvarchar" MaxLength="505" />
-          <Property Name="keyword" Type="nvarchar" MaxLength="505" />
-          <Property Name="cat_id" Type="int" />
-        </EntityType>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ichupModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="ichupEntities" p1:LazyLoadingEnabled="true">
+        <EntityContainer Name="Entities" p1:LazyLoadingEnabled="true">
           <EntitySet Name="categories" EntityType="ichupModel.category" />
-          <EntitySet Name="members" EntityType="ichupModel.member" />
           <EntitySet Name="images" EntityType="ichupModel.image" />
-          <EntitySet Name="titles" EntityType="ichupModel.title" />
-          </EntityContainer>
+          <EntitySet Name="members" EntityType="ichupModel.member" />
+        </EntityContainer>
         <EntityType Name="category">
           <Key>
             <PropertyRef Name="id" />
@@ -74,51 +73,51 @@
           <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
         </EntityType>
-        <EntityType Name="member">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="name" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="pass" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="email" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="phone" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="address" MaxLength="505" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="passport" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="total_views" />
-          <Property Type="DateTime" Name="date_reg" Precision="3" />
-        </EntityType>
         <EntityType Name="image">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Type="Int64" Name="id" Nullable="false" />
-          <Property Type="Int32" Name="title_id" />
-          <Property Type="String" Name="token" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="link" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="link_watermark" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="link_thumbail" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="total_views" />
-          <Property Type="Int32" Name="total_buy" />
-          <Property Type="Int32" Name="total_download" />
-          <Property Type="Int32" Name="member_id" />
-          <Property Type="DateTime" Name="date_post" Precision="3" />
+          <Property Name="id" Type="Int64" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="keywords" Type="String" MaxLength="688" Unicode="true" FixedLength="false" />
+          <Property Name="cat_id" Type="Int32" />
+          <Property Name="link" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="link_watermark" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="link_thumbail" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="total_views" Type="Int32" />
+          <Property Name="total_buy" Type="Int32" />
+          <Property Name="total_download" Type="Int32" />
+          <Property Name="member_id" Type="Int32" />
+          <Property Name="date_post" Type="DateTime" Precision="3" />
+          <Property Name="filter_1" Type="String" MaxLength="568" Unicode="true" FixedLength="false" />
+          <Property Name="filter_2" Type="String" MaxLength="568" Unicode="true" FixedLength="false" />
+          <Property Name="filter_3" Type="String" MaxLength="568" Unicode="true" FixedLength="false" />
+          <Property Name="filter_4" Type="String" MaxLength="568" Unicode="true" FixedLength="false" />
+          <Property Name="filter_5" Type="String" MaxLength="568" Unicode="true" FixedLength="false" />
+          <Property Name="price" Type="Decimal" Precision="12" Scale="0" />
+          <Property Name="token" Type="String" MaxLength="56" Unicode="true" FixedLength="false" />
+          <Property Name="stt" Type="Int32" />
         </EntityType>
-        <EntityType Name="title">
+        <EntityType Name="member">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="des" MaxLength="505" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="keyword" MaxLength="505" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="cat_id" />
+          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="pass" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="email" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="phone" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="address" Type="String" MaxLength="505" Unicode="true" FixedLength="false" />
+          <Property Name="passport" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="image" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
+          <Property Name="total_views" Type="Int32" />
+          <Property Name="date_reg" Type="DateTime" Precision="3" />
         </EntityType>
-        </Schema>
+      </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="ichupModelStoreContainer" CdmEntityContainer="ichupEntities">
+        <EntityContainerMapping StorageEntityContainer="ichupModelStoreContainer" CdmEntityContainer="Entities">
           <EntitySetMapping Name="categories">
             <EntityTypeMapping TypeName="ichupModel.category">
               <MappingFragment StoreEntitySet="category">
@@ -127,45 +126,44 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="members">
-            <EntityTypeMapping TypeName="ichupModel.member">
-              <MappingFragment StoreEntitySet="members">
-                <ScalarProperty Name="date_reg" ColumnName="date_reg" />
-                <ScalarProperty Name="total_views" ColumnName="total_views" />
-                <ScalarProperty Name="passport" ColumnName="passport" />
-                <ScalarProperty Name="address" ColumnName="address" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="pass" ColumnName="pass" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="images">
             <EntityTypeMapping TypeName="ichupModel.image">
               <MappingFragment StoreEntitySet="images">
-                <ScalarProperty Name="date_post" ColumnName="date_post" />
-                <ScalarProperty Name="member_id" ColumnName="member_id" />
-                <ScalarProperty Name="total_download" ColumnName="total_download" />
-                <ScalarProperty Name="total_buy" ColumnName="total_buy" />
-                <ScalarProperty Name="total_views" ColumnName="total_views" />
-                <ScalarProperty Name="link_thumbail" ColumnName="link_thumbail" />
-                <ScalarProperty Name="link_watermark" ColumnName="link_watermark" />
-                <ScalarProperty Name="link" ColumnName="link" />
-                <ScalarProperty Name="token" ColumnName="token" />
-                <ScalarProperty Name="title_id" ColumnName="title_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="keywords" ColumnName="keywords" />
+                <ScalarProperty Name="cat_id" ColumnName="cat_id" />
+                <ScalarProperty Name="link" ColumnName="link" />
+                <ScalarProperty Name="link_watermark" ColumnName="link_watermark" />
+                <ScalarProperty Name="link_thumbail" ColumnName="link_thumbail" />
+                <ScalarProperty Name="total_views" ColumnName="total_views" />
+                <ScalarProperty Name="total_buy" ColumnName="total_buy" />
+                <ScalarProperty Name="total_download" ColumnName="total_download" />
+                <ScalarProperty Name="member_id" ColumnName="member_id" />
+                <ScalarProperty Name="date_post" ColumnName="date_post" />
+                <ScalarProperty Name="filter_1" ColumnName="filter_1" />
+                <ScalarProperty Name="filter_2" ColumnName="filter_2" />
+                <ScalarProperty Name="filter_3" ColumnName="filter_3" />
+                <ScalarProperty Name="filter_4" ColumnName="filter_4" />
+                <ScalarProperty Name="filter_5" ColumnName="filter_5" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="token" ColumnName="token" />
+                <ScalarProperty Name="stt" ColumnName="stt" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="titles">
-            <EntityTypeMapping TypeName="ichupModel.title">
-              <MappingFragment StoreEntitySet="title">
-                <ScalarProperty Name="cat_id" ColumnName="cat_id" />
-                <ScalarProperty Name="keyword" ColumnName="keyword" />
-                <ScalarProperty Name="des" ColumnName="des" />
+          <EntitySetMapping Name="members">
+            <EntityTypeMapping TypeName="ichupModel.member">
+              <MappingFragment StoreEntitySet="members">
                 <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="pass" ColumnName="pass" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="passport" ColumnName="passport" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="total_views" ColumnName="total_views" />
+                <ScalarProperty Name="date_reg" ColumnName="date_reg" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -12,7 +12,14 @@ namespace Ichup
     {
         public static string ImagePath = "/Images/Upload/";
         public const int ImageMinimumBytes = 512;
-
+        public static int maxWidth1 = 270;//for ảnh ngang lúc tìm
+        public static int maxHeight1 = 180;
+        public static int maxWidth2 = 150;//for ảnh dọc lúc tìm
+        public static int maxHeight2 = 225;
+        public static int maxWidth3 = 570;//for ảnh ngang lúc xem chi tiết
+        public static int maxHeight3 = 363;
+        public static int maxWidth4 = 363;//for ảnh dọc lúc xem chi tiết
+        public static int maxHeight4 = 570;
         public static bool IsImage(HttpPostedFileBase postedFile)
         {
             //-------------------------------------------

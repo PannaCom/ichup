@@ -15,8 +15,8 @@ namespace Ichup.Models
     public partial class image
     {
         public long id { get; set; }
-        public Nullable<int> title_id { get; set; }
-        public string token { get; set; }
+        public string keywords { get; set; }
+        public Nullable<int> cat_id { get; set; }
         public string link { get; set; }
         public string link_watermark { get; set; }
         public string link_thumbail { get; set; }
@@ -25,5 +25,13 @@ namespace Ichup.Models
         public Nullable<int> total_download { get; set; }
         public Nullable<int> member_id { get; set; }
         public Nullable<System.DateTime> date_post { get; set; }
+        public string filter_1 { get; set; }
+        public string filter_2 { get; set; }
+        public string filter_3 { get; set; }
+        public string filter_4 { get; set; }
+        public string filter_5 { get; set; }
+        public Nullable<decimal> price { get; set; }
+        public string token { get; set; }
+        public Nullable<int> stt { get; set; }
     }
 }

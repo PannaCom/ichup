@@ -21,6 +21,7 @@ namespace Ichup.Models
         public string phone { get; set; }
         public string address { get; set; }
         public string passport { get; set; }
+        public string image { get; set; }
         public Nullable<int> total_views { get; set; }
         public Nullable<System.DateTime> date_reg { get; set; }
     }

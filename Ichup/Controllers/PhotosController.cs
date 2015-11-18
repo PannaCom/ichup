@@ -32,6 +32,10 @@ namespace Ichup.Controllers
             string guid = Guid.NewGuid().ToString();
             string physicalPath = HttpContext.Server.MapPath("../" + Config.ImagePath + "\\");
             string nameFile = String.Format("{0}.jpg", guid);
+            guid = Guid.NewGuid().ToString();
+            string nameFile1 = String.Format("{0}.jpg", guid);
+            guid = Guid.NewGuid().ToString();
+            string nameFile2 = String.Format("{0}.jpg", guid);
             int countFile = Request.Files.Count;
             string fullPath = physicalPath + System.IO.Path.GetFileName(nameFile);
             for (int i = 0; i < countFile; i++)
@@ -44,13 +48,36 @@ namespace Ichup.Controllers
                 Request.Files[i].SaveAs(fullPath);
                 //break;
             }
-            //string ok = resizeImage(Config.imgWidthNews, Config.imgHeightNews, fullPath, Config.NewsImagePath + "/" + nameFile);
-            return Config.ImagePath + "/" + nameFile;
-        }
-        public string resizeImage(int maxWidth, int maxHeight, string fullPath, string path)
-        {
 
+            string path1 = resizeImage(1, fullPath, Config.ImagePath + "/" + nameFile1);//resize ảnh để hiển thị lúc tìm
+            string path2 = resizeImage(2, fullPath, Config.ImagePath + "/" + nameFile2);//resize ảnh để xem chi tiết ảnh và thông số ảnh
+
+            return path1;// Config.ImagePath + "/" + nameFile;
+        }
+        public string resizeImage(byte type,string fullPath, string path)
+        {
+            int maxWidth=Config.maxWidth1, maxHeight=Config.maxHeight1;
+            
             var image = System.Drawing.Image.FromFile(fullPath);
+            if (type == 1)//Nếu là resize ảnh hiển thị lúc tìm
+            {
+                //Nếu là ảnh dọc thì đảo chiều
+                if (image.Height > image.Width)
+                {
+                    maxWidth = Config.maxWidth2;
+                    maxHeight = Config.maxHeight2;
+                }
+            }
+            else
+            {//Nếu là resize ảnh hiển thị lúc xem chi tiết ảnh
+                maxWidth = Config.maxWidth3;
+                maxHeight = Config.maxHeight3;
+                if (image.Height > image.Width)
+                {
+                    maxWidth = Config.maxWidth4;
+                    maxHeight = Config.maxHeight4;
+                }
+            }
             var ratioX = (double)maxWidth / image.Width;
             var ratioY = (double)maxHeight / image.Height;
             var ratio = Math.Min(ratioX, ratioY);
