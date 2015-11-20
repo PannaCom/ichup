@@ -18,8 +18,8 @@ namespace Ichup.Models
         public string keywords { get; set; }
         public Nullable<int> cat_id { get; set; }
         public string link { get; set; }
-        public string link_watermark { get; set; }
-        public string link_thumbail { get; set; }
+        public string link_thumbail_big { get; set; }
+        public string link_thumbail_small { get; set; }
         public Nullable<int> total_views { get; set; }
         public Nullable<int> total_buy { get; set; }
         public Nullable<int> total_download { get; set; }
@@ -33,5 +33,7 @@ namespace Ichup.Models
         public Nullable<decimal> price { get; set; }
         public string token { get; set; }
         public Nullable<int> stt { get; set; }
+        public string code { get; set; }
+        public Nullable<byte> status { get; set; }
     }
 }

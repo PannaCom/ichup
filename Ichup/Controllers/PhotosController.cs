@@ -5,14 +5,14 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using Ichup.Models;
 namespace Ichup.Controllers
 {
     public class PhotosController : Controller
     {
         //
         // GET: /Photos/
-
+        ichupEntities db = new ichupEntities();
         public ActionResult Index()
         {
             return View();
@@ -30,14 +30,16 @@ namespace Ichup.Controllers
         public string UploadImageProcess(HttpPostedFileBase file)
         {
             string guid = Guid.NewGuid().ToString();
+            string code = Config.genCode();
             string physicalPath = HttpContext.Server.MapPath("../" + Config.ImagePath + "\\");
-            string nameFile = String.Format("{0}.jpg", guid);
-            guid = Guid.NewGuid().ToString();
-            string nameFile1 = String.Format("{0}.jpg", guid);
-            guid = Guid.NewGuid().ToString();
-            string nameFile2 = String.Format("{0}.jpg", guid);
+            string nameFile = String.Format("{0}.jpg", guid + "-" + code);
+            
+            string nameFile1 = String.Format("{0}.jpg", guid+"-small");
+
+            string nameFile2 = String.Format("{0}.jpg", guid + "-big");
             int countFile = Request.Files.Count;
             string fullPath = physicalPath + System.IO.Path.GetFileName(nameFile);
+            string new_id = "";
             for (int i = 0; i < countFile; i++)
             {
                 if (!Config.IsImage(Request.Files[i])) return Config.ImagePath + "/invalidimage.png";
@@ -46,13 +48,36 @@ namespace Ichup.Controllers
                     System.IO.File.Delete(fullPath);
                 }
                 Request.Files[i].SaveAs(fullPath);
-                //break;
+                var test = System.Drawing.Image.FromFile(fullPath);
+                string filter_2 = "ngang";
+                if (test.Height > test.Width) filter_2 = "dọc";
+                test = null;
+                //Add vào db
+                image img = new image();
+                img.status = 0;
+                img.link = Config.ImagePath + nameFile;
+                img.link_thumbail_big = Config.ImagePath + nameFile2;
+                img.link_thumbail_small = Config.ImagePath + nameFile1;
+                img.token = guid;
+                img.filter_2 = filter_2;
+                img.code = code;
+                img.total_buy = 0;
+                img.total_download = 0;
+                img.total_views = 0;
+                img.date_post = DateTime.Now;
+                img.member_id = 1;
+                img.price = 0;
+                img.stt = i;
+                db.images.Add(img);
+                db.SaveChanges();
+                new_id = img.id.ToString();
+                break;
             }
+            
+            string path1 = resizeImage(1, fullPath, Config.ImagePath + "/" + nameFile1);//resize ảnh để hiển thị lúc tìm, ảnh nhỏ có wmark
+            string path2 = resizeImage(2, fullPath, Config.ImagePath + "/" + nameFile2);//resize ảnh để xem chi tiết ảnh và thông số ảnh, ảnh to có wmark
 
-            string path1 = resizeImage(1, fullPath, Config.ImagePath + "/" + nameFile1);//resize ảnh để hiển thị lúc tìm
-            string path2 = resizeImage(2, fullPath, Config.ImagePath + "/" + nameFile2);//resize ảnh để xem chi tiết ảnh và thông số ảnh
-
-            return path1;// Config.ImagePath + "/" + nameFile;
+            return path1 + ":" + new_id;// Config.ImagePath + "/" + nameFile;
         }
         public string resizeImage(byte type,string fullPath, string path)
         {

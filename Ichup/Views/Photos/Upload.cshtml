@@ -52,36 +52,11 @@
 
     <section class="image-decription-container">
       <div class="container">
-        <div class="row">
-          <div class="span6">
-            <div class="upload-box">
-              <div class="upload-controller" id="divPR1">
-                
-              </div> <!-- end upload-controller -->
-            </div> <!-- end upload-box -->
-          </div> <!-- end span6 -->
-          <div class="span6">
-            <div class="item-description">
-              <h5 class="title">Thông tin ảnh</h5>
-            
+        <div class="row" style="text-align:center;">
+          <input type="file" name="imageFile" id="imageFile" multiple="multiple"  runat="server" onchange="uploadProcess();">
+          <div style="display:block;float:left;position:relative;width:100%;" id="divPR1">
 
-            <div class="form-item-description">
-              <input type="file" name="imageFile" id="imageFile" multiple="multiple"  runat="server" onchange="uploadProcess();">
-              <form>
-                <fieldset>                  
-                  <legend>Từ khóa</legend>
-                  <input type="text" id="keyword" style="width:100%;">
-                  <legend>Chú thích, mô tả ảnh</legend>
-                  <textarea name="des" id="" rows="8" placeholder="Gõ nội dung vào đây"></textarea>
-                  <button type="button" class="btn btn-primary btn-large span2" style="padding-left:0px;margin-left:0px;">Save</button>
-                  @*<div id="divPR1">
-         
-                  </div>*@
-                </fieldset>
-              </form>
-            </div>
-            </div> <!-- end item-description -->
-          </div> <!-- end span6 -->
+          </div>
         </div> <!-- end row -->
       </div> <!-- end container -->
     </section> <!-- end image-description-container -->
@@ -95,10 +70,10 @@
        
         for (i = totalItemImage+1; i < fileInput.files.length + totalItemImage+1; i++) {
             var pr = "<div style=\"background-color:#ffffff;width:200px;height:auto;display:block;possition:relative;float:left;margin-right:5px;margin-bottom:1px;\">";
-            pr += "<div id=img" + i + " class=\"progressbar\" style=\"background-color:#fff;margin-top:5px;width:200px;height:126px;display:block;possition:relative;float:left;\">";
+            pr += "<div id=img_" + i + " class=\"progressbar\" style=\"background-color:#fff;margin-top:5px;width:200px;height:126px;display:block;possition:relative;float:left;\">";
             pr += "<div id=\"progresslabel" + i + "\" class=\"progressbarlabel\" style=\"background-color:green;width:1px;height:9px;display:block;possition:relative;float:left;\">uploading...</div>";
             pr += "</div>";
-            //pr += "<div style=\"background-color:#ffffff;width:200px;height:auto;display:block;possition:relative;float:left;margin-top:2px;\"><textarea id=title_" + i + " style=\"width:100%;\" placeholder=\"Chú thích ảnh\"></textarea></div>";
+            pr += "<div style=\"background-color:#ffffff;width:200px;height:auto;display:block;possition:relative;float:left;margin-top:2px;\">Từ khóa(cách nhau dấu ,)<textarea id=keyword_" + i + " style=\"width:100%;\" placeholder=\"từ khóa ảnh\"></textarea><input type=hidden id=id_"+i+">Giá: <input type=text id=price_"+i+" placeholder=\"Nhập giá\"></div>";
             pr += "</div>";
             $("#divPR1").append(pr);
         }
@@ -133,8 +108,10 @@
         //alert("222");
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
-                alert(xhr.responseText);
-                $('#img' + totalItemImage).html("<img src=\"" + xhr.responseText + "\" width=200 height=126 id=\"image_" + totalItemImage + "\">");
+                //alert(xhr.responseText);
+                var str = xhr.responseText.split(":");
+                $('#img_' + totalItemImage).html("<img src=\"" + str[0] + "\" width=200 height=126 id=\"image_" + totalItemImage + "\">");
+                $('#id_' + totalItemImage).val(str[1]);
                 newupload(filename, fileobj);
             }
             
