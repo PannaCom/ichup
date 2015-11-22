@@ -6,6 +6,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Ichup.Models;
+using ImageProcessor.Imaging;
+using ImageProcessor.Processors;
 namespace Ichup.Controllers
 {
     public class PhotosController : Controller
@@ -73,10 +75,35 @@ namespace Ichup.Controllers
                 new_id = img.id.ToString();
                 break;
             }
-            
+            //Size size1 = new Size(Config.maxWidth1, Config.maxHeight1);
+            //Size size2 = new Size(Config.maxWidth3, Config.maxHeight3);
+            ImageProcessor.ImageFactory iFF=new ImageProcessor.ImageFactory();
+            //iFF.Load(fullPath).Resize(size1).Save(physicalPath + nameFile1);
+            //iFF.Load(fullPath).Resize(size2).Save(physicalPath + nameFile2);
             string path1 = resizeImage(1, fullPath, Config.ImagePath + "/" + nameFile1);//resize ảnh để hiển thị lúc tìm, ảnh nhỏ có wmark
             string path2 = resizeImage(2, fullPath, Config.ImagePath + "/" + nameFile2);//resize ảnh để xem chi tiết ảnh và thông số ảnh, ảnh to có wmark
+            string w1 = HttpContext.Server.MapPath("../" + path1);
+            string w2 = HttpContext.Server.MapPath("../" + path2);
 
+            iFF.Load(w1).Watermark(new TextLayer()
+            {
+                DropShadow = true,
+                FontFamily = FontFamily.GenericMonospace,
+                Text = "BanAnhSo.Com",
+                Style = FontStyle.Regular,
+                FontSize=12,
+                FontColor = Color.WhiteSmoke
+            }).Save(w1);
+            iFF.Load(w2).Watermark(new TextLayer()
+            {
+                DropShadow = true,
+                FontFamily = FontFamily.GenericMonospace,
+                Text = "BanAnhSo.Com",
+                Style = FontStyle.Regular,
+                FontSize = 12,
+                FontColor = Color.WhiteSmoke
+            }).Save(w2);
+            iFF = null;
             return path1 + ":" + new_id;// Config.ImagePath + "/" + nameFile;
         }
         public string resizeImage(byte type,string fullPath, string path)
