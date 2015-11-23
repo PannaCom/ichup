@@ -19,6 +19,38 @@ namespace Ichup.Controllers
         {
             return View();
         }
+        public string Update(int totalitem)
+        {
+            try
+            {
+                for (int i = 0; i < totalitem; i++)
+                {
+                    string keyword = "";
+                    string price = "";
+                    string id = "";
+                    if (Request.Form["keyword_" + i] != null)
+                    {
+                        keyword = Request.Form["keyword_" + i].ToString();
+                    }
+                    if (Request.Form["price_" + i] != null)
+                    {
+                        price = Request.Form["price_" + i].ToString();
+                    }
+                    if (Request.Form["id_" + i] != null)
+                    {
+                        id = Request.Form["id_" + i].ToString();
+                    }
+                    int to_price = int.Parse(price);
+                    string query="update images set keywords=N'"+keyword+"',price="+to_price+" where id="+id;
+                    db.Database.ExecuteSqlCommand(query);
+                    return "1";
+                }
+            }
+            catch (Exception ex) {
+                return "0";
+            }
+            return "0";
+        }
         public ActionResult Upload() {
             return View();
         }
