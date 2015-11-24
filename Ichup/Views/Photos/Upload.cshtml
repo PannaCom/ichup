@@ -59,7 +59,7 @@
                   </p>  
           <input type="file" name="imageFile" id="imageFile" multiple="multiple"  runat="server" onchange="uploadProcess();">
           <div style="display:block;float:left;position:relative;width:100%;" id="divPR1">
-
+              <input type="text" id="mytags" name="mytags" class="tagit ui-widget ui-widget-content ui-corner-all">
           </div>
           <input type="button" class="class-form" value="Save" onclick="saveAll();">  
         </div> <!-- end row -->
@@ -82,11 +82,17 @@
             pr += "</div>";
             $("#divPR1").append(pr);
             //$('#keyword_'+i).textext({ plugins: 'tags' });
+            $(document).ready(function () {
+                $('#keyword_' + i).tagit();
+            });
         }
         totalindex = -1;
         newupload(fileInput.files[0].name, fileInput.files[0]);
         return false;
     }
+    $(document).ready(function () {
+        $('#mytags').tagit();
+    });
     function newupload(filename, fileobj) {
         totalindex++;
         totalItemImage++;
