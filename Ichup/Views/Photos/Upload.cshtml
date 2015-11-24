@@ -59,7 +59,7 @@
                   </p>  
           <input type="file" name="imageFile" id="imageFile" multiple="multiple"  runat="server" onchange="uploadProcess();">
           <div style="display:block;float:left;position:relative;width:100%;" id="divPR1">
-              <input type="text" id="mytags" name="mytags" class="tagit ui-widget ui-widget-content ui-corner-all">
+              
           </div>
           <input type="button" class="class-form" value="Save" onclick="saveAll();">  
         </div> <!-- end row -->
@@ -78,21 +78,20 @@
             pr += "<div id=img_" + i + " class=\"progressbar\" style=\"background-color:#fff;margin-top:5px;width:200px;height:126px;display:block;possition:relative;float:left;\">";
             pr += "<div id=\"progresslabel" + i + "\" class=\"progressbarlabel\" style=\"background-color:green;width:1px;height:9px;display:block;possition:relative;float:left;\">uploading...</div>";
             pr += "</div>";
-            pr += "<div style=\"background-color:#ffffff;width:200px;height:auto;display:block;possition:relative;float:left;margin-top:2px;\">Từ khóa(cách nhau dấu ,)<textarea id=keyword_" + i + " style=\"width:100%;\" placeholder=\"từ khóa ảnh\" class=\"example\" rows=\"1\"></textarea><input type=hidden id=id_"+i+">Giá: <input type=text id=price_"+i+" placeholder=\"Nhập giá\" onblur=\"checkPrice(this);\"></div>";
+            pr += "<div style=\"background-color:#ffffff;width:200px;height:auto;display:block;possition:relative;float:left;margin-top:2px;\">Từ khóa(cách nhau dấu ,)<textarea id=keyword_" + i + " style=\"width:100%;\" placeholder=\"từ khóa ảnh\" class=\"example\" rows=\"1\"></textarea><input type=hidden id=id_"+i+">Giá: <input type=text id=price_"+i+" placeholder=\"Nhập giá\" onblur=\"checkPrice(this);\"><ul id=\"myTags_"+i+"\"></ul></div>";
             pr += "</div>";
             $("#divPR1").append(pr);
             //$('#keyword_'+i).textext({ plugins: 'tags' });
             $(document).ready(function () {
                 $('#keyword_' + i).tagit();
+                //$('#myTags_' + i).tagit();
             });
         }
         totalindex = -1;
         newupload(fileInput.files[0].name, fileInput.files[0]);
         return false;
     }
-    $(document).ready(function () {
-        $('#mytags').tagit();
-    });
+    
     function newupload(filename, fileobj) {
         totalindex++;
         totalItemImage++;
