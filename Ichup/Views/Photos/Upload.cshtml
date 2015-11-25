@@ -54,14 +54,15 @@
         <div class="row" style="text-align:center;">
           <p style="text-align:justify;"><b>Chú ý: </b><br />
                       -Có thể upload nhiều ảnh một lúc<br />
-                      -Mỗi từ khóa ấn phím enter để nhập tiếp từ khóa tiếp theo cho mỗi ảnh.
+                      -Các từ khóa ngăn cách nhau bởi dấu ,
 
                   </p>  
           <input type="file" name="imageFile" id="imageFile" multiple="multiple"  runat="server" onchange="uploadProcess();">
           <div style="display:block;float:left;position:relative;width:100%;" id="divPR1">
               
           </div>
-          <input type="button" class="class-form" value="Save" onclick="saveAll();">  
+          <span id="notice"></span>  
+          <input type="button" class="class-form" value="Save All" onclick="saveAll();">  
         </div> <!-- end row -->
       </div> <!-- end container -->
     </section> <!-- end image-description-container -->
@@ -78,15 +79,12 @@
             pr += "<div id=img_" + i + " class=\"progressbar\" style=\"background-color:#fff;margin-top:5px;width:200px;height:126px;display:block;possition:relative;float:left;\">";
             pr += "<div id=\"progresslabel" + i + "\" class=\"progressbarlabel\" style=\"background-color:green;width:1px;height:9px;display:block;possition:relative;float:left;\">uploading...</div>";
             pr += "</div>";
-            pr += "<div style=\"background-color:#ffffff;width:200px;height:auto;display:block;possition:relative;float:left;margin-top:2px;\">Từ khóa(cách nhau dấu ,)<textarea id=keyword_" + i + " style=\"width:100%;\" placeholder=\"từ khóa ảnh\" class=\"example\" rows=\"1\"></textarea><input type=hidden id=id_"+i+">Giá: <input type=text id=price_"+i+" placeholder=\"Nhập giá\" onblur=\"checkPrice(this);\"><ul id=\"myTags_"+i+"\"></ul></div>";
+            pr += "<div style=\"background-color:#ffffff;width:200px;height:auto;display:block;possition:relative;float:left;margin-top:2px;\">Từ khóa(cách nhau dấu ,)<textarea id=keyword_" + i + " style=\"width:100%;\"  class=\"example\" rows=\"1\"></textarea><input type=hidden id=id_" + i + ">Giá: <input type=text id=price_" + i + " placeholder=\"Nhập giá\" onblur=\"checkPrice(this);\"></div>";//
             pr += "</div>";
             $("#divPR1").append(pr);
-            //$('#keyword_'+i).textext({ plugins: 'tags' });
-            $(document).ready(function () {
-                $('#keyword_' + i).tagit();
-                //$('#myTags_' + i).tagit();
-            });
+            
         }
+        
         totalindex = -1;
         newupload(fileInput.files[0].name, fileInput.files[0]);
         return false;
@@ -97,6 +95,7 @@
         totalItemImage++;
         if (totalindex >= fileInput.files.length) return;
         //alert(totalindex);
+        $("#notice").html("Đang upload xin chờ");
         filename = fileInput.files[totalindex].name;
         fileobj = fileInput.files[totalindex];
         //alert(filename + "," + fileobj);
@@ -111,6 +110,7 @@
                 $("#progresslabel" + totalItemImage).css("width", progress);//.progressbar("value", progress);//.html(progress);//
                 //$("#progresslabel" + index).html(progress);
                 //alert("ok"+totalindex);
+                
             }
         }, false);
         //alert("111");
@@ -123,6 +123,7 @@
                 var str = xhr.responseText.split(":");
                 $('#img_' + totalItemImage).html("<img src=\"" + str[0] + "\" width=200 height=126 id=\"image_" + totalItemImage + "\">");
                 $('#id_' + totalItemImage).val(str[1]);
+                $("#notice").html("Đã upload xong ảnh " + totalItemImage);
                 newupload(filename, fileobj);
             }
             
@@ -167,7 +168,7 @@
             if (xhr.readyState == 4 && xhr.status == 200) {
                 if (xhr.responseText == "1") {
                     alert("Cập nhật thành công");
-                    window.location.href = "/Home";
+                    window.location.href = "/Photos/User/1";
                 } else {
                     alert("Chương trình đang cập nhật, xin quay lại sau!");
                 }

@@ -1398,6 +1398,7 @@
     <Content Include="Views\Members\Register.cshtml" />
     <Content Include="Views\Members\Login.cshtml" />
     <Content Include="Views\Photos\Upload.cshtml" />
+    <Content Include="Views\Photos\User.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

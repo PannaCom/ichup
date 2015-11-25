@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Ichup.Models;
 using ImageProcessor.Imaging;
 using ImageProcessor.Processors;
+using PagedList;
 namespace Ichup.Controllers
 {
     public class PhotosController : Controller
@@ -50,6 +51,15 @@ namespace Ichup.Controllers
                 return "0";
             }
             return "0";
+        }
+        public ActionResult User(int? id,int? page) {
+            var p = (from q in db.images where q.member_id == id select q).OrderByDescending(o => o.id);
+            if (page == null) page = 1;
+            ViewBag.page = page;
+            if (id == null) return View();
+            int pageSize = 25;
+            int pageNumber = (page ?? 1);
+            return View(p.ToPagedList(pageNumber, pageSize));
         }
         public ActionResult Upload() {
             return View();

@@ -1,0 +1,98 @@
+﻿@model PagedList.IPagedList<Ichup.Models.image>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "User";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- ============================  Categories Start ============================ -->
+
+    <section class="picture-categories">
+
+      <div class="container">
+        <div class="row">
+          <div class="span12">
+            <div class="single-image-container">
+              <div class="row-fluid">
+                <div class="span1">
+
+                  <h4 class="title">Quản lý ảnh</h4>                  
+                </div> <!-- end span1 -->
+
+                <div class="span11">
+                    <ul class="nav nav-tabs">
+                      <li class="active"><a href="#"><i class="icon-picture icon-large"></i></a></li>
+                      <li><a href="#"><i class="icon-facetime-video icon-large"></i></a></li>
+                      <li><a href="#"><i class="icon-music icon-large"></i></a></li>
+                    </ul>
+                </div> <!-- end span8 -->
+               
+              </div><!--  end row-fluid -->
+            </div> <!-- end single-image-container -->
+          </div> <!-- end span12 -->
+
+        </div> <!-- end row -->
+
+        <div class="single-image-title v2">
+          <div class="row">
+            <div class="span12">
+              
+            </div> <!--end span12-->
+          </div> <!-- end row -->
+        </div> <!-- end single-image-title -->
+      </div> <!-- end container -->
+
+    </section> <!-- end picture-categories -->
+
+
+
+    <!-- ============================  Categories End ============================ -->
+
+    <!-- ============================  Image Decription Starts ============================ -->
+
+
+    <section class="image-decription-container">
+      <div class="container">
+        <div class="row" style="text-align:center;">
+            @foreach(var item in Model){
+                <text>
+                    <div class="span6" style="height:363px;">
+                        <figure>
+                          <img src="@item.link_thumbail_big" alt="img" />
+                        </figure>
+                    </div> <!-- end span6 -->
+                    <div class="span6" style="height:363px;">
+                        <table>
+                             <tr><td align="left">Từ khóa</td><td align="left"><input type="text" id="keyword_@item.id" value="@item.keywords"></td></tr>
+                             <tr><td colspan="2"><b>Đánh dấu vào các thuộc tính mà ảnh này có</b></td></tr>
+                             <tr>
+                                 <td align="left"><b>Loại ảnh:</b></td>
+                                 <td align="left"><input type="checkbox" id="f1_1">ảnh <input type="checkbox" id="f1_2">vector<input type="checkbox" id="f1_3">illustrator</td>
+                             </tr>   
+                            <tr>
+                                 <td align="left"><b>Kiểu ảnh:</b></td>
+                                 <td align="left"><input type="checkbox" id="f2_1">dọc <input type="checkbox" id="f2_2">ngang<input type="checkbox" id="f2_3">rộng</td>
+                             </tr>  
+                            <tr>
+                                 <td align="left"><b>Nhóm ảnh:</b></td>
+                                 <td align="left" id="category"><script>getCategoryCk();</script></td>
+                             </tr>  
+                            <tr>
+                                 <td align="left"><b>Người:</b></td>
+                                 <td align="left"><input type="checkbox" id="f4_1">có người <input type="checkbox" id="f4_2">nam<input type="checkbox" id="f4_3">nữ<input type="checkbox" id="f4_4">gay<input type="checkbox" id="f4_5">les
+                                     <input type="checkbox" id="f4_6">trẻ<input type="checkbox" id="f4_7">thanh niên<input type="checkbox" id="f4_8">trung niên<input type="checkbox" id="f4_9">người già
+                                     <input type="checkbox" id="f4_9">nước ngoài
+                                 </td>
+                             </tr> 
+                             <tr>
+                                 <td align="left"><b>Góc chụp:</b></td>
+                                 <td align="left"><input type="checkbox" id="f5_1">chân dung<input type="checkbox" id="f5_2">bán thân<input type="checkbox" id="f5_3">chụp 3/4<input type="checkbox" id="f5_4">toàn thân<input type="checkbox" id="f5_5">khoảnh khắc</td>
+                             </tr>
+                            <tr><td colspan="2"><input type="button" value="Save"></td></tr>
+                        </table>
+                    </div>
+                </text>
+            }
+        </div> <!-- end row -->
+      </div> <!-- end container -->
+    </section> <!-- end image-description-container -->
+
