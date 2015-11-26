@@ -9,6 +9,7 @@ using Ichup.Models;
 using ImageProcessor.Imaging;
 using ImageProcessor.Processors;
 using PagedList;
+using Newtonsoft.Json;
 namespace Ichup.Controllers
 {
     public class PhotosController : Controller
@@ -64,10 +65,28 @@ namespace Ichup.Controllers
         public ActionResult Upload() {
             return View();
         }
+        public string getCategoryCk() {
+            var p = (from q in db.categories orderby q.name select q.name).ToList();
+            return JsonConvert.SerializeObject(p);
+        }
         [HttpPost]
         public string test(HttpPostedFileBase file)
         {
             return "21";
+        }
+        [HttpPost]
+        public string UpdateFilter(int id, string filter_1,string filter_2,string filter_3,string filter_4,string filter_5,string keywords,int price)
+        {
+            try
+            {
+                string query = "update images set keywords=N'" + keywords + "',price=" + price + ",filter_1=N'"+filter_1+"',filter_2=N'"+filter_2+"',filter_3=N'"+filter_3+"',filter_4=N'"+filter_4+"',filter_5=N'"+filter_5+"' where id=" + id;
+                db.Database.ExecuteSqlCommand(query);
+                return "1";
+            }
+            catch (Exception ex) { 
+
+            }
+            return "0";
         }
         [HttpPost]
         [AcceptVerbs(HttpVerbs.Post)]
