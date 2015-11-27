@@ -11,6 +11,35 @@
             border-bottom:1px solid #0ff;
         }
     </style>
+    <script>
+        function setValueDefault(id,filter1,filter2,filter3,filter4,filter5){
+            var a1=["ảnh, ","vector, ","illustrator, "];
+            var a2=["dọc, ","ngang, ","rộng, "];
+            var index=0;
+            var i=0;
+            for(i=0;i<3;i++){
+                index=i+1;
+                if (filter1.indexOf(a1[i])>=0){
+                    document.getElementById("f-"+id+"-1_"+index).checked=true;
+                }
+            }
+            for(i=0;i<3;i++){
+                index=i+1;
+                if (filter2.indexOf(a2[i])>=0){
+                    document.getElementById("f-"+id+"-2_"+index).checked=true;
+                }
+            }
+            console.log(acategory.length);
+            for(i=0;i<acategory.length;i++){
+                index=i+1;
+                console.log(acategory[i]);
+                if (filter3.indexOf(acategory[i]+", ")>=0){
+                    document.getElementById("f-"+id+"-3_"+index).checked=true;
+                }
+            }
+        
+        }
+    </script>
     <section class="picture-categories">
 
       <div class="container">
@@ -85,7 +114,7 @@
                              </tr>  
                             <tr>
                                  <td align="left"><b>Người:</b></td>
-                                 <td align="left"><input type="checkbox" id="f-@item.id-4_1" value="có người">có người <input type="checkbox" id="f-@item.id-4_2" value="name">nam<input type="checkbox" id="f-@item.id-4_3" value="nữ">nữ
+                                 <td align="left"><input type="checkbox" id="f-@item.id-4_1" value="có người">có người <input type="checkbox" id="f-@item.id-4_2" value="nam">nam<input type="checkbox" id="f-@item.id-4_3" value="nữ">nữ
                                      <input type="checkbox" id="f-@item.id-4_4" value="gay">gay<input type="checkbox" id="f-@item.id-4_5" value="les">les
                                      <input type="checkbox" id="f-@item.id-4_6" value="trẻ">trẻ<input type="checkbox" id="f-@item.id-4_7" value="thanh niên">thanh niên<input type="checkbox" id="f-@item.id-4_8" value="trung niên">trung niên<input type="checkbox" id="f-@item.id-4_9" value="người già">người già
                                      <input type="checkbox" id="f-@item.id-4_9" value="nước ngoài">nước ngoài
@@ -98,6 +127,7 @@
                             <tr><td colspan="2"><input type="button" value="Save" onclick="save(@item.id);"><input type="button" value="Delete" onclick="del(@item.id);"></td></tr>
                         </table>
                     </div>
+                    <script>setValueDefault(@item.id,"@Html.Raw(@item.filter_1)","@Html.Raw(@item.filter_2)","@Html.Raw(@item.filter_3)","@Html.Raw(@item.filter_4)","@Html.Raw(@item.filter_5)");</script>
                 </text>
                 totalItemImage++;
             }
@@ -106,6 +136,8 @@
     </section> <!-- end image-description-container -->
 
 <script>
+    
+    
     var totalItemImage=@totalItemImage;
     function save(id){
         var formdata = new FormData(); //FormData object
