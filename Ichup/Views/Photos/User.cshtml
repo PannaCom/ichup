@@ -12,9 +12,11 @@
         }
     </style>
     <script>
+        isLoadedCat=false;
+        //getCategoryCk(@Model[0].id);
+        acategory=@Html.Raw(@ViewBag.acategory);
         function setValueDefault(id,filter1,filter2,filter3,filter4,filter5){
-            var a1=["ảnh, ","vector, ","illustrator, "];
-            var a2=["dọc, ","ngang, ","rộng, "];
+            
             var index=0;
             var i=0;
             for(i=0;i<3;i++){
@@ -29,10 +31,11 @@
                     document.getElementById("f-"+id+"-2_"+index).checked=true;
                 }
             }
-            console.log(acategory.length);
+            //console.log(acategory.length);
+            //console.log(filter3);
             for(i=0;i<acategory.length;i++){
                 index=i+1;
-                console.log(acategory[i]);
+                //console.log(filter3);
                 if (filter3.indexOf(acategory[i]+", ")>=0){
                     document.getElementById("f-"+id+"-3_"+index).checked=true;
                 }
@@ -110,7 +113,7 @@
                              </tr>  
                             <tr>
                                  <td align="left"><b>Nhóm ảnh:</b></td>
-                                 <td align="left" id="category_ck_list_@item.id"><script>getCategoryCk(@item.id);</script></td>
+                                 <td align="left" id="category_ck_list_@item.id">@Html.Raw(@Ichup.Config.getCategoryCk(@item.id))</td>
                              </tr>  
                             <tr>
                                  <td align="left"><b>Người:</b></td>

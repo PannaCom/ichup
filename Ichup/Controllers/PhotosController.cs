@@ -60,6 +60,8 @@ namespace Ichup.Controllers
             if (id == null) return View();
             int pageSize = 25;
             int pageNumber = (page ?? 1);
+            var c = (from q in db.categories orderby q.name select q.name);
+            ViewBag.acategory = JsonConvert.SerializeObject(c.ToList());
             return View(p.ToPagedList(pageNumber, pageSize));
         }
         public ActionResult Upload() {

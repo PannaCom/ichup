@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
-
+using Ichup.Models;
 namespace Ichup
 {
     public class Config
@@ -20,6 +20,7 @@ namespace Ichup
         public static int maxHeight3 = 363;
         public static int maxWidth4 = 363;//for ảnh dọc lúc xem chi tiết
         public static int maxHeight4 = 570;
+        private static ichupEntities db = new ichupEntities();
         public static bool IsImage(HttpPostedFileBase postedFile)
         {
             //-------------------------------------------
@@ -92,6 +93,15 @@ namespace Ichup
             }
 
             return true;
+        }
+        public static string getCategoryCk(long id){
+            var p=(from q in db.categories orderby q.name select q.name).ToList();
+            string val = "";
+            for (int i = 0; i < p.Count; i++) { 
+                string name=p[i];
+                val += "<input value='" + name + "' id=f-" + id + "-3_" + (i + 1) + " type=checkbox>" + name;
+            }
+            return val;
         }
         public static string genCode()
         {
