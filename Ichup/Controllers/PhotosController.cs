@@ -92,7 +92,7 @@ namespace Ichup.Controllers
         }
         [HttpPost]
         [AcceptVerbs(HttpVerbs.Post)]
-        public string UploadImageProcess(HttpPostedFileBase file)
+        public string UploadImageProcess(HttpPostedFileBase file,bool autoname)
         {
             string guid = Guid.NewGuid().ToString();
             string code = Config.genCode();
@@ -112,6 +112,8 @@ namespace Ichup.Controllers
                 {
                     System.IO.File.Delete(fullPath);
                 }
+                string basicname = Request.Files[i].FileName;
+                basicname = Config.removeSpecialChar(basicname);
                 Request.Files[i].SaveAs(fullPath);
                 var test = System.Drawing.Image.FromFile(fullPath);
                 string filter_2 = "ngang";
@@ -120,6 +122,7 @@ namespace Ichup.Controllers
                 //Add vào db
                 image img = new image();
                 img.status = 0;
+                img.keywords = basicname;
                 img.link = Config.ImagePath + nameFile;
                 img.link_thumbail_big = Config.ImagePath + nameFile2;
                 img.link_thumbail_small = Config.ImagePath + nameFile1;
@@ -138,13 +141,13 @@ namespace Ichup.Controllers
                 new_id = img.id.ToString();
                 break;
             }
-            //Size size1 = new Size(Config.maxWidth1, Config.maxHeight1);
-            //Size size2 = new Size(Config.maxWidth3, Config.maxHeight3);
+            Size size1 = new Size(Config.maxWidth1, Config.maxHeight1);
+            Size size2 = new Size(Config.maxWidth3, Config.maxHeight3);
             ImageProcessor.ImageFactory iFF=new ImageProcessor.ImageFactory();
-            //iFF.Load(fullPath).Resize(size1).Save(physicalPath + nameFile1);
-            //iFF.Load(fullPath).Resize(size2).Save(physicalPath + nameFile2);
-            string path1 = resizeImage(1, fullPath, Config.ImagePath + "/" + nameFile1);//resize ảnh để hiển thị lúc tìm, ảnh nhỏ có wmark
-            string path2 = resizeImage(2, fullPath, Config.ImagePath + "/" + nameFile2);//resize ảnh để xem chi tiết ảnh và thông số ảnh, ảnh to có wmark
+            iFF.Load(fullPath).Resize(size1).Save(physicalPath + nameFile1);
+            iFF.Load(fullPath).Resize(size2).Save(physicalPath + nameFile2);
+            string path1 = Config.ImagePath + "/" + nameFile1;// resizeImage(1, fullPath, Config.ImagePath + "/" + nameFile1);//resize ảnh để hiển thị lúc tìm, ảnh nhỏ có wmark
+            string path2 = Config.ImagePath + "/" + nameFile2;// resizeImage(2, fullPath, Config.ImagePath + "/" + nameFile2);//resize ảnh để xem chi tiết ảnh và thông số ảnh, ảnh to có wmark
             string w1 = HttpContext.Server.MapPath("../" + path1);
             string w2 = HttpContext.Server.MapPath("../" + path2);
 

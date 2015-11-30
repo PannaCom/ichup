@@ -52,12 +52,13 @@
     <section class="image-decription-container">
       <div class="container">
         <div class="row" style="text-align:center;">
-          <p style="text-align:justify;"><b>Chú ý: </b><br />
+          <p style="text-align:justify;"><b>CHÚ Ý QUAN TRỌNG: </b><br />
                       -Có thể upload nhiều ảnh một lúc<br />
-                      -Các từ khóa ngăn cách nhau bởi dấu ,
-
+                      -Các từ khóa của mỗi ảnh ngăn cách nhau bởi dấu ,
+                      -Nếu bạn muốn free ảnh nào, hãy để giá bằng 0.
                   </p>  
           <input type="file" name="imageFile" id="imageFile" multiple="multiple"  runat="server" onchange="uploadProcess();">
+          <input type="checkbox" id="autoname" name="autoname"/>  Tự động lấy tên ảnh làm tag từ khóa
           <div style="display:block;float:left;position:relative;width:100%;" id="divPR1">
               
           </div>
@@ -72,6 +73,8 @@
     var totalindex = -1;
     var fileInput = document.getElementById('imageFile');
     var totalItemImage = -1;
+    var autoname = false;
+    
     function uploadProcess() {
        
         for (i = totalItemImage+1; i < fileInput.files.length + totalItemImage+1; i++) {
@@ -84,7 +87,8 @@
             $("#divPR1").append(pr);
             
         }
-        
+        autoname = false;
+        if (document.getElementById("autoname").checked) autoname = true;
         totalindex = -1;
         newupload(fileInput.files[0].name, fileInput.files[0]);
         return false;
@@ -114,6 +118,7 @@
             }
         }, false);
         //alert("111");
+        formdata.append("autoname", autoname);
         xhr.open('POST', '/Photos/UploadImageProcess');//UploadImageProcess
         xhr.send(formdata);//formdata
         //alert("222");

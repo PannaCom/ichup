@@ -94,6 +94,11 @@ namespace Ichup
 
             return true;
         }
+        public static string removeSpecialChar(string input)
+        {
+            input = input.Replace("-", "").Replace(":", "").Replace(",", "").Replace("_", "").Replace("'", "").Replace("\"", "").Replace(";", "").Replace("”", "").Replace(".", "").Replace("%", "").Replace("&", "");
+            return input;
+        }
         public static string getCategoryCk(long id){
             var p=(from q in db.categories orderby q.name select q.name).ToList();
             string val = "";
