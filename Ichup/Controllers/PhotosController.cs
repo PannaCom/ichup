@@ -113,7 +113,7 @@ namespace Ichup.Controllers
                     System.IO.File.Delete(fullPath);
                 }
                 string basicname = Request.Files[i].FileName;
-                basicname = Config.removeSpecialChar(basicname);
+                basicname = Config.removeSpecialCharName(basicname);
                 Request.Files[i].SaveAs(fullPath);
                 var test = System.Drawing.Image.FromFile(fullPath);
                 string filter_2 = "ngang";
