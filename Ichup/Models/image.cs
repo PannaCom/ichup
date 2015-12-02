@@ -35,5 +35,7 @@ namespace Ichup.Models
         public Nullable<int> stt { get; set; }
         public string code { get; set; }
         public Nullable<byte> status { get; set; }
+        public Nullable<int> width { get; set; }
+        public Nullable<int> height { get; set; }
     }
 }

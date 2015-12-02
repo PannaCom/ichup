@@ -114,11 +114,12 @@ namespace Ichup.Controllers
                 }
                 string basicname = Request.Files[i].FileName;
                 basicname = Config.removeSpecialCharName(basicname);
+                if (!autoname) basicname = "";
                 Request.Files[i].SaveAs(fullPath);
                 var test = System.Drawing.Image.FromFile(fullPath);
                 string filter_2 = "ngang";
                 if (test.Height > test.Width) filter_2 = "dọc";
-                test = null;
+                
                 //Add vào db
                 image img = new image();
                 img.status = 0;
@@ -136,16 +137,19 @@ namespace Ichup.Controllers
                 img.member_id = 1;
                 img.price = 0;
                 img.stt = i;
+                img.width = test.Width;
+                img.height = test.Height;
                 db.images.Add(img);
                 db.SaveChanges();
                 new_id = img.id.ToString();
+                test = null;                
                 break;
             }
             Size size1 = new Size(Config.maxWidth1, Config.maxHeight1);
-            Size size2 = new Size(Config.maxWidth3, Config.maxHeight3);
+            Size size2 = new Size(Config.maxWidth3, Config.maxHeight3);            
             ImageProcessor.ImageFactory iFF=new ImageProcessor.ImageFactory();
-            iFF.Load(fullPath).Resize(size1).Save(physicalPath + nameFile1);
-            iFF.Load(fullPath).Resize(size2).Save(physicalPath + nameFile2);
+            iFF.Load(fullPath).Resize(size1).BackgroundColor(Color.WhiteSmoke).Save(physicalPath + nameFile1);
+            iFF.Load(fullPath).Resize(size2).BackgroundColor(Color.WhiteSmoke).Save(physicalPath + nameFile2);
             string path1 = Config.ImagePath + "/" + nameFile1;// resizeImage(1, fullPath, Config.ImagePath + "/" + nameFile1);//resize ảnh để hiển thị lúc tìm, ảnh nhỏ có wmark
             string path2 = Config.ImagePath + "/" + nameFile2;// resizeImage(2, fullPath, Config.ImagePath + "/" + nameFile2);//resize ảnh để xem chi tiết ảnh và thông số ảnh, ảnh to có wmark
             string w1 = HttpContext.Server.MapPath("../" + path1);
@@ -169,6 +173,7 @@ namespace Ichup.Controllers
                 FontSize = 12,
                 FontColor = Color.WhiteSmoke
             }).Save(w2);
+            
             iFF = null;
             return path1 + ":" + new_id;// Config.ImagePath + "/" + nameFile;
         }
@@ -214,6 +219,36 @@ namespace Ichup.Controllers
             string fileRelativePath = path;// "newsizeimages/" + maxWidth + Path.GetFileName(path);
             newImage.Save(HttpContext.Server.MapPath(fileRelativePath), newImage.RawFormat);
             return fileRelativePath;
+        }
+        public string Del(int id) {
+            try
+            {
+                image img = db.images.Find(id);
+                if (img != null)
+                {
+                    string link1 = HttpContext.Server.MapPath("../" + img.link);
+                    string link2 = HttpContext.Server.MapPath("../" + img.link_thumbail_small);
+                    string link3 = HttpContext.Server.MapPath("../" + img.link_thumbail_big);
+                    if (System.IO.File.Exists(link1))
+                    {
+                        System.IO.File.Delete(link1);                        
+                    }
+                    if (System.IO.File.Exists(link2))
+                    {
+                        System.IO.File.Delete(link2);
+                    }
+                    if (System.IO.File.Exists(link3))
+                    {
+                        System.IO.File.Delete(link3);
+                    }
+                    db.images.Remove(img);
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex) {
+                return "0";
+            }
+            return "1";
         }
     }
 }

@@ -93,14 +93,14 @@
             @foreach(var item in Model){
                 
                 <text>
-                    <div class="span6" style="height:363px;">
+                    <div class="span6" style="height:373px;" id="div-@item.id">
                         <figure>
                           <img src="@item.link_thumbail_big" alt="img" />
                         </figure>
                     </div> <!-- end span6 -->
-                    <div class="span6" style="height:363px;">
+                    <div class="span6" style="height:373px;" id="div-@item.id-2">
                         <table>
-                             <tr><td align="left" width="70">Từ khóa</td><td align="left"><input type="text" id="keyword_@item.id" name="keyword_@item.id" value="@item.keywords"></td></tr>
+                             <tr><td align="left" width="70">Từ khóa</td><td align="left"><input type="text" id="keyword_@item.id" name="keyword_@item.id" value="@item.keywords" style="width:100%;"></td></tr>
                              <tr><td align="left" width="70">Giá bán</td><td align="left"><input type="text" id="price_@item.id" name="price_@item.id" value="@item.price" onblur="checkPrice(this);"></td></tr>
                              <tr><td colspan="2"><b>Đánh dấu vào các thuộc tính mà ảnh này có</b></td></tr>
                              <tr>
@@ -177,6 +177,28 @@
                 if (xhr.responseText == "1") {
                     alert("Cập nhật thành công");
                     //window.location.href = "/Photos/User/1";
+                } else {
+                    alert("Chương trình đang cập nhật, xin quay lại sau!");
+                }
+            }
+        }
+
+    }
+    function del(id){
+        var formdata = new FormData(); //FormData object
+        formdata.append("id", id);
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/Photos/Del');
+        xhr.send(formdata);
+        var content = "";
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                if (xhr.responseText == "1") {
+                    //alert("xóa ảnh thành công");
+                    $("#div-"+id).html("");
+                    $("#div-"+id).css("background-color","red");
+                    $("#div-"+id+"-2").html("");
+                    $("#div-"+id+"-2").css("background-color","red");
                 } else {
                     alert("Chương trình đang cập nhật, xin quay lại sau!");
                 }

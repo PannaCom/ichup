@@ -143,7 +143,7 @@
             return;
         }
         for (var i = 0; i < totalItemImage; i++) {
-            if (document.getElementById("keyword_" + i) && document.getElementById("keyword_" + i).value == "") {
+            if (!autoname && document.getElementById("keyword_" + i) && document.getElementById("keyword_" + i).value == "") {
                 alert("Nhập từ khóa cho ảnh này!");
                 document.getElementById("keyword_" + i).focus();
                 return;
