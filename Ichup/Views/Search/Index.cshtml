@@ -1,0 +1,327 @@
+﻿
+@model PagedList.IPagedList<Ichup.Controllers.SearchController.searchitem>
+@using PagedList.Mvc; 
+@{
+    ViewBag.Title = "Kết quả tìm kiếm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="search-results">
+      <div class="container">
+        <div class="row">
+          <aside class="span3">
+            <div class="widgets-container">
+              <div class="widget">
+                <form action="" class="search-form">
+                    <div class="input-append">
+                      <input class="input-medium" id="appendedInputButton" type="text" placeholder="Enter keyword">
+                      <button class="btn" type="button"><i class="icon-search"></i></button>
+                    </div> <!-- end input-append -->
+                  </form> <!-- end search form -->
+              </div> <!-- end widget -->
+
+              <div class="widget">
+                <h4 class="title">Price Range</h4>
+                 <div class="noUiSlider horizontal">                   
+                  </div><!-- end ui-slider -->
+
+              </div> <!-- end widget --> 
+
+              <div class="widget">
+                <h4 class="title">Image Size</h4>
+                 <form class="form-inline search-image-size">
+                   <input type="text" class="input-small" placeholder="Width">
+                   <input type="text" class="input-small" placeholder="Height">
+                 </form>
+
+              </div> <!-- end widget -->
+
+              <div class="widget">
+                <h4 class="title">Categories</h4>
+                 <form class="search-categories">
+                   <label class="checkbox">
+                     <input type="checkbox" value="">
+                     Abstract
+                   </label>
+
+                   <label class="checkbox">
+                     <input type="checkbox" value="">
+                     Animals/Wildlife
+                   </label>
+
+                   <label class="checkbox">
+                     <input type="checkbox" value="" checked>
+                     The Arts
+                   </label>
+
+                   <label class="checkbox">
+                     <input type="checkbox" value="" checked>
+                     Backgrounds/Textures
+                   </label>
+
+                   <label class="checkbox">
+                     <input type="checkbox" value="" checked>
+                     Beauty/Fashion
+                   </label>
+
+                   <label class="checkbox">
+                     <input type="checkbox" value="">
+                     Buildings/Landmarks
+                   </label>
+
+                   <label class="checkbox">
+                     <input type="checkbox" value="">
+                     Business/Finance
+                   </label>
+
+                   <label class="checkbox">
+                     <input type="checkbox" value="" checked>
+                     Editorial
+                   </label>
+
+                   <label class="checkbox">
+                     <input type="checkbox" value="" checked>
+                     Education
+                   </label>
+
+                   <label class="checkbox">
+                     <input type="checkbox" value="">
+                     Food and Drink
+                   </label>
+
+                   <label class="checkbox">
+                     <input type="checkbox" value="">
+                     Healthcare/Medical
+                   </label>
+
+                   <label class="checkbox">
+                     <input type="checkbox" value="">
+                     Holidays
+                   </label>
+
+                   <label class="checkbox">
+                     <input type="checkbox" value="">
+                     Illustrations/Clip-Art
+                   </label>
+
+                   <label class="checkbox">
+                     <input type="checkbox" value="">
+                     Industrial
+                   </label>
+
+                   <label class="checkbox">
+                     <input type="checkbox" value="">
+                     Miscellaneous
+                   </label>
+
+                   <label class="checkbox">
+                     <input type="checkbox" value="">
+                     Model Released Only
+                   </label>
+
+                   <label class="checkbox">
+                     <input type="checkbox" value="">
+                     Nature
+                   </label>
+
+                   <label class="checkbox">
+                     <input type="checkbox" value="">
+                     Objects
+                   </label>
+
+                   <label class="checkbox">
+                     <input type="checkbox" value="">
+                     Parks/Outdoor
+                   </label>
+
+                   <label class="checkbox">
+                     <input type="checkbox" value="">
+                     People
+                   </label>
+
+                   <label class="checkbox">
+                     <input type="checkbox" value="">
+                     Religion
+                   </label>
+
+                   <label class="checkbox">
+                     <input type="checkbox" value="" checked>
+                     Signs/Symbols
+                   </label>
+
+                   <label class="checkbox">
+                     <input type="checkbox" value="">
+                     Sports/Recreation
+                   </label>
+
+                   <label class="checkbox">
+                     <input type="checkbox" value="" checked>
+                     Technology
+                   </label>
+
+                   <label class="checkbox">
+                     <input type="checkbox" value="">
+                     Transportation
+                   </label>
+
+                   <label class="checkbox">
+                     <input type="checkbox" value="">
+                     Vectors
+                   </label>
+
+                   <label class="checkbox">
+                     <input type="checkbox" value="">
+                     Vintage
+                   </label>
+
+                   <label class="checkbox">
+                     <input type="checkbox" value="">
+                     Science
+                   </label>
+
+                   <br />
+
+                   <button class="btn">Load more Categories</button>
+
+                 </form>
+
+              </div> <!-- end widget -->
+
+               <div class="widget">
+                <h4 class="title">License Types</h4>
+                 <form class="license-types">
+                   <label class="checkbox">
+                     <input type="checkbox" value="" checked>
+                     Free
+                   </label>
+
+                   <label class="checkbox">
+                     <input type="checkbox" value="">
+                     Creative
+                   </label>
+
+                   <label class="checkbox">
+                     <input type="checkbox" value="">
+                     Editorial
+                   </label>
+
+                 </form>
+
+                </div> <!-- end widget -->
+
+
+
+            </div> <!-- end widgets-container -->
+          </aside> <!-- end span3 -->
+          <div class="search-result-title">
+            <div class="span9">
+                <div class="row-fluid">
+                  <div class="span8">
+                    <h4 class="title">Search Results (35) - <span>Abstract Backgrounds</span></h4>
+                  </div> <!-- end span8 -->
+                  <div class="span4">
+                    <div class="portfolio-controllers-container">
+                      <p class="pull-left sort-title">Sort by -</p>
+                      <div class="btn-group">
+                        <button class="btn btn-large">Downloads</button>
+                        <button class="btn btn-large dropdown-toggle" data-toggle="dropdown">
+                          <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" id="filters">
+                          <!-- dropdown menu links -->
+                          <li><a href="#" data-filter="*" class="selected">Show All</a></li>
+                          <li><a href="#" data-filter=".transition">Size</a></li>
+                          <li><a href="#" data-filter=".metal">Price</a></li>
+                          <li><a href="#" data-filter=".alkali">Date</a></li>
+                        </ul>
+                      </div> <!-- end btn-group -->
+                    </div> <!-- end portfolio-controllers-container -->
+                  </div> <!-- end span4 -->
+                </div> <!-- end row-fluid -->
+                    
+                  <section class="top-images v2">
+
+                      <div class="images-container v3">
+                        <div class="row">
+                          <div id="portfolio-container">
+                            @foreach (var item in Model) { 
+                                <text>
+                                    <div class="span3 transition metal">
+                                    <figure class="top-img">
+                                      <img src="@item.link_thumbail_small" alt="img">
+                                      <figcaption class="img-meta">
+                                        <div class="row-fluid">
+                                          <div class="span8">
+                                            <a href="#" class="img-id">#@item.id</a>
+                                            <a href="#" class="img-tags">@item.filter_3</a>
+                                          </div>
+                                          <div class="span4">
+                                            <a href="#" class="btn download-btn"><i class="icon-download"></i></a>
+                                          </div>
+                                        </div>
+                                        <div class="roll-over">
+                                        <a href="#" class="btn"><span class="bucket">&#128092;</span></a>
+                                      </div> <!-- end roll-over -->
+                                      </figcaption> <!-- end img-meta -->
+                                    </figure> <!-- end top-img -->
+                                  </div><!--  end span3 -->
+                                </text>
+                            }
+                          </div> <!-- end id="portfolio-container" -->
+
+                        </div> <!-- end row-fluid -->
+                      </div> <!-- end images-container -->
+
+                    
+                  </section> <!-- end top-images -->
+
+                   <section class="main-pagination">
+                      <div class="row-fluid">
+                        <div class="span9">
+                            <div class="inner-pagination">
+                                <div class="pagination ">
+                                  <ul>
+                                    <li><a href="#" class="btn prev"><i class="icon-chevron-left"></i></a></li>
+                                    <li><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">5</a></li>
+                                    <li><a href="#">6</a></li>
+                                    <li><a href="#">7</a></li>
+                                    <li><a href="#">8</a></li>
+                                    <li><a href="#">9</a></li>
+                                    <li><a href="#" class="btn next"><i class="icon-chevron-right"></i></a></li>
+                                  </ul>
+                                </div> <!-- end pagination -->
+                            </div> <!-- end inner-pagination -->
+                        </div> <!-- end span9 -->
+                        <div class="span3">
+                          <div class="portfolio-controllers-container v2">
+                            <p class="pull-left sort-title">Images per page-</p>
+                            <div class="btn-group dropup">
+                              <button class="btn btn-large">15</button>
+                              <button class="btn btn-large dropdown-toggle" data-toggle="dropdown">
+                                <span class="caret"></span>
+                              </button>
+                              <ul class="dropdown-menu">
+                                <!-- dropdown menu links -->
+                                <li><a href="#">20</a></li>
+                                <li><a href="#">25</a></li>
+                                <li><a href="#">35</a></li>
+                              </ul>
+                            </div> <!-- end btn-group -->
+                          </div> <!-- end portfolio-controllers-container -->
+                            
+                        </div> <!-- end span3 -->
+                      </div> <!-- end row -->
+                  </section> <!-- end main-pagination -->
+
+                
+            </div> <!-- end span9 -->
+          </div> <!-- end search-result-title -->
+        </div> <!-- end row -->
+      </div> <!-- end container -->
+    </section> <!-- end search-results -->
+  
+    <!-- ============================  Search Results Ends ============================ -->
