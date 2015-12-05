@@ -31,6 +31,9 @@ namespace Ichup.Controllers
         private ichupEntities db = new ichupEntities();
         public ActionResult Index(string k,string f1,string f2,string f3,string f4,string f5,string order,int? to,int? pg)
         {
+            if (k == null) k = "a";
+            k = k.Replace("%20", " ");
+            ViewBag.keyword = k;
             string query=" SELECT top 1000 ";
             query += "FT_TBL.id,FT_TBL.link,FT_TBL.link_thumbail_small,FT_TBL.total_views,FT_TBL.keywords,FT_TBL.date_post,FT_TBL.filter_1,FT_TBL.filter_2,FT_TBL.filter_3,FT_TBL.filter_4,FT_TBL.filter_5,KEY_TBL.RANK FROM images AS FT_TBL INNER JOIN FREETEXTTABLE(images, keywords,'" + k + "') AS KEY_TBL ON FT_TBL.id = KEY_TBL.[KEY] ";
              query += " where (1=1) ";
@@ -42,14 +45,14 @@ namespace Ichup.Controllers
                 if (filter[f] != null)
                 {
                     item = filter[f].Split(',');
-                    query += " and ((1=2) ";
+                    if (item.Length >= 1 && item[0].Trim()!="") query += " and ((1=2) ";
                     int col = f + 1;
                     for (i = 0; i < item.Length; i++)
                         if (item[i] != "")
                         {
-                            query += " or (filter_" + col + " like N'%" + item[i] + "%')";
+                            query += " or (filter_" + col + " like N'" + item[i] + "')";
                         }
-                    query += " ) ";
+                    if (item.Length >= 1 && item[0].Trim() != "")  query += " ) ";
                 }
             }
             if (order == null) order = "RANK";

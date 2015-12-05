@@ -14,12 +14,19 @@
               <div class="widget">
                 <form action="" class="search-form">
                     <div class="input-append">
-                      <input class="input-medium" id="appendedInputButton" type="text" placeholder="Enter keyword">
+                      <input class="input-medium" id="keyword" type="text" placeholder="Nhập từ khóa" value="@ViewBag.keyword">
                       <button class="btn" type="button"><i class="icon-search"></i></button>
                     </div> <!-- end input-append -->
                   </form> <!-- end search form -->
               </div> <!-- end widget -->
-
+              <div class="widget">
+                <h4 class="title">Kiểu ảnh</h4>
+                 <div>
+                     <input type="checkbox" id="f-2_1" value="dọc" onchange="search();">dọc 
+                     <input type="checkbox" id="f-2_2" value="ngang" onchange="search();">ngang
+                     <input type="checkbox" id="f-2_3" value="rộng" onchange="search();">rộng             
+                  </div><!-- end ui-slider -->
+              </div> <!-- end widget --> 
               <div class="widget">
                 <h4 class="title">Price Range</h4>
                  <div class="noUiSlider horizontal">                   
@@ -325,3 +332,24 @@
     </section> <!-- end search-results -->
   
     <!-- ============================  Search Results Ends ============================ -->
+<script>
+    function search() {
+        var url = "/Search?";
+        var k = $("#keyword").val();
+        if (k == "") {
+            return;
+        }
+        var f1="";
+        var f2="";
+        var f3="";
+        var f4="";
+        var f5="";
+        for (var i = 1; i <= 3; i++) {
+            if (document.getElementById("f-2_" + i).checked){
+                f2 += document.getElementById("f-2_" + i).value + ",";
+            }
+        }
+        url += "k=" + k + "&f1=" + f1 + "&f2=" + f2 + "&f3=" + f3 + "&f4=" + f4 + "&f5=" + f5;
+        window.location.href = url;
+    }
+</script>
