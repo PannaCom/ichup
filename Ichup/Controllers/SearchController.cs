@@ -33,6 +33,11 @@ namespace Ichup.Controllers
         {
             if (k == null) k = "a";
             k = k.Replace("%20", " ");
+            f1 = f1.Replace("%20", " ");
+            f2 = f2.Replace("%20", " ");
+            f3 = f3.Replace("%20", " ");
+            f4 = f4.Replace("%20", " ");
+            f5 = f5.Replace("%20", " ");
             ViewBag.keyword = k;
             string query=" SELECT top 1000 ";
             query += "FT_TBL.id,FT_TBL.link,FT_TBL.link_thumbail_small,FT_TBL.total_views,FT_TBL.keywords,FT_TBL.date_post,FT_TBL.filter_1,FT_TBL.filter_2,FT_TBL.filter_3,FT_TBL.filter_4,FT_TBL.filter_5,KEY_TBL.RANK FROM images AS FT_TBL INNER JOIN FREETEXTTABLE(images, keywords,'" + k + "') AS KEY_TBL ON FT_TBL.id = KEY_TBL.[KEY] ";
@@ -50,7 +55,7 @@ namespace Ichup.Controllers
                     for (i = 0; i < item.Length; i++)
                         if (item[i] != "")
                         {
-                            query += " or (filter_" + col + " like N'" + item[i] + "')";
+                            query += " or (filter_" + col + " like N'%" + item[i] + "%')";
                         }
                     if (item.Length >= 1 && item[0].Trim() != "")  query += " ) ";
                 }
@@ -58,6 +63,11 @@ namespace Ichup.Controllers
             if (order == null) order = "RANK";
             query += " order by " + order;
             if (to == null) query += " Desc";
+            ViewBag.f1 = f1;
+            ViewBag.f2 = f2;
+            ViewBag.f3 = f3;
+            ViewBag.f4 = f4;
+            ViewBag.f5 = f5;
             var p = db.Database.SqlQuery<searchitem>(query);
             int pageSize = 8;
             int pageNumber = (pg ?? 1);

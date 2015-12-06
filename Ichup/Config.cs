@@ -113,6 +113,33 @@ namespace Ichup
             }
             return val;
         }
+        public static string getF1Ck(string have)
+        {
+            string val = "";
+            string schecked="";
+            if (have.Contains("dọc")) schecked="checked"; else schecked="";
+            val+="<input type=\"checkbox\" id=\"f-2_1\" value=\"dọc\" onchange=\"search();\" "+schecked+">dọc";
+            if (have.Contains("ngang")) schecked = "checked"; else schecked = "";
+            val += "<input type=\"checkbox\" id=\"f-2_2\" value=\"ngang\" onchange=\"search();\" " + schecked + ">ngang";
+            if (have.Contains("rộng")) schecked = "checked"; else schecked = "";
+            val += "<input type=\"checkbox\" id=\"f-2_3\" value=\"rộng\" onchange=\"search();\" " + schecked + ">rộng";
+            return val;
+
+        }
+        public static string getCategorySearch(string have)
+        {
+            var p = (from q in db.categories orderby q.name select q.name).ToList();
+            string val = "";
+            string schecked="";
+            for (int i = 0; i < p.Count; i++)
+            {
+                string name = p[i];
+                if (have!=null && have.Contains(name)) schecked = "checked"; else schecked = "";
+                val += "<input value='" + name + "' id=f-3_" + (i + 1) + " type=checkbox onchange=\"search();\" " + schecked + ">" + name;
+                if (i % 2 == 0) val += "<br>";
+            }
+            return val;
+        }
         public static string genCode()
         {
             Random rnd = new Random();
