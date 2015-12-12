@@ -113,7 +113,7 @@ namespace Ichup
             }
             return val;
         }
-        public static string getF1Ck(string have)
+        public static string getF2Ck(string have)
         {
             string val = "";
             string schecked="";
@@ -124,7 +124,20 @@ namespace Ichup
             if (have.Contains("rộng")) schecked = "checked"; else schecked = "";
             val += "<input type=\"checkbox\" id=\"f-2_3\" value=\"rộng\" onchange=\"search();\" " + schecked + ">rộng";
             return val;
-
+        }
+        public static string getF4Ck(string have)
+        {
+            string val = "";
+            string schecked = "";
+            string[] vlue = new string[]{"có người", "nam", "nữ", "gay", "les", "trẻ em", "thanh niên", "trung niên", "người già", "nước ngoài"};
+            //vlue = "có người";
+            for (int i = 0; i < vlue.Length; i++)
+            {
+                if (have.Contains(vlue[i])) schecked = "checked"; else schecked = "";
+                val += "<input type=\"checkbox\" id=\"f-4_" + (i + 1) + "\" value=\"" + vlue[i] + "\" onchange=\"search();\" " + schecked + ">" + vlue[i];
+            }
+            
+            return val;
         }
         public static string getCategorySearch(string have)
         {

@@ -25,7 +25,7 @@
                      @*<input type="checkbox" id="f-2_1" value="dọc" onchange="search();">dọc 
                      <input type="checkbox" id="f-2_2" value="ngang" onchange="search();">ngang
                      <input type="checkbox" id="f-2_3" value="rộng" onchange="search();">rộng       *@   
-                     @Html.Raw(@Ichup.Config.getF1Ck(@ViewBag.f2))   
+                     @Html.Raw(@Ichup.Config.getF2Ck(@ViewBag.f2))   
                   </div><!-- end ui-slider -->
               </div> <!-- end widget --> 
               <div class="widget">
@@ -39,8 +39,13 @@
                 <h4 class="title">Categories</h4>
                   <form class="search-categories">
                  @Html.Raw(@Ichup.Config.getCategorySearch(@ViewBag.f3))
-                  </form>  
-
+                  </form>
+              </div> <!-- end widget -->
+              <div class="widget">
+                <h4 class="title">Categories</h4>
+                  <form class="search-categories">
+                 @Html.Raw(@Ichup.Config.getF4Ck(@ViewBag.f4))
+                  </form>
               </div> <!-- end widget -->
 
                <div class="widget">
