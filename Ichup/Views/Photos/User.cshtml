@@ -113,19 +113,16 @@
                              </tr>  
                             <tr>
                                  <td align="left"><b>Nhóm ảnh:</b></td>
-                                 <td align="left" id="category_ck_list_@item.id">@Html.Raw(@Ichup.Config.getCategoryCk(@item.id))</td>
+                                 <td align="left" id="category_ck_list_@item.id">@Html.Raw(@Ichup.Config.getF3CkUser(@item.id,@item.filter_3))</td>
                              </tr>  
                             <tr>
                                  <td align="left"><b>Người:</b></td>
-                                 <td align="left"><input type="checkbox" id="f-@item.id-4_1" value="có người">có người <input type="checkbox" id="f-@item.id-4_2" value="nam">nam<input type="checkbox" id="f-@item.id-4_3" value="nữ">nữ
-                                     <input type="checkbox" id="f-@item.id-4_4" value="gay">gay<input type="checkbox" id="f-@item.id-4_5" value="les">les
-                                     <input type="checkbox" id="f-@item.id-4_6" value="trẻ em">trẻ em<input type="checkbox" id="f-@item.id-4_7" value="thanh niên">thanh niên<input type="checkbox" id="f-@item.id-4_8" value="trung niên">trung niên<input type="checkbox" id="f-@item.id-4_9" value="người già">người già
-                                     <input type="checkbox" id="f-@item.id-4_9" value="nước ngoài">nước ngoài
+                                 <td align="left">@Html.Raw(@Ichup.Config.getF4CkUser(@item.id,@item.filter_4))
                                  </td>
                              </tr> 
                              <tr>
                                  <td align="left"><b>Góc chụp:</b></td>
-                                 <td align="left"><input type="checkbox" id="f-@item.id-5_1" value="chân dung">chân dung<input type="checkbox" id="f-@item.id-5_2" value="bán thân">bán thân<input type="checkbox" id="f-@item.id-5_3" value="chụp 3/4">chụp 3/4<input type="checkbox" id="f-@item.id-5_4" value="toàn thân">toàn thân<input type="checkbox" value="khoảnh khắc" id="f-@item.id-5_5">khoảnh khắc</td>
+                                 <td align="left">@Html.Raw(@Ichup.Config.getF5CkUser(@item.id,@item.filter_5))</td>
                              </tr>
                             <tr><td colspan="2"><input type="button" value="Save" onclick="save(@item.id);"><input type="button" value="Delete" onclick="del(@item.id);"></td></tr>
                         </table>

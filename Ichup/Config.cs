@@ -104,15 +104,7 @@ namespace Ichup
             input = input.Replace("-", " ").Replace(":", " ").Replace(",", " ").Replace("_", " ").Replace("'", " ").Replace("\"", " ").Replace(";", " ").Replace("”", " ").Replace(".", " ").Replace("%", " ").Replace("&", " ");
             return input;
         }
-        public static string getCategoryCk(long id){
-            var p=(from q in db.categories orderby q.name select q.name).ToList();
-            string val = "";
-            for (int i = 0; i < p.Count; i++) { 
-                string name=p[i];
-                val += "<input value='" + name + "' id=f-" + id + "-3_" + (i + 1) + " type=checkbox>" + name;
-            }
-            return val;
-        }
+        
         public static string[] f1ck = new string[] { "ảnh", "vector", "illustrator"};
         public static string getF1CkUser(long id,string have)
         {
@@ -164,48 +156,108 @@ namespace Ichup
             return val;
         }
 
-        public static string getF4Ck(string have)
+        public static string getF3CkUser(long id,string have)
         {
+            if (have == null) have = "";
+            var p = (from q in db.categories orderby q.name select q.name).ToList();
             string val = "";
             string schecked = "";
-            string[] vlue = new string[]{"có người", "nam", "nữ", "gay", "les", "trẻ em", "thanh niên", "trung niên", "người già", "nước ngoài"};
-            //vlue = "có người";
-            for (int i = 0; i < vlue.Length; i++)
+
+            for (int i = 0; i < p.Count; i++)
             {
-                if (have.Contains(vlue[i])) schecked = "checked"; else schecked = "";
-                val += "<input type=\"checkbox\" id=\"f-4_" + (i + 1) + "\" value=\"" + vlue[i] + "\" onchange=\"search();\" " + schecked + ">" + vlue[i];
+                string name = p[i];
+                if (have.Contains(name)) schecked = "checked"; else schecked = "";
+                val += "<input value='" + name + "' id=f-" + id + "-3_" + (i + 1) + " type=checkbox " + schecked + ">" + name;
+            }
+            return val;
+        }
+        public static string getF3Ck(string have)
+        {
+            if (have == null) have = "";
+            var p = (from q in db.categories orderby q.name select q.name).ToList();
+            string val = "";
+            string schecked = "";
+
+            for (int i = 0; i < p.Count; i++)
+            {
+                string name = p[i];
+                if (have.Contains(name)) schecked = "checked"; else schecked = "";
+                val += "<input value='" + name + "' id=f-3_" + (i + 1) + " onchange=\"search();\" type=checkbox " + schecked + ">" + name;
+            }
+            return val;
+        }
+        public static string[] f4ck = new string[] { "có người", "nam", "nữ", "gay", "les", "trẻ em", "thanh niên", "trung niên", "người già", "nước ngoài" };
+        public static string getF4Ck(string have)
+        {
+            if (have == null) have = "";
+            string val = "";
+            string schecked = "";
+
+            for (int i = 0; i < f4ck.Length; i++)
+            {
+                if (have.Contains(f4ck[i])) schecked = "checked"; else schecked = "";
+                val += "<input type=\"checkbox\" id=\"f-4_" + (i + 1) + "\" value=\"" + f4ck[i] + "\" onchange=\"search();\" " + schecked + ">" + f4ck[i];
             }
             
             return val;
         }
-        public static string getF5Ck(string have)
+        public static string getF4CkUser(long id,string have)
         {
+            if (have == null) have = "";
             string val = "";
             string schecked = "";
-            string[] vlue = new string[] { "chân dung", "bán thân", "chụp 3/4", "toàn thân", "khoảnh khắc"};
-            
-            for (int i = 0; i < vlue.Length; i++)
+
+            for (int i = 0; i < f4ck.Length; i++)
             {
-                if (have.Contains(vlue[i])) schecked = "checked"; else schecked = "";
-                val += "<input type=\"checkbox\" id=\"f-5_" + (i + 1) + "\" value=\"" + vlue[i] + "\" onchange=\"search();\" " + schecked + ">" + vlue[i];
+                if (have.Contains(f4ck[i])) schecked = "checked"; else schecked = "";
+                val += "<input type=\"checkbox\" id=\"f-" + id + "-4_" + (i + 1) + "\" value=\"" + f4ck[i] + "\"  " + schecked + ">" + f4ck[i];
             }
 
             return val;
         }
-        public static string getCategorySearch(string have)
+        public static string[] f5ck = new string[] { "chân dung", "bán thân", "chụp 3/4", "toàn thân", "khoảnh khắc" };
+        public static string getF5Ck(string have)
         {
-            var p = (from q in db.categories orderby q.name select q.name).ToList();
+            if (have == null) have = "";
             string val = "";
-            string schecked="";
-            for (int i = 0; i < p.Count; i++)
+            string schecked = "";
+
+            for (int i = 0; i < f5ck.Length; i++)
             {
-                string name = p[i];
-                if (have!=null && have.Contains(name)) schecked = "checked"; else schecked = "";
-                val += "<input value='" + name + "' id=f-3_" + (i + 1) + " type=checkbox onchange=\"search();\" " + schecked + ">" + name;
-                //if (i % 2 == 0) val += "<br>";
+                if (have.Contains(f5ck[i])) schecked = "checked"; else schecked = "";
+                val += "<input type=\"checkbox\" id=\"f-5_" + (i + 1) + "\" value=\"" + f5ck[i] + "\" onchange=\"search();\" " + schecked + ">" + f5ck[i];
             }
+
             return val;
         }
+        public static string getF5CkUser(long id,string have)
+        {
+            if (have == null) have = "";
+            string val = "";
+            string schecked = "";
+
+            for (int i = 0; i < f5ck.Length; i++)
+            {
+                if (have.Contains(f5ck[i])) schecked = "checked"; else schecked = "";
+                val += "<input type=\"checkbox\" id=\"f-"+id+"-5_" + (i + 1) + "\" value=\"" + f5ck[i] + "\"  " + schecked + ">" + f5ck[i];
+            }
+
+            return val;
+        }
+        //public static string getCategorySearch(string have)
+        //{
+        //    var p = (from q in db.categories orderby q.name select q.name).ToList();
+        //    string val = "";
+        //    string schecked="";
+        //    for (int i = 0; i < p.Count; i++)
+        //    {
+        //        string name = p[i];
+        //        if (have!=null && have.Contains(name)) schecked = "checked"; else schecked = "";
+        //        val += "<input value='" + name + "' id=f-3_" + (i + 1) + " type=checkbox onchange=\"search();\" " + schecked + ">" + name;
+        //        //if (i % 2 == 0) val += "<br>";
+        //    }
+        //    return val;
+        //}
         public static string genCode()
         {
             Random rnd = new Random();

@@ -33,6 +33,8 @@ namespace Ichup.Controllers
         {
             if (k == null) k = "a";
             k = k.Replace("%20", " ");
+            f1 = f1 != null ? f1 : "";f2 = f2 != null ? f2 : ""; f3 = f3 != null ? f3 : "";
+            f4 = f4 != null ? f4 : ""; f5 = f5 != null ? f5 : "";
             f1 = f1.Replace("%20", " ");
             f2 = f2.Replace("%20", " ");
             f3 = f3.Replace("%20", " ");
