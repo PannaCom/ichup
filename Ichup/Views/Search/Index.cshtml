@@ -19,6 +19,12 @@
                     </div> <!-- end input-append -->
                   </form> <!-- end search form -->
               </div> <!-- end widget -->
+             <div class="widget">
+                <h4 class="title">Loại ảnh</h4>
+                 <div>
+                     @Html.Raw(@Ichup.Config.getF1Ck(@ViewBag.f1))   
+                  </div><!-- end ui-slider -->
+              </div> <!-- end widget --> 
               <div class="widget">
                 <h4 class="title">Kiểu ảnh</h4>
                  <div>
@@ -28,26 +34,31 @@
                      @Html.Raw(@Ichup.Config.getF2Ck(@ViewBag.f2))   
                   </div><!-- end ui-slider -->
               </div> <!-- end widget --> 
-              <div class="widget">
+              @*<div class="widget">
                 <h4 class="title">Price Range</h4>
                  <div class="noUiSlider horizontal">                   
                   </div><!-- end ui-slider -->
 
-              </div> <!-- end widget --> 
+              </div> <!-- end widget --> *@
 
               <div class="widget">
-                <h4 class="title">Categories</h4>
+                <h4 class="title">Danh mục</h4>
                   <form class="search-categories">
                  @Html.Raw(@Ichup.Config.getCategorySearch(@ViewBag.f3))
                   </form>
               </div> <!-- end widget -->
               <div class="widget">
-                <h4 class="title">Categories</h4>
+                <h4 class="title">Người</h4>
                   <form class="search-categories">
                  @Html.Raw(@Ichup.Config.getF4Ck(@ViewBag.f4))
                   </form>
               </div> <!-- end widget -->
-
+              <div class="widget">
+                <h4 class="title">Góc chụp</h4>
+                  <form class="search-categories">
+                 @Html.Raw(@Ichup.Config.getF5Ck(@ViewBag.f5))
+                  </form>
+              </div> <!-- end widget -->
                <div class="widget">
                 <h4 class="title">License Types</h4>
                  <form class="license-types">
@@ -78,22 +89,22 @@
             <div class="span9">
                 <div class="row-fluid">
                   <div class="span8">
-                    <h4 class="title">Search Results (35) - <span>Abstract Backgrounds</span></h4>
+                    <h4 class="title">Tìm thấy (@Model.TotalItemCount) - <span>ảnh</span></h4>
                   </div> <!-- end span8 -->
                   <div class="span4">
                     <div class="portfolio-controllers-container">
-                      <p class="pull-left sort-title">Sort by -</p>
+                      <p class="pull-left sort-title">Sắp xếp -</p>
                       <div class="btn-group">
-                        <button class="btn btn-large">Downloads</button>
+                        <button class="btn btn-large" id="order">Phù hợp nhất</button>
                         <button class="btn btn-large dropdown-toggle" data-toggle="dropdown">
                           <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" id="filters">
                           <!-- dropdown menu links -->
-                          <li><a href="#" data-filter="*" class="selected">Show All</a></li>
-                          <li><a href="#" data-filter=".transition">Size</a></li>
-                          <li><a href="#" data-filter=".metal">Price</a></li>
-                          <li><a href="#" data-filter=".alkali">Date</a></li>
+                          <li><a onclick="setorder('RANK','Desc');"   id="order1">Phù hợp nhất</a></li>
+                          <li><a onclick="setorder('id','Desc');" id="order2">Mới nhất</a></li>
+                          <li><a onclick="setorder('id','Asc');" id="order3">Cũ nhất</a></li>
+                          <li><a onclick="setorder('total_views','Desc');" id="order4">Xem nhiều nhất</a></li>
                         </ul>
                       </div> <!-- end btn-group -->
                     </div> <!-- end portfolio-controllers-container -->
@@ -138,11 +149,14 @@
 
                    <section class="main-pagination">
                       <div class="row-fluid">
-                        <div class="span9">
+                        <div class="span12">
                             <div class="inner-pagination">
                                 <div class="pagination ">
                                   <ul>
-                                    <li><a href="#" class="btn prev"><i class="icon-chevron-left"></i></a></li>
+                                    @for (int i = 1; i <= Model.PageCount; i++){
+                                        <li ><a onclick="setpage(@i);" style="cursor:pointer;">@i</a></li>
+                                    }
+                                    @*<li><a href="#" class="btn prev"><i class="icon-chevron-left"></i></a></li>
                                     <li><a href="#">1</a></li>
                                     <li><a href="#">2</a></li>
                                     <li><a href="#">3</a></li>
@@ -152,12 +166,12 @@
                                     <li><a href="#">7</a></li>
                                     <li><a href="#">8</a></li>
                                     <li><a href="#">9</a></li>
-                                    <li><a href="#" class="btn next"><i class="icon-chevron-right"></i></a></li>
+                                    <li><a href="#" class="btn next"><i class="icon-chevron-right"></i></a></li>*@
                                   </ul>
                                 </div> <!-- end pagination -->
                             </div> <!-- end inner-pagination -->
                         </div> <!-- end span9 -->
-                        <div class="span3">
+                        @*<div class="span3">
                           <div class="portfolio-controllers-container v2">
                             <p class="pull-left sort-title">Images per page-</p>
                             <div class="btn-group dropup">
@@ -174,7 +188,7 @@
                             </div> <!-- end btn-group -->
                           </div> <!-- end portfolio-controllers-container -->
                             
-                        </div> <!-- end span3 -->
+                        </div> <!-- end span3 -->*@
                       </div> <!-- end row -->
                   </section> <!-- end main-pagination -->
 
@@ -187,7 +201,34 @@
   
     <!-- ============================  Search Results Ends ============================ -->
 <script>
-    
+    var pg=@ViewBag.page;
+    var order="@ViewBag.order";
+    var to="@ViewBag.to";
+    if (order.toString().indexOf("RANK")>=0){
+        $("#order1").addClass("selected");
+        $("#order").html("Phù hợp nhất");
+    }
+    if (order.toString().indexOf("id")>=0 && to.toString().indexOf("Desc")>=0){
+        $("#order2").addClass("selected");
+        $("#order").html("Mới nhất");
+    }
+    if (order.toString().indexOf("id")>=0 && to.toString().indexOf("Asc")>=0){
+        $("#order3").addClass("selected");
+        $("#order").html("Cũ nhất");
+    }
+    if (order.toString().indexOf("total_views")>=0){
+        $("#order4").addClass("selected");
+        $("#order").html("Xem nhiều nhất");
+    }
+    function setorder(field,t) {
+        order=field;
+        to=t;
+        search();
+    }
+    function setpage(page) {
+        pg=page;
+        search();
+    }
     function search() {
         var url = "/Search?";
         var k = $("#keyword").val();
@@ -200,6 +241,11 @@
         var f4="";
         var f5="";
         for (var i = 1; i <= 3; i++) {
+            if (document.getElementById("f-1_" + i).checked){
+                f1 += document.getElementById("f-1_" + i).value + ",";
+            }
+        }
+        for (var i = 1; i <= 3; i++) {
             if (document.getElementById("f-2_" + i).checked){
                 f2 += document.getElementById("f-2_" + i).value + ",";
             }
@@ -209,7 +255,17 @@
                 f3 += document.getElementById("f-3_" + i).value + ",";
             }
         }
-        url += "k=" + k + "&f1=" + f1 + "&f2=" + f2 + "&f3=" + f3 + "&f4=" + f4 + "&f5=" + f5;
+        for (var i = 1; i <= 9; i++) {
+            if (document.getElementById("f-4_" + i) && document.getElementById("f-4_" + i).checked) {
+                f4 += document.getElementById("f-4_" + i).value + ",";
+            }
+        }
+        for (var i = 1; i <= 5; i++) {
+            if (document.getElementById("f-5_" + i) && document.getElementById("f-5_" + i).checked) {
+                f5 += document.getElementById("f-5_" + i).value + ",";
+            }
+        }
+        url += "k=" + k + "&f1=" + f1 + "&f2=" + f2 + "&f3=" + f3 + "&f4=" + f4 + "&f5=" + f5+"&order="+order+"&to="+to+"&pg="+pg;
         window.location.href = url;
     }
 </script>

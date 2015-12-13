@@ -105,11 +105,11 @@
                              <tr><td colspan="2"><b>Đánh dấu vào các thuộc tính mà ảnh này có</b></td></tr>
                              <tr>
                                  <td align="left"><b>Loại ảnh:</b></td>
-                                 <td align="left"><input type="checkbox" id="f-@item.id-1_1" value="ảnh">ảnh <input type="checkbox" id="f-@item.id-1_2" value="vector">vector<input type="checkbox" id="f-@item.id-1_3" value="illustrator">illustrator</td>
+                                 <td align="left">@Html.Raw(@Ichup.Config.getF1CkUser(@item.id,@item.filter_1))</td>
                              </tr>   
                             <tr>
                                  <td align="left"><b>Kiểu ảnh:</b></td>
-                                 <td align="left"><input type="checkbox" id="f-@item.id-2_1" value="dọc">dọc <input type="checkbox" id="f-@item.id-2_2" value="ngang">ngang<input type="checkbox" id="f-@item.id-2_3" value="rộng">rộng</td>
+                                 <td align="left">@Html.Raw(@Ichup.Config.getF2CkUser(@item.id,@item.filter_2))</td>
                              </tr>  
                             <tr>
                                  <td align="left"><b>Nhóm ảnh:</b></td>
@@ -130,7 +130,7 @@
                             <tr><td colspan="2"><input type="button" value="Save" onclick="save(@item.id);"><input type="button" value="Delete" onclick="del(@item.id);"></td></tr>
                         </table>
                     </div>
-                    <script>setValueDefault(@item.id,"@Html.Raw(@item.filter_1)","@Html.Raw(@item.filter_2)","@Html.Raw(@item.filter_3)","@Html.Raw(@item.filter_4)","@Html.Raw(@item.filter_5)");</script>
+                    @*<script>setValueDefault(@item.id,"@Html.Raw(@item.filter_1)","@Html.Raw(@item.filter_2)","@Html.Raw(@item.filter_3)","@Html.Raw(@item.filter_4)","@Html.Raw(@item.filter_5)");</script>*@
                 </text>
                 totalItemImage++;
             }

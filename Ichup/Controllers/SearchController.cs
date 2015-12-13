@@ -29,7 +29,7 @@ namespace Ichup.Controllers
 
         }
         private ichupEntities db = new ichupEntities();
-        public ActionResult Index(string k,string f1,string f2,string f3,string f4,string f5,string order,int? to,int? pg)
+        public ActionResult Index(string k, string f1, string f2, string f3, string f4, string f5, string order, string to, int? pg)
         {
             if (k == null) k = "a";
             k = k.Replace("%20", " ");
@@ -39,6 +39,7 @@ namespace Ichup.Controllers
             f4 = f4.Replace("%20", " ");
             f5 = f5.Replace("%20", " ");
             ViewBag.keyword = k;
+            if (pg == null) pg = 1;
             string query=" SELECT top 1000 ";
             query += "FT_TBL.id,FT_TBL.link,FT_TBL.link_thumbail_small,FT_TBL.total_views,FT_TBL.keywords,FT_TBL.date_post,FT_TBL.filter_1,FT_TBL.filter_2,FT_TBL.filter_3,FT_TBL.filter_4,FT_TBL.filter_5,KEY_TBL.RANK FROM images AS FT_TBL INNER JOIN FREETEXTTABLE(images, keywords,'" + k + "') AS KEY_TBL ON FT_TBL.id = KEY_TBL.[KEY] ";
              query += " where (1=1) ";
@@ -62,12 +63,16 @@ namespace Ichup.Controllers
             }
             if (order == null) order = "RANK";
             query += " order by " + order;
-            if (to == null) query += " Desc";
+            if (to == null) to="Desc";
+            query += " "+to;
             ViewBag.f1 = f1;
             ViewBag.f2 = f2;
             ViewBag.f3 = f3;
             ViewBag.f4 = f4;
             ViewBag.f5 = f5;
+            ViewBag.page = pg;
+            ViewBag.order = order;
+            ViewBag.to = to;
             var p = db.Database.SqlQuery<searchitem>(query);
             int pageSize = 8;
             int pageNumber = (pg ?? 1);

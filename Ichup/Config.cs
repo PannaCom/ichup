@@ -113,18 +113,57 @@ namespace Ichup
             }
             return val;
         }
-        public static string getF2Ck(string have)
+        public static string[] f1ck = new string[] { "ảnh", "vector", "illustrator"};
+        public static string getF1CkUser(long id,string have)
         {
+            if (have == null) have = "";
             string val = "";
-            string schecked="";
-            if (have.Contains("dọc")) schecked="checked"; else schecked="";
-            val+="<input type=\"checkbox\" id=\"f-2_1\" value=\"dọc\" onchange=\"search();\" "+schecked+">dọc";
-            if (have.Contains("ngang")) schecked = "checked"; else schecked = "";
-            val += "<input type=\"checkbox\" id=\"f-2_2\" value=\"ngang\" onchange=\"search();\" " + schecked + ">ngang";
-            if (have.Contains("rộng")) schecked = "checked"; else schecked = "";
-            val += "<input type=\"checkbox\" id=\"f-2_3\" value=\"rộng\" onchange=\"search();\" " + schecked + ">rộng";
+            string schecked = "";
+            for (int i = 0; i < f1ck.Length; i++)
+            {
+                if (have.Contains(f1ck[i])) schecked = "checked"; else schecked = "";
+                val += "<input type=\"checkbox\" id=\"f-"+id+"-1_" + (i + 1) + "\" value=\"" + f1ck[i] + "\"  " + schecked + ">" + f1ck[i];
+            }
             return val;
         }
+        public static string getF1Ck(string have)
+        {
+            if (have == null) have = "";
+            string val = "";
+            string schecked = "";
+            for (int i = 0; i < f1ck.Length; i++)
+            {
+                if (have.Contains(f1ck[i])) schecked = "checked"; else schecked = "";
+                val += "<input type=\"checkbox\" id=\"f-1_" + (i + 1) + "\" value=\"" + f1ck[i] + "\" onchange=\"search();\"  " + schecked + ">" + f1ck[i];
+            }
+            return val;
+        }
+        public static string[] f2ck = new string[] { "dọc", "ngang", "rộng" };
+        public static string getF2CkUser(long id,string have)
+        {
+            if (have == null) have = "";
+            string val = "";
+            string schecked = "";
+            for (int i = 0; i < f2ck.Length; i++)
+            {
+                if (have.Contains(f2ck[i])) schecked = "checked"; else schecked = "";
+                val += "<input type=\"checkbox\" id=\"f-" + id + "-2_" + (i + 1) + "\" value=\"" + f2ck[i] + "\"  " + schecked + ">" + f2ck[i];
+            }
+            return val;
+        }
+        public static string getF2Ck(string have)
+        {
+            if (have == null) have = "";
+            string val = "";
+            string schecked = "";
+            for (int i = 0; i < f2ck.Length; i++)
+            {
+                if (have.Contains(f2ck[i])) schecked = "checked"; else schecked = "";
+                val += "<input type=\"checkbox\" id=\"f-2_" + (i + 1) + "\" value=\"" + f2ck[i] + "\" onchange=\"search();\"  " + schecked + ">" + f2ck[i];
+            }
+            return val;
+        }
+
         public static string getF4Ck(string have)
         {
             string val = "";
@@ -139,6 +178,20 @@ namespace Ichup
             
             return val;
         }
+        public static string getF5Ck(string have)
+        {
+            string val = "";
+            string schecked = "";
+            string[] vlue = new string[] { "chân dung", "bán thân", "chụp 3/4", "toàn thân", "khoảnh khắc"};
+            
+            for (int i = 0; i < vlue.Length; i++)
+            {
+                if (have.Contains(vlue[i])) schecked = "checked"; else schecked = "";
+                val += "<input type=\"checkbox\" id=\"f-5_" + (i + 1) + "\" value=\"" + vlue[i] + "\" onchange=\"search();\" " + schecked + ">" + vlue[i];
+            }
+
+            return val;
+        }
         public static string getCategorySearch(string have)
         {
             var p = (from q in db.categories orderby q.name select q.name).ToList();
@@ -149,7 +202,7 @@ namespace Ichup
                 string name = p[i];
                 if (have!=null && have.Contains(name)) schecked = "checked"; else schecked = "";
                 val += "<input value='" + name + "' id=f-3_" + (i + 1) + " type=checkbox onchange=\"search();\" " + schecked + ">" + name;
-                if (i % 2 == 0) val += "<br>";
+                //if (i % 2 == 0) val += "<br>";
             }
             return val;
         }
