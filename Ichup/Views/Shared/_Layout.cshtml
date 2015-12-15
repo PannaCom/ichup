@@ -89,8 +89,8 @@
 		  <div style="display:block;float:left;position:relative;padding-top:3px;width:611px;height:auto;">
 			<form action="" class="search-form">
                     <div class="input-append">
-                      <input class="input-medium" id="appendedInputButton" style="width:600px;" type="text" placeholder="Enter keyword">
-                      <button class="btn" type="button"><i class="icon-search"></i></button>
+                      <input class="input-medium" style="width:600px;" type="text" placeholder="Nhập từ khóa" id="skeyword" value="@ViewBag.keyword">
+                      <button class="btn" type="button" onclick="bsearch();"><i class="icon-search"></i></button>
                     </div> <!-- end input-append -->
                   </form> <!-- end search form -->
 		  </div>	
@@ -212,7 +212,35 @@
 			
 		}
 		setInterval(changeBG, 3000);
-	
+		document.addEventListener("keydown", autosearch);
+		function autosearch(event) {
+		    var keyCode = ('which' in event) ? event.which : event.keyCode;
+		    var k = document.getElementById("skeyword").value;
+		    if (keyCode == 13) {
+		        if (k == "") {
+		            alert("Bạn phải nhập từ khóa");
+		            return;
+		        }
+		        var url = "/Search?k=" + k;
+		        //alert(url);
+		        window.location.href = url;
+            }
+		   
+		}
+		function bsearch() {
+		    
+		    var k = document.getElementById("skeyword").value;
+		    
+		        if (k == "") {
+		            alert("Bạn phải nhập từ khóa");
+		            return;
+		        }
+		        var url = "/Search?k=" + k;
+		        //alert(url);
+		        window.location.href = url;
+		   
+
+		}
 	</script>
     </body>
 </html>
