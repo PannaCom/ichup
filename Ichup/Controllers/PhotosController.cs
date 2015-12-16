@@ -71,6 +71,10 @@ namespace Ichup.Controllers
             var p = (from q in db.categories orderby q.name select q.name).ToList();
             return JsonConvert.SerializeObject(p);
         }
+        public ActionResult Page(int id) {
+            image img = db.images.Find(id);
+            return View(img);
+        }
         [HttpPost]
         public string test(HttpPostedFileBase file)
         {

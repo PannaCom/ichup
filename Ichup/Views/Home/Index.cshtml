@@ -38,7 +38,7 @@
               @foreach (var item in ViewBag.news) { 
                   <div class="span3">
                       <figure class="top-img">
-                        <img src="@item.link_thumbail_small" alt="img">
+                        <a href="/Photos/Page?id=@item.id"><img src="@item.link_thumbail_small" alt="img"></a>
                         <figcaption class="img-meta">
                           @*<div class="row-fluid">
                             <div class="span8">
