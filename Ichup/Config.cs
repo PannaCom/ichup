@@ -10,6 +10,7 @@ namespace Ichup
 {
     public class Config
     {
+        public static string domain = "http://localhost:53182/";
         public static string ImagePath = "/Images/Upload/";
         public const int ImageMinimumBytes = 512;
         public static int maxWidth1 = 270;//for ảnh ngang lúc tìm

@@ -1,7 +1,22 @@
-﻿
-<section class="image-decription-container" id="imagepage" style="display:none;top:20%;width:100%;display:block;position:relative;height:400px;float:left;">
+﻿<style>
+table{
+    width: 100%;
+    margin-bottom: 20px;
+    max-width: 100%;
+    background-color: transparent;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-color: grey;
+}
+th, td {
+    color: #ffffff;
+    border-bottom:1px solid #fff;
+}
+</style>
+<section class="image-decription-container" id="imagepage" style="z-index:1001;display:none;top:20%;width:100%;left:0%;position:fixed;height:400px;float:left;background-color:#808080;">
       <div class="container">
         <div class="row">
+          <div class="span12"><a onclick="closeimage();" style="float:right;color:#ffffff;cursor:pointer;font-size:25px;">X</a></div>  
           <div class="span6">
             <figure>
               <img src="" alt="img" id="image_source"/>
@@ -9,13 +24,13 @@
           </div> <!-- end span6 -->
           <div class="span6">
             <div class="item-description">
-              <h5 class="title" id="image_id">File ID - #</h5>
-            <table class="table table-hover">
+              <h5 class="title" id="image_id" style="color:#ffffff;">File ID - #</h5>
+            <table >
               <thead>
                 <tr>
-                  <th>Size</th>
-                  <th>Resolution</th>
-                  <th>Prize</th>
+                  <th>Cỡ ảnh</th>
+                  <th>Kích thước</th>
+                  <th>Giá</th>
                 </tr>
               </thead>
               <tbody>
@@ -24,42 +39,43 @@
                     <form action="">
                       <label class="checkbox">
                         <input type="checkbox" value="" id="image_chk1">
-                        Thumbnail
+                        Nhỏ
                       </label>
                     </form>
                   </td>
                   <td>270x180</td>
-                  <td>Free</td>
+                  <td>Miễn phí+watermark</td>
                 </tr>
                 <tr>
                   <td>
                     <form action="">
                       <label class="checkbox">
                         <input type="checkbox" value="" id="image_chk2">
-                        Small
+                        Trung bình
                       </label>
                     </form>
                   </td>
                   <td>570x363</td>
-                  <td>Free</td>
+                  <td>Miễn phí+watermark</td>
                 </tr>
                 <tr>
                   <td>
                     <form action="">
                       <label class="checkbox">
                         <input type="checkbox" value="" id="image_chk3">
-                        Original
+                        Ảnh gốc
                       </label>
                     </form>
                   </td>
                   <td id="image_width_height">1024x1024</td>
                   <td id="image_price">$0.99</td>
-                </tr>
-                
+                </tr>                
               </tbody>
             </table>
             </div> <!-- end item-description -->
+            <a onclick="downloadimage();" class="btn btn-primary btn-large">Download</a>&nbsp;<span class="title" id="image_price2"></span>
           </div> <!-- end span6 -->
         </div> <!-- end row -->
       </div> <!-- end container -->
     </section> <!-- end image-description-container -->
+<script>function closeimage() { $("#imagepage").hide(); }</script>

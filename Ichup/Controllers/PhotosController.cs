@@ -85,6 +85,16 @@ namespace Ichup.Controllers
                 return "0";
             }
         }
+        public string downloadfile(int id) {
+            image img = db.images.Find(id);
+            System.Web.HttpContext.Current.Response.ContentType = "application/force-download";
+            System.Web.HttpContext.Current.Response.AddHeader("content-disposition", "attachment; filename="+img.link);
+            System.Web.HttpContext.Current.Response.ContentType = "image/jpeg";
+            System.Web.HttpContext.Current.Response.TransmitFile(Server.MapPath(img.link));
+            System.Web.HttpContext.Current.Response.End();
+            //System.Web.HttpContext.Current.Response.Flush();
+            return "1";
+        }
         [HttpPost]
         public string test(HttpPostedFileBase file)
         {
