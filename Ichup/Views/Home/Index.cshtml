@@ -32,13 +32,13 @@
             <a href="#" class="pull-right random"><i class="icon-random icon-large"></i></a>
           </div> <!-- end span6 -->
         </div> <!-- end row -->
-
+        @Html.Partial("~/Views/_imagepage.cshtml")
         <div class="images-container">
           <div class="row">
               @foreach (var item in ViewBag.news) { 
                   <div class="span3">
                       <figure class="top-img">
-                        <a href="/Photos/Page?id=@item.id"><img src="@item.link_thumbail_small" alt="img"></a>
+                        <a onclick="imagepage(@item.id)"><img src="@item.link_thumbail_small" alt="img"></a>
                         <figcaption class="img-meta">
                           @*<div class="row-fluid">
                             <div class="span8">
@@ -79,5 +79,30 @@
 			
 		}
 		setInterval(changeBG, 3000);
-	
+		function imagepage(id) {
+		    var formdata = new FormData(); //FormData object
+		    formdata.append("id", id);
+		    var xhr = new XMLHttpRequest();
+		    xhr.open('POST', '/Photos/getImage');
+		    xhr.send(formdata);
+		    var content = "";
+		    $("#loadingimage").show();
+		    $("#imagepage").show();
+		    xhr.onreadystatechange = function () {
+		        if (xhr.readyState == 4 && xhr.status == 200) {
+		            if (xhr.responseText != "0") {
+		                //alert("Cập nhật thành công");
+		                //window.location.href = "/Photos/User/1";
+		                var news = '{"news":' + xhr.responseText + '}';
+		                var json_parsed = $.parseJSON(news);      
+		                for (var i = 0; i < json_parsed.news.length; i++) {
+
+		                }
+		                $("#loadingimage").hide();
+		            } else {
+		                alert("Chương trình đang cập nhật, xin quay lại sau!");
+		            }
+		        }
+		    }
+		}
 </script>

@@ -75,6 +75,16 @@ namespace Ichup.Controllers
             image img = db.images.Find(id);
             return View(img);
         }
+        public string getImage(int id) {
+            try
+            {
+                var p = (from q in db.images where q.id == id && q.status == 0 select q);
+                return JsonConvert.SerializeObject(p.ToList());
+            }
+            catch (Exception ex) {
+                return "0";
+            }
+        }
         [HttpPost]
         public string test(HttpPostedFileBase file)
         {
