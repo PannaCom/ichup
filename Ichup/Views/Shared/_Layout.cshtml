@@ -88,7 +88,7 @@
             </ul> <!-- end nav -->
           </div><!--/.nav-collapse -->
 
-          <a class="brand" href="index.html"><img src="~/Content/img/logo.png" alt="logo"></a>
+          <a class="brand" href="/"><img src="~/Content/img/logo.png" alt="logo"></a>
 		  <div style="display:block;float:left;position:relative;padding-top:3px;width:611px;height:auto;">
 			<form action="" class="search-form">
                     <div class="input-append">
@@ -99,7 +99,7 @@
 		  </div>	
           <div class="pull-right">
             <ul class="unstyled inline user-interaction">
-              <li><a href="#" style="color:#ffffff;">Upload Image</a></li>
+              <li><a href="/Photos/Upload" style="color:#ffffff;">Upload Image</a></li>
               
             </ul>  <!-- end user-interaction -->
           </div> <!-- end pull-right -->
@@ -219,14 +219,16 @@
 		function autosearch(event) {
 		    var keyCode = ('which' in event) ? event.which : event.keyCode;
 		    var k = document.getElementById("skeyword").value;
+		    //alert(keyCode);
 		    if (keyCode == 13) {
 		        if (k == "") {
 		            alert("Bạn phải nhập từ khóa");
 		            return;
-		        }
-		        var url = "../Search?k=" + k;
-		        //alert(url);
-		        window.location.href = url;
+		        }else{
+		            var url = "../Search?k=" + k;
+		            //alert(url);
+		            window.location.href = url;
+                }
             }
 		   
 		}

@@ -5,7 +5,7 @@
     ViewBag.Title = "Kết quả tìm kiếm";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@Html.Partial("~/Views/_imagepage.cshtml")
 <section class="search-results">
       <div class="container">
         <div class="row">
@@ -124,7 +124,7 @@
                                       <figcaption class="img-meta">
                                         <div class="row-fluid">
                                           <div class="span8">
-                                            <a href="#" class="img-id">#@item.id</a>
+                                            <a onclick="imagepage(@item.id)" class="img-id">#@item.id</a>
                                             @*<a href="#" class="img-tags">@item.filter_3</a>*@
                                           </div>
                                           <div class="span4">
@@ -132,7 +132,7 @@
                                           </div>
                                         </div>
                                         <div class="roll-over">
-                                        <a href="#" class="btn"><span class="bucket">&#128092;</span></a>
+                                        <a onclick="imagepage(@item.id)" class="btn"><span class="bucket">&#128092;</span></a>
                                       </div> <!-- end roll-over -->
                                       </figcaption> <!-- end img-meta -->
                                     </figure> <!-- end top-img -->
@@ -267,5 +267,61 @@
         }
         url += "k=" + k + "&f1=" + f1 + "&f2=" + f2 + "&f3=" + f3 + "&f4=" + f4 + "&f5=" + f5+"&order="+order+"&to="+to+"&pg="+pg;
         window.location.href = url;
+    }
+    var currentId = -1;
+    function imagepage(id) {
+        currentId = id;
+        var formdata = new FormData(); //FormData object
+        formdata.append("id", id);
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/Photos/getImage');
+        xhr.send(formdata);
+        var content = "";
+        $("#loadingimage").show();
+        $("#imagepage").show();
+        $("#image_source").attr("src", "/Images/loading.gif"); 
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                if (xhr.responseText != "0") {
+                    //alert("Cập nhật thành công");
+                    //window.location.href = "/Photos/User/1";
+                    var news = '{"news":' + xhr.responseText + '}';
+                    var json_parsed = $.parseJSON(news);      
+                    for (var i = 0; i < json_parsed.news.length; i++) {
+                        var src = json_parsed.news[i].link_thumbail_big;
+                        var id = json_parsed.news[i].id;
+                        var price = json_parsed.news[i].price;
+                        var image_width_height = json_parsed.news[i].width + "x" + json_parsed.news[i].height;
+                        $("#image_source").attr("src", src);
+                        $("#image_id").html("File ID - #" + id);
+                        $("#image_price").html(price);
+                        $("#image_price2").html("Giá: " + price);
+                        $("#image_width_height").html(image_width_height);
+                    }
+                    $("#loadingimage").hide();
+                } else {
+                    alert("Chương trình đang cập nhật, xin quay lại sau!");
+                }
+            }
+        }
+    }
+    function downloadimage() {
+        window.open("/Photos/downloadfile?id=" + currentId, "_self");
+        //var formdata = new FormData(); //FormData object
+        //formdata.append("id", currentId);
+        //var xhr = new XMLHttpRequest();
+        //xhr.open('POST', '/Photos/downloadfile');
+        //xhr.send(formdata);
+        //var content = "";
+        //$("#loadingimage").show();
+        //xhr.onreadystatechange = function () {
+        //    if (xhr.readyState == 4 && xhr.status == 200) {
+        //        if (xhr.responseText != "0") {
+        //            $("#loadingimage").hide();
+        //        } else {
+        //            alert("Chương trình đang cập nhật, xin quay lại sau!");
+        //        }
+        //    }
+        //}
     }
 </script>
