@@ -245,6 +245,17 @@ namespace Ichup
 
             return val;
         }
+        public static string getSaleType(long id,byte? sale_type) {
+            string val="";
+            string schecked1="checked";
+            string schecked2="";
+            if (sale_type==1){
+                schecked1="";
+                schecked2="checked";
+            }
+            val = "<input type=\"radio\" name=\"sale_type_" + id + "\" id=\"sale_type_" + id + "_1\" value=\"0\" " + schecked1 + ">Bán nhiều lần<input type=\"radio\" name=\"sale_type_" + id + "\" id=\"sale_type_" + id + "_2\" value=\"1\" " + schecked2 + ">Bán độc quyền một lần";
+            return val;
+        }
         //public static string getCategorySearch(string have)
         //{
         //    var p = (from q in db.categories orderby q.name select q.name).ToList();

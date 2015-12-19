@@ -53,8 +53,9 @@ namespace Ichup.Controllers
             }
             return "0";
         }
-        public ActionResult User(int? id,int? page) {
-            var p = (from q in db.images where q.member_id == id select q).OrderByDescending(o => o.id);
+        public ActionResult User(string keyword,int? id,int? page) {
+            if (keyword == null) keyword = "";
+            var p = (from q in db.images where q.keywords.Contains(keyword) && q.member_id == id select q).OrderByDescending(o => o.id);
             if (page == null) page = 1;
             ViewBag.page = page;
             if (id == null) return View();
@@ -79,6 +80,8 @@ namespace Ichup.Controllers
             try
             {
                 var p = (from q in db.images where q.id == id && q.status == 0 select q);
+                string query = "update images set total_views=total_views+1 where id=" + id;
+                db.Database.ExecuteSqlCommand(query);
                 return JsonConvert.SerializeObject(p.ToList());
             }
             catch (Exception ex) {
@@ -87,6 +90,8 @@ namespace Ichup.Controllers
         }
         public string downloadfile(int id) {
             image img = db.images.Find(id);
+            string query = "update images set total_download=total_download+1 where id=" + id;
+            db.Database.ExecuteSqlCommand(query);
             System.Web.HttpContext.Current.Response.ContentType = "application/force-download";
             System.Web.HttpContext.Current.Response.AddHeader("content-disposition", "attachment; filename="+img.link);
             System.Web.HttpContext.Current.Response.ContentType = "image/jpeg";
@@ -101,11 +106,11 @@ namespace Ichup.Controllers
             return "21";
         }
         [HttpPost]
-        public string UpdateFilter(int id, string filter_1,string filter_2,string filter_3,string filter_4,string filter_5,string keywords,int price)
+        public string UpdateFilter(int id, string filter_1,string filter_2,string filter_3,string filter_4,string filter_5,string keywords,int price,byte sale_type)
         {
             try
             {
-                string query = "update images set keywords=N'" + keywords + "',price=" + price + ",filter_1=N'"+filter_1+"',filter_2=N'"+filter_2+"',filter_3=N'"+filter_3+"',filter_4=N'"+filter_4+"',filter_5=N'"+filter_5+"' where id=" + id;
+                string query = "update images set keywords=N'" + keywords + "',price=" + price + ",filter_1=N'" + filter_1 + "',filter_2=N'" + filter_2 + "',filter_3=N'" + filter_3 + "',filter_4=N'" + filter_4 + "',filter_5=N'" + filter_5 + "',sale_type=" + sale_type + " where id=" + id;
                 db.Database.ExecuteSqlCommand(query);
                 return "1";
             }
