@@ -60,6 +60,7 @@
                       <li class="active"><a href="#"><i class="icon-picture icon-large"></i></a></li>
                       <li><a href="#"><i class="icon-facetime-video icon-large"></i></a></li>
                       <li><a href="#"><i class="icon-music icon-large"></i></a></li>
+                      <li><span style="color:red;">Đánh dấu vào các thuộc tính ảnh giúp user tìm được ảnh nhiều hơn!</span></li>
                     </ul>
                 </div> <!-- end span8 -->
                
@@ -188,6 +189,10 @@
 
     }
     function del(id){
+        if (!confirm("Bạn có chắc chắn xóa?"))
+        {
+            return;
+        }
         var formdata = new FormData(); //FormData object
         formdata.append("id", id);
         var xhr = new XMLHttpRequest();
