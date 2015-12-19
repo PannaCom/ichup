@@ -90,12 +90,12 @@
 
           <a class="brand" href="/"><img src="~/Content/img/logo.png" alt="logo"></a>
 		  <div style="display:block;float:left;position:relative;padding-top:3px;width:611px;height:auto;">
-			<form action="" class="search-form">
+			
                     <div class="input-append">
-                      <input class="input-medium" style="width:600px;" type="text" placeholder="Nhập từ khóa" id="skeyword" value="@ViewBag.keyword">
+                      <input  style="width:600px;" type="text" placeholder="Nhập từ khóa" id="skeyword" value="@ViewBag.keyword" onkeypress="autosearch(event);">
                       <button class="btn" type="button" onclick="bsearch();"><i class="icon-search"></i></button>
                     </div> <!-- end input-append -->
-                  </form> <!-- end search form -->
+            
 		  </div>	
           <div class="pull-right">
             <ul class="unstyled inline user-interaction">
@@ -215,19 +215,21 @@
 			
 		}
 		setInterval(changeBG, 3000);
-		document.addEventListener("keydown", autosearch);
-		function autosearch(event) {
-		    var keyCode = ('which' in event) ? event.which : event.keyCode;
-		    var k = document.getElementById("skeyword").value;
+		//document.addEventListener("keydown", autosearch);
+		function autosearch(e) {
+		    var keyCode = e.keyCode || e.which;//('which' in event) ? event.which : event.keyCode;
+		    var keyword = document.getElementById("skeyword").value;
 		    //alert(keyCode);
 		    if (keyCode == 13) {
-		        if (k == "") {
+		        if (keyword == "") {
 		            alert("Bạn phải nhập từ khóa");
 		            return;
 		        }else{
-		            var url = "../Search?k=" + k;
+		            //var surl = "/Search/Index?k=" + keyword;
 		            //alert(url);
-		            window.location.href = url;
+		            //window.location.href = surl;
+		            //history.pushState('Search', 'Search', surl);
+		            bsearch();
                 }
             }
 		   

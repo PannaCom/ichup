@@ -103,11 +103,13 @@
 		                    var id = json_parsed.news[i].id;
 		                    var price = json_parsed.news[i].price;
 		                    var image_width_height = json_parsed.news[i].width + "x" + json_parsed.news[i].height;
+		                    var image_keyword = json_parsed.news[i].keywords;
 		                    $("#image_source").attr("src", src);
 		                    $("#image_id").html("File ID - #" + id);
 		                    $("#image_price").html(price);
 		                    $("#image_price2").html("Giá: " + price);
 		                    $("#image_width_height").html(image_width_height);
+		                    $("#image_keyword").html("Từ khóa:"+image_keyword);
 		                }
 		                $("#loadingimage").hide();
 		            } else {
