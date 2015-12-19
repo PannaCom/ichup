@@ -62,8 +62,10 @@
           <div style="display:block;float:left;position:relative;width:100%;" id="divPR1">
               
           </div>
-          <span id="notice"></span>  
-          <input type="button" class="class-form" value="Save All" onclick="saveAll();">  
+          <p style="text-align:justify;">  
+          <span id="notice"></span>.&nbsp;  
+          <input type="button" class="class-form" value="Save All" onclick="saveAll();" id="saveAll" style="display:none;">  
+          </p>
         </div> <!-- end row -->
       </div> <!-- end container -->
     </section> <!-- end image-description-container -->
@@ -82,7 +84,7 @@
             pr += "<div id=img_" + i + " class=\"progressbar\" style=\"background-color:#fff;margin-top:5px;width:200px;height:126px;display:block;possition:relative;float:left;\">";
             pr += "<div id=\"progresslabel" + i + "\" class=\"progressbarlabel\" style=\"background-color:green;width:1px;height:9px;display:block;possition:relative;float:left;\">uploading...</div>";
             pr += "</div>";
-            pr += "<div style=\"background-color:#ffffff;width:200px;height:auto;display:block;possition:relative;float:left;margin-top:2px;\">Từ khóa(cách nhau dấu ,)<textarea id=keyword_" + i + " style=\"width:100%;\"  class=\"example\" rows=\"1\"></textarea><input type=hidden id=id_" + i + ">Giá: <input type=text id=price_" + i + " placeholder=\"Nhập giá\" onblur=\"checkPrice(this);\"></div>";//
+            pr += "<div style=\"background-color:#ffffff;width:200px;height:auto;display:block;possition:relative;float:left;margin-top:2px;\">Từ khóa<textarea id=keyword_" + i + " placeholder=\"Nhập từ khóa\" style=\"width:100%;\"  class=\"example\" rows=\"1\"></textarea><input type=hidden id=id_" + i + ">Giá bán<input type=text id=price_" + i + " placeholder=\"Nhập giá\" onblur=\"checkPrice(this);\"></div>";//
             pr += "</div>";
             $("#divPR1").append(pr);
             
@@ -90,6 +92,7 @@
         autoname = false;
         if (document.getElementById("autoname").checked) autoname = true;
         totalindex = -1;
+        $("#saveAll").show();
         newupload(fileInput.files[0].name, fileInput.files[0]);
         return false;
     }
@@ -126,9 +129,10 @@
             if (xhr.readyState == 4 && xhr.status == 200) {
                 //alert(xhr.responseText);
                 var str = xhr.responseText.split(":");
+                var indexUploaded = totalItemImage + 1;
                 $('#img_' + totalItemImage).html("<img src=\"" + str[0] + "\" width=200 height=126 id=\"image_" + totalItemImage + "\">");
                 $('#id_' + totalItemImage).val(str[1]);
-                $("#notice").html("Đã upload xong ảnh " + totalItemImage);
+                $("#notice").html("Đã upload xong ảnh " + indexUploaded);
                 newupload(filename, fileobj);
             }
             
@@ -162,9 +166,10 @@
                 formdata.append("keyword_" + i, document.getElementById("keyword_" + i).value);
                 formdata.append("price_" + i, document.getElementById("price_" + i).value);
                 formdata.append("id_" + i, document.getElementById("id_" + i).value);
+                //alert(document.getElementById("keyword_" + i).value);
             }
         }
-
+        //return;
         var xhr = new XMLHttpRequest();
         xhr.open('POST', '/Photos/Update');
         xhr.send(formdata);

@@ -44,9 +44,9 @@ namespace Ichup.Controllers
                     }
                     int to_price = int.Parse(price);
                     string query="update images set keywords=N'"+keyword+"',price="+to_price+" where id="+id;
-                    db.Database.ExecuteSqlCommand(query);
-                    return "1";
+                    db.Database.ExecuteSqlCommand(query);                    
                 }
+                return "1";
             }
             catch (Exception ex) {
                 return "0";

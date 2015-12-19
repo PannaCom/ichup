@@ -59,7 +59,7 @@
                  @Html.Raw(@Ichup.Config.getF5Ck(@ViewBag.f5))
                   </form>
               </div> <!-- end widget -->
-               <div class="widget">
+               @*<div class="widget">
                 <h4 class="title">License Types</h4>
                  <form class="license-types">
                    <label class="checkbox">
@@ -79,7 +79,7 @@
 
                  </form>
 
-                </div> <!-- end widget -->
+                </div> <!-- end widget -->*@
 
 
 
@@ -223,6 +223,7 @@
     function setorder(field,t) {
         order=field;
         to=t;
+        pg=1;
         search();
     }
     function setpage(page) {
