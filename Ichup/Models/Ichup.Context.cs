@@ -12,7 +12,7 @@ namespace Ichup.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-
+    
     public partial class ichupEntities : DbContext
     {
         public ichupEntities()
@@ -28,5 +28,6 @@ namespace Ichup.Models
         public DbSet<category> categories { get; set; }
         public DbSet<member> members { get; set; }
         public DbSet<image> images { get; set; }
+        public DbSet<sales_log> sales_log { get; set; }
     }
 }

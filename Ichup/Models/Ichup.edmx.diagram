@@ -7,7 +7,8 @@
       <Diagram DiagramId="ae8ba064630d4b62ae38d7eb5b91dc42" Name="Diagram1">
         <EntityTypeShape EntityType="ichupModel.category" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ichupModel.member" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ichupModel.image" Width="1.5" PointX="2.5790770624666832" PointY="4.83906248437197" />
+        <EntityTypeShape EntityType="ichupModel.image" Width="1.5" PointX="3.9050577114825407" PointY="14.785922578901948" />
+        <EntityTypeShape EntityType="ichupModel.sales_log" Width="1.5" PointX="9.0528782070860636" PointY="28.153212426301657" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
