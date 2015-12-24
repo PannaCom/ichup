@@ -28,6 +28,8 @@
           <Property Name="link" Type="nvarchar" MaxLength="150" />
           <Property Name="link_thumbail_big" Type="nvarchar" MaxLength="150" />
           <Property Name="link_thumbail_small" Type="nvarchar" MaxLength="150" />
+          <Property Name="link_big" Type="nvarchar" MaxLength="150" />
+          <Property Name="link_small" Type="nvarchar" MaxLength="150" />
           <Property Name="total_views" Type="int" />
           <Property Name="total_buy" Type="int" />
           <Property Name="total_download" Type="int" />
@@ -78,8 +80,8 @@
         <EntityContainer Name="Entities" p1:LazyLoadingEnabled="true">
           <EntitySet Name="categories" EntityType="ichupModel.category" />
           <EntitySet Name="members" EntityType="ichupModel.member" />
-          <EntitySet Name="images" EntityType="ichupModel.image" />
           <EntitySet Name="sales_log" EntityType="ichupModel.sales_log" />
+          <EntitySet Name="images" EntityType="ichupModel.image" />
         </EntityContainer>
         <EntityType Name="category">
           <Key>
@@ -103,6 +105,15 @@
           <Property Name="total_views" Type="Int32" />
           <Property Name="date_reg" Type="DateTime" Precision="3" />
         </EntityType>
+        <EntityType Name="sales_log">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int64" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int64" Name="image_id" />
+          <Property Type="Int32" Name="member_id_buy" />
+          <Property Type="DateTime" Name="date_sale" Precision="3" />
+        </EntityType>
         <EntityType Name="image">
           <Key>
             <PropertyRef Name="id" />
@@ -113,6 +124,8 @@
           <Property Type="String" Name="link" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="link_thumbail_big" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="link_thumbail_small" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="link_big" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="link_small" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="total_views" />
           <Property Type="Int32" Name="total_buy" />
           <Property Type="Int32" Name="total_download" />
@@ -131,15 +144,6 @@
           <Property Type="Int32" Name="width" />
           <Property Type="Int32" Name="height" />
           <Property Type="Byte" Name="sale_type" />
-        </EntityType>
-        <EntityType Name="sales_log">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Type="Int64" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Int64" Name="image_id" />
-          <Property Type="Int32" Name="member_id_buy" />
-          <Property Type="DateTime" Name="date_sale" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -171,6 +175,16 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="sales_log">
+            <EntityTypeMapping TypeName="ichupModel.sales_log">
+              <MappingFragment StoreEntitySet="sales_log">
+                <ScalarProperty Name="date_sale" ColumnName="date_sale" />
+                <ScalarProperty Name="member_id_buy" ColumnName="member_id_buy" />
+                <ScalarProperty Name="image_id" ColumnName="image_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="images">
             <EntityTypeMapping TypeName="ichupModel.image">
               <MappingFragment StoreEntitySet="images">
@@ -192,21 +206,13 @@
                 <ScalarProperty Name="total_download" ColumnName="total_download" />
                 <ScalarProperty Name="total_buy" ColumnName="total_buy" />
                 <ScalarProperty Name="total_views" ColumnName="total_views" />
+                <ScalarProperty Name="link_small" ColumnName="link_small" />
+                <ScalarProperty Name="link_big" ColumnName="link_big" />
                 <ScalarProperty Name="link_thumbail_small" ColumnName="link_thumbail_small" />
                 <ScalarProperty Name="link_thumbail_big" ColumnName="link_thumbail_big" />
                 <ScalarProperty Name="link" ColumnName="link" />
                 <ScalarProperty Name="cat_id" ColumnName="cat_id" />
                 <ScalarProperty Name="keywords" ColumnName="keywords" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sales_log">
-            <EntityTypeMapping TypeName="ichupModel.sales_log">
-              <MappingFragment StoreEntitySet="sales_log">
-                <ScalarProperty Name="date_sale" ColumnName="date_sale" />
-                <ScalarProperty Name="member_id_buy" ColumnName="member_id_buy" />
-                <ScalarProperty Name="image_id" ColumnName="image_id" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

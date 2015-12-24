@@ -20,6 +20,8 @@ namespace Ichup.Models
         public string link { get; set; }
         public string link_thumbail_big { get; set; }
         public string link_thumbail_small { get; set; }
+        public string link_big { get; set; }
+        public string link_small { get; set; }
         public Nullable<int> total_views { get; set; }
         public Nullable<int> total_buy { get; set; }
         public Nullable<int> total_download { get; set; }
