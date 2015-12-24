@@ -102,8 +102,8 @@
                     <div class="span6" style="height:373px;" id="div-@item.id-2">
                         <table>
                              <tr><td align="left" width="70">Từ khóa</td><td align="left"><input type="text" id="keyword_@item.id" name="keyword_@item.id" value="@item.keywords" style="width:100%;"></td></tr>
-                             <tr><td align="left" width="70">Giá bán</td><td align="left"><input type="text" id="price_@item.id" name="price_@item.id" value="@item.price" onblur="checkPrice(this);"></td></tr>
-                             <tr><td align="left" width="70">Kiểu bán</td><td align="left">@Html.Raw(@Ichup.Config.getSaleType(@item.id,@item.sale_type))</td></tr>
+                             @*<tr><td align="left" width="70">Giá bán</td><td align="left"><input type="text" id="price_@item.id" name="price_@item.id" value="@item.price" onblur="checkPrice(this);"></td></tr>*@
+                             @*<tr><td align="left" width="70">Kiểu bán</td><td align="left">@Html.Raw(@Ichup.Config.getSaleType(@item.id,@item.sale_type))</td></tr>*@
                              <tr><td colspan="2"><b>Đánh dấu vào các thuộc tính mà ảnh này có</b></td></tr>
                              <tr>
                                  <td align="left"><b>Loại ảnh:</b></td>
@@ -154,13 +154,13 @@
                 document.getElementById("keyword_" + id).focus();
                 return;
             }
-        if (document.getElementById("price_" + id) && document.getElementById("price_" + id).value == "") {
-                alert("Nhập giá cho ảnh này!");
-                document.getElementById("price_" + id).focus();
-                return;
-        }
+        //if (document.getElementById("price_" + id) && document.getElementById("price_" + id).value == "") {
+        //        alert("Nhập giá cho ảnh này!");
+        //        document.getElementById("price_" + id).focus();
+        //        return;
+        //}
         var sale_type=0;
-        if (document.getElementById("sale_type_" + id+"_2").checked) sale_type=1;;
+        //if (document.getElementById("sale_type_" + id+"_2").checked) sale_type=1;;
         //alert(document.getElementById("sale_type_" + id+"_2").checked);
         //return;
         formdata.append("id", id);
@@ -170,8 +170,8 @@
         formdata.append("filter_4", filter_4);
         formdata.append("filter_5", filter_5);
         formdata.append("keywords", document.getElementById("keyword_" + id).value );
-        formdata.append("price", document.getElementById("price_" + id).value );
-        formdata.append("sale_type", sale_type);
+        formdata.append("price", 1000000);
+        formdata.append("sale_type", 0);
         var xhr = new XMLHttpRequest();
         xhr.open('POST', '/Photos/UpdateFilter');
         xhr.send(formdata);

@@ -121,16 +121,17 @@ namespace Ichup.Controllers
         }
         [HttpPost]
         [AcceptVerbs(HttpVerbs.Post)]
-        public string UploadImageProcess(HttpPostedFileBase file,bool autoname)
+        public string UploadImageProcess(HttpPostedFileBase file, bool autoname, bool free)
         {
             string guid = Guid.NewGuid().ToString();
             string code = Config.genCode();
             string physicalPath = HttpContext.Server.MapPath("../" + Config.ImagePath + "\\");
             string nameFile = String.Format("{0}.jpg", guid + "-" + code);
             
-            string nameFile1 = String.Format("{0}.jpg", guid+"-small");
-
-            string nameFile2 = String.Format("{0}.jpg", guid + "-big");
+            string nameFile1 = String.Format("{0}.jpg", guid+"-tb-small");
+            string nameFile1_2 = String.Format("{0}.jpg", guid + "-small-"+Config.genCode());
+            string nameFile2 = String.Format("{0}.jpg", guid + "-tb-big");
+            string nameFile2_2 = String.Format("{0}.jpg", guid + "-big-" + Config.genCode());
             int countFile = Request.Files.Count;
             string fullPath = physicalPath + System.IO.Path.GetFileName(nameFile);
             string new_id = "";
@@ -148,26 +149,31 @@ namespace Ichup.Controllers
                 var test = System.Drawing.Image.FromFile(fullPath);
                 string filter_2 = "ngang";
                 if (test.Height > test.Width) filter_2 = "dọc";
-                
+                string filter_1 = "ảnh";
                 //Add vào db
                 image img = new image();
                 img.status = 0;
                 img.keywords = basicname;
                 img.link = Config.ImagePath + nameFile;
                 img.link_thumbail_big = Config.ImagePath + nameFile2;
+                img.link_big = Config.ImagePath + nameFile2_2;
                 img.link_thumbail_small = Config.ImagePath + nameFile1;
+                img.link_small = Config.ImagePath + nameFile1_2;                
                 img.token = guid;
                 img.filter_2 = filter_2;
+                img.filter_1 = filter_1;
                 img.code = code;
                 img.total_buy = 0;
                 img.total_download = 0;
                 img.total_views = 0;
                 img.date_post = DateTime.Now;
                 img.member_id = 1;
-                img.price = 0;
+                img.price = 1000000;
+                if (free) img.price = 0;
                 img.stt = i;
                 img.width = test.Width;
                 img.height = test.Height;
+                img.sale_type = 0;
                 db.images.Add(img);
                 db.SaveChanges();
                 new_id = img.id.ToString();
@@ -177,14 +183,16 @@ namespace Ichup.Controllers
             Size size1 = new Size(Config.maxWidth1, Config.maxHeight1);
             Size size2 = new Size(Config.maxWidth3, Config.maxHeight3);            
             ImageProcessor.ImageFactory iFF=new ImageProcessor.ImageFactory();
-            iFF.Load(fullPath).Resize(size1).BackgroundColor(Color.WhiteSmoke).Save(physicalPath + nameFile1);
-            iFF.Load(fullPath).Resize(size2).BackgroundColor(Color.WhiteSmoke).Save(physicalPath + nameFile2);
+            //Tạo ra file thumbail không có watermark
+            iFF.Load(fullPath).Resize(size1).BackgroundColor(Color.WhiteSmoke).Save(physicalPath + nameFile1_2);
+            iFF.Load(fullPath).Resize(size2).BackgroundColor(Color.WhiteSmoke).Save(physicalPath + nameFile2_2);
+            //Tạo ra file thumbail có watermark
             string path1 = Config.ImagePath + "/" + nameFile1;// resizeImage(1, fullPath, Config.ImagePath + "/" + nameFile1);//resize ảnh để hiển thị lúc tìm, ảnh nhỏ có wmark
             string path2 = Config.ImagePath + "/" + nameFile2;// resizeImage(2, fullPath, Config.ImagePath + "/" + nameFile2);//resize ảnh để xem chi tiết ảnh và thông số ảnh, ảnh to có wmark
             string w1 = HttpContext.Server.MapPath("../" + path1);
             string w2 = HttpContext.Server.MapPath("../" + path2);
 
-            iFF.Load(w1).Watermark(new TextLayer()
+            iFF.Load(physicalPath + nameFile1_2).Watermark(new TextLayer()
             {
                 DropShadow = true,
                 FontFamily = FontFamily.GenericMonospace,
@@ -193,7 +201,7 @@ namespace Ichup.Controllers
                 FontSize=12,
                 FontColor = Color.WhiteSmoke
             }).Save(w1);
-            iFF.Load(w2).Watermark(new TextLayer()
+            iFF.Load(physicalPath + nameFile2_2).Watermark(new TextLayer()
             {
                 DropShadow = true,
                 FontFamily = FontFamily.GenericMonospace,

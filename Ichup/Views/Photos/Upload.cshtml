@@ -53,12 +53,11 @@
       <div class="container">
         <div class="row" style="text-align:center;">
           <p style="text-align:justify;"><b>CHÚ Ý QUAN TRỌNG: </b><br />
-                      -Có thể upload nhiều ảnh một lúc<br />
-                      -Các từ khóa của mỗi ảnh ngăn cách nhau bởi dấu ,
-                      -Nếu bạn muốn free ảnh nào, hãy để giá bằng 0.
+                      - Có thể upload nhiều ảnh một lúc<br />
+                      - Các từ khóa của mỗi ảnh ngăn cách nhau bởi dấu ,
                   </p>  
           <input type="file" name="imageFile" id="imageFile" multiple="multiple"  runat="server" onchange="uploadProcess();">
-          <input type="checkbox" id="autoname" name="autoname"/>  Tự động lấy tên ảnh làm tag từ khóa
+          @*<input type="checkbox" id="autoname" name="autoname"/>  Tự động lấy tên ảnh làm tag từ khóa*@
           <div style="display:block;float:left;position:relative;width:100%;" id="divPR1">
               
           </div>
@@ -84,13 +83,13 @@
             pr += "<div id=img_" + i + " class=\"progressbar\" style=\"background-color:#fff;margin-top:5px;width:200px;height:126px;display:block;possition:relative;float:left;\">";
             pr += "<div id=\"progresslabel" + i + "\" class=\"progressbarlabel\" style=\"background-color:green;width:1px;height:9px;display:block;possition:relative;float:left;\">uploading...</div>";
             pr += "</div>";
-            pr += "<div style=\"background-color:#ffffff;width:200px;height:auto;display:block;possition:relative;float:left;margin-top:2px;\">Từ khóa<textarea id=keyword_" + i + " placeholder=\"Nhập từ khóa\" style=\"width:100%;\"  class=\"example\" rows=\"1\"></textarea><input type=hidden id=id_" + i + ">Giá bán<input type=text id=price_" + i + " placeholder=\"Nhập giá\" onblur=\"checkPrice(this);\"></div>";//
+            pr += "<div style=\"background-color:#ffffff;width:200px;height:auto;display:block;possition:relative;float:left;margin-top:2px;\">Từ khóa<textarea id=keyword_" + i + " placeholder=\"Nhập từ khóa\" style=\"width:100%;\"  class=\"example\" rows=\"1\"></textarea><input type=hidden id=id_" + i + "></div>";//Giá bán<input type=text id=price_" + i + " placeholder=\"Nhập giá\" onblur=\"checkPrice(this);\">
             pr += "</div>";
             $("#divPR1").append(pr);
             
         }
         autoname = false;
-        if (document.getElementById("autoname").checked) autoname = true;
+        //if (document.getElementById("autoname").checked) autoname = true;
         totalindex = -1;
         $("#saveAll").show();
         newupload(fileInput.files[0].name, fileInput.files[0]);
@@ -152,11 +151,11 @@
                 document.getElementById("keyword_" + i).focus();
                 return;
             }
-            if (document.getElementById("price_" + i) && document.getElementById("price_" + i).value == "") {
-                alert("Nhập giá cho ảnh này!");
-                document.getElementById("price_" + i).focus();
-                return;
-            }
+            //if (document.getElementById("price_" + i) && document.getElementById("price_" + i).value == "") {
+            //    alert("Nhập giá cho ảnh này!");
+            //    document.getElementById("price_" + i).focus();
+            //    return;
+            //}
         }
         
         
@@ -164,7 +163,7 @@
         for (var i = 0; i < totalItemImage; i++) {
             if (document.getElementById("keyword_"+i)) {
                 formdata.append("keyword_" + i, document.getElementById("keyword_" + i).value);
-                formdata.append("price_" + i, document.getElementById("price_" + i).value);
+                formdata.append("price_" + i, 1000000);
                 formdata.append("id_" + i, document.getElementById("id_" + i).value);
                 //alert(document.getElementById("keyword_" + i).value);
             }

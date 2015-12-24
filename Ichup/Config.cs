@@ -272,16 +272,16 @@ namespace Ichup
         //}
         public static string genCode()
         {
-            Random rnd = new Random();
-            string[] temp = new string[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" };
-            string[] temp2 = new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
-            int a = rnd.Next(0, 26); // creates a number between 1 and 25
-            int b = rnd.Next(0, 10); // creates a number between 1 and 9
-            int c = rnd.Next(0, 26);
-            int d = rnd.Next(0, 10);
-            int e = rnd.Next(0, 26);
-            string rs = temp[a] + temp2[b] + temp[c] + temp2[d] + temp[e];
-            return rs;
+            //Random rnd = new Random();
+            //string[] temp = new string[] { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z" };
+            //string[] temp2 = new string[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+            //int a = rnd.Next(0, 26); // creates a number between 1 and 25
+            //int b = rnd.Next(0, 10); // creates a number between 1 and 9
+            //int c = rnd.Next(0, 26);
+            //int d = rnd.Next(0, 10);
+            //int e = rnd.Next(0, 26);
+            //string rs = temp[a] + temp2[b] + temp[c] + temp2[d] + temp[e];            
+            return Guid.NewGuid().ToString().Split('-')[0];
         }
         public static string GetMd5Hash(MD5 md5Hash, string input)
         {
