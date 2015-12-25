@@ -66,6 +66,7 @@ namespace Ichup.Controllers
             return View(p.ToPagedList(pageNumber, pageSize));
         }
         public ActionResult Upload() {
+            if (Config.getCookie("logged") == "") return RedirectToAction("Login", "Members");
             return View();
         }
         public string getCategoryCk() {

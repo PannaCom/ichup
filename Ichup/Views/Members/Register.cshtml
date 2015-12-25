@@ -18,6 +18,7 @@
           <div class="row">
             <div class="span6">
               <h4 class="title">Đăng Ký Thành Viên</h4>
+              <div class="span10"><input type="radio" name="type" id="type1" value="0" checked>Bán ảnh<input type="radio" name="type" id="type2" value="1">Mua ảnh <input type="radio" name="type" id="type3" value="2">Cả hai</div>
             </div> <!-- end span6 -->
             <div class="span6">
               <a href="#" class="btn pull-right">Được ưu đãi, chăm sóc</a>
@@ -40,18 +41,18 @@
         <div class="row">
           <div class="span12">
             <figure>
-              <input class="span10"  id=name name=name type="text" placeholder="tên truy cập">
+              <input class="span10"  id=name name=name type="text" placeholder="tên truy cập" onblur="checkExist();"><span style="color:red;" id="notice1"></span>
 			  <input class="span10"  id=pass name=pass type="password" placeholder="mật khẩu">
 			  <input class="span10"  id=pass2 name=pass2 type="password" placeholder="gõ lại mật khẩu">
 			  <input class="span10"  id=email name=email type="text" placeholder="email">
 			  <input class="span10"  id=phone name=phone type="text" placeholder="điện thoại">
 			  <textarea class="span10"  id=address name=address placeholder="địa chỉ"></textarea>
-			  <input class="span10"  id=passport name=passport type="text" placeholder="Số chứng minh thư/ Hộ chiếu">
+			  <input class="span10"  id=passport name=passport type="text" placeholder="Số chứng minh thư/ Hộ chiếu">              
               <div class="span10">
               <a href="@Url.Action("SignUp")"> 
                   <img alt="Captcha" src="@Url.Action("CaptchaImage")" style="" border="1"/> 
               </a> 
-              nhập mã (chứng minh bạn không phải robot):<input type="text" id="captchaText" name="captchaText">
+              nhập mã bảo mật(bạn không phải robot):<input type="text" id="captchaText" name="captchaText">
               </div>
               <div class="span10"><h2>Xin đọc kỹ quy định và thỏa thuận thành viên dưới đây</h2>
 			      <p style="width:100%;">Thỏa thuận thành viên với Ichup.com <br>
@@ -61,8 +62,8 @@
 					    +Không đăng ảnh nói xấu các tổ chức, cá nhân, doanh nghiệp<br>
 					    +Không đăng các ảnh không thuộc quyền sở hữu của bạn, hoặc có tranh chấp bản quyền với bên thứ ba<br>
 			      -	<b>Về thanh toán tiền bán ảnh</b>:<br>
-					    +Bạn được 30% số tiền bán mỗi ảnh, 70% còn lại thuộc về Ichup.com(đội ngũ biên tập, server, thuế..) <br>
-					    +Bạn được thanh toán tiền ảnh mỗi tháng một lần tại trụ sở Ichup.com hoặc chuyển khoản<br>
+					    + Mỗi bức ảnh được bán đồng giá, Bạn được 50% số tiền bán mỗi ảnh, 50% còn lại thuộc về Ichup.com(đội ngũ biên tập, server, thuế..) <br>
+					    + Bạn được thanh toán tiền ảnh mỗi tháng một lần tại trụ sở Ichup.com hoặc chuyển khoản<br>
 			      </p>
 			      <input type=checkbox id=agree>Đồng ý với các điều khoản trên<br>
               </div>      
@@ -76,6 +77,29 @@
 
   <!-- ============================  Image Decription Ends ============================ -->
 <script>
+    var duplicate=false;
+    function checkExist(){
+        var formdata = new FormData(); //FormData object
+        var name = document.getElementById("name").value;
+        formdata.append("name", name);
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/members/checkExist');
+        xhr.send(formdata);        
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                if (xhr.responseText == "1") {
+                    //alert("ok");
+                    duplicate=true;       
+                    //alert("ok");
+                    $("#notice1").html("&nbsp;* User này đã có người dùng");
+                } else {
+                    duplicate=false;
+                    $("#notice1").html("");
+                }
+            }
+
+        }
+    }
     function AddNew() {
         var formdata = new FormData(); //FormData object
         var name = document.getElementById("name").value;
@@ -86,8 +110,19 @@
         var address = document.getElementById("address").value;
         var passport = document.getElementById("passport").value;
         var captcha = document.getElementById("captchaText").value;
-        
-        
+        var type1 = document.getElementById("type1").checked;
+        var type2 = document.getElementById("type2").checked;
+        var type3 = document.getElementById("type3").checked;
+        var type=0;
+        if (type1) {type=0;}
+        else
+            if (type2) {type=1;}
+        else
+        if (type3) {type=2;}
+        if (duplicate) {
+            alert("User đã có người dùng, chọn tên khác");
+            return;
+        }
         if (name == "") {
             alert("Nhập tên truy cập");
             return;
@@ -132,6 +167,7 @@
         formdata.append("address", address);
         formdata.append("passport", passport);
         formdata.append("captcha", captcha);
+        formdata.append("type", type);
         formdata.append("id", @ViewBag.id);
         
         var xhr = new XMLHttpRequest();
@@ -140,12 +176,16 @@
         var content = "";
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
-                if (xhr.responseText != "0") {
+                if (xhr.responseText != "0" && xhr.responseText != "-1") {
                     //updateGI(xhr.responseText);
                     //updatePrice(xhr.responseText);
-                    window.location.href = "/Home/index";
+                    window.location.href = "/Members/Login";
                 } else {
                     document.getElementById("btnSA").disabled = false;
+                    if (xhr.responseText == "-1"){
+                        alert("Bạn đã nhập mã an ninh không đúng");
+                        return;
+                    }
                     alert("Có lỗi trong quá trình cập nhật dữ liệu! Bạn");
                 }
             }

@@ -33,17 +33,29 @@ namespace Ichup.Controllers
             MD5 md5Hash = MD5.Create();
             pass = Config.GetMd5Hash(md5Hash, pass);
             bool p = db.members.Any(o => o.name == name && o.pass == pass);
-            if (p) return "1"; else return "0";
+            if (p) {
+                Config.setCookie("logged", name);
+                return "1"; 
+            } else { return "0"; }
+        }
+        public ActionResult Logout()
+        {
+            if (Request.Cookies["logged"] != null)
+            {
+                Response.Cookies["logged"].Expires = DateTime.Now.AddDays(-1);
+            }
+            Session.Abandon();
+            return View();
         }
         [HttpPost]
-        public string Update(string name,string pass,string email,string phone,string address,string passport,string captcha,int id) {
+        public string Update(string name,string pass,string email,string phone,string address,string passport,string captcha,byte? type,int id) {
             MD5 md5Hash = MD5.Create();
             try
             {
                 if (id == 0)
                 {
                     if (Session["Captcha"] != null && Session["Captcha"].ToString() != captcha) {
-                        return "0";
+                        return "-1";
                     }
                     pass = Config.GetMd5Hash(md5Hash, pass);
                     member mb = new member();
@@ -54,6 +66,7 @@ namespace Ichup.Controllers
                     mb.address = address;
                     mb.passport = passport;
                     mb.total_views = 0;
+                    mb.type = type;
                     mb.date_reg = DateTime.Now;
                     db.members.Add(mb);
                     db.SaveChanges();
@@ -68,6 +81,7 @@ namespace Ichup.Controllers
                     mb.phone = phone;
                     mb.address = address;
                     mb.passport = passport;
+                    mb.type = type;
                     db.Entry(mb).State = EntityState.Modified;
                     db.SaveChanges();
                     return id.ToString();
@@ -77,6 +91,20 @@ namespace Ichup.Controllers
                 return "0";
             }
             return "1";
+        }
+        [HttpPost]
+        public string checkExist(string name)
+        {
+            try
+            {
+                bool p = db.members.Any(o => o.name.Contains(name));
+                if (p) return "1";
+                else return "0";
+            }
+            catch (Exception ex) {
+                return "0";
+            }
+            return "0";
         }
         // genarate captcha Image
         public ActionResult CaptchaImage(bool noisy = false)

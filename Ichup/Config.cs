@@ -266,6 +266,25 @@ namespace Ichup
             val = "<input type=\"radio\" name=\"sale_type_" + id + "\" id=\"sale_type_" + id + "_1\" value=\"0\" " + schecked1 + ">Bán nhiều lần<input type=\"radio\" name=\"sale_type_" + id + "\" id=\"sale_type_" + id + "_2\" value=\"1\" " + schecked2 + ">Bán độc quyền một lần";
             return val;
         }
+        public static void setCookie(string field, string value)
+        {
+            HttpCookie MyCookie = new HttpCookie(field);
+            MyCookie.Value = HttpUtility.HtmlEncode(value);
+            MyCookie.Expires = DateTime.Now.AddDays(365);
+            HttpContext.Current.Response.Cookies.Add(MyCookie);
+            //Response.Cookies.Add(MyCookie);           
+        }
+        public static string getCookie(string v)
+        {
+            try
+            {
+                return HttpContext.Current.Request.Cookies[v].Value.ToString();
+            }
+            catch (Exception ex)
+            {
+                return "";
+            }
+        }
         //public static string getCategorySearch(string have)
         //{
         //    var p = (from q in db.categories orderby q.name select q.name).ToList();

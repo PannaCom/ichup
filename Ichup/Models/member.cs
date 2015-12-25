@@ -24,5 +24,6 @@ namespace Ichup.Models
         public string image { get; set; }
         public Nullable<int> total_views { get; set; }
         public Nullable<System.DateTime> date_reg { get; set; }
+        public Nullable<byte> type { get; set; }
     }
 }

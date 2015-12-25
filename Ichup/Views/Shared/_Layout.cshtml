@@ -92,7 +92,7 @@
 		  <div style="display:block;float:left;position:relative;padding-top:3px;width:611px;height:auto;">
 			
                     <div class="input-append">
-                      <input  style="width:600px;" type="text" placeholder="Nhập từ khóa" id="skeyword" value="@ViewBag.keyword" onkeypress="autosearch(event);">
+                      <input  style="width:500px;" type="text" placeholder="Nhập từ khóa" id="skeyword" value="@ViewBag.keyword" onkeypress="autosearch(event);">
                       <button class="btn" type="button" onclick="bsearch();"><i class="icon-search"></i></button>
                     </div> <!-- end input-append -->
             
@@ -100,7 +100,11 @@
           <div class="pull-right">
             <ul class="unstyled inline user-interaction">
               <li><a href="/Photos/Upload" style="color:#ffffff;">Upload Image</a></li>
-              
+              <li><a href="/Members/Register" style="color:#ffffff;">Đăng ký</a></li>
+              @if (Ichup.Config.getCookie("logged")!=""){<li><a href="/Members/Profile" style="color:#ffffff;">Xin chào @Ichup.Config.getCookie("logged")</a></li><li><a href="/Members/Logout" style="color:#ffffff;">Thoát</a></li>}
+                else
+                {<li><a href="/Members/Login" style="color:#ffffff;">Đăng nhập</a></li>}
+                      
             </ul>  <!-- end user-interaction -->
           </div> <!-- end pull-right -->
         </div> <!-- end container -->
