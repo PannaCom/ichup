@@ -105,7 +105,17 @@ namespace Ichup
             input = input.Replace("-", " ").Replace(":", " ").Replace(",", " ").Replace("_", " ").Replace("'", " ").Replace("\"", " ").Replace(";", " ").Replace("”", " ").Replace(".", " ").Replace("%", " ").Replace("&", " ");
             return input;
         }
-        
+        public static string getF0CkUser(long id, string have)
+        {
+            if (have == null) have = "";
+            string val = "";
+            string schecked = "";
+            
+             if (have.Equals("0")) schecked = "checked"; else schecked = "";
+             val += "<input type=\"checkbox\" id=\"f-" + id + "-0_1\" value=\"0\"  " + schecked + ">Miễn phí";
+            
+            return val;
+        }
         public static string[] f1ck = new string[] { "ảnh", "vector", "illustrator"};
         public static string getF1CkUser(long id,string have)
         {

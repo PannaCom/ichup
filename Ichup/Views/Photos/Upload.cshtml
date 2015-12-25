@@ -121,6 +121,7 @@
         }, false);
         //alert("111");
         formdata.append("autoname", autoname);
+        formdata.append("free", false);
         xhr.open('POST', '/Photos/UploadImageProcess');//UploadImageProcess
         xhr.send(formdata);//formdata
         //alert("222");
