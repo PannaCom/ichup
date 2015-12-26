@@ -73,7 +73,7 @@
                   <span class="icon-bar"></span>
                 </a>
 
-                <ul class="dropdown-menu">
+                @*<ul class="dropdown-menu">
                   <li><a href="cart.html">Cart</a></li>
                   <li><a href="image-page.html">Images</a></li>
                   <li><a href="image-upload.html">Uploads</a></li>
@@ -81,7 +81,7 @@
                   <li><a href="single-post.html">Single Post</a></li>
                   <li><a href="pricing.html">Pricing</a></li>
                   <li><a href="search-results.html">Search Results</a></li>
-                </ul>
+                </ul>*@
 
               </li>
               
@@ -99,11 +99,11 @@
 		  </div>	
           <div class="pull-right">
             <ul class="unstyled inline user-interaction">
-              <li><a href="/Photos/Upload" style="color:#ffffff;">Upload Image</a></li>
-              <li><a href="/Members/Register" style="color:#ffffff;">Đăng ký</a></li>
-              @if (Ichup.Config.getCookie("logged")!=""){<li><a href="/Members/Profile" style="color:#ffffff;">Xin chào @Ichup.Config.getCookie("logged")</a></li><li><a href="/Members/Logout" style="color:#ffffff;">Thoát</a></li>}
-                else
-                {<li><a href="/Members/Login" style="color:#ffffff;">Đăng nhập</a></li>}
+              <li><a href="/Photos/Upload" style="color:#ffffff;">Upload Image</a></li>              
+              @if (Ichup.Config.getCookie("logged") != "")
+              {<li><a href="/Photos/User/@Ichup.Config.getCookie("userid")" style="color:#ffffff;">My Image</a></li><li><a href="/Members/Profile" style="color:#ffffff;">Xin chào @Ichup.Config.getCookie("logged")</a></li><li><a href="/Members/Logout" style="color:#ffffff;">Thoát</a></li>}
+              else
+              {<li><a href="/Members/Register" style="color:#ffffff;">Đăng ký</a></li><li><a href="/Members/Login" style="color:#ffffff;">Đăng nhập</a></li>}
                       
             </ul>  <!-- end user-interaction -->
           </div> <!-- end pull-right -->

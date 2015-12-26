@@ -90,14 +90,18 @@ namespace Ichup.Controllers
                 return "0";
             }
         }
-        public string downloadfile(int id) {
+        public string downloadfile(int id,int type) {
             image img = db.images.Find(id);
+            string link = img.link;
+            if (type == 3) link = img.link;
+            if (type == 2) link = img.link_big;
+            if (type == 1) link = img.link_small;
             string query = "update images set total_download=total_download+1 where id=" + id;
             db.Database.ExecuteSqlCommand(query);
             System.Web.HttpContext.Current.Response.ContentType = "application/force-download";
-            System.Web.HttpContext.Current.Response.AddHeader("content-disposition", "attachment; filename="+img.link);
+            System.Web.HttpContext.Current.Response.AddHeader("content-disposition", "attachment; filename="+link);
             System.Web.HttpContext.Current.Response.ContentType = "image/jpeg";
-            System.Web.HttpContext.Current.Response.TransmitFile(Server.MapPath(img.link));
+            System.Web.HttpContext.Current.Response.TransmitFile(Server.MapPath(link));
             System.Web.HttpContext.Current.Response.End();
             //System.Web.HttpContext.Current.Response.Flush();
             return "1";
