@@ -1,0 +1,165 @@
+﻿@model Ichup.Models.member
+
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string checked1 = "";
+    string checked2 = "";
+    string checked3 = "";
+    if (Model.type==0) {checked1="checked";}
+    else if (Model.type == 1) { checked2 = "checked"; }
+    else if (Model.type == 2) { checked3 = "checked"; }
+}
+<section class="picture-categories">
+
+      <div class="container">
+        <div class="row">
+          <div class="span12">
+            <div class="single-image-container">
+              
+            </div> <!-- end single-image-container -->
+          </div> <!-- end span12 -->
+
+        </div> <!-- end row -->
+
+        <div class="single-image-title">
+          <div class="row">
+            <div class="span6">
+              <h4 class="title">Cập nhật thông tin Thành Viên</h4>
+              <div class="span10"><input type="radio" name="type" id="type1" value="0" @checked1>Bán ảnh<input type="radio" name="type" id="type2" value="1" @checked2>Mua ảnh <input type="radio" name="type" id="type3" value="2" @checked3>Cả hai</div>
+            </div> <!-- end span6 -->
+            <div class="span6">
+              <a href="/Members/changePass" class="btn pull-right">Đổi mật khẩu</a>
+            </div> <!-- end span6 -->
+          </div> <!-- end row -->
+        </div> <!-- end single-image-title -->
+      </div> <!-- end container -->
+
+    </section> <!-- end picture-categories -->
+
+
+
+    <!-- ============================  Categories End ============================ -->
+
+    <!-- ============================  Image Decription Starts ============================ -->
+
+
+    <section class="image-decription-container">
+      <div class="container">
+        <div class="row">
+          <div class="span12">
+            <figure>              
+			  @*Mật khẩu:<input class="span12"  id=pass name=pass type="password" placeholder="mật khẩu" value="@Model.pass">
+			  Gõ lại mật khẩu:<input class="span12"  id=pass2 name=pass2 type="password" placeholder="gõ lại mật khẩu" value="@Model.pass">*@
+			  Email:<input class="span12"  id=email name=email type="text" placeholder="email" value="@Model.email">
+			  Điện thoại:<input class="span12"  id=phone name=phone type="text" placeholder="điện thoại" value="@Model.phone">
+			  Địa chỉ:<textarea class="span12"  id=address name=address placeholder="địa chỉ">@Model.address</textarea>
+			  Chứng minh thư/Hộ chiếu<input class="span12"  id=passport name=passport type="text" placeholder="Số chứng minh thư/ Hộ chiếu" value="@Model.passport">              
+              <div class="span12"><h2>Xin đọc kỹ quy định và thỏa thuận thành viên dưới đây</h2>
+			      <p style="width:100%;">Thỏa thuận thành viên với Ichup.com <br>
+			      - <b>Về nội dung ảnh:</b><br>
+					    +Không đăng ảnh có nội dung đồi trụy, đi ngược thuần phong mỹ tục văn hóa Việt Nam<br>
+					    +Không đăng ảnh có nội dung liên quan đến chính trị, chống phá nhà nước, chính quyền<br>
+					    +Không đăng ảnh nói xấu các tổ chức, cá nhân, doanh nghiệp<br>
+					    +Không đăng các ảnh không thuộc quyền sở hữu của bạn, hoặc có tranh chấp bản quyền với bên thứ ba<br>
+			      -	<b>Về thanh toán tiền bán ảnh</b>:<br>
+					    + Mỗi bức ảnh được bán đồng giá, Bạn được 50% số tiền bán mỗi ảnh, 50% còn lại thuộc về Ichup.com(đội ngũ biên tập, server, thuế..) <br>
+					    + Bạn được thanh toán tiền ảnh mỗi tháng một lần tại trụ sở Ichup.com hoặc chuyển khoản<br>
+			      </p>
+			      <input type=checkbox id=agree checked>Đồng ý với các điều khoản trên<br>
+              </div>      
+			  <input class="span10" type=button value="Cập nhật thông tin" onclick="AddNew();" id="btnSA">
+            </figure>
+          </div> <!-- end span6 -->
+          
+        </div> <!-- end row -->
+      </div> <!-- end container -->
+    </section> <!-- end image-description-container -->
+
+  <!-- ============================  Image Decription Ends ============================ -->
+<script>
+    
+    function AddNew() {
+        var formdata = new FormData(); //FormData object
+       
+        //var pass = document.getElementById("pass").value;
+        //var pass2 = document.getElementById("pass2").value;
+        var email = document.getElementById("email").value;
+        var phone = document.getElementById("phone").value;
+        var address = document.getElementById("address").value;
+        var passport = document.getElementById("passport").value;
+       
+        var type1 = document.getElementById("type1").checked;
+        var type2 = document.getElementById("type2").checked;
+        var type3 = document.getElementById("type3").checked;
+        var type=0;
+        if (type1) {type=0;}
+        else
+            if (type2) {type=1;}
+            else
+                if (type3) {type=2;}
+        
+        //if (pass == "") {
+        //    alert("Nhập mật khẩu");
+        //    return;
+        //}
+        //if (pass != pass2) {
+        //    alert("Nhập mật khẩu không khớp nhau");
+        //    return;
+        //}
+        if (email == "") {
+            alert("Nhập email");
+            return;
+        }
+        if (phone == "") {
+            alert("Nhập điện thoại");
+            return;
+        }
+        if (address == "") {
+            alert("Nhập địa chỉ");
+            return;
+        }
+        if (passport == "") {
+            alert("Nhập số chứng minh thư hoặc passport, bạn cần điền vì sau này khi trả tiền bản quyền bán ảnh bạn cần xuất cmt");
+            return;
+        }
+        
+        if (document.getElementById("agree").checked==false){
+            alert("Bạn phải chấp nhận các quy định và thỏa thuận thành viên ở trên. Click vào đồng ý!");
+            return;
+        }
+        document.getElementById("btnSA").disabled = true;
+        formdata.append("name", "");
+        formdata.append("pass", "");
+        formdata.append("email", email);
+        formdata.append("phone", phone);
+        formdata.append("address", address);
+        formdata.append("passport", passport);
+        formdata.append("captcha", "");
+        formdata.append("type", type);
+        formdata.append("id", @ViewBag.id);
+        
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/members/Update');
+        xhr.send(formdata);
+        var content = "";
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                if (xhr.responseText != "0" && xhr.responseText != "-1") {
+                    //updateGI(xhr.responseText);
+                    //updatePrice(xhr.responseText);
+                    alert("Cập nhật thành công!");
+                    window.location.href = "/Members/Profile";
+                } else {
+                    document.getElementById("btnSA").disabled = false;
+                    if (xhr.responseText == "-1"){
+                        alert("Bạn đã nhập mã an ninh không đúng");
+                        return;
+                    }
+                    alert("Có lỗi trong quá trình cập nhật dữ liệu! Bạn");
+                }
+            }
+
+        }
+    }
+</script>

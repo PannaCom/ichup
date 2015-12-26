@@ -67,6 +67,7 @@ namespace Ichup.Controllers
         }
         public ActionResult Upload() {
             if (Config.getCookie("logged") == "") return RedirectToAction("Login", "Members");
+            ViewBag.member_id = Config.getCookie("userid");
             return View();
         }
         public string getCategoryCk() {
@@ -122,7 +123,7 @@ namespace Ichup.Controllers
         }
         [HttpPost]
         [AcceptVerbs(HttpVerbs.Post)]
-        public string UploadImageProcess(HttpPostedFileBase file, bool autoname, bool free)
+        public string UploadImageProcess(HttpPostedFileBase file, bool autoname, bool free,int member_id)
         {
             string guid = Guid.NewGuid().ToString();
             string code = Config.genCode();
@@ -168,7 +169,7 @@ namespace Ichup.Controllers
                 img.total_download = 0;
                 img.total_views = 0;
                 img.date_post = DateTime.Now;
-                img.member_id = 1;
+                img.member_id = member_id;
                 img.price = 1000000;
                 if (free) img.price = 0;
                 img.stt = i;

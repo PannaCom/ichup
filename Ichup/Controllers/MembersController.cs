@@ -26,15 +26,28 @@ namespace Ichup.Controllers
             ViewBag.id = id;
             return View();
         }
+        public ActionResult Profile() {
+            int id = 0;
+            if (Config.getCookie("userid") == "") return RedirectToAction("Login", "Members");
+            else id = int.Parse(Config.getCookie("userid"));
+            member m = db.members.Find(id);
+            if (m == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.id = id;
+            return View(m);
+        }
         public ActionResult Login() {
             return View();
         }
         public string checkLogin(string name,string pass) {
             MD5 md5Hash = MD5.Create();
             pass = Config.GetMd5Hash(md5Hash, pass);
-            bool p = db.members.Any(o => o.name == name && o.pass == pass);
-            if (p) {
+            var id = db.members.Where(o => o.name == name && o.pass == pass).FirstOrDefault();
+            if (id!=null) {
                 Config.setCookie("logged", name);
+                Config.setCookie("userid", id.id.ToString());
                 return "1"; 
             } else { return "0"; }
         }
@@ -43,9 +56,44 @@ namespace Ichup.Controllers
             if (Request.Cookies["logged"] != null)
             {
                 Response.Cookies["logged"].Expires = DateTime.Now.AddDays(-1);
+                
             }
+            if (Request.Cookies["userid"] != null)
+            {
+                Response.Cookies["userid"].Expires = DateTime.Now.AddDays(-1);
+            }
+
             Session.Abandon();
             return View();
+        }
+        public ActionResult changePass() {
+            int id = 0;
+            if (Config.getCookie("userid") == "") return RedirectToAction("Login", "Members");
+            else id = int.Parse(Config.getCookie("userid"));
+            ViewBag.member_id = id;
+            member m = db.members.Find(id);
+            if (m == null)
+            {
+                return HttpNotFound();
+            }
+            return View(m);
+        }
+        public string updatePass(string pass,int id)
+        {
+            try
+            {   
+                if (!Config.getCookie("userid").Equals(id.ToString())) return "0";
+                MD5 md5Hash = MD5.Create();
+                member mb = db.members.Find(id);
+                pass = Config.GetMd5Hash(md5Hash, pass);
+                mb.pass = pass;
+                db.Entry(mb).State = EntityState.Modified;
+                db.SaveChanges();
+                return id.ToString();
+            }
+            catch (Exception ex) {
+                return "0";
+            }
         }
         [HttpPost]
         public string Update(string name,string pass,string email,string phone,string address,string passport,string captcha,byte? type,int id) {
@@ -74,8 +122,9 @@ namespace Ichup.Controllers
 
                 }
                 else {
+                    if (!Config.getCookie("userid").Equals(id.ToString())) return "0";
                     member mb = db.members.Find(id);
-                    mb.name = name;
+                    //pass = Config.GetMd5Hash(md5Hash, pass);                    
                     //mb.pass = pass;
                     mb.email = email;
                     mb.phone = phone;

@@ -1,6 +1,9 @@
-﻿@{
-    ViewBag.Title = "Login";
+﻿@model Ichup.Models.member
+
+@{
+    ViewBag.Title = "Profile";
     Layout = "~/Views/Shared/_Layout.cshtml";
+   
 }
 <section class="picture-categories">
 
@@ -17,10 +20,10 @@
         <div class="single-image-title">
           <div class="row">
             <div class="span6">
-              <h4 class="title">Đăng Nhập Thành Viên</h4>
+              <h4 class="title">Cập nhật thông tin Thành Viên</h4>             
             </div> <!-- end span6 -->
             <div class="span6">
-              <a href="#" class="btn pull-right">Bán ảnh</a>
+              <a href="#" class="btn pull-right">Đổi mật khẩu</a>
             </div> <!-- end span6 -->
           </div> <!-- end row -->
         </div> <!-- end single-image-title -->
@@ -39,11 +42,11 @@
       <div class="container">
         <div class="row">
           <div class="span12">
-            <figure>
-              <input class="span10"  id=name name=name type="text" placeholder="tên truy cập">
-			  <input class="span10"  id=pass name=pass type="password" placeholder="mật khẩu">			 
-			  <input class="span10" type=button value="Đăng nhập" onclick="Login();" id="btnSA">
-              <a class="span10" href="/Members/Register" style="text-align:center;">Đăng ký thành viên(nếu chưa có account)</a>  
+            <figure>              
+			  Mật khẩu:<input class="span12"  id=pass name=pass type="password" placeholder="mật khẩu" >
+			  Gõ lại mật khẩu:<input class="span12"  id=pass2 name=pass2 type="password" placeholder="gõ lại mật khẩu" >
+			   
+			  <input class="span10" type=button value="Cập nhật thông tin" onclick="AddNew();" id="btnSA">
             </figure>
           </div> <!-- end span6 -->
           
@@ -53,40 +56,45 @@
 
   <!-- ============================  Image Decription Ends ============================ -->
 <script>
-    function Login() {
+    var member_id=@ViewBag.member_id;
+    function AddNew() {
         var formdata = new FormData(); //FormData object
-        var name = document.getElementById("name").value;
+       
         var pass = document.getElementById("pass").value;
+        var pass2 = document.getElementById("pass2").value;
         
         
-        if (name == "") {
-            alert("Nhập tên truy cập");
-            return;
-        }
         if (pass == "") {
             alert("Nhập mật khẩu");
             return;
         }
-        
+        if (pass != pass2) {
+            alert("Nhập mật khẩu không khớp nhau");
+            return;
+        }
         
         document.getElementById("btnSA").disabled = true;
-        formdata.append("name", name);
         formdata.append("pass", pass);
-       
-        
+        formdata.append("id", member_id);
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', '/members/checkLogin');
+        xhr.open('POST', '/members/updatePass');
         xhr.send(formdata);
         var content = "";
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
-                if (xhr.responseText != "0") {
-                    window.location.href = "/Home/index";
+                if (xhr.responseText != "0" && xhr.responseText != "-1") {
+                    alert("Đổi pass thành công. Hãy đăng nhập lại.");
+                    window.location.href = "/Members/Login";
                 } else {
                     document.getElementById("btnSA").disabled = false;
-                    alert("Không tìm thấy user và pass này! Kiểm tra lại pass và tên truy cập!");
+                    if (xhr.responseText == "-1"){
+                        alert("Bạn đã nhập mã an ninh không đúng");
+                        return;
+                    }
+                    alert("Có lỗi trong quá trình cập nhật dữ liệu! Bạn");
                 }
             }
+
         }
     }
 </script>

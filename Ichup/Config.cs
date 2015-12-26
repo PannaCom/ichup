@@ -269,7 +269,7 @@ namespace Ichup
         public static void setCookie(string field, string value)
         {
             HttpCookie MyCookie = new HttpCookie(field);
-            MyCookie.Value = HttpUtility.HtmlEncode(value);
+            MyCookie.Value = HttpUtility.UrlEncode(value);
             MyCookie.Expires = DateTime.Now.AddDays(365);
             HttpContext.Current.Response.Cookies.Add(MyCookie);
             //Response.Cookies.Add(MyCookie);           
@@ -278,7 +278,7 @@ namespace Ichup
         {
             try
             {
-                return HttpContext.Current.Request.Cookies[v].Value.ToString();
+                return HttpUtility.UrlDecode(HttpContext.Current.Request.Cookies[v].Value.ToString());
             }
             catch (Exception ex)
             {
