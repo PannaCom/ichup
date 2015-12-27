@@ -6,9 +6,9 @@
     <edmx:Diagrams>
       <Diagram DiagramId="895999fe88434cdc93f957be2d5e608c" Name="Diagram1">
         <EntityTypeShape EntityType="ichupModel.category" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ichupModel.image" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ichupModel.member" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ichupModel.sales_log" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ichupModel.image" Width="1.5" PointX="6.5499530316097445" PointY="23.439706768579644" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

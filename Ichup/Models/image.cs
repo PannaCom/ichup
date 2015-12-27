@@ -25,6 +25,8 @@ namespace Ichup.Models
         public Nullable<int> total_views { get; set; }
         public Nullable<int> total_buy { get; set; }
         public Nullable<int> total_download { get; set; }
+        public Nullable<int> total_download_big { get; set; }
+        public Nullable<int> total_download_small { get; set; }
         public Nullable<int> member_id { get; set; }
         public Nullable<System.DateTime> date_post { get; set; }
         public string filter_1 { get; set; }

@@ -93,10 +93,11 @@ namespace Ichup.Controllers
         public string downloadfile(int id,int type) {
             image img = db.images.Find(id);
             string link = img.link;
+            string download = "total_download=total_download+1";
             if (type == 3) link = img.link;
-            if (type == 2) link = img.link_big;
-            if (type == 1) link = img.link_small;
-            string query = "update images set total_download=total_download+1 where id=" + id;
+            if (type == 2) { link = img.link_big; download = "total_download_big=total_download_big+1"; }
+            if (type == 1) { link = img.link_small; download = "total_download_small=total_download_small+1"; }
+            string query = "update images set " + download + " where id=" + id;
             db.Database.ExecuteSqlCommand(query);
             System.Web.HttpContext.Current.Response.ContentType = "application/force-download";
             System.Web.HttpContext.Current.Response.AddHeader("content-disposition", "attachment; filename="+link);
