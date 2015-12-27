@@ -985,6 +985,7 @@
     <Content Include="Content\img\work\9.jpg" />
     <Content Include="Content\img\work\avatar.jpg" />
     <Content Include="Content\img\work\collage.jpg" />
+    <Content Include="Content\jquery-ui.css" />
     <Content Include="Content\js\bootstrap.js" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\libraries\easings.min.js" />
@@ -1459,6 +1460,9 @@
     <Content Include="Views\Search\Index.cshtml" />
     <Content Include="Views\Photos\Page.cshtml" />
     <Content Include="Views\_imagepage.cshtml" />
+    <Content Include="Views\Members\Logout.cshtml" />
+    <Content Include="Views\Members\Profile.cshtml" />
+    <Content Include="Views\Members\changePass.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -29,10 +29,11 @@ namespace Ichup.Controllers
 
         }
         private ichupEntities db = new ichupEntities();
-        public ActionResult Index(string k, string f1, string f2, string f3, string f4, string f5, string order, string to, int? pg)
+        public ActionResult Index(string k,string f0, string f1, string f2, string f3, string f4, string f5, string order, string to, int? pg)
         {
             if (k == null) k = "a";
             k = k.Replace("%20", " ");
+            f0 = f0 != null ? f0 : "";
             f1 = f1 != null ? f1 : "";f2 = f2 != null ? f2 : ""; f3 = f3 != null ? f3 : "";
             f4 = f4 != null ? f4 : ""; f5 = f5 != null ? f5 : "";
             f1 = f1.Replace("%20", " ");
@@ -44,8 +45,9 @@ namespace Ichup.Controllers
             if (pg == null) pg = 1;
             string query=" SELECT top 1000 ";
             query += "FT_TBL.id,FT_TBL.link,FT_TBL.link_thumbail_small,FT_TBL.total_views,FT_TBL.keywords,FT_TBL.date_post,FT_TBL.filter_1,FT_TBL.filter_2,FT_TBL.filter_3,FT_TBL.filter_4,FT_TBL.filter_5,KEY_TBL.RANK FROM images AS FT_TBL INNER JOIN FREETEXTTABLE(images, keywords,'" + k + "') AS KEY_TBL ON FT_TBL.id = KEY_TBL.[KEY] ";
-             query += " where (status=0) ";
-             string[] item=new string[10];
+            query += " where (status=0) ";
+
+            string[] item=new string[10];
             int i=0;
             string[] filter = new string[5]; filter[0] = f1; filter[1] = f2; filter[2] = f3; filter[3] = f4; filter[4] = f5;
             for (int f = 0; f < filter.Length; f++)
@@ -63,10 +65,25 @@ namespace Ichup.Controllers
                     if (item.Length >= 1 && item[0].Trim() != "")  query += " ) ";
                 }
             }
+            filter[0] = f0;
+            if (filter[0] != null)
+            {
+                item = filter[0].Split(',');
+                if (item.Length >= 1 && item[0].Trim() != "") query += " and ((1=2) ";
+                
+                for (i = 0; i < item.Length; i++)
+                    if (item[i] != "")
+                    {
+                        query += " or ( price=" + item[i] + ")";
+                    }
+                if (item.Length >= 1 && item[0].Trim() != "") query += " ) ";
+            }
+
             if (order == null) order = "RANK";
             query += " order by " + order;
             if (to == null) to="Desc";
             query += " "+to;
+            ViewBag.f0 = f0;
             ViewBag.f1 = f1;
             ViewBag.f2 = f2;
             ViewBag.f3 = f3;
