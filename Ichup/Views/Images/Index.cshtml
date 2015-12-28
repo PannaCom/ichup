@@ -1,0 +1,190 @@
+﻿@model IEnumerable<Ichup.Models.image>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.keywords)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cat_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.link)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.link_thumbail_big)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.link_thumbail_small)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.link_big)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.link_small)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.total_views)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.total_buy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.total_download)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.total_download_big)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.total_download_small)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.member_id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.date_post)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.filter_1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.filter_2)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.filter_3)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.filter_4)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.filter_5)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.token)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.stt)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.width)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.height)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sale_type)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.keywords)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cat_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.link)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.link_thumbail_big)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.link_thumbail_small)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.link_big)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.link_small)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.total_views)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.total_buy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.total_download)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.total_download_big)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.total_download_small)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.member_id)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.date_post)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.filter_1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.filter_2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.filter_3)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.filter_4)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.filter_5)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.token)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.stt)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.width)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.height)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sale_type)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

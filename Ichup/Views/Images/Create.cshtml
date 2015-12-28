@@ -1,0 +1,245 @@
+﻿@model Ichup.Models.image
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>image</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.keywords)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.keywords)
+            @Html.ValidationMessageFor(model => model.keywords)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.cat_id)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.cat_id)
+            @Html.ValidationMessageFor(model => model.cat_id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.link)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.link)
+            @Html.ValidationMessageFor(model => model.link)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.link_thumbail_big)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.link_thumbail_big)
+            @Html.ValidationMessageFor(model => model.link_thumbail_big)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.link_thumbail_small)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.link_thumbail_small)
+            @Html.ValidationMessageFor(model => model.link_thumbail_small)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.link_big)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.link_big)
+            @Html.ValidationMessageFor(model => model.link_big)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.link_small)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.link_small)
+            @Html.ValidationMessageFor(model => model.link_small)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.total_views)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.total_views)
+            @Html.ValidationMessageFor(model => model.total_views)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.total_buy)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.total_buy)
+            @Html.ValidationMessageFor(model => model.total_buy)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.total_download)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.total_download)
+            @Html.ValidationMessageFor(model => model.total_download)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.total_download_big)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.total_download_big)
+            @Html.ValidationMessageFor(model => model.total_download_big)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.total_download_small)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.total_download_small)
+            @Html.ValidationMessageFor(model => model.total_download_small)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.member_id)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.member_id)
+            @Html.ValidationMessageFor(model => model.member_id)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.date_post)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.date_post)
+            @Html.ValidationMessageFor(model => model.date_post)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.filter_1)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.filter_1)
+            @Html.ValidationMessageFor(model => model.filter_1)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.filter_2)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.filter_2)
+            @Html.ValidationMessageFor(model => model.filter_2)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.filter_3)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.filter_3)
+            @Html.ValidationMessageFor(model => model.filter_3)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.filter_4)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.filter_4)
+            @Html.ValidationMessageFor(model => model.filter_4)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.filter_5)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.filter_5)
+            @Html.ValidationMessageFor(model => model.filter_5)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.price)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.price)
+            @Html.ValidationMessageFor(model => model.price)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.token)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.token)
+            @Html.ValidationMessageFor(model => model.token)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.stt)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.stt)
+            @Html.ValidationMessageFor(model => model.stt)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.code)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.code)
+            @Html.ValidationMessageFor(model => model.code)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.status)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.status)
+            @Html.ValidationMessageFor(model => model.status)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.width)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.width)
+            @Html.ValidationMessageFor(model => model.width)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.height)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.height)
+            @Html.ValidationMessageFor(model => model.height)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.sale_type)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.sale_type)
+            @Html.ValidationMessageFor(model => model.sale_type)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,252 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>ichup.com</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Bootstrap Styles -->
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Content/css/bootstrap-responsive.min.css" rel="stylesheet">
+
+    <!-- Font Icons -->
+    <link rel="stylesheet" href="~/Content/css/font-awesome.min.css" />
+
+    <!-- Social Icons -->
+    <link rel="stylesheet" href="~/Content/css/fc-webicons.css" />
+
+    <!-- Google Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,200italic,300italic,400italic,600italic,700italic' rel='stylesheet' type='text/css'>
+
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="~/Content/css/styles.css" />
+
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="~/Content/img/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="~/Content/img/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="~/Content/img/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="~/Content/img/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="img/favicon.png">
+
+    <!-- Modernizr Feature Detection  -->
+    <script src="~/Content/js/libraries/modernizr.min.js"></script>
+
+    <script src="~/Content/js/libraries/respond.min.js"></script>
+    <script src="/Scripts/jquery-1.8.2.js"></script>
+    @*<script src="/Scripts/jquery-1.8.2.min.js"></script>*@
+    <script src="/Scripts/jquery-ui-1.8.24.min.js"></script>
+    <script src="/Scripts/jquery-ui-1.8.24.js"></script>
+    <link rel="stylesheet" type="text/css" href="/Content/jquery-ui.css" />
+    <script src="/Scripts/core.js"></script>
+    
+  </head>
+
+  <body>
+    <div id="loadingImage" style="z-index:1000;position:fixed;left:40%;top:20%;width:32px;height:32px;display:none;">
+        <img src="/Images/loading.gif">
+    </div>
+    <!-- ============================  Navigation Start =========================== -->
+
+    <div class="navbar navbar-inverse-blue navbar-fixed-top" style="height:25px;">
+      <div class="navbar-inner" style="height:25px;">
+        <div class="container" style="height:25px;">
+          
+          <div class="navigation" >
+            <ul class="nav">
+              <li class="active dropdown">
+
+                <a href="#" class="dropdown-toggle btn-navbar-blue" data-toggle="dropdown">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </a>
+
+                @*<ul class="dropdown-menu">
+                  <li><a href="cart.html">Cart</a></li>
+                  <li><a href="image-page.html">Images</a></li>
+                  <li><a href="image-upload.html">Uploads</a></li>
+                  <li><a href="blog.html">Blog</a></li>
+                  <li><a href="single-post.html">Single Post</a></li>
+                  <li><a href="pricing.html">Pricing</a></li>
+                  <li><a href="search-results.html">Search Results</a></li>
+                </ul>*@
+
+              </li>
+              
+            </ul> <!-- end nav -->
+          </div><!--/.nav-collapse -->
+
+          <a class="brand" href="/"><img src="~/Content/img/logo.png" alt="logo"></a>
+		  <div style="display:block;float:left;position:relative;padding-top:3px;width:611px;height:auto;">
+			<ul class="unstyled inline user-interaction">
+              <li><a href="/Photos/Upload" style="color:#ffffff;">Upload Image</a></li>              
+              @if (Ichup.Config.getCookie("logged") != "")
+              {<li><a href="/Photos/User/@Ichup.Config.getCookie("userid")" style="color:#ffffff;">My Image</a></li><li><a href="/Members/Profile" style="color:#ffffff;">Xin chào @Ichup.Config.getCookie("logged")</a></li><li><a href="/Members/Logout" style="color:#ffffff;">Thoát</a></li>}
+              
+                      
+            </ul>  <!-- end user-interaction -->
+            
+		  </div>	
+          <div class="pull-right">
+            
+          </div> <!-- end pull-right -->
+        </div> <!-- end container -->
+      </div> <!-- end navbar-inner -->
+    </div> <!-- end navbar-inverse-blue -->
+
+    <!-- ============================  Navigation End ============================ -->
+        <div id="body">
+            
+            <section class="content-wrapper main-content clear-fix">
+                @RenderBody()
+            </section>
+        </div>
+        <!-- ============================  FOOTER START ============================ -->
+
+    <footer>
+      <div class="container">
+        <div class="row">
+          <div class="span4">
+            <div class="footer-widgets">
+              <h4 class="title">Về chúng tôi</h4>
+              <p class="description">
+                Bạn cần một bức ảnh chất lượng đúng nội dung mình đang tìm kiếm? Chúng tôi có những gì bạn cần, hãy tìm kiếm, download!
+              </p>
+              <a href="#" class="btn">Trở thành Partnership?</a>
+            </div> <!-- end footer-widgets -->
+          </div> <!-- end span4 -->
+          <div class="span3">
+            <div class="footer-widgets">
+              <h4 class="title">Liên hệ</h4>
+              <p class="description">
+               Công ty TNHH Nghệ thuật giải trí I-Chụp.Com
+              </p>
+              <h4 class="title">Gọi chúng tôi</h4>
+                <div class="row-fluid">
+                  <div class="span2">
+                    <i class="icon-tablet icon-4x"></i>
+                  </div>
+                  <div class="span10">
+                    <p>(08404) 123 456 79</p>
+                    <p>(08404) 123 357 79</p>
+                  </div>
+                </div>
+            </div> <!-- end footer-widgets -->
+          </div> <!-- end span3 -->
+            <div class="span3">
+              <div class="footer-widgets">
+                <h4 class="title">Nhận tin từ chúng tôi</h4>
+                <form class="subscribe">
+                  <fieldset>
+                    <input type="text" placeholder="Name">
+                    <input type="text" placeholder="Email">
+                    <button type="submit" class="btn">Subscribe</button>
+                  </fieldset>
+                </form>
+                
+              </div> <!-- end footer-widgets -->
+          </div> <!-- end span3 -->
+          <div class="span2">
+              <div class="footer-widgets">               
+                <h4 class="title">Social Networks</h4>
+                <ul class="unstyled inline">
+                  <li><a class="fc-webicon facebook" href="#"></a></li>
+                  <li><a class="fc-webicon twitter" href="#"></a></li>
+                  <li><a class="fc-webicon googleplus" href="#"></a></li>
+                </ul>
+              </div> <!-- end footer-widgets -->
+          </div> <!-- end span2 -->
+        </div> <!-- end row -->
+      </div> <!-- end container -->
+    </footer> <!-- end footer -->
+
+    <div class="subfooter">
+      <div class="container">
+        <div class="row">
+          <div class="span1">
+            <a href="#" class="footer-logo"><img src="~/Content/img/logo2.png" alt="logo"></a>
+          </div> <!-- end span1 -->
+          <div class="span11">
+            <p class="copy">All contents &copy; copyright 2015 ichup.com, Inc. All rights reserved.</p>
+          </div> <!-- end span11 -->
+        </div> <!-- end row -->          
+      </div> <!-- end container -->
+    </div> <!-- end subfooter -->
+
+
+    <!-- ============================  FOOTER ENDS ============================ -->
+
+
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    
+    
+    @*<script src="~/Content/js/libraries/jquery.min.js"></script>*@
+    <script src="~/Content/js/bootstrap.min.js"></script>
+    <script src="~/Content/js/libraries/placeholders.js"></script>
+
+    <script src="~/Content/js/main.js"></script>
+	<script>
+	    var sl = 0;
+	    var index;
+	    function changeBG() {
+	        $('#mainbg').animate({ opacity: 0.9 }, 1000, changeBGDO).animate({ opacity: 1 }, 1000);
+	    }
+	    function changeBGDO() {
+	        sl++;
+	        sl = sl % 3;
+	        index = sl + 1;
+	        $('#mainbg').css("background-image", "url('/Content/img/sl" + index + ".jpg')");
+
+	    }
+	    setInterval(changeBG, 3000);
+	    //document.addEventListener("keydown", autosearch);
+	    function autosearch(e) {
+	        var keyCode = e.keyCode || e.which;//('which' in event) ? event.which : event.keyCode;
+	        var keyword = document.getElementById("skeyword").value;
+	        //alert(keyCode);
+	        if (keyCode == 13) {
+	            if (keyword == "") {
+	                alert("Bạn phải nhập từ khóa");
+	                return;
+	            } else {
+	                //var surl = "/Search/Index?k=" + keyword;
+	                //alert(url);
+	                //window.location.href = surl;
+	                //history.pushState('Search', 'Search', surl);
+	                bsearch();
+	            }
+	        }
+
+	    }
+	    function bsearch() {
+
+	        var k = document.getElementById("skeyword").value;
+
+	        if (k == "") {
+	            alert("Bạn phải nhập từ khóa");
+	            return;
+	        }
+	        var url = "/Search?k=" + k;
+	        //alert(url);
+	        window.location.href = url;
+
+
+	    }
+	</script>
+    </body>
+</html>
