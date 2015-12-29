@@ -87,15 +87,15 @@
             @item.total_download
         </td>
         <td>
-            
+            @item.size/1024
         </td>
         <td>
             @item.date_post
         </td>        
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+            
+            
+            
         </td>
     </tr>
 }
