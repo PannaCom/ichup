@@ -42,5 +42,6 @@ namespace Ichup.Models
         public Nullable<int> width { get; set; }
         public Nullable<int> height { get; set; }
         public Nullable<byte> sale_type { get; set; }
+        public Nullable<long> size { get; set; }
     }
 }

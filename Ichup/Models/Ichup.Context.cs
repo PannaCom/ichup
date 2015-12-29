@@ -12,7 +12,7 @@ namespace Ichup.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+
     public partial class ichupEntities : DbContext
     {
         public ichupEntities()

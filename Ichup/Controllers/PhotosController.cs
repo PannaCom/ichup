@@ -10,6 +10,7 @@ using ImageProcessor.Imaging;
 using ImageProcessor.Processors;
 using PagedList;
 using Newtonsoft.Json;
+using System.IO;
 namespace Ichup.Controllers
 {
     public class PhotosController : Controller
@@ -43,6 +44,7 @@ namespace Ichup.Controllers
                         id = Request.Form["id_" + i].ToString();
                     }
                     int to_price = int.Parse(price);
+                    keyword += "," + Config.getCookie("logged");
                     string query="update images set keywords=N'"+keyword+"',price="+to_price+" where id="+id;
                     db.Database.ExecuteSqlCommand(query);                    
                 }
@@ -145,15 +147,17 @@ namespace Ichup.Controllers
             for (int i = 0; i < countFile; i++)
             {
                 if (!Config.IsImage(Request.Files[i])) return Config.ImagePath + "/invalidimage.png";
-                if (System.IO.File.Exists(fullPath))
-                {
-                    System.IO.File.Delete(fullPath);
-                }
+                //if (System.IO.File.Exists(fullPath))
+                //{
+                //    System.IO.File.Delete(fullPath);
+                //}
                 string basicname = Request.Files[i].FileName;
                 basicname = Config.removeSpecialCharName(basicname);
                 if (!autoname) basicname = "";
                 Request.Files[i].SaveAs(fullPath);
                 var test = System.Drawing.Image.FromFile(fullPath);
+                FileInfo f = new FileInfo(fullPath);
+                long size_file = f.Length;
                 string filter_2 = "ngang";
                 if (test.Height > test.Width) filter_2 = "dọc";
                 string filter_1 = "ảnh";
@@ -176,6 +180,7 @@ namespace Ichup.Controllers
                 img.date_post = DateTime.Now;
                 img.member_id = member_id;
                 img.price = 1000000;
+                img.size = size_file;
                 if (free) img.price = 0;
                 img.stt = i;
                 img.width = test.Width;

@@ -32,12 +32,17 @@ namespace Ichup.Controllers
             public int RANK { get; set; }
 
         }
-        public ActionResult Index(string k,string f1,int? pg)
+        public ActionResult Index(string k,int? pg)
         {
-            string query = " SELECT top 1000 ";
-            query += "FT_TBL.id,FT_TBL.link,FT_TBL.link_thumbail_small,FT_TBL.total_views,FT_TBL.keywords,FT_TBL.date_post,FT_TBL.filter_1,FT_TBL.filter_2,FT_TBL.filter_3,FT_TBL.filter_4,FT_TBL.filter_5,KEY_TBL.RANK FROM images AS FT_TBL INNER JOIN FREETEXTTABLE(images, keywords,'" + k + "') AS KEY_TBL ON FT_TBL.id = KEY_TBL.[KEY] ";
-            query += " where (status=0) order by id desc";
-            var p = db.Database.SqlQuery<searchitem>(query);
+            long id;
+            bool isNum = long.TryParse(k, out id);
+            if (k == null) k = "";
+            //string query = " SELECT top 1000 ";
+            //query += "FT_TBL.id,FT_TBL.link,FT_TBL.link_thumbail_small,FT_TBL.total_views,FT_TBL.keywords,FT_TBL.date_post,FT_TBL.filter_1,FT_TBL.filter_2,FT_TBL.filter_3,FT_TBL.filter_4,FT_TBL.filter_5,KEY_TBL.RANK FROM images AS FT_TBL INNER JOIN FREETEXTTABLE(images, keywords,'" + k + "') AS KEY_TBL ON FT_TBL.id = KEY_TBL.[KEY] ";
+            //query += " where (status=0) order by id desc";
+            //var p = db.Database.SqlQuery<searchitem>(query);
+            var p = (from q in db.images where q.status == 0 && (q.keywords.Contains(k)|| q.id==id) select q).OrderByDescending(o => o.id).Take(100);
+            ViewBag.k = k;
             int pageSize = 5;
             int pageNumber = (pg ?? 1);
             return View(p.ToPagedList(pageNumber, pageSize));

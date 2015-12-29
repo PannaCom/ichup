@@ -50,6 +50,7 @@
           <Property Name="width" Type="int" />
           <Property Name="height" Type="int" />
           <Property Name="sale_type" Type="tinyint" />
+          <Property Name="size" Type="bigint" />
         </EntityType>
         <EntityType Name="members">
           <Key>
@@ -150,6 +151,7 @@
           <Property Type="Int32" Name="width" />
           <Property Type="Int32" Name="height" />
           <Property Type="Byte" Name="sale_type" />
+          <Property Type="Int64" Name="size" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -195,6 +197,7 @@
           <EntitySetMapping Name="images">
             <EntityTypeMapping TypeName="ichupModel.image">
               <MappingFragment StoreEntitySet="images">
+                <ScalarProperty Name="size" ColumnName="size" />
                 <ScalarProperty Name="sale_type" ColumnName="sale_type" />
                 <ScalarProperty Name="height" ColumnName="height" />
                 <ScalarProperty Name="width" ColumnName="width" />
