@@ -2334,3 +2334,14 @@ footer .footer-widgets .subscribe :-ms-input-placeholder {
 /*.table th td{
     border:solid 1px #e22020;
 }*/
+.refinements-summary{
+     margin-bottom: 5px;
+    padding: 6px 5px;
+    color: #1a1a1a;
+    background-color: #eee;
+    font-weight: normal;
+    font-size: 0.9em;
+    border-radius: 6px;
+    text-transform: none;
+    vertical-align: top;
+}
