@@ -4,6 +4,7 @@
 @{
     ViewBag.Title = "Kết quả tìm kiếm";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    string allFilter = ViewBag.f0 + ViewBag.f1 + ViewBag.f2 + ViewBag.f3 + ViewBag.f4 + ViewBag.f5;
 }
 @Html.Partial("~/Views/_imagepage.cshtml")
 <section class="search-results">
@@ -122,7 +123,11 @@
                       <div class="images-container v3">
                         <div class="row">
                           <div id="portfolio-container">
-                            <section class="refinements-summary">@Html.Raw(Ichup.Config.tags(ViewBag.f1 + ViewBag.f2 + ViewBag.f3 + ViewBag.f4 + ViewBag.f5))</section>
+                            <section class="refinements-summary">
+                                @Html.Raw(Ichup.Config.tags(allFilter))
+                                @if (allFilter != "" && allFilter != null)
+                                {<a style="cursor:pointer;" onclick="removeAllFilter();">xóa bộ lọc</a>}
+                            </section>
                             @foreach (var item in Model) { 
                                 <text>
                                     <div class="span3 transition metal">
@@ -283,6 +288,54 @@
         window.location.href = url;
     }
     var currentId = -1;
-    
-    
+    function removeFilter(key){
+        for (var i = 1; i <= 2; i++) {
+            if (document.getElementById("f-0_" + i).checked && document.getElementById("f-0_" + i).value==key){
+                document.getElementById("f-0_" + i).checked=false;
+                search();
+                break;
+            }
+        }
+        for (var i = 1; i <= 3; i++) {
+            if (document.getElementById("f-1_" + i).checked && document.getElementById("f-1_" + i).value==key){
+                document.getElementById("f-1_" + i).checked=false;
+                search();
+                break;
+            }
+        }
+        for (var i = 1; i <= 3; i++) {
+            if (document.getElementById("f-2_" + i).checked && document.getElementById("f-2_" + i).value==key){
+                document.getElementById("f-2_" + i).checked=false;
+                search();
+                break;
+            }
+        }
+        for (var i = 1; i <= 30; i++) {
+            if (document.getElementById("f-3_" + i).checked && document.getElementById("f-3_" + i).value==key){
+                document.getElementById("f-3_" + i).checked=false;
+                search();
+                break;
+            }
+        }
+        for (var i = 1; i <= 9; i++) {
+            if (document.getElementById("f-4_" + i).checked && document.getElementById("f-4_" + i).value==key){
+                document.getElementById("f-4_" + i).checked=false;
+                search();
+                break;
+            }
+        }
+        for (var i = 1; i <= 5; i++) {
+            if (document.getElementById("f-5_" + i).checked && document.getElementById("f-5_" + i).value==key){
+                document.getElementById("f-5_" + i).checked=false;
+                search();
+                break;
+            }
+        }
+    }
+    function removeAllFilter(){
+        $(':checkbox').each(function(i,item){
+            $(item).attr('checked', false);
+        });
+        search();
+    }
 </script>

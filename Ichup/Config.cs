@@ -101,7 +101,7 @@ namespace Ichup
             for (int i = 0; i < all.Length; i++)
             {
                 if (all[i] != "") {
-                    val += "<a style=\"cursor:pointer;\">" +all[i]+ "</a>,";
+                    val += "<a style=\"cursor:pointer;\" onclick=\"removeFilter('"+all[i]+"');\">" +all[i]+ "</a>,";
                 }
             }
             return val;
