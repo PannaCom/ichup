@@ -2334,8 +2334,8 @@ footer .footer-widgets .subscribe :-ms-input-placeholder {
 /*.table th td{
     border:solid 1px #e22020;
 }*/
-.refinements-summary{
-     margin-bottom: 5px;
+.refinements-summary a{
+    margin-bottom: 5px;
     padding: 6px 5px;
     color: #1a1a1a;
     background-color: #eee;
@@ -2344,4 +2344,14 @@ footer .footer-widgets .subscribe :-ms-input-placeholder {
     border-radius: 6px;
     text-transform: none;
     vertical-align: top;
+}
+
+.refinements-summary a:after {
+    content: "x";    
+    color: #b3b3b3;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-left: 5px;
+    line-height: 1px;
+    vertical-align: middle;
 }

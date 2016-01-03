@@ -95,6 +95,17 @@ namespace Ichup
 
             return true;
         }
+        public static string tags(string keyword) {
+            string[] all = keyword.Split(',');
+            string val = "";
+            for (int i = 0; i < all.Length; i++)
+            {
+                if (all[i] != "") {
+                    val += "<a style=\"cursor:pointer;\">" +all[i]+ "</a>,";
+                }
+            }
+            return val;
+        }
         public static string removeSpecialChar(string input)
         {
             input = input.Replace("-", "").Replace(":", "").Replace(",", "").Replace("_", "").Replace("'", "").Replace("\"", "").Replace(";", "").Replace("”", "").Replace(".", "").Replace("%", "").Replace("&", "");
