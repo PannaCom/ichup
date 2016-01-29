@@ -10,6 +10,8 @@ using System.Web.Mvc;
 using Ichup.Models;
 using System.Data;
 using System.Security.Cryptography;
+using Newtonsoft.Json;
+using PagedList;
 namespace Ichup.Controllers
 {
     public class MembersController : Controller
@@ -17,9 +19,13 @@ namespace Ichup.Controllers
         //
         // GET: /Members/
         private ichupEntities db = new ichupEntities();
-        public ActionResult Index()
+        public ActionResult Index(string word, int? pg)
         {
-            return View();
+            var p = (from q in db.members where q.name.Contains(word) select q).OrderBy(o => o.name).Take(1000);
+            int pageSize = 8;
+            int pageNumber = (pg ?? 1);
+            return View(p.ToPagedList(pageNumber, pageSize));
+            
         }
         public ActionResult Register(int? id) {
             if (id == null) id = 0;
