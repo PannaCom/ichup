@@ -66,7 +66,7 @@
           <Property Name="image" Type="nvarchar" MaxLength="150" />
           <Property Name="total_views" Type="int" />
           <Property Name="date_reg" Type="datetime" />
-          <Property Name="type" Type="tinyint" />
+          <Property Name="type" Type="smallint" />
         </EntityType>
         <EntityType Name="sales_log">
           <Key>
@@ -83,9 +83,9 @@
       <Schema Namespace="ichupModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="Entities" p1:LazyLoadingEnabled="true">
           <EntitySet Name="categories" EntityType="ichupModel.category" />
-          <EntitySet Name="members" EntityType="ichupModel.member" />
           <EntitySet Name="sales_log" EntityType="ichupModel.sales_log" />
           <EntitySet Name="images" EntityType="ichupModel.image" />
+          <EntitySet Name="members" EntityType="ichupModel.member" />
         </EntityContainer>
         <EntityType Name="category">
           <Key>
@@ -93,22 +93,6 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
-        </EntityType>
-        <EntityType Name="member">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
-          <Property Name="pass" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
-          <Property Name="email" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="phone" Type="String" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="address" Type="String" MaxLength="505" Unicode="true" FixedLength="false" />
-          <Property Name="passport" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
-          <Property Name="image" Type="String" MaxLength="150" Unicode="true" FixedLength="false" />
-          <Property Name="total_views" Type="Int32" />
-          <Property Name="date_reg" Type="DateTime" Precision="3" />
-          <Property Name="type" Type="Byte" />
         </EntityType>
         <EntityType Name="sales_log">
           <Key>
@@ -153,6 +137,22 @@
           <Property Type="Byte" Name="sale_type" />
           <Property Type="Int64" Name="size" />
         </EntityType>
+        <EntityType Name="member">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="name" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="pass" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="email" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="phone" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="address" MaxLength="505" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="passport" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="image" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="total_views" />
+          <Property Type="DateTime" Name="date_reg" Precision="3" />
+          <Property Type="Int16" Name="type" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -164,23 +164,6 @@
               <MappingFragment StoreEntitySet="category">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="members">
-            <EntityTypeMapping TypeName="ichupModel.member">
-              <MappingFragment StoreEntitySet="members">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="pass" ColumnName="pass" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="address" ColumnName="address" />
-                <ScalarProperty Name="passport" ColumnName="passport" />
-                <ScalarProperty Name="image" ColumnName="image" />
-                <ScalarProperty Name="total_views" ColumnName="total_views" />
-                <ScalarProperty Name="date_reg" ColumnName="date_reg" />
-                <ScalarProperty Name="type" ColumnName="type" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -225,6 +208,23 @@
                 <ScalarProperty Name="link" ColumnName="link" />
                 <ScalarProperty Name="cat_id" ColumnName="cat_id" />
                 <ScalarProperty Name="keywords" ColumnName="keywords" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="members">
+            <EntityTypeMapping TypeName="ichupModel.member">
+              <MappingFragment StoreEntitySet="members">
+                <ScalarProperty Name="type" ColumnName="type" />
+                <ScalarProperty Name="date_reg" ColumnName="date_reg" />
+                <ScalarProperty Name="total_views" ColumnName="total_views" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="passport" ColumnName="passport" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="pass" ColumnName="pass" />
+                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

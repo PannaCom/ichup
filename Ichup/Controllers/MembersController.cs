@@ -21,12 +21,14 @@ namespace Ichup.Controllers
         private ichupEntities db = new ichupEntities();
         public ActionResult Index(string word, int? pg)
         {
+            if (word == null) word = "";
             var p = (from q in db.members where q.name.Contains(word) select q).OrderBy(o => o.name).Take(1000);
             int pageSize = 8;
             int pageNumber = (pg ?? 1);
             return View(p.ToPagedList(pageNumber, pageSize));
             
         }
+        
         public ActionResult Register(int? id) {
             if (id == null) id = 0;
             ViewBag.id = id;
@@ -50,10 +52,11 @@ namespace Ichup.Controllers
         public string checkLogin(string name,string pass) {
             MD5 md5Hash = MD5.Create();
             pass = Config.GetMd5Hash(md5Hash, pass);
-            var id = db.members.Where(o => o.name == name && o.pass == pass).FirstOrDefault();
+            var id = db.members.Where(o => o.name == name && o.pass == pass && o.type>=0).FirstOrDefault();
             if (id!=null) {
                 Config.setCookie("logged", name);
                 Config.setCookie("userid", id.id.ToString());
+                Config.setCookie("type", id.type.ToString());
                 return "1"; 
             } else { return "0"; }
         }
@@ -71,6 +74,12 @@ namespace Ichup.Controllers
 
             Session.Abandon();
             return View();
+        }
+        public string updateType(int type,int id) { 
+            //if (Config.getCookie("type") == "") return
+            string query = "update members set type="+type+" where id="+id;
+            db.Database.ExecuteSqlCommand(query);
+            return "1";
         }
         public ActionResult changePass() {
             int id = 0;
