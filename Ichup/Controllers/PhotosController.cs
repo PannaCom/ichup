@@ -56,6 +56,8 @@ namespace Ichup.Controllers
             return "0";
         }
         public ActionResult User(string keyword,int? id,int? page) {
+            if (Config.getCookie("userid") == "") return RedirectToAction("Login", "Members");
+            else id = int.Parse(Config.getCookie("userid"));
             if (keyword == null) keyword = "";
             var p = (from q in db.images where q.keywords.Contains(keyword) && q.member_id == id select q).OrderByDescending(o => o.id);
             if (page == null) page = 1;
@@ -272,8 +274,11 @@ namespace Ichup.Controllers
         public string Del(int id) {
             try
             {
+                int userid = 0;
+                if (Config.getCookie("userid") == "") return "0";
+                else userid = int.Parse(Config.getCookie("userid"));
                 image img = db.images.Find(id);
-                if (img != null)
+                if (img != null && userid==img.member_id)
                 {
                     string link1 = HttpContext.Server.MapPath("../" + img.link);
                     string link2 = HttpContext.Server.MapPath("../" + img.link_thumbail_small);

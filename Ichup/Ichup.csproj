@@ -1472,6 +1472,7 @@
     <Content Include="Views\Images\Edit.cshtml" />
     <Content Include="Views\Images\Delete.cshtml" />
     <Content Include="Views\Members\Index.cshtml" />
+    <Content Include="Views\Members\Reset.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

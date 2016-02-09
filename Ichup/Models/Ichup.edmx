@@ -67,6 +67,7 @@
           <Property Name="total_views" Type="int" />
           <Property Name="date_reg" Type="datetime" />
           <Property Name="type" Type="smallint" />
+          <Property Name="token" Type="nvarchar" MaxLength="150" />
         </EntityType>
         <EntityType Name="sales_log">
           <Key>
@@ -152,6 +153,7 @@
           <Property Type="Int32" Name="total_views" />
           <Property Type="DateTime" Name="date_reg" Precision="3" />
           <Property Type="Int16" Name="type" />
+          <Property Type="String" Name="token" MaxLength="150" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -215,6 +217,7 @@
           <EntitySetMapping Name="members">
             <EntityTypeMapping TypeName="ichupModel.member">
               <MappingFragment StoreEntitySet="members">
+                <ScalarProperty Name="token" ColumnName="token" />
                 <ScalarProperty Name="type" ColumnName="type" />
                 <ScalarProperty Name="date_reg" ColumnName="date_reg" />
                 <ScalarProperty Name="total_views" ColumnName="total_views" />

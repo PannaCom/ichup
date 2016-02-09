@@ -21,6 +21,10 @@ namespace Ichup.Controllers
         private ichupEntities db = new ichupEntities();
         public ActionResult Index(string word, int? pg)
         {
+            int type=0;
+            if (Config.getCookie("type") == "") return RedirectToAction("Login", "Members");
+            else type = int.Parse(Config.getCookie("type"));
+            if (type<3) return RedirectToAction("Login", "Members");
             if (word == null) word = "";
             var p = (from q in db.members where q.name.Contains(word) select q).OrderBy(o => o.name).Take(1000);
             int pageSize = 8;
@@ -71,20 +75,35 @@ namespace Ichup.Controllers
             {
                 Response.Cookies["userid"].Expires = DateTime.Now.AddDays(-1);
             }
+            if (Request.Cookies["type"] != null)
+            {
+                Response.Cookies["type"].Expires = DateTime.Now.AddDays(-1);
+            }
 
             Session.Abandon();
             return View();
         }
-        public string updateType(int type,int id) { 
-            //if (Config.getCookie("type") == "") return
+        public string updateType(int type,int id) {
+            if (Config.getCookie("type") == "") return "0";
             string query = "update members set type="+type+" where id="+id;
             db.Database.ExecuteSqlCommand(query);
             return "1";
         }
-        public ActionResult changePass() {
+        public ActionResult changePass(string token) {
             int id = 0;
-            if (Config.getCookie("userid") == "") return RedirectToAction("Login", "Members");
-            else id = int.Parse(Config.getCookie("userid"));
+            ViewBag.token = "";
+            if (token != "" && token != null)
+            {
+                ViewBag.token = token;
+                var mb = db.members.Where(o => o.token.Equals(token)).FirstOrDefault();
+                if (mb != null) id = mb.id;
+                else return HttpNotFound();
+            }
+            else
+            {
+                if (Config.getCookie("userid") == "") return RedirectToAction("Login", "Members");
+                else id = int.Parse(Config.getCookie("userid"));
+            }
             ViewBag.member_id = id;
             member m = db.members.Find(id);
             if (m == null)
@@ -93,15 +112,20 @@ namespace Ichup.Controllers
             }
             return View(m);
         }
-        public string updatePass(string pass,int id)
+        [HttpPost]
+        public string updatePass(string pass,int id,string token)
         {
             try
-            {   
-                if (!Config.getCookie("userid").Equals(id.ToString())) return "0";
+            {
+                if (token == "")
+                {
+                    if (!Config.getCookie("userid").Equals(id.ToString())) return "0";
+                }
                 MD5 md5Hash = MD5.Create();
                 member mb = db.members.Find(id);
                 pass = Config.GetMd5Hash(md5Hash, pass);
                 mb.pass = pass;
+                mb.token = "";
                 db.Entry(mb).State = EntityState.Modified;
                 db.SaveChanges();
                 return id.ToString();
@@ -169,6 +193,30 @@ namespace Ichup.Controllers
                 return "0";
             }
             return "0";
+        }
+        public ActionResult Reset() {
+            return View();
+        }
+        public string resetPass(string email) {
+            try
+            {
+                var any = db.members.Where(o => o.email.Equals(email.Trim())).FirstOrDefault();
+                if (any == null)
+                {
+                    return "0";
+                }
+                else
+                {
+                    string token = Guid.NewGuid().ToString();
+                    string query = "update members set token=N'" + token + "' where id=" + any.id;
+                    db.Database.ExecuteSqlCommand(query);
+                    Config.mail(Config.fromEmail, email, "Lấy lại mật khẩu ichup.com", Config.fromEmailPass, "<b>Chào bạn "+any.name+"!</b><br>Bạn hay ai đó đã dùng email này xin lấy lại mật khẩu, nếu không phải bạn, xin đừng click, nếu là bạn, hãy click vào đây để đổi lại mật khẩu:<b><a href='" + Config.domain + "/members/changePass?token=" + token + "'>Đổi mật khẩu tại đây</a></b>");
+                }
+            }
+            catch (Exception ex) {
+                return "0";
+            }
+            return "1";
         }
         // genarate captcha Image
         public ActionResult CaptchaImage(bool noisy = false)

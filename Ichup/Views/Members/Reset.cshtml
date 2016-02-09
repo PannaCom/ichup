@@ -1,9 +1,6 @@
-﻿@model Ichup.Models.member
-
-@{
-    ViewBag.Title = "Profile";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-   
+﻿@{
+    ViewBag.Title = "Reset";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 <section class="picture-categories">
 
@@ -20,10 +17,10 @@
         <div class="single-image-title">
           <div class="row">
             <div class="span6">
-              <h4 class="title">Cập nhật thông tin Thành Viên</h4>             
+              <h4 class="title">Lấy Lại Mật Khẩu</h4>
             </div> <!-- end span6 -->
             <div class="span6">
-              <a href="#" class="btn pull-right">Đổi mật khẩu</a>
+              <a href="#" class="btn pull-right">Điền email, sau đó kiểm tra email để lấy lại mật khẩu.</a>
             </div> <!-- end span6 -->
           </div> <!-- end row -->
         </div> <!-- end single-image-title -->
@@ -42,11 +39,9 @@
       <div class="container">
         <div class="row">
           <div class="span12">
-            <figure>              
-			  Mật khẩu:<input class="span12"  id=pass name=pass type="password" placeholder="mật khẩu" >
-			  Gõ lại mật khẩu:<input class="span12"  id=pass2 name=pass2 type="password" placeholder="gõ lại mật khẩu" >
-			   
-			  <input class="span10" type=button value="Cập nhật thông tin" onclick="AddNew();" id="btnSA">
+            <figure>
+              <input class="span10"  id=email name=email type="text" placeholder="Điền email">
+			  <input class="span10" type=button value="Lấy lại mật khẩu qua email" onclick="Login();" id="btnSA">
             </figure>
           </div> <!-- end span6 -->
           
@@ -56,47 +51,34 @@
 
   <!-- ============================  Image Decription Ends ============================ -->
 <script>
-    var member_id=@ViewBag.member_id;
-    var token="@ViewBag.token";
-    function AddNew() {
+    function Login() {
         var formdata = new FormData(); //FormData object
-       
-        var pass = document.getElementById("pass").value;
-        var pass2 = document.getElementById("pass2").value;
+        var email = document.getElementById("email").value;
         
-        
-        if (pass == "") {
-            alert("Nhập mật khẩu");
-            return;
-        }
-        if (pass != pass2) {
-            alert("Nhập mật khẩu không khớp nhau");
+        if (email == "") {
+            alert("Nhập email");
             return;
         }
         
         document.getElementById("btnSA").disabled = true;
-        formdata.append("pass", pass);
-        formdata.append("id", member_id);
-        formdata.append("token", token);
+        document.getElementById("btnSA").value = "ĐANG XỬ LÝ, XIN ĐỢI TRONG GIÂY LÁT!";
+        formdata.append("email", email);
+        
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', '/members/updatePass');
+        xhr.open('POST', '/members/resetPass');
         xhr.send(formdata);
         var content = "";
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
-                if (xhr.responseText != "0" && xhr.responseText != "-1") {
-                    alert("Đổi pass thành công. Hãy đăng nhập lại.");
-                    window.location.href = "/Members/Login";
+                if (xhr.responseText != "0") {
+                    alert("Kiểm tra lại email để reset lại pass của bạn!");
+                    window.location.href = "@Ichup.Config.domain/members/Login";
                 } else {
                     document.getElementById("btnSA").disabled = false;
-                    if (xhr.responseText == "-1"){
-                        alert("Bạn đã nhập mã an ninh không đúng");
-                        return;
-                    }
-                    alert("Có lỗi trong quá trình cập nhật dữ liệu! Bạn");
+                    alert("Không tìm thấy email này! Kiểm tra lại email!");
+                    document.getElementById("btnSA").value = "Lấy lại mật khẩu qua email";
                 }
             }
-
         }
     }
 </script>

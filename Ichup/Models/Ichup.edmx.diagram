@@ -8,7 +8,7 @@
         <EntityTypeShape EntityType="ichupModel.category" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ichupModel.sales_log" Width="1.5" PointX="4.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="ichupModel.image" Width="1.5" PointX="0.11869505239589839" PointY="25.740002450412142" />
-        <EntityTypeShape EntityType="ichupModel.member" Width="1.5" PointX="10.097636080392467" PointY="1.3016661113601487" />
+        <EntityTypeShape EntityType="ichupModel.member" Width="1.5" PointX="0.76656149549715291" PointY="1.3944316065844296" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

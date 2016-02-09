@@ -25,5 +25,6 @@ namespace Ichup.Models
         public Nullable<int> total_views { get; set; }
         public Nullable<System.DateTime> date_reg { get; set; }
         public Nullable<short> type { get; set; }
+        public string token { get; set; }
     }
 }

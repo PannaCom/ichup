@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
 }
 <div id=settypediv style="width:50%;display:block;float:left;position:fixed;top:40%;left:25%;background-color:#c8e19b;z-index:1001;text-align:center;display:none;">
-    <label class="label" id="addnewcatlabel">Kiểu user *:</label><select id="type"><option value="3">Editor</option><option value="4">Admin</option></select>
+    <label class="label" id="addnewcatlabel">Kiểu user *:</label><select id="type"><option value="2">Normal</option><option value="3">Editor</option><option value="4">Admin</option></select>
     <input type="button" value="Save" onclick="settype('');" class="btn btn-primary tf-btn color" style="position:relative; width:100px;"/>
     <input type="button" value="Close" onclick="$('#settypediv').hide();" class="btn btn-primary tf-btn color" style="position:relative; width:100px;"/>
 </div>  
@@ -31,8 +31,12 @@
                 @item.phone
             </td>
             <td>
-                <a onclick="lock(@item.id);" style="cursor:pointer;">Lock user</a> |
-                <a onclick="showtype(@item.id);" style="cursor:pointer;">set Admin</a>
+                @Ichup.Config.getTypeUser(@item.type)
+            </td>
+            <td>
+                <a onclick="lock(@item.id);" style="cursor:pointer;"><img src="/Images/lock.png" style="width:32px;height:32px;"></a>|
+                <a onclick="unlock(@item.id);" style="cursor:pointer;"><img src="/Images/unlock.png" style="width:32px;height:32px;"></a>  |
+                <a onclick="showtype(@item.id);" style="cursor:pointer;"><img src="/Images/admin.png" style="width:32px;height:32px;"></a>
             </td>
         </tr>
      }
@@ -44,7 +48,10 @@
         currentID = id;
         settype(-1);
     }
-    
+    function unlock(id) {
+        currentID = id;
+        settype(2);
+    }
     function showtype(id) {
         currentID = id;
         $('#settypediv').show();
@@ -54,6 +61,7 @@
 
         var type = document.getElementById("type").value;
         if (stype != '') type = stype;
+        alert(type);
         formdata.append("type", type);
         formdata.append("id", currentID);
         var xhr = new XMLHttpRequest();

@@ -6,11 +6,15 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Web;
 using Ichup.Models;
+using System.Net;
+using System.Net.Mail;
 namespace Ichup
 {
     public class Config
     {
-        public static string domain = "http://ichup.binhyen.net/";//http://localhost:53182/
+        public static string domain = "http://localhost:53182/";//http://ichup.binhyen.net/
+        public static string fromEmail = "xe14.com@gmail.com";
+        public static string fromEmailPass = "chanhniem";
         public static string ImagePath = "/Images/Upload/";
         public const int ImageMinimumBytes = 512;
         public static int maxWidth1 = 270;//for ảnh ngang lúc tìm
@@ -94,6 +98,18 @@ namespace Ichup
             }
 
             return true;
+        }
+        public static string getTypeUser(short? type){
+            string val = "";
+            switch (type) {
+                case -1: val = "bị khóa"; break;
+                case 0: val = "bán ảnh"; break;
+                case 1: val = "mua ảnh"; break;
+                case 2: val = "mua bán ảnh"; break;
+                case 3: val = "editor"; break;
+                case 4: val = "admin"; break;
+            }
+            return val;
         }
         public static string tags(string keyword) {
             string[] all = keyword.Split(',');
@@ -358,6 +374,45 @@ namespace Ichup
 
             // Return the hexadecimal string. 
             return sBuilder.ToString();
+        }
+        public static string mail(string from, string to, string topic, string pass, string content)
+        {
+            try
+            {
+                var fromAddress = from;
+                var toAddress = to;
+                //Password of your gmail address
+                string fromPassword = pass;
+                // Passing the values and make a email formate to display
+                string subject = topic;
+                string body = content;
+                //body += "Email: " + fromEmailAddress + "\n";
+                //body += "Về việc: " + subject + "\n";
+                //body += "Nội dung: \n" + content + "\n";
+                // smtp settings
+                MailMessage message = new MailMessage();
+                message.From = new MailAddress(fromAddress);
+                message.To.Add(toAddress);
+                message.Subject = subject;
+                message.IsBodyHtml = true;
+                message.Body = body;
+                var smtp = new System.Net.Mail.SmtpClient();
+                {
+                    smtp.Host = "smtp.gmail.com";//"smtp.gmail.com";
+                    smtp.Port = 587;// 465;//587;
+                    smtp.EnableSsl = true;
+                    smtp.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network;
+                    smtp.Credentials = new NetworkCredential(fromAddress, fromPassword);
+                    smtp.Timeout = 20000;
+                }
+                // Passing values to smtp object
+                smtp.Send(message);
+            }
+            catch (Exception ex)
+            {
+                return "-1";
+            }
+            return "ok";
         }
     }
 }
