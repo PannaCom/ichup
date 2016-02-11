@@ -2,7 +2,7 @@
 var acategory = [];
 var a1 = ["ảnh, ", "vector, ", "illustrator, "];
 var a2 = ["dọc, ", "ngang, ", "rộng, "];
-var _domain_ = "http://localhost:53182/";
+var _domain_ = "http://ichup.binhyen.net/";
 function getCategoryCk(id) {
     //console.log(acategory.length + "," + isLoadedCat);
     if (!isLoadedCat) {
