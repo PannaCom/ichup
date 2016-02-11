@@ -25,6 +25,7 @@ namespace Ichup.Controllers
             public string filter_3 { get; set; }
             public string filter_4 { get; set; }
             public string filter_5 { get; set; }
+            public int member_id { get; set; }
             public int RANK { get; set; }
 
         }
@@ -44,7 +45,7 @@ namespace Ichup.Controllers
             ViewBag.keyword = k;
             if (pg == null) pg = 1;
             string query=" SELECT top 1000 ";
-            query += "FT_TBL.id,FT_TBL.link,FT_TBL.link_thumbail_small,FT_TBL.total_views,FT_TBL.keywords,FT_TBL.date_post,FT_TBL.filter_1,FT_TBL.filter_2,FT_TBL.filter_3,FT_TBL.filter_4,FT_TBL.filter_5,KEY_TBL.RANK FROM images AS FT_TBL INNER JOIN FREETEXTTABLE(images, keywords,'" + k + "') AS KEY_TBL ON FT_TBL.id = KEY_TBL.[KEY] ";
+            query += "FT_TBL.id,FT_TBL.link,FT_TBL.link_thumbail_small,FT_TBL.total_views,FT_TBL.keywords,FT_TBL.date_post,FT_TBL.filter_1,FT_TBL.filter_2,FT_TBL.filter_3,FT_TBL.filter_4,FT_TBL.filter_5,FT_TBL.member_id,KEY_TBL.RANK FROM images AS FT_TBL INNER JOIN FREETEXTTABLE(images, keywords,'" + k + "') AS KEY_TBL ON FT_TBL.id = KEY_TBL.[KEY] ";
             query += " where (status=0) ";
 
             string[] item=new string[10];
@@ -92,6 +93,8 @@ namespace Ichup.Controllers
             ViewBag.page = pg;
             ViewBag.order = order;
             ViewBag.to = to;
+            ViewBag.typeUser = Config.getCookie("type");
+            if (ViewBag.typeUser == "" || ViewBag.typeUser == null) ViewBag.typeUser = "0";
             var p = db.Database.SqlQuery<searchitem>(query);
             int pageSize = 8;
             int pageNumber = (pg ?? 1);

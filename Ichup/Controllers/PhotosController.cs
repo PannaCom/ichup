@@ -26,6 +26,7 @@ namespace Ichup.Controllers
         {
             try
             {
+                if (Config.getCookie("logged") == "") return "0";
                 for (int i = 0; i < totalitem; i++)
                 {
                     string keyword = "";
@@ -57,13 +58,21 @@ namespace Ichup.Controllers
         }
         public ActionResult User(string keyword,int? id,int? page) {
             if (Config.getCookie("userid") == "") return RedirectToAction("Login", "Members");
-            else id = int.Parse(Config.getCookie("userid"));
+            else
+            {
+                //Nếu không phải là editor
+                if (Config.getCookie("type") != "3" || Config.getCookie("type") != "4") id = int.Parse(Config.getCookie("userid"));
+            }
             if (keyword == null) keyword = "";
+            keyword = keyword.Replace("%20", " ");
             var p = (from q in db.images where q.keywords.Contains(keyword) && q.member_id == id select q).OrderByDescending(o => o.id);
+            if (Config.getCookie("type") == "3" || Config.getCookie("type") == "4") p = (from q in db.images where q.keywords.Contains(keyword) select q).OrderByDescending(o => o.id);
             if (page == null) page = 1;
             ViewBag.page = page;
+            ViewBag.keyword = keyword;
+            ViewBag.id = id;
             if (id == null) return View();
-            int pageSize = 25;
+            int pageSize = 10;
             int pageNumber = (page ?? 1);
             var c = (from q in db.categories orderby q.name select q.name);
             ViewBag.acategory = JsonConvert.SerializeObject(c.ToList());
@@ -95,19 +104,26 @@ namespace Ichup.Controllers
             }
         }
         public string downloadfile(int id,int type) {
-            image img = db.images.Find(id);
-            string link = img.link;
-            string download = "total_download=total_download+1";
-            if (type == 3) link = img.link;
-            if (type == 2) { link = img.link_big; download = "total_download_big=total_download_big+1"; }
-            if (type == 1) { link = img.link_small; download = "total_download_small=total_download_small+1"; }
-            string query = "update images set " + download + " where id=" + id;
-            db.Database.ExecuteSqlCommand(query);
-            System.Web.HttpContext.Current.Response.ContentType = "application/force-download";
-            System.Web.HttpContext.Current.Response.AddHeader("content-disposition", "attachment; filename="+link);
-            System.Web.HttpContext.Current.Response.ContentType = "image/jpeg";
-            System.Web.HttpContext.Current.Response.TransmitFile(Server.MapPath(link));
-            System.Web.HttpContext.Current.Response.End();
+            try
+            {
+                image img = db.images.Find(id);
+                string link = img.link;
+                string download = "total_download=total_download+1";
+                if (type == 3) link = img.link;
+                if (type == 2) { link = img.link_big; download = "total_download_big=total_download_big+1"; }
+                if (type == 1) { link = img.link_small; download = "total_download_small=total_download_small+1"; }
+                string query = "update images set " + download + " where id=" + id;
+                db.Database.ExecuteSqlCommand(query);
+                //link=Config.domain + link;
+                System.Web.HttpContext.Current.Response.ContentType = "application/force-download";
+                System.Web.HttpContext.Current.Response.AddHeader("content-disposition", "attachment; filename=" + link);
+                System.Web.HttpContext.Current.Response.ContentType = "image/jpeg";
+                System.Web.HttpContext.Current.Response.TransmitFile(Server.MapPath(link));
+                System.Web.HttpContext.Current.Response.End();
+            }
+            catch (Exception ex) {
+                return "0";
+            }
             //System.Web.HttpContext.Current.Response.Flush();
             return "1";
         }
@@ -121,6 +137,7 @@ namespace Ichup.Controllers
         {
             try
             {
+                if (Config.getCookie("logged") == "") return "0";
                 string query = "update images set keywords=N'" + keywords + "',price=" + price + ",filter_1=N'" + filter_1 + "',filter_2=N'" + filter_2 + "',filter_3=N'" + filter_3 + "',filter_4=N'" + filter_4 + "',filter_5=N'" + filter_5 + "',sale_type=" + sale_type + " where id=" + id;
                 db.Database.ExecuteSqlCommand(query);
                 return "1";
@@ -134,6 +151,7 @@ namespace Ichup.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public string UploadImageProcess(HttpPostedFileBase file, bool autoname, bool free,int member_id)
         {
+            if (Config.getCookie("logged") == "") return "0";
             string guid = Guid.NewGuid().ToString();
             string code = Config.genCode();
             string physicalPath = HttpContext.Server.MapPath("../" + Config.ImagePath + "\\");
@@ -278,7 +296,7 @@ namespace Ichup.Controllers
                 if (Config.getCookie("userid") == "") return "0";
                 else userid = int.Parse(Config.getCookie("userid"));
                 image img = db.images.Find(id);
-                if (img != null && userid==img.member_id)
+                if (img != null && (userid == img.member_id || Config.getCookie("type") == "3" || Config.getCookie("type") == "4"))
                 {
                     string link1 = HttpContext.Server.MapPath("../" + img.link);
                     string link2 = HttpContext.Server.MapPath("../" + img.link_thumbail_small);

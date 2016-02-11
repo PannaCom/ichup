@@ -2,7 +2,7 @@
 var acategory = [];
 var a1 = ["ảnh, ", "vector, ", "illustrator, "];
 var a2 = ["dọc, ", "ngang, ", "rộng, "];
-
+var _domain_ = "http://localhost:53182/";
 function getCategoryCk(id) {
     //console.log(acategory.length + "," + isLoadedCat);
     if (!isLoadedCat) {
@@ -116,6 +116,7 @@ function imagepage(id) {
                     $("#image_price2").html("Giá: " + formatCurrency(price));
                     $("#image_width_height").html(image_width_height);
                     $("#image_keyword").html("Từ khóa: " + image_keyword);
+                    $("#image_link").html("<a href='"+_domain_ +"Photos/Page/"+id+"'>Chi tiết</a>");
                 }
                 $("#loadingimage").hide();
             } else {

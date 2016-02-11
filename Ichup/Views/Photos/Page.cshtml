@@ -4,66 +4,71 @@
     ViewBag.Title = "Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<section class="image-decription-container" id="imagepage" style="display:none;">
+<style>
+table{
+    width: 100%;
+    margin-bottom: 20px;
+    max-width: 100%;
+    background-color: transparent;
+    border-collapse: collapse;
+    border-spacing: 0;
+    border-color: grey;
+}
+th, td {
+    color: #ffffff;
+    border-bottom:1px solid #fff;
+}
+</style>
+<script>currentId=@Model.id;</script>
+<section class="image-decription-container" id="imagepage" style="background-color:#808080;">
       <div class="container">
         <div class="row">
           <div class="span6">
             <figure>
-              <img src="@Model.link_thumbail_big" alt="img" id="image_source"/>
+              <img src="@Ichup.Config.domain/@Model.link_thumbail_big" alt="img" id="image_source"/>
             </figure>
           </div> <!-- end span6 -->
           <div class="span6">
             <div class="item-description">
-              <h5 class="title" id="image_id">File ID - #@Model.id</h5>
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th>Size</th>
-                  <th>Resolution</th>
-                  <th>Prize</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>
-                    <form action="">
-                      <label class="checkbox">
-                        <input type="checkbox" value="" id="image_chk1">
-                        Thumbnail
-                      </label>
-                    </form>
-                  </td>
-                  <td>270x180</td>
-                  <td>Free</td>
-                </tr>
-                <tr>
-                  <td>
-                    <form action="">
-                      <label class="checkbox">
-                        <input type="checkbox" value="" id="image_chk2">
-                        Small
-                      </label>
-                    </form>
-                  </td>
-                  <td>570x363</td>
-                  <td>Free</td>
-                </tr>
-                <tr>
-                  <td>
-                    <form action="">
-                      <label class="checkbox">
-                        <input type="checkbox" value="" id="image_chk3">
-                        Original
-                      </label>
-                    </form>
-                  </td>
-                  <td id="image_width_height">@Model.width x @Model.height</td>
-                  <td id="image_price">@Model.price</td>
-                </tr>
-                
-              </tbody>
-            </table>
+              <h5 class="title" id="image_id" style="color:#ffffff;">File ID - #@Model.id</h5>
+                <table >
+                  <thead>
+                    <tr>
+                      <th>Cỡ ảnh</th>
+                      <th>Kích thước</th>
+                      <th>Giá</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                            <input type="radio" value="1" id="image_chk1" name="linkdownload">
+                            Nhỏ
+                      </td>
+                      <td>270x180</td>
+                      <td>Miễn phí</td>
+                    </tr>
+                    <tr>
+                      <td>
+                            <input type="radio" value="2" id="image_chk2" name="linkdownload">
+                            Trung bình
+                      </td>
+                      <td>570x363</td>
+                      <td>Miễn phí</td>
+                    </tr>
+                    <tr>
+                      <td>
+                            <input type="radio" value="3" id="image_chk3" name="linkdownload" checked>
+                            Ảnh gốc
+                      </td>
+                      <td id="image_width_height">@Model.width x @Model.height</td>
+                      <td id="image_price">@String.Format("{0:#,##0,,}", @Model.price.ToString())</td>
+                    </tr>                
+                  </tbody>
+                </table>
             </div> <!-- end item-description -->
+              <a onclick="downloadimage();" class="btn btn-primary btn-large">Download</a>&nbsp;<span class="title" id="image_price2" style="color:#ffffff;"></span>
+            <br /><span class="btn btn-primary btn-large" id="image_keyword">Từ khóa:@Model.keywords</span>
           </div> <!-- end span6 -->
         </div> <!-- end row -->
       </div> <!-- end container -->

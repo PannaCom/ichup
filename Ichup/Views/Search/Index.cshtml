@@ -5,6 +5,9 @@
     ViewBag.Title = "Kết quả tìm kiếm";
     Layout = "~/Views/Shared/_Layout.cshtml";
     string allFilter = ViewBag.f0 + ViewBag.f1 + ViewBag.f2 + ViewBag.f3 + ViewBag.f4 + ViewBag.f5;
+    int typeUser = 0;
+    typeUser=int.Parse(ViewBag.typeUser.ToString());
+    
 }
 @Html.Partial("~/Views/_imagepage.cshtml")
 <section class="search-results">
@@ -132,7 +135,7 @@
                                 <text>
                                     <div class="span3 transition metal">
                                     <figure class="top-img">
-                                      <img src="@item.link_thumbail_small" alt="img">
+                                      <img src="@Ichup.Config.domain/@item.link_thumbail_small" alt="img">
                                       <figcaption class="img-meta">
                                         <div class="row-fluid">
                                           <div class="span8">
@@ -141,6 +144,10 @@
                                           </div>
                                           <div class="span4">
                                             <a href="#" class="btn download-btn"><i class="icon-download"></i></a>
+                                            @if (typeUser>=3){
+                                                <a onclick="del(@item.id)" class="btn download-btn">Xóa</a>
+                                                <a href="/Photos/User?id=@item.member_id&keyword=@item.keywords" class="btn download-btn">Sửa</a>
+                                            }
                                           </div>
                                         </div>
                                         <div class="roll-over">
@@ -165,7 +172,8 @@
                             <div class="inner-pagination">
                                 <div class="pagination ">
                                   <ul>
-                                    @for (int i = 1; i <= Model.PageCount; i++){
+                                    @for (int i = 1; i <= Model.PageCount; i++)
+                                    {
                                         <li ><a onclick="setpage(@i);" style="cursor:pointer;">@i</a></li>
                                     }
                                     @*<li><a href="#" class="btn prev"><i class="icon-chevron-left"></i></a></li>
@@ -337,5 +345,27 @@
             $(item).attr('checked', false);
         });
         search();
+    }
+    function del(id){
+        if (!confirm("Bạn có chắc chắn xóa?"))
+        {
+            return;
+        }
+        var formdata = new FormData(); //FormData object
+        formdata.append("id", id);
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/Photos/Del');
+        xhr.send(formdata);
+        var content = "";
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                if (xhr.responseText == "1") {
+                    alert("xóa ảnh thành công");
+                } else {
+                    
+                }
+            }
+        }
+
     }
 </script>

@@ -38,7 +38,7 @@
               @foreach (var item in ViewBag.news) { 
                   <div class="span3">
                       <figure class="top-img">
-                        <a onclick="imagepage(@item.id)"><img src="@item.link_thumbail_small" alt="img"></a>
+                        <a onclick="imagepage(@item.id)"><img src="@Ichup.Config.domain/@item.link_thumbail_small" alt="img"></a>
                         <figcaption class="img-meta">
                           @*<div class="row-fluid">
                             <div class="span8">

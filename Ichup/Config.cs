@@ -12,7 +12,7 @@ namespace Ichup
 {
     public class Config
     {
-        public static string domain = "http://localhost:53182/";//http://ichup.binhyen.net/
+        public static string domain = "http://ichup.binhyen.net/";//"http://localhost:53182/";//
         public static string fromEmail = "xe14.com@gmail.com";
         public static string fromEmailPass = "chanhniem";
         public static string ImagePath = "/Images/Upload/";
