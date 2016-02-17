@@ -125,3 +125,13 @@ function imagepage(id) {
         }
     }
 }
+function opendv(id) {
+    $("#dvf" + id).show();
+    $("#dvfh" + id).show();
+    $("#dvfs" + id).hide();
+}
+function closedv(id) {
+    $("#dvf" + id).hide();
+    $("#dvfh" + id).hide();
+    $("#dvfs" + id).show();
+}

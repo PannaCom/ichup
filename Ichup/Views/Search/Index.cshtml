@@ -23,21 +23,24 @@
                     </div> <!-- end input-append -->
                   </form> <!-- end search form -->*@
               </div> <!-- end widget -->
-              <div class="widget">
-                <h4 class="title">Giá bán</h4>
-                 <div>
-                     @Html.Raw(@Ichup.Config.getF0Ck(@ViewBag.f0))   
+              <div class="widget" style="border-bottom:#ea2b2b solid 1px;">
+                <h4 class="title">Giá bán<span onclick="opendv(0);" style="float:right;position:relative;padding-right:3px;cursor:pointer;font-size:1.5rem;font-family: 'Helvetica Neue';line-height: 1.5rem;" id="dvfs0">+</span>
+                     <span onclick="closedv(0);" style="float:right;position:relative;display:none;padding-right:3px;cursor:pointer;font-size:1.5rem;font-family: 'Helvetica Neue';line-height: 1.5rem;" id="dvfh0">-</span></h4>
+                 <div id="dvf0" style="display:none;">
+                     @Html.Raw(@Ichup.Config.getF0Ck(@ViewBag.f0))                        
                   </div><!-- end ui-slider -->
               </div> <!-- end widget --> 
-              <div class="widget">
-                <h4 class="title">Loại ảnh</h4>
-                 <div>
+              <div class="widget" style="border-bottom:#ea2b2b solid 1px;">
+                <h4 class="title">Loại ảnh<span onclick="opendv(1);" style="float:right;position:relative;padding-right:3px;cursor:pointer;font-size:1.5rem;font-family: 'Helvetica Neue';line-height: 1.5rem;" id="dvfs1">+</span>
+                     <span onclick="closedv(1);" style="float:right;position:relative;display:none;padding-right:3px;cursor:pointer;font-size:1.5rem;font-family: 'Helvetica Neue';line-height: 1.5rem;" id="dvfh1">-</span></h4>
+                 <div id="dvf1" style="display:none;">
                      @Html.Raw(@Ichup.Config.getF1Ck(@ViewBag.f1))   
                   </div><!-- end ui-slider -->
               </div> <!-- end widget --> 
-              <div class="widget">
-                <h4 class="title">Kiểu ảnh</h4>
-                 <div>
+              <div class="widget" style="border-bottom:#ea2b2b solid 1px;">
+                <h4 class="title">Kiểu ảnh<span onclick="opendv(2);" style="float:right;position:relative;padding-right:3px;cursor:pointer;font-size:1.5rem;font-family: 'Helvetica Neue';line-height: 1.5rem;" id="dvfs2">+</span>
+                     <span onclick="closedv(2);" style="float:right;position:relative;display:none;padding-right:3px;cursor:pointer;font-size:1.5rem;font-family: 'Helvetica Neue';line-height: 1.5rem;" id="dvfh2">-</span></h4>
+                 <div id="dvf2" style="display:none;">
                      @*<input type="checkbox" id="f-2_1" value="dọc" onchange="search();">dọc 
                      <input type="checkbox" id="f-2_2" value="ngang" onchange="search();">ngang
                      <input type="checkbox" id="f-2_3" value="rộng" onchange="search();">rộng       *@   
@@ -51,23 +54,26 @@
 
               </div> <!-- end widget --> *@
 
-              <div class="widget">
-                <h4 class="title">Danh mục</h4>
-                  <form class="search-categories">
+              <div class="widget" style="border-bottom:#ea2b2b solid 1px;">
+                <h4 class="title">Danh mục<span onclick="opendv(3);" style="float:right;position:relative;padding-right:3px;cursor:pointer;font-size:1.5rem;font-family: 'Helvetica Neue';line-height: 1.5rem;" id="dvfs3">+</span>
+                     <span onclick="closedv(3);" style="float:right;position:relative;display:none;padding-right:3px;cursor:pointer;font-size:1.5rem;font-family: 'Helvetica Neue';line-height: 1.5rem;" id="dvfh3">-</span></h4>
+                 <div id="dvf3" style="display:none;">
                  @Html.Raw(@Ichup.Config.getF3Ck(@ViewBag.f3))
-                  </form>
+                  </div>
               </div> <!-- end widget -->
-              <div class="widget">
-                <h4 class="title">Người</h4>
-                  <form class="search-categories">
+              <div class="widget" style="border-bottom:#ea2b2b solid 1px;">
+                <h4 class="title">Người<span onclick="opendv(4);" style="float:right;position:relative;padding-right:3px;cursor:pointer;font-size:1.5rem;font-family: 'Helvetica Neue';line-height: 1.5rem;" id="dvfs4">+</span>
+                     <span onclick="closedv(4);" style="float:right;position:relative;display:none;padding-right:3px;cursor:pointer;font-size:1.5rem;font-family: 'Helvetica Neue';line-height: 1.5rem;" id="dvfh4">-</span></h4>
+                 <div id="dvf4" style="display:none;">
                  @Html.Raw(@Ichup.Config.getF4Ck(@ViewBag.f4))
-                  </form>
+                  </div>
               </div> <!-- end widget -->
               <div class="widget">
-                <h4 class="title">Góc chụp</h4>
-                  <form class="search-categories">
+                <h4 class="title">Góc chụp<span onclick="opendv(5);" style="float:right;position:relative;padding-right:3px;cursor:pointer;font-size:1.5rem;font-family: 'Helvetica Neue';line-height: 1.5rem;" id="dvfs5">+</span>
+                     <span onclick="closedv(5);" style="float:right;position:relative;display:none;padding-right:3px;cursor:pointer;font-size:1.5rem;font-family: 'Helvetica Neue';line-height: 1.5rem;" id="dvfh5">-</span></h4>
+                   <div id="dvf5" style="display:none;">
                  @Html.Raw(@Ichup.Config.getF5Ck(@ViewBag.f5))
-                  </form>
+                  </div>
               </div> <!-- end widget -->
                @*<div class="widget">
                 <h4 class="title">License Types</h4>
@@ -240,6 +246,12 @@
         $("#order4").addClass("selected");
         $("#order").html("Xem nhiều nhất");
     }
+    if ("@ViewBag.f0"!=""){opendv(0);}
+    if ("@ViewBag.f1"!=""){opendv(1);}
+    if ("@ViewBag.f2"!=""){opendv(2);}
+    if ("@ViewBag.f3"!=""){opendv(3);}
+    if ("@ViewBag.f4"!=""){opendv(4);}
+    if ("@ViewBag.f5"!=""){opendv(5);}
     function setorder(field,t) {
         order=field;
         to=t;
