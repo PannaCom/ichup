@@ -12,38 +12,16 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <!-- Bootstrap Styles -->
-    <link href="/Content/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/Content/css/bootstrap-responsive.min.css" rel="stylesheet">
+     <script src="/Content/js/jquery.min.js"></script>
+    <script src="/Content/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" href="/Content/css/bootstrap.min.css" type="text/css" />
+    <link type="text/css" rel="stylesheet" href="/Content/css/base.css" />
+    <link type="text/css" rel="stylesheet" href="/Content/css/style.css" />
+    <link href="/Content/css/font-awesome.css" rel="stylesheet" />
 
-    <!-- Font Icons -->
-    <link rel="stylesheet" href="/Content/css/font-awesome.min.css" />
+    <script src="js/owl.carousel.js"></script>
+    <link rel="stylesheet" href="css/owl.carousel.css">
 
-    <!-- Social Icons -->
-    <link rel="stylesheet" href="/Content/css/fc-webicons.css" />
-
-    <!-- Google Fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600,700,200italic,300italic,400italic,600italic,700italic' rel='stylesheet' type='text/css'>
-
-    <!-- Main Styles -->
-    <link rel="stylesheet" href="/Content/css/styles.css" />
-
-    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    <!-- Fav and touch icons -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="~/Content/img/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="~/Content/img/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="~/Content/img/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="~/Content/img/apple-touch-icon-57-precomposed.png">
-    <link rel="shortcut icon" href="img/favicon.png">
-
-    <!-- Modernizr Feature Detection  -->
-    <script src="~/Content/js/libraries/modernizr.min.js"></script>
-
-    <script src="~/Content/js/libraries/respond.min.js"></script>
     <script src="/Scripts/jquery-1.8.2.js"></script>
     @*<script src="/Scripts/jquery-1.8.2.min.js"></script>*@
     <script src="/Scripts/jquery-ui-1.8.24.min.js"></script>
@@ -54,62 +32,45 @@
   </head>
 
   <body>
-    <div id="loadingImage" style="z-index:1000;position:fixed;left:40%;top:20%;width:32px;height:32px;display:none;">
-        <img src="/Images/loading.gif">
-    </div>
-    <!-- ============================  Navigation Start =========================== -->
+    <header class="navbar navbar-static-top bs-docs-nav">
+        <!--"navbar-static-top" or "navbar-fixed-top": "big-slider" padding-top: 80:px-->
+        <div class="container">
+            <div class="navbar-header">
+                <button class="navbar-toggle collapsed" type="button" tabindex="1" accesskey="m" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false">
+                    <span class="sr-only">toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="index.html" class="navbar-brand"><img src="/Content/img/logo.png" alt=""> tentrangweb.com</a>
+            </div>
+            <nav id="bs-navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-left">
+                    <li>
+                        <a href="#"><i class="fa fa-camera"></i> Đối tượng 1</a>
+                    </li>
+                    <li>
+                        <a href="#">Đăng nhập</a>
+                    </li>
+                    <li>
+                        <a href="#">Đăng ký</a>
+                    </li>
+                </ul>
 
-    <div class="navbar navbar-inverse-blue navbar-fixed-top" style="height:25px;">
-      <div class="navbar-inner" style="height:25px;">
-        <div class="container" style="height:25px;">
-          
-          <div class="navigation" >
-            <ul class="nav">
-              <li class="active dropdown">
-
-                <a href="#" class="dropdown-toggle btn-navbar-blue" data-toggle="dropdown">
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                </a>
-
-                @*<ul class="dropdown-menu">
-                  <li><a href="cart.html">Cart</a></li>
-                  <li><a href="image-page.html">Images</a></li>
-                  <li><a href="image-upload.html">Uploads</a></li>
-                  <li><a href="blog.html">Blog</a></li>
-                  <li><a href="single-post.html">Single Post</a></li>
-                  <li><a href="pricing.html">Pricing</a></li>
-                  <li><a href="search-results.html">Search Results</a></li>
-                </ul>*@
-
-              </li>
-              
-            </ul> <!-- end nav -->
-          </div><!--/.nav-collapse -->
-
-          <a class="brand" href="/"><img src="~/Content/img/logo.png" alt="logo"></a>
-		  <div style="display:block;float:left;position:relative;padding-top:3px;width:611px;height:auto;">
-			
-                    <div class="input-append">
-                      <input  style="width:500px;" type="text" placeholder="Nhập từ khóa" id="skeyword" value="@ViewBag.keyword" onkeypress="autosearch(event);">
-                      <button class="btn" type="button" onclick="bsearch();"><i class="icon-search"></i></button>
-                    </div> <!-- end input-append -->
-            
-		  </div>	
-          <div class="pull-right">
-            <ul class="unstyled inline user-interaction">
-              <li><a href="/Photos/Upload" style="color:#ffffff;">Upload Image</a></li>              
-              @if (Ichup.Config.getCookie("logged") != "")
-              {<li><a href="/Photos/User/@Ichup.Config.getCookie("userid")" style="color:#ffffff;">My Image</a></li><li><a href="/Members/Profile" style="color:#ffffff;">Xin chào @Ichup.Config.getCookie("logged")</a></li><li><a href="/Members/Logout" style="color:#ffffff;">Thoát</a></li>}
-              else
-              {<li><a href="/Members/Register" style="color:#ffffff;">Đăng ký</a></li><li><a href="/Members/Login" style="color:#ffffff;">Đăng nhập</a></li>}
-                      
-            </ul>  <!-- end user-interaction -->
-          </div> <!-- end pull-right -->
-        </div> <!-- end container -->
-      </div> <!-- end navbar-inner -->
-    </div> <!-- end navbar-inverse-blue -->
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active">
+                        <a href="#"><i class="fa fa-user"></i> Đối tượng 1</a>
+                    </li>
+                    <li class="active">
+                        <a href="#">Đăng nhập</a>
+                    </li>
+                    <li class="active">
+                        <a href="#">Đăng ký</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header><!-- end header-->
 
     <!-- ============================  Navigation End ============================ -->
         <div id="body">
