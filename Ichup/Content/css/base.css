@@ -1,0 +1,328 @@
+/* CSS Document */
+
+
+@font-face {
+  font-family: 'San Francisco';
+  src: url('../fonts/SanFranciscoDisplay-Thin.eot?v=4.6.0');
+  src: url('../fonts/SanFranciscoDisplay-Thin.eot?#iefix&v=4.6.0') format('embedded-opentype'), url('../fonts/SanFranciscoDisplay-Thin.woff2?v=4.6.0') format('woff2'), url('../fonts/SanFranciscoDisplay-Thin.woff?v=4.6.0') format('woff'), url('../fonts/SanFranciscoDisplay-Thin.ttf?v=4.6.0') format('truetype'), url('../fonts/SanFranciscoDisplay-Thin.svg') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+body{
+    color: #000000;
+    font-size: 13px;
+    font-family: "San Francisco", Arial;
+    line-height: 1.8;
+    background-color: #ffffff;
+    width:100%;
+    margin:0px auto;
+}
+img {
+}
+a:focus {
+    text-decoration: none;
+}
+
+a {
+    color: #3cbac8;
+    text-decoration: none;
+}
+a:hover{
+    color:#299daa;
+    text-decoration: none;
+}
+
+
+
+/*navbar-header*/
+header .navbar-nav > li > a {
+ 
+    z-index: 1;
+    color:#676767;
+}
+header .nav > li > a:focus, .nav > li > a:hover {
+    text-decoration: none;
+    color: #FFFFFF;
+}
+header .navbar-nav > li > a:before {
+    
+}
+header .navbar-nav > li > a i{
+    font-size:16px;
+}
+
+
+header .navbar-nav > li.active > a:before {
+    /*content: "";*/
+}
+header .navbar-nav > li.active:hover > a {
+    color: #ffffff;
+}
+
+header .navbar-toggle .icon-bar {
+    background-color: #ffffff;
+}
+header .bs-docs-nav .navbar-header .navbar-toggle:focus, .bs-docs-nav .navbar-header .navbar-toggle:hover {
+    background-color: #f9f9f9;
+    border-color: #f9f9f9;
+}
+
+
+/* End - Header */
+
+/* Begin - Footer */
+footer
+{
+    background-color:#808080;
+    color:#e5e5e5;
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+footer .col-center
+{
+        float: none;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+footer ul
+{
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+footer ul > li
+{
+    padding-bottom: 15px;
+   
+}
+
+footer ul > li.item-top
+{
+    font-size: 30px;
+}
+
+footer ul > li.item-list-social
+{
+   
+}
+footer ul > li.item-list-social i
+{
+   font-size: 30px;
+   color: #ffffff;
+   padding-right: 5px;
+}
+
+
+footer ul > li a {
+        color:#ffffff;
+
+    }
+
+    footer ul > li a:hover {
+        color:#ffffff;
+
+    }
+
+
+footer .btn-totop
+{
+    margin-bottom: 40px;
+    background-color: rgba(255,255,255,0.2);
+    padding-top: 15px;
+    padding-bottom:15px;
+
+}
+
+footer .btn-totop img
+{
+    width: 18px;
+}
+footer .footer-logo
+{
+    padding: 5px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    color: #172A59;
+    background-color: #fff;
+}
+footer .footer-logo img
+{
+    width: 150px;
+}
+footer .bottom-footer
+{
+   
+}
+footer .bottom-footer .contact
+{
+        padding-top: 25px;
+    padding-bottom: 25px;
+        margin-bottom: 0;
+}
+footer .bottom-footer .copyright
+{
+    margin: 0;
+    padding-top: 18px;
+    padding-bottom: 170px;
+    background-color: #172A59;
+    color: #ffffff;
+}
+footer .form-login-index .checkbox label
+{
+    font-size: 13px;
+    color:#b6b4b4;
+}
+footer .form-login-index .div-submit
+{
+    text-align:center;
+}
+footer .form-login-index .div-submit .btn-submit
+{
+    background-color:#333333;
+    padding: 7px 25px;
+    border-style:none;
+
+}
+
+
+
+/* End - Footer */
+
+
+
+/* Begin - Section */
+
+section {
+}
+section .headimg {
+    position: relative;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
+
+
+section .container {
+    
+    padding-top: 20px;
+    padding-bottom: 50px;
+}
+
+section .headline, .headline-white {
+    margin-bottom: 0;
+}
+
+section .headline h2 {
+   margin: 40px 0 20px 0;
+    font-size: 45px;
+    color: #676767;
+    text-align:center;
+}
+section .headline h2 span {
+    color: #676767;
+    font-size: 14px;
+    float:right;
+}
+
+section .col-center
+{
+    float:none;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+/* End - Section */
+
+input[type=checkbox].css-checkbox {
+    position: absolute;
+    z-index: -1000;
+    left: -1000px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+}
+
+    input[type=checkbox].css-checkbox + label.css-label {
+        padding-left: 20px;
+        display: inline-block;
+        background-repeat: no-repeat;
+        background-position: 0 0;
+        vertical-align: middle;
+        cursor: pointer;
+        min-height: 15px;
+        line-height: 15px;
+    }
+
+    input[type=checkbox].css-checkbox:checked + label.css-label {
+        background-image: url('../img/cb_small_2.png');
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    }
+
+label.css-label {
+    background-image: url('../img/cb_small_1.png');
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    
+}
+
+
+
+input[type=checkbox].css-checkbox-big {
+    position: absolute;
+    z-index: -1000;
+    left: -1000px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+}
+
+    input[type=checkbox].css-checkbox-big + label.css-label-big {
+        padding-left: 30px;
+        display: inline-block;
+        background-repeat: no-repeat;
+        background-position: 0 0;
+        vertical-align: middle;
+        cursor: pointer;
+        min-height: 18px;
+    }
+
+    input[type=checkbox].css-checkbox-big:checked + label.css-label-big {
+        background-image: url('../img/cb_big_2.png');
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    }
+
+label.css-label-big {
+    background-image: url('../img/cb_big_1.png');
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
