@@ -14,6 +14,7 @@ namespace Ichup.Controllers
             //ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
             var p = (from q in db.images where q.status == 0 && q.price == 0 orderby q.total_views descending select q).OrderByDescending(o => o.total_views).Take(20).ToList();
             ViewBag.news = p;
+            
             return View();
         }
 
