@@ -328,6 +328,27 @@ namespace Ichup
                 return "";
             }
         }
+        public static string getCategory()
+        {
+            try
+            {
+                var p = (from q in db.categories orderby q.name select q.name).ToList();
+                string val = "";
+                
+                for (int i = 0; i < p.Count; i++)
+                {
+                    string name = p[i].ToUpperInvariant();
+                    
+                    val += "<li class=\"col-sm-4\"><a href=\"#\">"+name+"</a></li>";
+                    //if (i % 2 == 0) val += "<br>";
+                }
+                return val;
+            }
+            catch (Exception ex) {
+                return "";
+            }
+            
+        }
         //public static string getCategorySearch(string have)
         //{
         //    var p = (from q in db.categories orderby q.name select q.name).ToList();
