@@ -81,75 +81,108 @@
         </div>
         <!-- ============================  FOOTER START ============================ -->
 
-    <footer>
-      <div class="container">
-        <div class="row">
-          <div class="span4">
-            <div class="footer-widgets">
-              <h4 class="title">Về chúng tôi</h4>
-              <p class="description">
-                Bạn cần một bức ảnh chất lượng đúng nội dung mình đang tìm kiếm? Chúng tôi có những gì bạn cần, hãy tìm kiếm, download!
-              </p>
-              <a href="#" class="btn">Trở thành Partnership?</a>
-            </div> <!-- end footer-widgets -->
-          </div> <!-- end span4 -->
-          <div class="span3">
-            <div class="footer-widgets">
-              <h4 class="title">Liên hệ</h4>
-              <p class="description">
-               Công ty TNHH Nghệ thuật giải trí I-Chụp.Com
-              </p>
-              <h4 class="title">Gọi chúng tôi</h4>
-                <div class="row-fluid">
-                  <div class="span2">
-                    <i class="icon-tablet icon-4x"></i>
-                  </div>
-                  <div class="span10">
-                    <p>(08404) 123 456 79</p>
-                    <p>(08404) 123 357 79</p>
-                  </div>
-                </div>
-            </div> <!-- end footer-widgets -->
-          </div> <!-- end span3 -->
-            <div class="span3">
-              <div class="footer-widgets">
-                <h4 class="title">Nhận tin từ chúng tôi</h4>
-                <form class="subscribe">
-                  <fieldset>
-                    <input type="text" placeholder="Name">
-                    <input type="text" placeholder="Email">
-                    <button type="submit" class="btn">Subscribe</button>
-                  </fieldset>
-                </form>
-                
-              </div> <!-- end footer-widgets -->
-          </div> <!-- end span3 -->
-          <div class="span2">
-              <div class="footer-widgets">               
-                <h4 class="title">Social Networks</h4>
-                <ul class="unstyled inline">
-                  <li><a class="fc-webicon facebook" href="#"></a></li>
-                  <li><a class="fc-webicon twitter" href="#"></a></li>
-                  <li><a class="fc-webicon googleplus" href="#"></a></li>
-                </ul>
-              </div> <!-- end footer-widgets -->
-          </div> <!-- end span2 -->
-        </div> <!-- end row -->
-      </div> <!-- end container -->
-    </footer> <!-- end footer -->
+    <section class="contact-text-index" style="background-color:#4d4e4e">
+        <div class="container">
 
-    <div class="subfooter">
-      <div class="container">
-        <div class="row">
-          <div class="span1">
-            <a href="#" class="footer-logo"><img src="~/Content/img/logo2.png" alt="logo"></a>
-          </div> <!-- end span1 -->
-          <div class="span11">
-            <p class="copy">All contents &copy; copyright 2015 ichup.com, Inc. All rights reserved.</p>
-          </div> <!-- end span11 -->
-        </div> <!-- end row -->          
-      </div> <!-- end container -->
-    </div> <!-- end subfooter -->
+            <div class="row">
+                <div class="col-md-10 col-center">
+                    <div class="col-xs-12 col-sm-4 col-md-4 item-contact-index">
+                        <div class="images"><i class="fa fa-facebook-square"></i></div>
+                        <div class="title">Công ty Cổ phần sáng tạo</div>
+                        <div class="content-meta">Tầng 2, tòa nhà Kim Hoàn, ngõ 19 Duy Tân</div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-md-4 item-contact-index">
+                        <div class="images"><i class="fa fa-phone-square"></i></div>
+                        <div class="title">04.1900.8798</div>
+                        <div class="content-meta">Điện thoại hỗ trợ 24/7</div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-md-4 item-contact-index">
+                        <div class="images"><i class="fa fa-envelope-square"></i></div>
+                        <div class="title">Liên hệ</div>
+                        <div class="content-meta">bananhso@gmail.com</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-4 col-md-3 text-left">
+                    <ul>
+                        <li class="item-top"><a href="#">GIỚI THIỆU</a></li>
+                        <li><a href="#">Giới thiệu</a></li>
+                        <li><a href="#">Đăng ký</a></li>
+                        <li><a href="#">Bảng giá và hình thức thanh toán</a></li>
+                        <li><a href="#">Bản quyền và điều khoản sử dụng</a></li>
+                        <li><a href="#">Câu hỏi thường gặp</a></li>
+                    </ul>
+
+                    <ul>
+                        <li class="item-top"><a href="#">LIÊN KẾT</a></li>
+                        <li class="item-list-social">
+                            <a href="#"><i class="fa fa-facebook-square"></i></a>
+                            <a href="#"><i class="fa fa-twitter-square"></i></a>
+                            <a href="#"><i class="fa fa-google-plus-square"></i></a>
+                            <a href="#"><i class="fa fa-youtube-square"></i></a>
+                            <a href="#"><i class="fa fa-vimeo-square"></i></a>
+                        </li>
+
+                    </ul>
+
+                </div>
+                <div class="col-xs-12 col-sm-8 col-md-6 text-left">
+
+
+                    <ul class="row" style="margin:0 -15px">
+                        <li class="col-sm-12 item-top"><a href="#">ẢNH THEO CHỦ ĐỀ</a></li>
+                        @Html.Raw(@Ichup.Config.getCategory())
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-8 col-md-3 text-left">
+                    <ul>
+                        <li class="item-top"><a href="#">ĐĂNG KÝ</a></li>
+                    </ul>
+                    <form class="form-login-index">
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Tên đăng nhập">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Mật khẩu">
+                        </div>
+
+                        <div class="checkbox">
+                            <input type="checkbox" name="checkboxG6" id="checkboxG6" class="css-checkbox" /><label for="checkboxG6" class="css-label">Tôi đã đọc và đồng ý với <a href="#"> Bản quyền và điều khoản sử dụng</a> của website tenwebsitecom và đồng ý đăng ký</label>
+                        </div>
+                        <div class="div-submit">
+                            <button type="submit" class="btn-submit">Đăng ký</button>
+                        </div>
+
+                    </form>
+
+                </div>
+                <div class="clearfix"></div>
+
+                <div class="bottom-footer">
+                    <div class="col-xs-12 col-sm-12 text-left">
+                        © Bananhso.com. All rights reserved. Cơ quan chủ quản: Công ty cổ phần Sáng Tạo. Giấy phép số: 144/GP - BC do Bộ thông tin - Truyền thông cấp ngày 18/04/2007
+                    </div>
+
+
+
+                </div>
+            </div>
+
+        </div>
+    </footer><!-- end footer-->
+
+    <script src="js/script.js"></script>
 
 
     <!-- ============================  FOOTER ENDS ============================ -->
