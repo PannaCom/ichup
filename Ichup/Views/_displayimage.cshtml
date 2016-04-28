@@ -1,0 +1,127 @@
+﻿<div class="gallery-desc" id="imagepage" style="z-index:1001;display:none;top:20%;width:100%;left:0%;position:fixed;float:left;">
+                                    <div class="span12"><a onclick="closeimage();" style="float:right;color:#ffffff;cursor:pointer;font-size:25px;">X</a></div> 
+
+                                    <div class="col-xs-12 col-md-6">
+                                        <div class="images-big">
+                                            <img alt="#" id="image_source">
+                                            <div class="text-over">
+                                                <div class="col-xs-6 col-sm-4 col-md-3">
+                                                     ID# <span id="image_id"></span>
+                                                </div>
+                                                <div class="col-xs-6 col-sm-4 col-md-3">
+                                                    Tải ảnh <i class="fa fa-chevron-circle-down"></i>
+                                                </div>
+                                                <div class="col-xs-6 col-sm-4 col-md-3">
+                                                    Nhúng ảnh  <i class="fa fa-cloud-upload"></i>
+                                                </div>
+                                                <div class="col-xs-6 col-sm-4 col-md-3">
+                                                    Chia sẻ  <i class="fa fa-facebook-square"></i> <i class="fa fa-twitter-square"></i> <i class="fa fa-google-plus-square"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-6">
+                                        <div class="images-desc">
+
+                                            <div class="row">
+                                                <div class="col-xs-4 col-sm-3 col-md-3">
+                                                    Mô tả:
+                                                </div>
+                                                <div class="col-xs-8 col-sm-9 col-md-9">
+                                                    Cô gái uống cafe
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-4 col-sm-3 col-md-3">
+                                                    Mã số ảnh:
+                                                </div>
+                                                <div class="col-xs-8 col-sm-9 col-md-9">
+                                                    ID# 12882
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-4 col-sm-3 col-md-3">
+                                                    Từ khóa:
+                                                </div>
+                                                <div class="col-xs-8 col-sm-9 col-md-9" id="image_keyword">
+                                                    cô gái, cafe, buổi sáng @*<a href="#">xem tất cả <i class="fa fa-chevron-circle-right"></i></a>*@
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <table class="table">
+                                                        <tbody>
+                                                        <thead> <tr> <th>Cỡ ảnh</th> <th>Kích thước(pixel)</th> <th>Dung lượng(MB)</th> <th>Đơn giá(Vnđ)</th> </tr> </thead>
+                                                        <tr> <td>Nhỏ</td> <td>270x180</td> <td>25kb</td> <td>Miễn phí</td> </tr>
+                                                        <tr> <td>Trung bình</td> <td>570x363</td> <td>35kb</td> <td>Miễn phí</td> </tr>
+                                                        <tr> <td>Ảnh gốc</td> <td id="image_width_height">8790x1930</td> <td>12mb</td> <td>1.000.000</td> </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="row table-desc">
+                                                <div class="arrow-table-desc"></div>
+
+                                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                                    Tiết kiệm 800.000 với gói <a href="#"> Basic</a>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                                    Giá chỉ 200.000 một ảnh
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+
+                                                    <div class="col-xs-12 col-sm-4 col-md-4 btn1-images-desc">Mua ảnh ngay</div>
+                                                    <div class="col-xs-12 col-sm-4 col-md-4 btn2-images-desc"><a href="#"> Lưu để mua sau <i class="fa fa-chevron-circle-down"></i></a></div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+
+                                    <ul class="col-xs-12 col-md-12 title-images-list">
+                                        <li class="active"><a href="#">Ảnh cùng tác giả</a></li>
+                                        <li><a href="#">Ảnh cùng loại</a></li>
+
+                                    </ul>
+
+
+                                    <div class="col-xs-12 col-md-12 images-list">
+                                        @*<div class="col-xs-6 col-sm-4 col-md-2 images-list-item">
+                                            <div class="images-list-item-thumb img-resize"><a href="#"><img src="/img/t1.jpg" alt="#"></a></div>
+                                        </div>
+                                        <div class="col-xs-6 col-sm-4 col-md-2 images-list-item">
+                                            <div class="images-list-item-thumb img-resize"><a href="#"><img src="/img/t2.jpg" alt="#"></a></div>
+                                        </div>
+
+                                        <div class="col-xs-6 col-sm-4 col-md-2 images-list-item">
+                                            <div class="images-list-item-thumb img-resize"><a href="#"><img src="/img/t3.jpg" alt="#"></a></div>
+                                        </div>
+                                        <div class="col-xs-6 col-sm-4 col-md-2 images-list-item">
+                                            <div class="images-list-item-thumb img-resize"><a href="#"><img src="/img/t4.jpg" alt="#"></a></div>
+                                        </div>
+                                        <div class="col-xs-6 col-sm-4 col-md-2 images-list-item">
+                                            <div class="images-list-item-thumb img-resize"><a href="#"><img src="/img/t5.jpg" alt="#"></a></div>
+                                        </div>
+
+
+
+                                        <div class="col-xs-6 col-sm-4 col-md-2 images-list-item">
+
+                                            <div class="images-list-item-thumb img-resize">
+                                                <div class="text-over">
+                                                    Xem tất cả
+                                                </div>
+                                                <a href="#"><img src="img/ind-post-03.jpg" alt="#"></a>
+                                            </div>
+                                        </div>*@
+
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+<script>function closeimage() { $("#imagepage").hide(); }</script>
