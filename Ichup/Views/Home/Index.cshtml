@@ -122,11 +122,12 @@ Sau khi mô tả kỹ bức ảnh bạn cần, chúng tôi sẽ liên hệ với
 
             </ul>
             <div class="clearfix"></div>
-
-            <div class="list-post-index row">
+            
+            <div class="list-post-index row list-gallery-index-08">
+                @Html.Partial("~/Views/_displayimage.cshtml")
                 @foreach (var item in ViewBag.news) { 
                     <div class="col-xs-12 col-sm-4 col-md-3 post-item">
-                        <div class="post-item-thumb img-resize"><a href="#"><img src="@Ichup.Config.domain/@item.link_thumbail_small" alt="#"></a></div>
+                        <div class="post-item-thumb img-resize"><a href="#" onclick="imagepage(@item.id)"><img src="@Ichup.Config.domain/@item.link_thumbail_small" alt="#"></a></div>
                         <div class="post-item-info">
                             <h3 class="post-item-title"><a href="#">Menu 1</a></h3>
                             <div class="post-item-meta">@item.keywords</div>
