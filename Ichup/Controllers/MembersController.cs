@@ -51,6 +51,7 @@ namespace Ichup.Controllers
             return View(m);
         }
         public ActionResult Login() {
+            //ViewBag.id = 0;
             return View();
         }
         public string checkLogin(string name,string pass) {
@@ -185,7 +186,7 @@ namespace Ichup.Controllers
         {
             try
             {
-                bool p = db.members.Any(o => o.name.Contains(name));
+                bool p = db.members.Any(o => o.name.Equals(name));
                 if (p) return "1";
                 else return "0";
             }

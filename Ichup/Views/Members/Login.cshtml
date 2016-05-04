@@ -2,58 +2,191 @@
     ViewBag.Title = "Login";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<section class="picture-categories">
-
-      <div class="container">
-        <div class="row">
-          <div class="span12">
-            <div class="single-image-container">
-              
-            </div> <!-- end single-image-container -->
-          </div> <!-- end span12 -->
-
-        </div> <!-- end row -->
-
-        <div class="single-image-title">
-          <div class="row">
-            <div class="span6">
-              <h4 class="title">Đăng Nhập Thành Viên</h4>
-            </div> <!-- end span6 -->
-            <div class="span6">
-              <a href="#" class="btn pull-right">Bán ảnh</a>
-            </div> <!-- end span6 -->
-          </div> <!-- end row -->
-        </div> <!-- end single-image-title -->
-      </div> <!-- end container -->
-
-    </section> <!-- end picture-categories -->
 
 
 
-    <!-- ============================  Categories End ============================ -->
 
-    <!-- ============================  Image Decription Starts ============================ -->
+    <section class="section-05">
+        <div class="container">
+            <div class="col-md-12">
+                <div class="headline">
+                    <h2>
+                        Đăng Ký - Đăng Nhập Thành Viên
+                    </h2>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 padding-horizontal-60 border-right">
+                        <div class="headline">
+                            <h3>
+                                Đăng ký tài khoản
+                            </h3>
+                        </div>
+                        <form class="form-login-index">
+                            <div class="form-group">
+                                <input class="form-control" id=name name=name type="text" placeholder="Tên đăng nhập" onblur="checkExist();">
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" id=email name=email type="text" placeholder="Email">
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" id=pass name=pass type="password" placeholder="Mật khẩu">
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" id=pass2 name=pass2 type="password" placeholder="Nhập lại mật khẩu">
+                            </div>
+                            <div class="form-group">
+                                <a @*href="@Url.Action("SignUp")"*@> 
+                                      <img alt="Captcha" src="@Url.Action("CaptchaImage")" style="" border="1"/> 
+                                  </a> 
+                                  nhập mã bảo mật(chứng minh bạn không phải robot):<input type="text" id="captchaText" name="captchaText" class="form-control" style="border:1px solid #808080;">
+                            </div>
+                            <div class="checkbox">
+                                <input type="checkbox" name="agree" id="agree" /><label for="checkboxG6" class="css-label">Tôi đã đọc và đồng ý với <a href="#"> Bản quyền và điều khoản sử dụng</a> của website bananhso.com và đồng ý đăng ký</label>
+                            </div>
+                            <div class="div-submit">
+                                <button type=button value="Đăng ký" onclick="AddNew();" id="btnSA" class="btn-submit">Đăng ký</button>
+                            </div>
+
+                        </form>
+                    </div>
+
+                    <div class="col-sm-6 padding-horizontal-60">
+                        <div class="headline">
+                            <h3>
+                                Đã có tài khoản? <a href="#">Đăng nhập</a>
+                            </h3>
 
 
-    <section class="image-decription-container">
-      <div class="container">
-        <div class="row">
-          <div class="span12">
-            <figure>
-              <input class="span10"  id=name name=name type="text" placeholder="tên truy cập">
-			  <input class="span10"  id=pass name=pass type="password" placeholder="mật khẩu">			 
-			  <input class="span10" type=button value="Đăng nhập" onclick="Login();" id="btnSA">
-              <a class="span10" href="/Members/Register" style="text-align:center;">Đăng ký thành viên(nếu chưa có account)</a>  
-              <a class="span10" href="/Members/Reset" style="text-align:center;">Quên mật khẩu</a>  
-            </figure>
-          </div> <!-- end span6 -->
-          
-        </div> <!-- end row -->
-      </div> <!-- end container -->
-    </section> <!-- end image-description-container -->
+                        </div>
+                        <form class="form-login-index">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id=name name=name placeholder="Tên đăng nhập">
+                            </div>
 
-  <!-- ============================  Image Decription Ends ============================ -->
+                            <div class="form-group">
+                                <input type="password" class="form-control" id=pass name=pass  placeholder="Mật khẩu">
+                            </div>
+
+
+                            <div class="div-submit">
+                                <button onclick="Login();" id="btnSA" class="btn-submit">Đăng nhập</button>
+                            </div>
+                            <div class="change-pass"><a href="/Members/Reset">Quên mật khẩu?</a></div>
+                        </form>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section><!-- end calendar-->
 <script>
+    var duplicate=false;
+    function checkExist(){
+        var formdata = new FormData(); //FormData object
+        var name = document.getElementById("name").value;
+        formdata.append("name", name);
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/members/checkExist');
+        xhr.send(formdata);        
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                if (xhr.responseText == "1") {
+                    //alert("ok");
+                    duplicate=true;       
+                    alert("User này đã có người dùng");
+                    //$("#notice1").html("&nbsp;* User này đã có người dùng");
+                } else {
+                    duplicate=false;
+                    //$("#notice1").html("");
+                }
+            }
+
+        }
+    }
+    function AddNew() {
+        var formdata = new FormData(); //FormData object
+        var name = document.getElementById("name").value;
+        var pass = document.getElementById("pass").value;
+        var pass2 = document.getElementById("pass2").value;
+        var email = document.getElementById("email").value;
+        var phone = "";
+        var address = "";
+        var passport = "";
+        var captcha = document.getElementById("captchaText").value;
+        //var type1 = document.getElementById("type1").checked;
+        //var type2 = document.getElementById("type2").checked;
+        //var type3 = document.getElementById("type3").checked;
+        var type=1;
+        //if (type1) {type=0;}
+        //else
+        //    if (type2) {type=1;}
+        //    else
+        //        if (type3) {type=2;}
+        if (duplicate) {
+            alert("User đã có người dùng, chọn tên khác");
+            return;
+        }
+        if (name == "") {
+            alert("Nhập tên truy cập");
+            return;
+        }
+        if (pass == "") {
+            alert("Nhập mật khẩu");
+            return;
+        }
+        if (pass != pass2) {
+            alert("Nhập mật khẩu không khớp nhau");
+            return;
+        }
+        if (email == "") {
+            alert("Nhập email");
+            return;
+        }
+        
+        if (captcha == "") {
+            alert("Nhập mã an ninh");
+            return;
+        }
+        if (document.getElementById("agree").checked==false){
+            alert("Bạn phải click vào Tôi đã đọc và đồng ý với Bản quyền và điều khoản sử dụng của website bananhso.com!");
+            return;
+        }
+        document.getElementById("btnSA").disabled = true;
+        formdata.append("name", name);
+        formdata.append("pass", pass);
+        formdata.append("email", email);
+        formdata.append("phone", phone);
+        formdata.append("address", address);
+        formdata.append("passport", passport);
+        formdata.append("captcha", captcha);
+        formdata.append("type", type);
+        formdata.append("id",0);
+        
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/members/Update');
+        xhr.send(formdata);
+        var content = "";
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                if (xhr.responseText != "0" && xhr.responseText != "-1") {
+                    //updateGI(xhr.responseText);
+                    //updatePrice(xhr.responseText);
+                    alert("Bạn đã đăng ký thành công! Xin đăng nhập tại trang này!");
+                    window.location.href = "/Members/Login";
+                } else {
+                    document.getElementById("btnSA").disabled = false;
+                    if (xhr.responseText == "-1"){
+                        alert("Bạn đã nhập mã an ninh không đúng");
+                        return;
+                    }
+                    alert("Có lỗi trong quá trình cập nhật dữ liệu! Bạn");
+                }
+            }
+
+        }
+    }
+
     function Login() {
         var formdata = new FormData(); //FormData object
         var name = document.getElementById("name").value;
