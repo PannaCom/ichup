@@ -26,5 +26,11 @@ namespace Ichup.Models
         public Nullable<System.DateTime> date_reg { get; set; }
         public Nullable<short> type { get; set; }
         public string token { get; set; }
+        public Nullable<System.DateTime> birthday { get; set; }
+        public string full_name { get; set; }
+        public string bank_account_full_name { get; set; }
+        public string bank_account_number { get; set; }
+        public string bank_name { get; set; }
+        public string bank_agency_name { get; set; }
     }
 }

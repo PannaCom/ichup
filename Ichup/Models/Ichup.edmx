@@ -9,6 +9,8 @@
           <EntitySet Name="category" EntityType="ichupModel.Store.category" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="images" EntityType="ichupModel.Store.images" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="members" EntityType="ichupModel.Store.members" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="members_price_pack" EntityType="ichupModel.Store.members_price_pack" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="price_pack" EntityType="ichupModel.Store.price_pack" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="sales_log" EntityType="ichupModel.Store.sales_log" store:Type="Tables" Schema="dbo" />
         </EntityContainer>
         <EntityType Name="category">
@@ -23,6 +25,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="nvarchar" MaxLength="368" />
           <Property Name="keywords" Type="nvarchar" MaxLength="688" />
           <Property Name="cat_id" Type="int" />
           <Property Name="link" Type="nvarchar" MaxLength="150" />
@@ -68,6 +71,30 @@
           <Property Name="date_reg" Type="datetime" />
           <Property Name="type" Type="smallint" />
           <Property Name="token" Type="nvarchar" MaxLength="150" />
+          <Property Name="birthday" Type="datetime" />
+          <Property Name="full_name" Type="nvarchar" MaxLength="501" />
+          <Property Name="bank_account_full_name" Type="nvarchar" MaxLength="351" />
+          <Property Name="bank_account_number" Type="nvarchar" MaxLength="150" />
+          <Property Name="bank_name" Type="nvarchar" MaxLength="351" />
+          <Property Name="bank_agency_name" Type="nvarchar" MaxLength="551" />
+        </EntityType>
+        <EntityType Name="members_price_pack">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="member_id" Type="int" />
+          <Property Name="price_pack_id" Type="int" />
+        </EntityType>
+        <EntityType Name="price_pack">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="pack_name" Type="nvarchar" MaxLength="150" />
+          <Property Name="pack_price" Type="decimal" Precision="12" />
+          <Property Name="months" Type="int" />
+          <Property Name="daily_limited" Type="int" />
         </EntityType>
         <EntityType Name="sales_log">
           <Key>
@@ -87,6 +114,8 @@
           <EntitySet Name="sales_log" EntityType="ichupModel.sales_log" />
           <EntitySet Name="images" EntityType="ichupModel.image" />
           <EntitySet Name="members" EntityType="ichupModel.member" />
+          <EntitySet Name="members_price_pack" EntityType="ichupModel.members_price_pack" />
+          <EntitySet Name="price_pack" EntityType="ichupModel.price_pack" />
         </EntityContainer>
         <EntityType Name="category">
           <Key>
@@ -109,6 +138,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Type="Int64" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="name" MaxLength="368" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="keywords" MaxLength="688" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="cat_id" />
           <Property Type="String" Name="link" MaxLength="150" FixedLength="false" Unicode="true" />
@@ -154,6 +184,30 @@
           <Property Type="DateTime" Name="date_reg" Precision="3" />
           <Property Type="Int16" Name="type" />
           <Property Type="String" Name="token" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="birthday" Precision="3" />
+          <Property Type="String" Name="full_name" MaxLength="501" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="bank_account_full_name" MaxLength="351" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="bank_account_number" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="bank_name" MaxLength="351" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="bank_agency_name" MaxLength="551" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="members_price_pack">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int64" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="member_id" />
+          <Property Type="Int32" Name="price_pack_id" />
+        </EntityType>
+        <EntityType Name="price_pack">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int32" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="pack_name" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="Decimal" Name="pack_price" Precision="12" Scale="0" />
+          <Property Type="Int32" Name="months" />
+          <Property Type="Int32" Name="daily_limited" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -210,6 +264,7 @@
                 <ScalarProperty Name="link" ColumnName="link" />
                 <ScalarProperty Name="cat_id" ColumnName="cat_id" />
                 <ScalarProperty Name="keywords" ColumnName="keywords" />
+                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -217,6 +272,12 @@
           <EntitySetMapping Name="members">
             <EntityTypeMapping TypeName="ichupModel.member">
               <MappingFragment StoreEntitySet="members">
+                <ScalarProperty Name="bank_agency_name" ColumnName="bank_agency_name" />
+                <ScalarProperty Name="bank_name" ColumnName="bank_name" />
+                <ScalarProperty Name="bank_account_number" ColumnName="bank_account_number" />
+                <ScalarProperty Name="bank_account_full_name" ColumnName="bank_account_full_name" />
+                <ScalarProperty Name="full_name" ColumnName="full_name" />
+                <ScalarProperty Name="birthday" ColumnName="birthday" />
                 <ScalarProperty Name="token" ColumnName="token" />
                 <ScalarProperty Name="type" ColumnName="type" />
                 <ScalarProperty Name="date_reg" ColumnName="date_reg" />
@@ -228,6 +289,26 @@
                 <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="pass" ColumnName="pass" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="members_price_pack">
+            <EntityTypeMapping TypeName="ichupModel.members_price_pack">
+              <MappingFragment StoreEntitySet="members_price_pack">
+                <ScalarProperty Name="price_pack_id" ColumnName="price_pack_id" />
+                <ScalarProperty Name="member_id" ColumnName="member_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="price_pack">
+            <EntityTypeMapping TypeName="ichupModel.price_pack">
+              <MappingFragment StoreEntitySet="price_pack">
+                <ScalarProperty Name="daily_limited" ColumnName="daily_limited" />
+                <ScalarProperty Name="months" ColumnName="months" />
+                <ScalarProperty Name="pack_price" ColumnName="pack_price" />
+                <ScalarProperty Name="pack_name" ColumnName="pack_name" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

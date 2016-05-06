@@ -11,14 +11,14 @@
             <div class="col-md-12">
                 <div class="headline">
                     <h2>
-                        Dành Cho Người Dùng
+                        Đăng Ký - Đăng Nhập Thành Viên
                     </h2>
                 </div>
                 <div class="row">
                     <div class="col-sm-6 padding-horizontal-60 border-right">
                         <div class="headline">
                             <h3>
-                                Đăng Ký Mua Ảnh
+                                Đăng ký tài khoản
                             </h3>
                         </div>
                         <form class="form-login-index">
@@ -40,9 +40,9 @@
                                   </a> 
                                   nhập mã bảo mật(chứng minh bạn không phải robot):<input type="text" id="captchaText" name="captchaText" class="form-control" style="border:1px solid #808080;">
                             </div>
-                            <div class="checkbox">
+                          @*  <div class="checkbox">
                                 <input type="checkbox" name="agree" id="agree" /><label for="checkboxG6" class="css-label">Tôi đã đọc và đồng ý với <a href="#"> Bản quyền và điều khoản sử dụng</a> của website bananhso.com và đồng ý đăng ký</label>
-                            </div>
+                            </div>*@
                             <div class="div-submit">
                                 <button type=button value="Đăng ký" onclick="AddNew();" id="btnSA" class="btn-submit">Đăng ký</button>
                             </div>
@@ -80,6 +80,72 @@
             </div>
         </div>
     </section><!-- end calendar-->
+    <section class="section-05">
+        <div class="container">
+            <div class="col-md-12 col-center">
+
+                <div class="row">
+                    <div class="col-sm-6 padding-horizontal-60 border-right">
+                        <div class="headline-4">
+                            <h3>
+                                Thông tin cá nhân
+                            </h3>
+
+                            <h5>dấu (*) là thông tin bắt buộc</h5>
+
+                        </div>
+                        <form class="form-login-index">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="full_name" placeholder="Họ và tên">
+                            </div>
+                            <div class="form-group">
+                                <input type="date" class="form-control" id="birthday" placeholder="Ngày tháng năm sinh">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="passport" placeholder="Số chứng minh thư hoặc hộ chiếu">
+                            </div>
+                            <div class="form-group">
+                                <textarea placeholder="Địa chỉ nhà riêng" id="address"></textarea>
+                            </div>
+
+                            <input type="checkbox" name="agree" id="agree" /><label for="checkboxG6" class="css-label">Tôi đã đọc và đồng ý với <a href="#"> Bản quyền và điều khoản sử dụng</a> của website bananhso.com và đồng ý đăng ký</label>
+                            <div class="div-submit">
+                                <button type=button value="Đăng ký" onclick="AddNew();" id="btnSA" class="btn-submit">Tạo tài khoản</button>
+                            </div>
+
+
+                        </form>
+                    </div>
+
+                    <div class="col-sm-6 padding-horizontal-60">
+                        <div class="headline-4">
+                            <h5>Trong trường hợp bạn muốn chúng tôi chuyển khoản tiền cho bạn</h5>
+                        </div>
+                        <form class="form-login-index">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="bank_account_full_name" placeholder="Tên chủ tài khoản">
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="bank_account_number" placeholder="Số tài khoản">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="bank_name" placeholder="Mở tại ngân hàng">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="bank_agency_name" placeholder="Chi nhánh">
+                            </div>
+
+
+
+                        </form>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
 <script>
     var duplicate=false;
     function checkExist(){

@@ -54,6 +54,11 @@ namespace Ichup.Controllers
             //ViewBag.id = 0;
             return View();
         }
+        public ActionResult Login2()
+        {
+            //ViewBag.id = 0;
+            return View();
+        }
         public string checkLogin(string name,string pass) {
             MD5 md5Hash = MD5.Create();
             pass = Config.GetMd5Hash(md5Hash, pass);

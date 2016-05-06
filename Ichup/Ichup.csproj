@@ -284,6 +284,12 @@
     <Compile Include="Models\member.cs">
       <DependentUpon>Ichup.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\members_price_pack.cs">
+      <DependentUpon>Ichup.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\price_pack.cs">
+      <DependentUpon>Ichup.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\sales_log.cs">
       <DependentUpon>Ichup.tt</DependentUpon>
     </Compile>
@@ -1474,6 +1480,7 @@
     <Content Include="Views\Members\Index.cshtml" />
     <Content Include="Views\Members\Reset.cshtml" />
     <Content Include="Views\_displayimage.cshtml" />
+    <Content Include="Views\Members\Login2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
