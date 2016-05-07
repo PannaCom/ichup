@@ -396,6 +396,17 @@ namespace Ichup
             // Return the hexadecimal string. 
             return sBuilder.ToString();
         }
+        public static DateTime convertDateTime(string date){
+            try
+            {
+                DateTime date2 = DateTime.Now;
+                DateTime.TryParse(date, out date2);
+                return date2;
+            }
+            catch (Exception ex) {
+                return DateTime.Now;
+            }
+        }
         public static string mail(string from, string to, string topic, string pass, string content)
         {
             try
