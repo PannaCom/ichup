@@ -105,6 +105,9 @@
                                 <input type="text" class="form-control" id="passport" placeholder="Số chứng minh thư hoặc hộ chiếu">
                             </div>
                             <div class="form-group">
+                                <input type="text" class="form-control" id="phone" placeholder="Số điện thoại">
+                            </div>
+                            <div class="form-group">
                                 <textarea placeholder="Địa chỉ nhà riêng" id="address"></textarea>
                             </div>
 
@@ -176,14 +179,21 @@
         var pass = document.getElementById("pass").value;
         var pass2 = document.getElementById("pass2").value;
         var email = document.getElementById("email").value;
-        var phone = "";
-        var address = "";
-        var passport = "";
+        var phone = document.getElementById("phone").value;
+        var full_name = document.getElementById("full_name").value;
+        var birthday = document.getElementById("birthday").value;
+        var passport = document.getElementById("passport").value;
+        var address = document.getElementById("address").value;
+        var bank_account_full_name = document.getElementById("bank_account_full_name").value;
+        var bank_account_number = document.getElementById("bank_account_number").value;
+        var bank_name = document.getElementById("bank_name").value;
+        var bank_agency_name = document.getElementById("bank_agency_name").value;
+
         var captcha = document.getElementById("captchaText").value;
         //var type1 = document.getElementById("type1").checked;
         //var type2 = document.getElementById("type2").checked;
         //var type3 = document.getElementById("type3").checked;
-        var type=1;
+        var type=0;// bán ảnh
         //if (type1) {type=0;}
         //else
         //    if (type2) {type=1;}
@@ -223,14 +233,20 @@
         formdata.append("pass", pass);
         formdata.append("email", email);
         formdata.append("phone", phone);
-        formdata.append("address", address);
+        formdata.append("full_name", full_name);
+        formdata.append("birthday", birthday);
         formdata.append("passport", passport);
+        formdata.append("address", address);
+        formdata.append("bank_account_full_name", bank_account_full_name);
+        formdata.append("bank_account_number", bank_account_number);
+        formdata.append("bank_name", bank_name);
+        formdata.append("bank_agency_name", bank_agency_name);
         formdata.append("captcha", captcha);
         formdata.append("type", type);
         formdata.append("id",0);
         
         var xhr = new XMLHttpRequest();
-        xhr.open('POST', '/members/Update');
+        xhr.open('POST', '/members/Update2');
         xhr.send(formdata);
         var content = "";
         xhr.onreadystatechange = function () {

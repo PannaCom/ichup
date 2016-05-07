@@ -187,6 +187,68 @@ namespace Ichup.Controllers
             return "1";
         }
         [HttpPost]
+        public string Update2(string name, string pass, string email, string phone, string address, string passport, string captcha, byte? type, int id, string full_name, string birthday, string bank_account_full_name, string bank_account_number, string bank_name, string bank_agency_name)
+        {
+            MD5 md5Hash = MD5.Create();
+            try
+            {
+                if (id == 0)
+                {
+                    if (Session["Captcha"] != null && Session["Captcha"].ToString() != captcha)
+                    {
+                        return "-1";
+                    }
+                    pass = Config.GetMd5Hash(md5Hash, pass);
+                    member mb = new member();
+                    mb.name = name;
+                    mb.pass = pass;
+                    mb.email = email;
+                    mb.phone = phone;
+                    mb.address = address;
+                    mb.passport = passport;
+                    mb.total_views = 0;
+                    mb.type = type;
+                    mb.date_reg = DateTime.Now;
+                    mb.full_name=full_name;
+                    mb.birthday=Config.convertDateTime(birthday);
+                    mb.bank_account_full_name=bank_account_full_name;
+                    mb.bank_account_number=bank_account_number;
+                    mb.bank_name=bank_name;
+                    mb.bank_agency_name = bank_agency_name;
+                    db.members.Add(mb);
+                    db.SaveChanges();
+                    return mb.id.ToString();
+
+                }
+                else
+                {
+                    if (!Config.getCookie("userid").Equals(id.ToString())) return "0";
+                    member mb = db.members.Find(id);
+                    //pass = Config.GetMd5Hash(md5Hash, pass);                    
+                    //mb.pass = pass;
+                    mb.email = email;
+                    mb.phone = phone;
+                    mb.address = address;
+                    mb.passport = passport;
+                    mb.type = type;
+                    mb.full_name = full_name;
+                    mb.birthday = Config.convertDateTime(birthday);
+                    mb.bank_account_full_name = bank_account_full_name;
+                    mb.bank_account_number = bank_account_number;
+                    mb.bank_name = bank_name;
+                    mb.bank_agency_name = bank_agency_name;
+                    db.Entry(mb).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return id.ToString();
+                }
+            }
+            catch (Exception ex)
+            {
+                return "0";
+            }
+            return "1";
+        }
+        [HttpPost]
         public string checkExist(string name)
         {
             try
