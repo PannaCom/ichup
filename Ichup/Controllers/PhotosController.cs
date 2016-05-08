@@ -164,6 +164,7 @@ namespace Ichup.Controllers
             int countFile = Request.Files.Count;
             string fullPath = physicalPath + System.IO.Path.GetFileName(nameFile);
             string new_id = "";
+            string basicname = "";
             for (int i = 0; i < countFile; i++)
             {
                 if (!Config.IsImage(Request.Files[i])) return Config.ImagePath + "/invalidimage.png";
@@ -171,9 +172,9 @@ namespace Ichup.Controllers
                 //{
                 //    System.IO.File.Delete(fullPath);
                 //}
-                string basicname = Request.Files[i].FileName;
+                basicname = Request.Files[i].FileName;
                 basicname = Config.removeSpecialCharName(basicname);
-                if (!autoname) basicname = "";
+                //if (!autoname) basicname = "";
                 Request.Files[i].SaveAs(fullPath);
                 var test = System.Drawing.Image.FromFile(fullPath);
                 FileInfo f = new FileInfo(fullPath);
@@ -244,7 +245,7 @@ namespace Ichup.Controllers
             }).Save(w2);
             
             iFF = null;
-            return path1 + ":" + new_id;// Config.ImagePath + "/" + nameFile;
+            return path1 + ":" + new_id + ":" + basicname;// Config.ImagePath + "/" + nameFile;
         }
         public string resizeImage(byte type,string fullPath, string path)
         {

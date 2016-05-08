@@ -2,10 +2,113 @@
     ViewBag.Title = "Upload";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<section class="search-index-08">
+        <div class="container">
+            <div class="col-md-12">
+                <ul class="post-menu-cat">
+                    <li class="active"><a class="col-xs-12 col-sm-4 col-md-2" href="#">Upload ảnh/Video</a></li>
+                    <li><a class="col-xs-12 col-sm-4 col-md-2" href="#">Gán từ khóa</a></li>
+                    <li><a class="col-xs-12 col-sm-4 col-md-2" href="#">Quản lý ảnh/Video</a></li>
+                    <li><a class="col-xs-12 col-sm-4 col-md-2" href="#">Lịch sử ảnh đã mua</a></li>
+                    <li><a class="col-xs-12 col-sm-4 col-md-2" href="#">Thông tin thanh toán</a></li>
+                    <li><a class="col-xs-12 col-sm-4 col-md-2" href="#">Quản lý tài khoản</a></li>
 
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="section-02">
+        <div class="container">
+            <div class="headline">
+                <h1>
+                    Upload ảnh của bạn
+                </h1>
+            </div>
+            <div class="bg-11">
+                <div class="col-md-12 col-center">
+                    <div class="col-md-5 col-center">
+                        <div > Chọn file ảnh để upload(có thể chọn nhiều file một lúc)<input type="file" name="imageFile" id="imageFile" multiple="multiple"  runat="server" onchange="uploadProcess();">
+                        <div  id="notice"></div>
+                    </div>
+                    <div class="gallery-index-08">
+
+                        <div id="gallery-respon" class="col-md-12">
+
+                            <div class="clearfix"></div>
+
+                            <div class="list-gallery-index-08 row">
+
+                                <div class="col-xs-12 col-sm-6 col-md-2 gallery-item" id="divPR1">
+                                    
+
+                                </div>
+                            </div>
+
+                            <div class="clearfix"></div>
+                            
+                        </div>
+
+                        <div class="clearfix"></div>
+                    </div>
+                   
+                </div>
+            </div>
+            <div class="footer-11">
+                <div class="col-md-3 col-md-offset-3">
+                    <div class="checkbox">
+                        <input type="checkbox" name="checkboxG6" id="checkboxG6" class="css-checkbox" /><label for="checkboxG6" class="css-label">Tôi đã đọc và đồng ý với <a href="#"> Bản quyền và điều khoản sử dụng</a> của website bananhso.com và đồng ý đăng ký</label>
+                    </div>
+                </div>
+
+                <div class="col-md-3 submit-11">
+                    <div class="div-submit">
+                        <button type="button" class="btn-submit">Thực hiện lệnh</button>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="section-02">
+        <div class="container">
+            <div class="col-md-12 col-center">
+                
+                <div class="row">
+
+                    @*<div class="col-md-4 item-section-02">
+                        <div class="images"><i class="fa fa-cloud-upload"></i></div>
+                        <div class="title">Lorem ipsum dolor sit ame</div>
+                        <div class="content-meta">Lorem ipsum dolor sit amet, consectetur adipiscing elit, <a href="#">Hướng dẫn tại đây</a> </div>
+                    </div>
+                    <div class="col-md-4 item-section-02 border-lr-1">
+                        <div class="images"><i class="fa fa-image"></i></div>
+                        <div class="title">Lorem ipsum dolor sit ame</div>
+                        <div class="content-meta">Lorem ipsum dolor sit amet, consectetur adipiscing elit, <a href="#">Hướng dẫn tại đây</a> </div>
+                    </div>
+                    <div class="col-md-4 item-section-02">
+                        <div class="images"><i class="fa fa-comments"></i></div>
+                        <div class="title">Lorem ipsum dolor sit ame</div>
+                        <div class="content-meta">
+                            <div class="hotline"><i class="fa fa-phone-square"></i> 0900 000 000</div>
+
+                            <div class="face-book"><i class="fa fa-facebook-square"></i> tentrangwweb</div>
+
+                        </div>
+                    </div>*@
+
+                </div>
+            </div>
+        </div>
+    </section>
 <!-- ============================  Categories Start ============================ -->
 
-    <section class="picture-categories">
+    @*<section class="picture-categories">
 
       <div class="container">
         <div class="row">
@@ -57,7 +160,7 @@
                       - Các từ khóa của mỗi ảnh ngăn cách nhau bởi dấu ,
                   </p>  
           <input type="file" name="imageFile" id="imageFile" multiple="multiple"  runat="server" onchange="uploadProcess();">
-          @*<input type="checkbox" id="autoname" name="autoname"/>  Tự động lấy tên ảnh làm tag từ khóa*@
+          <input type="checkbox" id="autoname" name="autoname"/>  Tự động lấy tên ảnh làm tag từ khóa
           <div style="display:block;float:left;position:relative;width:100%;" id="divPR1">
               
           </div>
@@ -67,7 +170,7 @@
           </p>
         </div> <!-- end row -->
       </div> <!-- end container -->
-    </section> <!-- end image-description-container -->
+    </section> <!-- end image-description-container -->*@
 
   <!-- ============================  Image Decription Ends ============================ -->
 <script>
@@ -79,12 +182,17 @@
     function uploadProcess() {
        
         for (i = totalItemImage+1; i < fileInput.files.length + totalItemImage+1; i++) {
-            var pr = "<div style=\"background-color:#ffffff;width:200px;height:auto;display:block;possition:relative;float:left;margin-right:5px;margin-bottom:1px;\">";
-            pr += "<div id=img_" + i + " class=\"progressbar\" style=\"background-color:#fff;margin-top:5px;width:200px;height:126px;display:block;possition:relative;float:left;\">";
-            pr += "<div id=\"progresslabel" + i + "\" class=\"progressbarlabel\" style=\"background-color:green;width:1px;height:9px;display:block;possition:relative;float:left;\">uploading...</div>";
-            pr += "</div>";
-            pr += "<div style=\"background-color:#ffffff;width:200px;height:auto;display:block;possition:relative;float:left;margin-top:2px;\">Từ khóa<textarea id=keyword_" + i + " placeholder=\"Nhập từ khóa\" style=\"width:100%;\"  class=\"example\" rows=\"1\"></textarea><input type=hidden id=id_" + i + "></div>";//Giá bán<input type=text id=price_" + i + " placeholder=\"Nhập giá\" onblur=\"checkPrice(this);\">
-            pr += "</div>";
+            //var pr = "<div style=\"background-color:#ffffff;width:200px;height:auto;display:block;possition:relative;float:left;margin-right:5px;margin-bottom:1px;\">";
+            //pr += "<div id=img_" + i + " class=\"progressbar\" style=\"background-color:#fff;margin-top:5px;width:200px;height:126px;display:block;possition:relative;float:left;\">";
+            //pr += "<div id=\"progresslabel" + i + "\" class=\"progressbarlabel\" style=\"background-color:green;width:1px;height:9px;display:block;possition:relative;float:left;\">uploading...</div>";
+            //pr += "</div>";
+            //pr += "<div style=\"background-color:#ffffff;width:200px;height:auto;display:block;possition:relative;float:left;margin-top:2px;\">Từ khóa<textarea id=keyword_" + i + " placeholder=\"Nhập từ khóa\" style=\"width:100%;\"  class=\"example\" rows=\"1\"></textarea><input type=hidden id=id_" + i + "></div>";//Giá bán<input type=text id=price_" + i + " placeholder=\"Nhập giá\" onblur=\"checkPrice(this);\">
+            //pr += "</div>";
+            var pr ="";
+            pr +="<div class=\"col-xs-12 col-sm-6 col-md-2 gallery-item\">";
+            pr +="<div class=\"gallery-item-thumb img-resize\" style=\"height: 115px;\" id=img_" + i + "><div id=\"progresslabel" + i + "\" class=\"progressbarlabel\" style=\"background-color:green;width:1px;height:9px;display:block;possition:relative;float:left;\">uploading...</div></div>";
+            pr +="<div class=\"text-11\" id=des_" + i + "></div>";
+            pr +="</div>";
             $("#divPR1").append(pr);
             
         }
@@ -128,15 +236,15 @@
         //alert("222");
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
-                //alert(xhr.responseText);
+                alert(xhr.responseText);
                 var str = xhr.responseText.split(":");
                 var indexUploaded = totalItemImage + 1;
-                $('#img_' + totalItemImage).html("<img src=\"" + str[0] + "\" width=200 height=126 id=\"image_" + totalItemImage + "\">");
+                $('#img_' + totalItemImage).html("<img src=\"" + str[0] + "\" width=100% id=\"image_" + totalItemImage + "\">");
                 $('#id_' + totalItemImage).val(str[1]);
+                $('#des_' + totalItemImage).val(str[2]);
                 $("#notice").html("Đã upload xong ảnh " + indexUploaded);
                 newupload(filename, fileobj);
             }
-            
         }
         
 
