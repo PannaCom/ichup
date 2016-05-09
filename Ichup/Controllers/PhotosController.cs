@@ -173,7 +173,7 @@ namespace Ichup.Controllers
                 //    System.IO.File.Delete(fullPath);
                 //}
                 basicname = Request.Files[i].FileName;
-                basicname = Config.removeSpecialCharName(basicname);
+                //basicname = Config.removeSpecialCharName(basicname);
                 //if (!autoname) basicname = "";
                 Request.Files[i].SaveAs(fullPath);
                 var test = System.Drawing.Image.FromFile(fullPath);
