@@ -724,6 +724,7 @@
     <Content Include="Content\admin\dist\js\sb-admin-2.js" />
     <Content Include="Content\admin\js\flot-data.js" />
     <Content Include="Content\admin\js\morris-data.js" />
+    <Content Include="Content\css\base.css" />
     <Content Include="Content\css\bootstrap-responsive.css" />
     <Content Include="Content\css\bootstrap-responsive.min.css" />
     <Content Include="Content\css\bootstrap.css" />

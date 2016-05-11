@@ -168,7 +168,7 @@ namespace Ichup
             for (int i = 0; i < f1ck.Length; i++)
             {
                 if (have.Contains(f1ck[i])) schecked = "checked"; else schecked = "";
-                val += "<input type=\"checkbox\" id=\"f-"+id+"-1_" + (i + 1) + "\" value=\"" + f1ck[i] + "\"  " + schecked + ">" + f1ck[i];
+                val += "<div class=\"checkbox\"><input type=\"checkbox\" id=\"f-" + id + "-1_" + (i + 1) + "\" value=\"" + f1ck[i] + "\"  " + schecked + " class=\"css-checkbox\">" + f1ck[i]+"</div>";
             }
             return val;
         }
@@ -193,7 +193,7 @@ namespace Ichup
             for (int i = 0; i < f2ck.Length; i++)
             {
                 if (have.Contains(f2ck[i])) schecked = "checked"; else schecked = "";
-                val += "<input type=\"checkbox\" id=\"f-" + id + "-2_" + (i + 1) + "\" value=\"" + f2ck[i] + "\"  " + schecked + ">" + f2ck[i];
+                val += "<div class=\"checkbox\"><input type=\"checkbox\" id=\"f-" + id + "-2_" + (i + 1) + "\" value=\"" + f2ck[i] + "\"  " + schecked + ">" + f2ck[i] + "</div>";
             }
             return val;
         }
@@ -214,15 +214,17 @@ namespace Ichup
         {
             if (have == null) have = "";
             var p = (from q in db.categories orderby q.name select q.name).ToList();
-            string val = "";
+            string val = "<table style=\"width:100%;\"><tr>";
             string schecked = "";
 
             for (int i = 0; i < p.Count; i++)
             {
                 string name = p[i];
                 if (have.Contains(name)) schecked = "checked"; else schecked = "";
-                val += "<input value='" + name + "' id=f-" + id + "-3_" + (i + 1) + " type=checkbox " + schecked + ">" + name;
+                if (i % 4 == 0 && i>0) val += "</tr><tr>";
+                val += "<td width=25%><input value='" + name + "' id=f-" + id + "-3_" + (i + 1) + " type=checkbox " + schecked + ">" + name + "</td>";
             }
+            val += "</tr></table>";
             return val;
         }
         public static string getF3Ck(string have)
@@ -264,7 +266,7 @@ namespace Ichup
             for (int i = 0; i < f4ck.Length; i++)
             {
                 if (have.Contains(f4ck[i])) schecked = "checked"; else schecked = "";
-                val += "<input type=\"checkbox\" id=\"f-" + id + "-4_" + (i + 1) + "\" value=\"" + f4ck[i] + "\"  " + schecked + ">" + f4ck[i];
+                val += "<div class=\"checkbox\"><input type=\"checkbox\" id=\"f-" + id + "-4_" + (i + 1) + "\" value=\"" + f4ck[i] + "\"  " + schecked + ">" + f4ck[i]+ "</div>";
             }
 
             return val;
@@ -293,7 +295,7 @@ namespace Ichup
             for (int i = 0; i < f5ck.Length; i++)
             {
                 if (have.Contains(f5ck[i])) schecked = "checked"; else schecked = "";
-                val += "<input type=\"checkbox\" id=\"f-"+id+"-5_" + (i + 1) + "\" value=\"" + f5ck[i] + "\"  " + schecked + ">" + f5ck[i];
+                val += "<div class=\"checkbox\"><input type=\"checkbox\" id=\"f-" + id + "-5_" + (i + 1) + "\" value=\"" + f5ck[i] + "\"  " + schecked + ">" + f5ck[i] + "</div>"; 
             }
 
             return val;
