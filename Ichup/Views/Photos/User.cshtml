@@ -59,7 +59,30 @@
             </div>
         </div>
     </section>
-    
+    <section class="section-09">
+        <div class="container">
+            <div class="col-md-12 col-center">
+                <div class="headline">
+                    <h2>
+                        Gán từ khóa
+                    </h2>
+
+
+                </div>
+                <div class="row">
+                    <div class="bg-12">
+                        <div class="col-md-12 col-center">
+                            <div class="title-09">Nếu khách hàng không tìm thấy ảnh họ cần, họ sẽ không thể mua. Mô tả chính xác và từ khóa đúng
+giúp bức ảnh của bạn sẽ được tìm thấy dễ hơn, và có thể bán được nhiều hơn. Hướng dẫn</div>
+                        </div>
+
+                        <div class="clear"></div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </section>
 <section class="section-10">
 
         <div class="container">
@@ -67,19 +90,16 @@
                 <div class="row">
                     <div class="col-md-4">
                         <div class="number-12">
-                            <h2>GÁN TỪ KHÓA</h2>
-                            Nếu khách hàng không tìm thấy ảnh họ cần, họ sẽ không thể mua. Mô tả chính xác và từ khóa đúng
-giúp bức ảnh của bạn sẽ được tìm thấy dễ hơn, và có thể bán được nhiều hơn. Hướng dẫn
+                            <h2>1</h2>
                         </div>
                         <div class="col-md-8">
                             <div class="text-section-10">
-                                <div class="title">Bước 1</div>
+                                <div class="title">Hình ảnh</div>
                                 <div class="checkbox fl-left">
                                     <input type="checkbox" name="checkboxG6" id="checkboxG6" class="css-checkbox" /><label for="checkboxG6" class="css-label"></label>
                                 </div>
                                 <div class="text">
-                                    "Lorem ipsum dolor sit amet,<br />
-                                    Đã chọn <span class="red">15</span>/200 ảnh
+                                    Chọn tất cả
                                 </div>
 
                             </div>
@@ -93,10 +113,10 @@ giúp bức ảnh của bạn sẽ được tìm thấy dễ hơn, và có thể
 
                         </div>
                         <div class="text-section-10">
-                            <div class="title">Bước 2</div>
+                            <div class="title">Phân loại nhóm</div>
 
                             <div class="text">
-                                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, Lorem ipsum dolor sit amet, consectetur adipiscing elit,<br />
+                                Đánh dấu vào từng ô để mô tả bức ảnh của bạn Một bức ảnh có thể thuộc nhiều chủ đề khác nhau
 
                             </div>
 
@@ -111,7 +131,8 @@ giúp bức ảnh của bạn sẽ được tìm thấy dễ hơn, và có thể
                         <div class="text-section-10">
                             <div class="title">Bước 3</div>
 
-                            <div class="text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, Lorem ipsum dolor sit amet, consectetur adipiscing elit,</div>
+                            <div class="text">Dùng một câu ngắn gọn xúc tích mô tả ảnh của bạn. Hướng dẫn Sử dụng những từ khóa ngắn gọn (2-3 chữ) để liệt kê những thành phần
+trong ảnh của bạn. Hướng dẫn</div>
 
                         </div>
                         <div class="clearfix"></div>
@@ -122,123 +143,174 @@ giúp bức ảnh của bạn sẽ được tìm thấy dễ hơn, và có thể
         </div>
 
     </section>
-    @*<section class="picture-categories">
-
-      <div class="container">
-        <div class="row">
-          <div class="span12">
-            <div class="single-image-container">
-              <div class="row-fluid">
-                <div class="span1">
-
-                  <h4 class="title">Quản lý ảnh</h4>                  
-                </div> <!-- end span1 -->
-
-                <div class="span11">
-                    <ul class="nav nav-tabs">
-                      <li class="active"><a href="#"><i class="icon-picture icon-large"></i></a></li>
-                      <li><a href="#"><i class="icon-facetime-video icon-large"></i></a></li>
-                      <li><a href="#"><i class="icon-music icon-large"></i></a></li>
-                      <li><span style="color:red;">Đánh dấu vào các thuộc tính ảnh giúp user tìm được ảnh nhiều hơn!</span></li>
-                    </ul>
-                </div> <!-- end span8 -->
-               
-              </div><!--  end row-fluid -->
-            </div> <!-- end single-image-container -->
-          </div> <!-- end span12 -->
-
-        </div> <!-- end row -->
-
-        <div class="single-image-title v2">
-          <div class="row">
-            <div class="span12">
-              
-            </div> <!--end span12-->
-          </div> <!-- end row -->
-        </div> <!-- end single-image-title -->
-      </div> <!-- end container -->
-
-    </section> <!-- end picture-categories -->*@
-
-
-
-    <!-- ============================  Categories End ============================ -->
-
-    <!-- ============================  Image Decription Starts ============================ -->
-
-
-    <section class="image-decription-container">
-      <div class="container">
-        <div class="input-append">
-            <input  style="width:500px;" type="text" placeholder="Nhập từ khóa" id="skeyword2" value="@ViewBag.keyword">
-            <button class="btn" type="button" onclick="csearch();"><i class="icon-search"></i></button>
-        </div> <!-- end input-append -->
-        <div class="row" style="text-align:center;">
-            @foreach(var item in Model){
+ @foreach(var item in Model){
                 
                 <text>
-                    <div class="span5" style="height:373px;position:relative;" id="div-@item.id">
-                        <figure>
-                          <img src="@Ichup.Config.domain/@item.link_thumbail_big" alt="img" style="border-radius:11px;" />
-                        </figure>
-                        <div style="position:absolute;float:right;top:0px;right:0px;color:red;">File ID:#@item.id</div>
-                    </div> <!-- end span6 -->
-                    <div class="span6" style="height:373px;background-color:#0ff;" id="div-@item.id-2">
-                        <table>
-                             <tr><td align="left" width="70"><b>Từ khóa:</b></td><td align="left"><input type="text" id="keyword_@item.id" name="keyword_@item.id" value="@item.keywords" style="width:100%;"></td></tr>
-                             <tr><td align="left" width="70"><b>Giá bán:</b></td><td align="left">Mặc định 1000,000. Nếu bạn muốn miễn phía xin click vào đây @Html.Raw(@Ichup.Config.getF0CkUser(@item.id,@item.price.ToString()))</td></tr>
-                             <tr><td align="left" width="70"><b>Thống kê:</b></td><td align="left">Số lượt mua ảnh:@item.total_buy, Số lượt xem ảnh: @item.total_views, Kích cỡ: @item.width x @item.height</td></tr>
-                             @*<tr><td align="left" width="70">Giá bán</td><td align="left"><input type="text" id="price_@item.id" name="price_@item.id" value="@item.price" onblur="checkPrice(this);"></td></tr>*@
-                             @*<tr><td align="left" width="70">Kiểu bán</td><td align="left">@Html.Raw(@Ichup.Config.getSaleType(@item.id,@item.sale_type))</td></tr>*@
-                             <tr><td colspan="2"><b style="color:red;">Đánh dấu vào các thuộc tính mà ảnh này có - Tạo thuộc tính cho ảnh</b></td></tr>
-                             <tr>
-                                 <td align="left"><b>Loại ảnh:</b></td>
-                                 <td align="left">@Html.Raw(@Ichup.Config.getF1CkUser(@item.id,@item.filter_1))</td>
-                             </tr>   
-                            <tr>
-                                 <td align="left"><b>Kiểu ảnh:</b></td>
-                                 <td align="left">@Html.Raw(@Ichup.Config.getF2CkUser(@item.id,@item.filter_2))</td>
-                             </tr>  
-                            <tr>
-                                 <td align="left"><b>Nhóm ảnh:</b></td>
-                                 <td align="left" id="category_ck_list_@item.id">@Html.Raw(@Ichup.Config.getF3CkUser(@item.id,@item.filter_3))</td>
-                             </tr>  
-                            <tr>
-                                 <td align="left"><b>Người:</b></td>
-                                 <td align="left">@Html.Raw(@Ichup.Config.getF4CkUser(@item.id,@item.filter_4))
-                                 </td>
-                             </tr> 
-                             <tr>
-                                 <td align="left"><b>Góc chụp:</b></td>
-                                 <td align="left">@Html.Raw(@Ichup.Config.getF5CkUser(@item.id,@item.filter_5))</td>
-                             </tr>
-                            <tr><td colspan="2"><input type="button" value="Save" class="btn btn-primary" onclick="save(@item.id);"><input type="button" class="btn btn-primary" value="Delete" onclick="del(@item.id);"></td></tr>
-                        </table>
+<section class="section-11">
+
+        <div class="container">
+            <div class="col-md-12 col-center">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="item-12">
+                            <div class="images"><img src="..@item.link_thumbail_big" alt="img" style="border-radius:11px;width:285px;height:202px;" /></div>
+                            <div class="checkbox">
+                                <input type="checkbox" name="checkboxG6" id="checkboxG6" class="css-checkbox" /><label for="checkboxG6" class="css-label">Chọn ảnh này</label>
+                            </div>
+                            <div class="div-submit margin-top-125">
+                                <button type="submit" class="btn-submit">Save</button>
+                            </div>
+                            <div class="clear"></div>
+                        </div>
                     </div>
-                    <hr class="post-separator" style="width:100%;color:#ff6a00;border: 0;border-top: 1px solid red;border-bottom: 1px solid #fff;">
-                    @*<script>setValueDefault(@item.id,"@Html.Raw(@item.filter_1)","@Html.Raw(@item.filter_2)","@Html.Raw(@item.filter_3)","@Html.Raw(@item.filter_4)","@Html.Raw(@item.filter_5)");</script>*@
-                </text>
+                    <div class="col-md-4 border-lr-12">
+                        <div class="col-sm-6 col-md-4">
+                            <div class="item-center">
+                                <div class="text">Loại ảnh</div>
+                                @Html.Raw(@Ichup.Config.getF1CkUser(@item.id,@item.filter_1))
+                               
+                            </div>
+
+                        </div>
+
+                        <div class="col-sm-6 col-md-4">
+                            <div class="item-center">
+                               <div class="text">Kiểu ảnh</div>
+                                @Html.Raw(@Ichup.Config.getF2CkUser(@item.id,@item.filter_2))
+                            </div>
+
+                        </div>
+
+                        <div class="col-sm-6 col-md-4">
+                            <div class="item-center">
+                                <div class="text">Góc chụp</div>
+                                 @Html.Raw(@Ichup.Config.getF5CkUser(@item.id,@item.filter_5))
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-12 margin-top-30">
+                            <div class="item-center">
+                                <div class="text">Chủ đề</div>
+                                 @Html.Raw(@Ichup.Config.getF3CkUser(@item.id,@item.filter_3))
+
+                            </div>
+                        </div>
+                        
+                        <div class="col-sm-6 col-md-4 margin-top-30">
+                            <div class="item-center">
+                                <div class="text"></div>
+
+                                <div class="checkbox">
+                                    <input type="checkbox" name="checkboxG6" id="checkboxG6" class="css-checkbox" /><label for="checkboxG6" class="css-label">Nội Dung 1</label>
+                                </div>
+                                <div class="checkbox">
+                                    <input type="checkbox" name="checkboxG6" id="checkboxG6" class="css-checkbox" /><label for="checkboxG6" class="css-label">Nội Dung 2</label>
+                                </div>
+                                <div class="checkbox">
+                                    <input type="checkbox" name="checkboxG6" id="checkboxG6" class="css-checkbox" /><label for="checkboxG6" class="css-label">Nội Dung 3</label>
+                                </div>
+                                <div class="checkbox">
+                                    <input type="checkbox" name="checkboxG6" id="checkboxG6" class="css-checkbox" /><label for="checkboxG6" class="css-label">Nội Dung 4</label>
+                                </div>
+                                <div class="checkbox">
+                                    <input type="checkbox" name="checkboxG6" id="checkboxG6" class="css-checkbox" /><label for="checkboxG6" class="css-label">Nội Dung 5</label>
+                                </div>
+
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-12 margin-top-30">
+                            <div class="item-center">
+                                <div class="text">Tiêu đề 5</div>
+                            </div>
+                            <div class="col-md-6 padding-left-0">
+                                <div class="btn-dropdown-group">
+                                    <button id="dropdown-option-index" type="button" class="btn btn-default dropdown-toggle btn-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Lorem ipsum <span class="fa fa-angle-down"></span> <span class="sr-only">Toggle Dropdown</span> </button>
+                                    <div id="ul-dropdown-option-index" class="ul-btn-dropdown">
+                                        <div class="item-checkbox">
+                                            <input type="checkbox" name="checkbox30" id="checkbox30" checked class="css-checkbox"><label for="checkbox30" class="css-label">Lorem ipsum</label>
+                                        </div>
+                                        <div class="item-checkbox">
+                                            <input type="checkbox" name="checkbox31" id="checkbox31" class="css-checkbox"><label for="checkbox31" class="css-label">Lorem ipsum</label>
+                                        </div>
+                                        <div class="item-checkbox">
+                                            <input type="checkbox" name="checkbox32" id="checkbox32" class="css-checkbox"><label for="checkbox32" class="css-label">Lorem ipsum</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 padding-left-0">
+                                <div class="btn-dropdown-group">
+
+                                    <button id="dropdown-option-index-1" type="button" class="btn btn-default dropdown-toggle btn-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Lorem ipsum <span class="fa fa-angle-down"></span> <span class="sr-only">Toggle Dropdown</span> </button>
+                                    <div id="ul-dropdown-option-index-1" class="ul-btn-dropdown">
+                                        <div class="item-checkbox">
+                                            <input type="checkbox" name="checkbox33" id="checkbox33" checked class="css-checkbox"><label for="checkbox33" class="css-label">Lorem ipsum</label>
+                                        </div>
+                                        <div class="item-checkbox">
+                                            <input type="checkbox" name="checkbox34" id="checkbox34" class="css-checkbox"><label for="checkbox34" class="css-label">Lorem ipsum</label>
+                                        </div>
+                                        <div class="item-checkbox">
+                                            <input type="checkbox" name="checkbox35" id="checkbox35" class="css-checkbox"><label for="checkbox35" class="css-label">Lorem ipsum</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="col-md-4">
+                        <div class="item-center">
+                            <div class="text">Nội dung     <span class="text-12-2"><span class="red">15</span>/200</span></div>
+                            <div class="lable-1"><textarea placeholder="Lorem ipsum dolor sit amet"></textarea></div>
+                            <p>Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet</p>
+
+
+                            <div class="lable-2">
+                                <div class="text margin-top-30 margin-bottom-5">Nội dung     <span class="text-12-2"><span class="red">15</span>/200</span></div>
+
+                                <label>
+                                    <button type="button" class="btn btn-default">
+                                        Lorem
+                                    </button>
+                                    <button type="button" class="btn btn-default">
+                                        Lorem ipsum
+                                    </button><button type="button" class="btn btn-default">
+                                        Lorem ipsum
+                                    </button><button type="button" class="btn btn-default">
+                                        Lorem ipsum
+                                    </button><button type="button" class="btn btn-default">
+                                        Lorem ipsum
+                                    </button>
+
+                                </label>
+                                <div class="text-label"><a href="#">Coppy nội dung</a><a href="#">Xóa Nội dung</a></div>
+
+
+                            </div>
+                            <p>Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet</p>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+</text>
                 totalItemImage++;
             }
-        </div> <!-- end row -->
-      </div> <!-- end container -->
-    </section> <!-- end image-description-container -->
-    <section class="main-pagination">
-                      <div class="row-fluid">
-                        <div class="span12">
-                            <div class="inner-pagination">
-                                <div class="pagination ">
-                                  <ul>
-                                    @for (int i = 1; i <= Model.PageCount; i++){
-                                        <li ><a href="/Photos/User?keyword=@ViewBag.keyword&id=@ViewBag.id&page=@i" style="cursor:pointer;">@i</a></li>
-                                    }
-                                  </ul>
-                                </div> <!-- end pagination -->
-                            </div> <!-- end inner-pagination -->
-                        </div> <!-- end span9 -->
-                       
-                      </div> <!-- end row -->
-                  </section> <!-- end main-pagination -->
+
+    
+
+
 <script>
     
     

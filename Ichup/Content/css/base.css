@@ -238,7 +238,7 @@ section .col-center
 /* End - Section */
 
 input[type=checkbox].css-checkbox {
-    position: absolute;
+    /*position: absolute;
     z-index: -1000;
     left: -1000px;
     overflow: hidden;
@@ -247,7 +247,7 @@ input[type=checkbox].css-checkbox {
     width: 1px;
     margin: -1px;
     padding: 0;
-    border: 0;
+    border: 0;*/
 }
 
     input[type=checkbox].css-checkbox + label.css-label {
