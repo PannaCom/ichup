@@ -11,6 +11,7 @@ using ImageProcessor.Processors;
 using PagedList;
 using Newtonsoft.Json;
 using System.IO;
+using System.Data;
 namespace Ichup.Controllers
 {
     public class PhotosController : Controller
@@ -133,13 +134,27 @@ namespace Ichup.Controllers
             return "21";
         }
         [HttpPost]
-        public string UpdateFilter(int id, string filter_1,string filter_2,string filter_3,string filter_4,string filter_5,string keywords,int price,byte sale_type)
+        public string UpdateFilter(int id, string filter_1, string filter_2, string filter_3, string filter_4, string filter_5, string keywords, int price, byte sale_type, string name, string address, float lon,float lat)
         {
             try
             {
                 if (Config.getCookie("logged") == "") return "0";
-                string query = "update images set keywords=N'" + keywords + "',price=" + price + ",filter_1=N'" + filter_1 + "',filter_2=N'" + filter_2 + "',filter_3=N'" + filter_3 + "',filter_4=N'" + filter_4 + "',filter_5=N'" + filter_5 + "',sale_type=" + sale_type + " where id=" + id;
-                db.Database.ExecuteSqlCommand(query);
+                //string query = "update images set keywords=N'" + keywords + "',price=" + price + ",filter_1=N'" + filter_1 + "',filter_2=N'" + filter_2 + "',filter_3=N'" + filter_3 + "',filter_4=N'" + filter_4 + "',filter_5=N'" + filter_5 + "',sale_type=" + sale_type + ",name=N'" + name + "',address=N'" + address + "',lon=" + lon + ",lat=" + lat + " where id=" + id;
+                //db.Database.ExecuteSqlCommand(query);
+                image ig = db.images.Find(id);
+                ig.keywords = keywords;
+                ig.filter_1 = filter_1;
+                ig.filter_2 = filter_2;
+                ig.filter_3 = filter_3;
+                ig.filter_4 = filter_4;
+                ig.filter_5 = filter_5;
+                ig.name = name;
+                ig.address = address;
+                ig.lat = lat;
+                ig.lon = lon;
+                ig.geocode = Config.CreatePoint(lat, lon);
+                db.Entry(ig).State = EntityState.Modified;
+                db.SaveChanges();
                 return "1";
             }
             catch (Exception ex) { 

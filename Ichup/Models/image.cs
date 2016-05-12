@@ -44,5 +44,9 @@ namespace Ichup.Models
         public Nullable<int> height { get; set; }
         public Nullable<byte> sale_type { get; set; }
         public Nullable<long> size { get; set; }
+        public string address { get; set; }
+        public System.Data.Spatial.DbGeography geocode { get; set; }
+        public Nullable<double> lon { get; set; }
+        public Nullable<double> lat { get; set; }
     }
 }

@@ -54,6 +54,10 @@
           <Property Name="height" Type="int" />
           <Property Name="sale_type" Type="tinyint" />
           <Property Name="size" Type="bigint" />
+          <Property Name="address" Type="nvarchar" MaxLength="250" />
+          <Property Name="geocode" Type="geography" />
+          <Property Name="lon" Type="float" />
+          <Property Name="lat" Type="float" />
         </EntityType>
         <EntityType Name="members">
           <Key>
@@ -112,10 +116,10 @@
         <EntityContainer Name="Entities" p1:LazyLoadingEnabled="true">
           <EntitySet Name="categories" EntityType="ichupModel.category" />
           <EntitySet Name="sales_log" EntityType="ichupModel.sales_log" />
-          <EntitySet Name="images" EntityType="ichupModel.image" />
           <EntitySet Name="members" EntityType="ichupModel.member" />
           <EntitySet Name="members_price_pack" EntityType="ichupModel.members_price_pack" />
           <EntitySet Name="price_pack" EntityType="ichupModel.price_pack" />
+          <EntitySet Name="images" EntityType="ichupModel.image" />
         </EntityContainer>
         <EntityType Name="category">
           <Key>
@@ -132,41 +136,6 @@
           <Property Name="image_id" Type="Int64" />
           <Property Name="member_id_buy" Type="Int32" />
           <Property Name="date_sale" Type="DateTime" Precision="3" />
-        </EntityType>
-        <EntityType Name="image">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Type="Int64" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="name" MaxLength="368" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="keywords" MaxLength="688" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="cat_id" />
-          <Property Type="String" Name="link" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="link_thumbail_big" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="link_thumbail_small" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="link_big" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="link_small" MaxLength="150" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="total_views" />
-          <Property Type="Int32" Name="total_buy" />
-          <Property Type="Int32" Name="total_download" />
-          <Property Type="Int32" Name="total_download_big" />
-          <Property Type="Int32" Name="total_download_small" />
-          <Property Type="Int32" Name="member_id" />
-          <Property Type="DateTime" Name="date_post" Precision="3" />
-          <Property Type="String" Name="filter_1" MaxLength="568" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="filter_2" MaxLength="568" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="filter_3" MaxLength="568" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="filter_4" MaxLength="568" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="filter_5" MaxLength="568" FixedLength="false" Unicode="true" />
-          <Property Type="Decimal" Name="price" Precision="12" Scale="0" />
-          <Property Type="String" Name="token" MaxLength="56" FixedLength="false" Unicode="true" />
-          <Property Type="Int32" Name="stt" />
-          <Property Type="String" Name="code" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Type="Byte" Name="status" />
-          <Property Type="Int32" Name="width" />
-          <Property Type="Int32" Name="height" />
-          <Property Type="Byte" Name="sale_type" />
-          <Property Type="Int64" Name="size" />
         </EntityType>
         <EntityType Name="member">
           <Key>
@@ -209,6 +178,45 @@
           <Property Type="Int32" Name="months" />
           <Property Type="Int32" Name="daily_limited" />
         </EntityType>
+        <EntityType Name="image">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="Int64" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="name" MaxLength="368" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="keywords" MaxLength="688" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="cat_id" />
+          <Property Type="String" Name="link" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="link_thumbail_big" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="link_thumbail_small" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="link_big" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="link_small" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="total_views" />
+          <Property Type="Int32" Name="total_buy" />
+          <Property Type="Int32" Name="total_download" />
+          <Property Type="Int32" Name="total_download_big" />
+          <Property Type="Int32" Name="total_download_small" />
+          <Property Type="Int32" Name="member_id" />
+          <Property Type="DateTime" Name="date_post" Precision="3" />
+          <Property Type="String" Name="filter_1" MaxLength="568" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="filter_2" MaxLength="568" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="filter_3" MaxLength="568" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="filter_4" MaxLength="568" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="filter_5" MaxLength="568" FixedLength="false" Unicode="true" />
+          <Property Type="Decimal" Name="price" Precision="12" Scale="0" />
+          <Property Type="String" Name="token" MaxLength="56" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="stt" />
+          <Property Type="String" Name="code" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="Byte" Name="status" />
+          <Property Type="Int32" Name="width" />
+          <Property Type="Int32" Name="height" />
+          <Property Type="Byte" Name="sale_type" />
+          <Property Type="Int64" Name="size" />
+          <Property Type="String" Name="address" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="Geography" Name="geocode" />
+          <Property Type="Double" Name="lon" />
+          <Property Type="Double" Name="lat" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -230,42 +238,6 @@
                 <ScalarProperty Name="image_id" ColumnName="image_id" />
                 <ScalarProperty Name="member_id_buy" ColumnName="member_id_buy" />
                 <ScalarProperty Name="date_sale" ColumnName="date_sale" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="images">
-            <EntityTypeMapping TypeName="ichupModel.image">
-              <MappingFragment StoreEntitySet="images">
-                <ScalarProperty Name="size" ColumnName="size" />
-                <ScalarProperty Name="sale_type" ColumnName="sale_type" />
-                <ScalarProperty Name="height" ColumnName="height" />
-                <ScalarProperty Name="width" ColumnName="width" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="code" ColumnName="code" />
-                <ScalarProperty Name="stt" ColumnName="stt" />
-                <ScalarProperty Name="token" ColumnName="token" />
-                <ScalarProperty Name="price" ColumnName="price" />
-                <ScalarProperty Name="filter_5" ColumnName="filter_5" />
-                <ScalarProperty Name="filter_4" ColumnName="filter_4" />
-                <ScalarProperty Name="filter_3" ColumnName="filter_3" />
-                <ScalarProperty Name="filter_2" ColumnName="filter_2" />
-                <ScalarProperty Name="filter_1" ColumnName="filter_1" />
-                <ScalarProperty Name="date_post" ColumnName="date_post" />
-                <ScalarProperty Name="member_id" ColumnName="member_id" />
-                <ScalarProperty Name="total_download_small" ColumnName="total_download_small" />
-                <ScalarProperty Name="total_download_big" ColumnName="total_download_big" />
-                <ScalarProperty Name="total_download" ColumnName="total_download" />
-                <ScalarProperty Name="total_buy" ColumnName="total_buy" />
-                <ScalarProperty Name="total_views" ColumnName="total_views" />
-                <ScalarProperty Name="link_small" ColumnName="link_small" />
-                <ScalarProperty Name="link_big" ColumnName="link_big" />
-                <ScalarProperty Name="link_thumbail_small" ColumnName="link_thumbail_small" />
-                <ScalarProperty Name="link_thumbail_big" ColumnName="link_thumbail_big" />
-                <ScalarProperty Name="link" ColumnName="link" />
-                <ScalarProperty Name="cat_id" ColumnName="cat_id" />
-                <ScalarProperty Name="keywords" ColumnName="keywords" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -309,6 +281,46 @@
                 <ScalarProperty Name="months" ColumnName="months" />
                 <ScalarProperty Name="pack_price" ColumnName="pack_price" />
                 <ScalarProperty Name="pack_name" ColumnName="pack_name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="images">
+            <EntityTypeMapping TypeName="ichupModel.image">
+              <MappingFragment StoreEntitySet="images">
+                <ScalarProperty Name="lat" ColumnName="lat" />
+                <ScalarProperty Name="lon" ColumnName="lon" />
+                <ScalarProperty Name="geocode" ColumnName="geocode" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="size" ColumnName="size" />
+                <ScalarProperty Name="sale_type" ColumnName="sale_type" />
+                <ScalarProperty Name="height" ColumnName="height" />
+                <ScalarProperty Name="width" ColumnName="width" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="code" ColumnName="code" />
+                <ScalarProperty Name="stt" ColumnName="stt" />
+                <ScalarProperty Name="token" ColumnName="token" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="filter_5" ColumnName="filter_5" />
+                <ScalarProperty Name="filter_4" ColumnName="filter_4" />
+                <ScalarProperty Name="filter_3" ColumnName="filter_3" />
+                <ScalarProperty Name="filter_2" ColumnName="filter_2" />
+                <ScalarProperty Name="filter_1" ColumnName="filter_1" />
+                <ScalarProperty Name="date_post" ColumnName="date_post" />
+                <ScalarProperty Name="member_id" ColumnName="member_id" />
+                <ScalarProperty Name="total_download_small" ColumnName="total_download_small" />
+                <ScalarProperty Name="total_download_big" ColumnName="total_download_big" />
+                <ScalarProperty Name="total_download" ColumnName="total_download" />
+                <ScalarProperty Name="total_buy" ColumnName="total_buy" />
+                <ScalarProperty Name="total_views" ColumnName="total_views" />
+                <ScalarProperty Name="link_small" ColumnName="link_small" />
+                <ScalarProperty Name="link_big" ColumnName="link_big" />
+                <ScalarProperty Name="link_thumbail_small" ColumnName="link_thumbail_small" />
+                <ScalarProperty Name="link_thumbail_big" ColumnName="link_thumbail_big" />
+                <ScalarProperty Name="link" ColumnName="link" />
+                <ScalarProperty Name="cat_id" ColumnName="cat_id" />
+                <ScalarProperty Name="keywords" ColumnName="keywords" />
+                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

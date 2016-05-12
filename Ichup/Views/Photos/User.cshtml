@@ -11,6 +11,8 @@
             border-bottom:1px solid #0ff;
         }
     </style>
+    <script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
+	<script src="/Scripts/jquery.geocomplete.js"></script> 
     <script>
         isLoadedCat=false;
        
@@ -43,6 +45,8 @@
         
         }
     </script>
+@*<input type="text" autocomplete="on" class="form-control" placeholder="địa điểm" id="location" required data-validation-required-message="địa điểm">*@
+<div class="map_canvas" style="display:none;"></div>
     <section class="search-index-08">
         <div class="container">
             <div class="col-md-12">
@@ -158,7 +162,7 @@ trong ảnh của bạn. Hướng dẫn</div>
                                 <input type="checkbox" name="checkboxG6" id="checkboxG6" class="css-checkbox" /><label for="checkboxG6" class="css-label">Chọn ảnh này</label>
                             </div>
                             <div class="div-submit margin-top-125">
-                                <button type="submit" class="btn-submit">Save</button>
+                                <button type="button" class="btn-submit" onclick="save(@item.id)">Save</button>
                             </div>
                             <div class="clear"></div>
                         </div>
@@ -196,104 +200,55 @@ trong ảnh của bạn. Hướng dẫn</div>
 
                             </div>
                         </div>
-                        
-                        <div class="col-sm-6 col-md-4 margin-top-30">
-                            <div class="item-center">
-                                <div class="text"></div>
-
-                                <div class="checkbox">
-                                    <input type="checkbox" name="checkboxG6" id="checkboxG6" class="css-checkbox" /><label for="checkboxG6" class="css-label">Nội Dung 1</label>
-                                </div>
-                                <div class="checkbox">
-                                    <input type="checkbox" name="checkboxG6" id="checkboxG6" class="css-checkbox" /><label for="checkboxG6" class="css-label">Nội Dung 2</label>
-                                </div>
-                                <div class="checkbox">
-                                    <input type="checkbox" name="checkboxG6" id="checkboxG6" class="css-checkbox" /><label for="checkboxG6" class="css-label">Nội Dung 3</label>
-                                </div>
-                                <div class="checkbox">
-                                    <input type="checkbox" name="checkboxG6" id="checkboxG6" class="css-checkbox" /><label for="checkboxG6" class="css-label">Nội Dung 4</label>
-                                </div>
-                                <div class="checkbox">
-                                    <input type="checkbox" name="checkboxG6" id="checkboxG6" class="css-checkbox" /><label for="checkboxG6" class="css-label">Nội Dung 5</label>
-                                </div>
-
-
-                            </div>
-
-                        </div>
-
                         <div class="col-md-12 margin-top-30">
                             <div class="item-center">
-                                <div class="text">Tiêu đề 5</div>
-                            </div>
-                            <div class="col-md-6 padding-left-0">
-                                <div class="btn-dropdown-group">
-                                    <button id="dropdown-option-index" type="button" class="btn btn-default dropdown-toggle btn-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Lorem ipsum <span class="fa fa-angle-down"></span> <span class="sr-only">Toggle Dropdown</span> </button>
-                                    <div id="ul-dropdown-option-index" class="ul-btn-dropdown">
-                                        <div class="item-checkbox">
-                                            <input type="checkbox" name="checkbox30" id="checkbox30" checked class="css-checkbox"><label for="checkbox30" class="css-label">Lorem ipsum</label>
-                                        </div>
-                                        <div class="item-checkbox">
-                                            <input type="checkbox" name="checkbox31" id="checkbox31" class="css-checkbox"><label for="checkbox31" class="css-label">Lorem ipsum</label>
-                                        </div>
-                                        <div class="item-checkbox">
-                                            <input type="checkbox" name="checkbox32" id="checkbox32" class="css-checkbox"><label for="checkbox32" class="css-label">Lorem ipsum</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6 padding-left-0">
-                                <div class="btn-dropdown-group">
+                                <div class="text">Người</div>
+                                 @Html.Raw(@Ichup.Config.getF4CkUser(@item.id,@item.filter_4))
 
-                                    <button id="dropdown-option-index-1" type="button" class="btn btn-default dropdown-toggle btn-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Lorem ipsum <span class="fa fa-angle-down"></span> <span class="sr-only">Toggle Dropdown</span> </button>
-                                    <div id="ul-dropdown-option-index-1" class="ul-btn-dropdown">
-                                        <div class="item-checkbox">
-                                            <input type="checkbox" name="checkbox33" id="checkbox33" checked class="css-checkbox"><label for="checkbox33" class="css-label">Lorem ipsum</label>
-                                        </div>
-                                        <div class="item-checkbox">
-                                            <input type="checkbox" name="checkbox34" id="checkbox34" class="css-checkbox"><label for="checkbox34" class="css-label">Lorem ipsum</label>
-                                        </div>
-                                        <div class="item-checkbox">
-                                            <input type="checkbox" name="checkbox35" id="checkbox35" class="css-checkbox"><label for="checkbox35" class="css-label">Lorem ipsum</label>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
                         </div>
+                        
 
 
                     </div>
                     <div class="col-md-4">
                         <div class="item-center">
-                            <div class="text">Nội dung     <span class="text-12-2"><span class="red">15</span>/200</span></div>
-                            <div class="lable-1"><textarea placeholder="Lorem ipsum dolor sit amet"></textarea></div>
-                            <p>Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet</p>
-
-
-                            <div class="lable-2">
-                                <div class="text margin-top-30 margin-bottom-5">Nội dung     <span class="text-12-2"><span class="red">15</span>/200</span></div>
-
-                                <label>
-                                    <button type="button" class="btn btn-default">
-                                        Lorem
-                                    </button>
-                                    <button type="button" class="btn btn-default">
-                                        Lorem ipsum
-                                    </button><button type="button" class="btn btn-default">
-                                        Lorem ipsum
-                                    </button><button type="button" class="btn btn-default">
-                                        Lorem ipsum
-                                    </button><button type="button" class="btn btn-default">
-                                        Lorem ipsum
-                                    </button>
-
-                                </label>
-                                <div class="text-label"><a href="#">Coppy nội dung</a><a href="#">Xóa Nội dung</a></div>
-
-
+                            <div class="text">Mô tả ảnh</div>
+                            <div class="lable-1"><textarea id="name_@item.id" name="name_@item.id" placeholder="Mô tả ảnh" rows="2" cols="10">@item.name</textarea></div>
+                           <div class="lable-2">
+                                <div class="text margin-top-30 margin-bottom-5">Từ khóa</div>
+                                <div class="lable-1"><textarea id="keyword_@item.id" name="keyword_@item.id"  placeholder="Từ khóa cách nhau dấu ," rows="2" cols="10">@item.keywords</textarea></div>
+                                @*<div class="text-label"><a href="#">Coppy nội dung</a><a href="#">Xóa Nội dung</a></div>*@
+                                <div class="text margin-top-30 margin-bottom-5">Địa điểm chụp ảnh này</div>
+                                <div class="lable-1">
+                                    <input type="text" autocomplete="on"  id="address_@item.id" name="address_@item.id" value="@item.address" style="width:100%;"/>
+                                    <input type="hidden" id="lon_@item.id" name="lon_@item.id" value="@item.lon"/>
+                                    <input type="hidden" id="lat_@item.id" name="lat_@item.id" value="@item.lat"/>
+                                    
+                                    @*<div class="map_canvas" style="display:none;"></div>*@
+                                    <script>
+                                        $(function () {
+                                            //var long;
+                                            //var lat;
+                                            var options = {
+                                                map: ".map_canvas"
+                                            };
+                                            $("#address_@item.id").geocomplete(options)
+                                              .bind("geocode:result", function (event, result) {
+                                                  $("#lon_@item.id").val(result.geometry.location.lng());
+                                                  $("#lat_@item.id").val(result.geometry.location.lat());
+                                                  //alert("long" + result.geometry.location.lng() + ", lat=" + result.geometry.location.lat());
+                                              })
+                                              .bind("geocode:error", function (event, status) {
+                                                  $.log("ERROR: " + status);
+                                              })
+                                              .bind("geocode:multiple", function (event, results) {
+                                                  $.log("Multiple: " + results.length + " results found");
+                                              });
+                                        });
+                                    </script>
+                                </div>
                             </div>
-                            <p>Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet</p>
-
                         </div>
 
                     </div>
@@ -308,7 +263,13 @@ trong ảnh của bạn. Hướng dẫn</div>
                 totalItemImage++;
             }
 
-    
+    <div class="pagination ">
+                                  <ul>
+                                    @for (int i = 1; i <= Model.PageCount; i++){
+                                        <li ><a href="/Photos/User?keyword=@ViewBag.keyword&id=@ViewBag.id&page=@i" style="cursor:pointer;">@i</a></li>
+                                    }
+                                  </ul>
+                                </div> <!-- end pagination -->
 
 
 <script>
@@ -323,31 +284,36 @@ trong ảnh của bạn. Hướng dẫn</div>
         var filter_4=getValueOfField(id,4);
         var filter_5=getValueOfField(id,5);
        
+        if (document.getElementById("name_" + id) && document.getElementById("name_" + id).value == "") {
+            alert("Nhập mô tả ảnh!");
+            document.getElementById("name_" + id).focus();
+            return;
+        }
         if (document.getElementById("keyword_" + id) && document.getElementById("keyword_" + id).value == "") {
                 alert("Nhập từ khóa cho ảnh này!");
                 document.getElementById("keyword_" + id).focus();
                 return;
             }
-        //if (document.getElementById("price_" + id) && document.getElementById("price_" + id).value == "") {
-        //        alert("Nhập giá cho ảnh này!");
-        //        document.getElementById("price_" + id).focus();
-        //        return;
-        //}
+        
         var sale_type=0;
         var price=1000000;
         //if (document.getElementById("sale_type_" + id+"_2").checked) sale_type=1;;
         //alert(document.getElementById("sale_type_" + id+"_2").checked);
         //return;
-        if (document.getElementById("f-" + id+"-0_1").checked) price=0;
+        //if (document.getElementById("f-" + id+"-0_1").checked) price=0;
         formdata.append("id", id);
         formdata.append("filter_1", filter_1);
         formdata.append("filter_2", filter_2);
         formdata.append("filter_3", filter_3);
         formdata.append("filter_4", filter_4);
         formdata.append("filter_5", filter_5);
-        formdata.append("keywords", document.getElementById("keyword_" + id).value );
+        formdata.append("keywords", document.getElementById("keyword_" + id).value);
         formdata.append("price", price);
         formdata.append("sale_type", 0);
+        formdata.append("name", document.getElementById("name_" + id).value );
+        formdata.append("address", document.getElementById("address_" + id).value );
+        formdata.append("lon", document.getElementById("lon_" + id).value );
+        formdata.append("lat", document.getElementById("lat_" + id).value );
         var xhr = new XMLHttpRequest();
         xhr.open('POST', '/Photos/UpdateFilter');
         xhr.send(formdata);
@@ -401,4 +367,5 @@ trong ảnh của bạn. Hướng dẫn</div>
         }
         return value;
     }
+    
 </script>

@@ -8,6 +8,7 @@ using System.Web;
 using Ichup.Models;
 using System.Net;
 using System.Net.Mail;
+using System.Data.Spatial;
 namespace Ichup
 {
     public class Config
@@ -222,7 +223,7 @@ namespace Ichup
                 string name = p[i];
                 if (have.Contains(name)) schecked = "checked"; else schecked = "";
                 if (i % 4 == 0 && i>0) val += "</tr><tr>";
-                val += "<td width=25%><input value='" + name + "' id=f-" + id + "-3_" + (i + 1) + " type=checkbox " + schecked + ">" + name + "</td>";
+                val += "<td width=25%><div class=\"checkbox\"><input value='" + name + "' id=f-" + id + "-3_" + (i + 1) + " type=checkbox " + schecked + ">" + name + "</div></td>";
             }
             val += "</tr></table>";
             return val;
@@ -260,15 +261,16 @@ namespace Ichup
         public static string getF4CkUser(long id,string have)
         {
             if (have == null) have = "";
-            string val = "";
+            //string val = "";
             string schecked = "";
-
+            string val = "<table style=\"width:100%;\"><tr>";
             for (int i = 0; i < f4ck.Length; i++)
             {
                 if (have.Contains(f4ck[i])) schecked = "checked"; else schecked = "";
-                val += "<div class=\"checkbox\"><input type=\"checkbox\" id=\"f-" + id + "-4_" + (i + 1) + "\" value=\"" + f4ck[i] + "\"  " + schecked + ">" + f4ck[i]+ "</div>";
+                if (i % 4 == 0 && i > 0) val += "</tr><tr>";
+                val += "<td width=25%><div class=\"checkbox\"><input type=\"checkbox\" id=\"f-" + id + "-4_" + (i + 1) + "\" value=\"" + f4ck[i] + "\"  " + schecked + ">" + f4ck[i] + "</div></td>";
             }
-
+            val += "</tr></table>";
             return val;
         }
         public static string[] f5ck = new string[] { "chân dung", "bán thân", "chụp 3/4", "toàn thân", "khoảnh khắc" };
@@ -447,6 +449,13 @@ namespace Ichup
                 return "-1";
             }
             return "ok";
+        }
+        public static DbGeography CreatePoint(double? latitude, double? longitude)
+        {
+            if (latitude == null || longitude == null) return null;
+            latitude = (double)latitude;
+            longitude = (double)longitude;
+            return DbGeography.FromText(String.Format("POINT({1} {0})", latitude, longitude));
         }
     }
 }
