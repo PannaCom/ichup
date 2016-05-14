@@ -142,7 +142,8 @@ namespace Ichup.Controllers
                 //string query = "update images set keywords=N'" + keywords + "',price=" + price + ",filter_1=N'" + filter_1 + "',filter_2=N'" + filter_2 + "',filter_3=N'" + filter_3 + "',filter_4=N'" + filter_4 + "',filter_5=N'" + filter_5 + "',sale_type=" + sale_type + ",name=N'" + name + "',address=N'" + address + "',lon=" + lon + ",lat=" + lat + " where id=" + id;
                 //db.Database.ExecuteSqlCommand(query);
                 image ig = db.images.Find(id);
-                ig.keywords = keywords;
+                ig.keywords2 = keywords;
+                ig.keywords = name + " " + keywords;
                 ig.filter_1 = filter_1;
                 ig.filter_2 = filter_2;
                 ig.filter_3 = filter_3;

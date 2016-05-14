@@ -25,34 +25,12 @@
                             </div>
                         </div>
                         <div class="group-input-search-index">
-                            <input id="input-search-index" type="text" class="form-control input-search-index" aria-label="Text input with segmented button dropdown">
-                            <div id="ul-input-search-index" class="ul-input-search-index">
-                                <div class="item-input-search">
-                                    Lorem
-                                </div>
-                                <div class="item-input-search">
-                                    Lorem ipsum
-                                </div>
-                                <div class="item-input-search">
-                                    Lorem ipsum
-                                </div>
-                                <div class="item-input-search">
-                                    Lorem ipsum
-                                </div>
-                                <div class="item-input-search">
-                                    Lorem ipsum dolor
-                                </div>
-                                <div class="item-input-search">
-                                    Lorem ipsum dolor sit
-                                </div>
-                                <div class="item-input-search">
-                                    Lorem ipsum dolor sit amet
-                                </div>
-                            </div>
+                            <input id="input-search-index" type="text" class="form-control input-search-index" aria-label="Nhập từ khóa" placeholder="Nhập từ khóa tìm kiếm">
+                            
                         </div>
 
                         <div class="input-group-btn">
-                            <button type="button" class="btn btn-default button-search-index"><i class="fa fa-search"></i></button>
+                            <button type="button" class="btn btn-default button-search-index" onclick="search();"><i class="fa fa-search"></i></button>
 
                         </div>
 
@@ -209,5 +187,18 @@ Sau khi mô tả kỹ bức ảnh bạn cần, chúng tôi sẽ liên hệ với
 		//        }
 		//    }
 		//}
-		
+		function search() {
+
+		    var k = document.getElementById("input-search-index").value;
+
+		    if (k == "") {
+		        alert("Bạn phải nhập từ khóa");
+		        return;
+		    }
+		    var url = "/Search?k=" + k;
+		    //alert(url);
+		    window.location.href = url;
+
+
+		}
 </script>

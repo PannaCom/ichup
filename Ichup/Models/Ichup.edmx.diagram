@@ -10,7 +10,7 @@
         <EntityTypeShape EntityType="ichupModel.member" Width="1.5" PointX="0.70235196533722433" PointY="26.200003621261569" />
         <EntityTypeShape EntityType="ichupModel.members_price_pack" Width="1.5" PointX="8.96194704108031" PointY="11.921371435709936" />
         <EntityTypeShape EntityType="ichupModel.price_pack" Width="1.5" PointX="4.1529895794358982" PointY="5.6901922252449175" />
-        <EntityTypeShape EntityType="ichupModel.image" Width="1.5" PointX="6.3605639125968159" PointY="10.973459412797103" />
+        <EntityTypeShape EntityType="ichupModel.image" Width="1.5" PointX="6.5223267537179987" PointY="5.36394897353088" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

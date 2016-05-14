@@ -17,6 +17,7 @@ namespace Ichup.Models
         public long id { get; set; }
         public string name { get; set; }
         public string keywords { get; set; }
+        public string keywords2 { get; set; }
         public Nullable<int> cat_id { get; set; }
         public string link { get; set; }
         public string link_thumbail_big { get; set; }

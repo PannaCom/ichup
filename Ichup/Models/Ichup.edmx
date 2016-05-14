@@ -26,7 +26,8 @@
           </Key>
           <Property Name="id" Type="bigint" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="nvarchar" MaxLength="368" />
-          <Property Name="keywords" Type="nvarchar" MaxLength="688" />
+          <Property Name="keywords" Type="nvarchar" MaxLength="3568" />
+          <Property Name="keywords2" Type="nvarchar" MaxLength="688" />
           <Property Name="cat_id" Type="int" />
           <Property Name="link" Type="nvarchar" MaxLength="150" />
           <Property Name="link_thumbail_big" Type="nvarchar" MaxLength="150" />
@@ -184,7 +185,8 @@
           </Key>
           <Property Type="Int64" Name="id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="name" MaxLength="368" FixedLength="false" Unicode="true" />
-          <Property Type="String" Name="keywords" MaxLength="688" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="keywords" MaxLength="3568" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="keywords2" MaxLength="688" FixedLength="false" Unicode="true" />
           <Property Type="Int32" Name="cat_id" />
           <Property Type="String" Name="link" MaxLength="150" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="link_thumbail_big" MaxLength="150" FixedLength="false" Unicode="true" />
@@ -319,6 +321,7 @@
                 <ScalarProperty Name="link_thumbail_big" ColumnName="link_thumbail_big" />
                 <ScalarProperty Name="link" ColumnName="link" />
                 <ScalarProperty Name="cat_id" ColumnName="cat_id" />
+                <ScalarProperty Name="keywords2" ColumnName="keywords2" />
                 <ScalarProperty Name="keywords" ColumnName="keywords" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
