@@ -118,7 +118,7 @@ namespace Ichup
             for (int i = 0; i < all.Length; i++)
             {
                 if (all[i] != "") {
-                    val += "<a style=\"cursor:pointer;\" onclick=\"removeFilter('"+all[i]+"');\">" +all[i]+ "</a>,";
+                    val += "<span class=\"label label-default\" style=\"cursor:pointer;\" onclick=\"removeFilter('" + all[i] + "');\">" + all[i] + " X</span>";
                 }
             }
             return val;
@@ -156,7 +156,7 @@ namespace Ichup
             {
                 if (have.Contains(","+f0ck[i]+",")) schecked = "checked"; else schecked = "";
                 if (f0ck[i].Equals("0")) display = "miễn phí"; else display = "thương mại";
-                val += "<label class=\"checkbox\"><span class=\"icon\"></span><span class=\"icon-to-fade\"></span><input type=\"checkbox\" id=\"f-0_" + (i + 1) + "\" value=\"" + f0ck[i] + "\" onchange=\"search();\"  " + schecked + ">" + display+"</label>";
+                val += "<div class=\"item-checkbox\"><input type=\"checkbox\" id=\"f-0_" + (i + 1) + "\" value=\"" + f0ck[i] + "\" onchange=\"search();\"  " + schecked + " class=\"css-checkbox\">" + display + "</div>";
             }
             return val;
         }
@@ -181,7 +181,7 @@ namespace Ichup
             for (int i = 0; i < f1ck.Length; i++)
             {
                 if (have.Contains(f1ck[i])) schecked = "checked"; else schecked = "";
-                val += "<label class=\"checkbox\"><span class=\"icon\"></span><span class=\"icon-to-fade\"></span><input type=\"checkbox\" id=\"f-1_" + (i + 1) + "\" value=\"" + f1ck[i] + "\" onchange=\"search();\"  " + schecked + ">" + f1ck[i]+"</label>";
+                val += "<div class=\"item-checkbox\"><input type=\"checkbox\" id=\"f-1_" + (i + 1) + "\" value=\"" + f1ck[i] + "\" onchange=\"search();\"  " + schecked + " class=\"css-checkbox\">" + f1ck[i]+"</div>";
             }
             return val;
         }
@@ -206,7 +206,7 @@ namespace Ichup
             for (int i = 0; i < f2ck.Length; i++)
             {
                 if (have.Contains(f2ck[i])) schecked = "checked"; else schecked = "";
-                val += "<label class=\"checkbox\"><span class=\"icon\"></span><span class=\"icon-to-fade\"></span><input type=\"checkbox\" id=\"f-2_" + (i + 1) + "\" value=\"" + f2ck[i] + "\" onchange=\"search();\"  " + schecked + ">" + f2ck[i]+"</label>";
+                val += "<div class=\"item-checkbox\"><input type=\"checkbox\" id=\"f-2_" + (i + 1) + "\" value=\"" + f2ck[i] + "\" onchange=\"search();\"  " + schecked + ">" + f2ck[i] + "</div>";
             }
             return val;
         }
@@ -239,7 +239,7 @@ namespace Ichup
             {
                 string name = p[i];
                 if (have.Contains(name)) schecked = "checked"; else schecked = "";
-                val += "<label class=\"checkbox\"><span class=\"icon\"></span><span class=\"icon-to-fade\"></span><input value='" + name + "' id=f-3_" + (i + 1) + " onchange=\"search();\" type=checkbox " + schecked + ">" + name+"</label>";
+                val += "<div class=\"item-checkbox\"><input value='" + name + "' id=f-3_" + (i + 1) + " onchange=\"search();\" type=checkbox " + schecked + ">" + name + "</div>";
             }
             return val;
         }
@@ -253,7 +253,7 @@ namespace Ichup
             for (int i = 0; i < f4ck.Length; i++)
             {
                 if (have.Contains(f4ck[i])) schecked = "checked"; else schecked = "";
-                val += "<label class=\"checkbox\"><span class=\"icon\"></span><span class=\"icon-to-fade\"></span><input type=\"checkbox\" id=\"f-4_" + (i + 1) + "\" value=\"" + f4ck[i] + "\" onchange=\"search();\" " + schecked + ">" + f4ck[i]+"</label>";
+                val += "<div class=\"item-checkbox\"><input type=\"checkbox\" id=\"f-4_" + (i + 1) + "\" value=\"" + f4ck[i] + "\" onchange=\"search();\" " + schecked + ">" + f4ck[i] + "</div>";
             }
             
             return val;
@@ -283,7 +283,7 @@ namespace Ichup
             for (int i = 0; i < f5ck.Length; i++)
             {
                 if (have.Contains(f5ck[i])) schecked = "checked"; else schecked = "";
-                val += "<label class=\"checkbox\"><span class=\"icon\"></span><span class=\"icon-to-fade\"></span><input type=\"checkbox\" id=\"f-5_" + (i + 1) + "\" value=\"" + f5ck[i] + "\" onchange=\"search();\" " + schecked + ">" + f5ck[i]+"</label>";
+                val += "<div class=\"item-checkbox\"><input type=\"checkbox\" id=\"f-5_" + (i + 1) + "\" value=\"" + f5ck[i] + "\" onchange=\"search();\" " + schecked + ">" + f5ck[i] + "</div>";
             }
 
             return val;

@@ -19,6 +19,7 @@ namespace Ichup.Controllers
             public string link_thumbail_small { get; set; }
             public int total_views { get; set; }
             public string keywords { get; set; }
+            public string address { get; set; }
             public DateTime date_post { get; set; }
             public string filter_1 { get; set; }
             public string filter_2 { get; set; }
@@ -30,10 +31,11 @@ namespace Ichup.Controllers
 
         }
         private ichupEntities db = new ichupEntities();
-        public ActionResult Index(string k,string f0, string f1, string f2, string f3, string f4, string f5, string order, string to, int? pg)
+        public ActionResult Index(string k,string f0, string f1, string f2, string f3, string f4, string f5,string address, string order, string to, int? pg)
         {
             if (k == null) k = "a";
             k = k.Replace("%20", " ");
+            address = address != null ? address : "";
             f0 = f0 != null ? f0 : "";
             f1 = f1 != null ? f1 : "";f2 = f2 != null ? f2 : ""; f3 = f3 != null ? f3 : "";
             f4 = f4 != null ? f4 : ""; f5 = f5 != null ? f5 : "";
@@ -45,7 +47,7 @@ namespace Ichup.Controllers
             ViewBag.keyword = k;
             if (pg == null) pg = 1;
             string query=" SELECT top 1000 ";
-            query += "FT_TBL.id,FT_TBL.link,FT_TBL.link_thumbail_small,FT_TBL.total_views,FT_TBL.keywords,FT_TBL.date_post,FT_TBL.filter_1,FT_TBL.filter_2,FT_TBL.filter_3,FT_TBL.filter_4,FT_TBL.filter_5,FT_TBL.member_id,KEY_TBL.RANK FROM images AS FT_TBL INNER JOIN FREETEXTTABLE(images, keywords,'" + k + "') AS KEY_TBL ON FT_TBL.id = KEY_TBL.[KEY] ";
+            query += "FT_TBL.id,FT_TBL.link,FT_TBL.link_thumbail_small,FT_TBL.total_views,FT_TBL.keywords,FT_TBL.address,FT_TBL.date_post,FT_TBL.filter_1,FT_TBL.filter_2,FT_TBL.filter_3,FT_TBL.filter_4,FT_TBL.filter_5,FT_TBL.member_id,KEY_TBL.RANK FROM images AS FT_TBL INNER JOIN FREETEXTTABLE(images, keywords,'" + k + "') AS KEY_TBL ON FT_TBL.id = KEY_TBL.[KEY] ";
             query += " where (status=0) ";
 
             string[] item=new string[10];
@@ -79,7 +81,9 @@ namespace Ichup.Controllers
                     }
                 if (item.Length >= 1 && item[0].Trim() != "") query += " ) ";
             }
-
+            if (address != "") {
+                query += " and address like N'%"+address+"%' ";
+            }
             if (order == null) order = "RANK";
             query += " order by " + order;
             if (to == null) to="Desc";
@@ -90,6 +94,7 @@ namespace Ichup.Controllers
             ViewBag.f3 = f3;
             ViewBag.f4 = f4;
             ViewBag.f5 = f5;
+            ViewBag.address = address;
             ViewBag.page = pg;
             ViewBag.order = order;
             ViewBag.to = to;

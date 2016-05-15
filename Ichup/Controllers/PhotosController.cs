@@ -149,6 +149,8 @@ namespace Ichup.Controllers
                 ig.filter_3 = filter_3;
                 ig.filter_4 = filter_4;
                 ig.filter_5 = filter_5;
+                ig.price = price;
+                ig.sale_type = sale_type;
                 ig.name = name;
                 ig.address = address;
                 ig.lat = lat;

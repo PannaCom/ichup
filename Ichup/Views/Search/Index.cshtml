@@ -16,15 +16,14 @@
             <div class="col-md-12">
                 <div class="col-md-2 menu-left">
 
-                    <button type="button" id="dropdown-menu-left" class="btn btn-default dropdown-toggle dropdown-menu-left" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Lorem ipsum dolor <span class="fa fa-angle-down"></span> <span class="sr-only">Toggle Dropdown</span> </button>
+                    <button type="button" id="dropdown-menu-left" class="btn btn-default dropdown-toggle dropdown-menu-left" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tìm kiếm nâng cao<span class="fa fa-angle-down"></span> <span class="sr-only">Toggle Dropdown</span> </button>
                     <div id="ul-dropdown-menu-left" class="ul-dropdown-menu-left">
                         <div class="panel-group" id="" role="tablist" aria-multiselectable="true">
                             <div class="panel panel-menu-left">
                                 <div class="panel-heading" role="tab" id="heading1">
                                     <h4 class="panel-title">
                                         <a role="button" data-toggle="collapse" data-parent="" href="#collapse1" aria-expanded="true" aria-controls="collapse1">
-                                            Lorem ipsum
-
+                                            Giá bán
                                             <i class="fa pull-right"></i>
                                         </a>
 
@@ -32,17 +31,23 @@
                                 </div>
                                 <div id="collapse1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading1">
                                     <div class="panel-body">
-                                        <div class="item-checkbox">
-                                            <input type="checkbox" name="checkbox01" id="checkbox01" checked class="css-checkbox"><label for="checkbox01" class="css-label">Lorem ipsum</label>
-                                        </div>
-                                        <div class="item-checkbox">
-                                            <input type="checkbox" name="checkbox02" id="checkbox02" class="css-checkbox"><label for="checkbox02" class="css-label">Lorem ipsum</label>
-                                        </div>
-                                        <div class="item-checkbox">
-                                            <input type="checkbox" name="checkbox03" id="checkbox03" class="css-checkbox"><label for="checkbox03" class="css-label">Lorem ipsum</label>
-                                        </div>
+                                        @Html.Raw(@Ichup.Config.getF0Ck(@ViewBag.f0))   
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-menu-left">
+                                <div class="panel-heading" role="tab" id="heading1">
+                                    <h4 class="panel-title">
+                                        <a role="button" data-toggle="collapse" data-parent="" href="#collapse1" aria-expanded="true" aria-controls="collapse1">
+                                            Tất cả các loại
+                                            <i class="fa pull-right"></i>
+                                        </a>
 
-
+                                    </h4>
+                                </div>
+                                <div id="collapse1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading1">
+                                    <div class="panel-body">
+                                        @Html.Raw(@Ichup.Config.getF1Ck(@ViewBag.f1))   
                                     </div>
                                 </div>
                             </div>
@@ -50,24 +55,14 @@
                                 <div class="panel-heading" role="tab" id="heading2">
                                     <h4 class="panel-title">
                                         <a role="button" data-toggle="collapse" data-parent="" href="#collapse2" aria-expanded="false" aria-controls="collapse2">
-                                            Lorem ipsum
+                                            Kiểu ảnh
                                             <i class="fa pull-right"></i>
                                         </a>
                                     </h4>
                                 </div>
                                 <div id="collapse2" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading2">
                                     <div class="panel-body">
-                                        <div class="item-checkbox">
-                                            <input type="checkbox" name="checkbox04" id="checkbox04" checked class="css-checkbox"><label for="checkbox04" class="css-label">Lorem ipsum</label>
-                                        </div>
-                                        <div class="item-checkbox">
-                                            <input type="checkbox" name="checkbox05" id="checkbox05" class="css-checkbox"><label for="checkbox05" class="css-label">Lorem ipsum</label>
-                                        </div>
-                                        <div class="item-checkbox">
-                                            <input type="checkbox" name="checkbox06" id="checkbox06" class="css-checkbox"><label for="checkbox06" class="css-label">Lorem ipsum</label>
-                                        </div>
-
-
+                                       @Html.Raw(@Ichup.Config.getF2Ck(@ViewBag.f2)) 
                                     </div>
                                 </div>
                             </div>
@@ -75,22 +70,14 @@
                                 <div class="panel-heading" role="tab" id="heading3">
                                     <h4 class="panel-title">
                                         <a role="button" data-toggle="collapse" data-parent="" href="#collapse3" aria-expanded="false" aria-controls="collapse3">
-                                            Lorem ipsum
+                                            Danh mục
                                             <i class="fa pull-right"></i>
                                         </a>
                                     </h4>
                                 </div>
                                 <div id="collapse3" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading3">
                                     <div class="panel-body">
-                                        <div class="item-checkbox">
-                                            <input type="checkbox" name="checkbox07" id="checkbox07" checked class="css-checkbox"><label for="checkbox07" class="css-label">Lorem ipsum</label>
-                                        </div>
-                                        <div class="item-checkbox">
-                                            <input type="checkbox" name="checkbox08" id="checkbox08" class="css-checkbox"><label for="checkbox08" class="css-label">Lorem ipsum</label>
-                                        </div>
-                                        <div class="item-checkbox">
-                                            <input type="checkbox" name="checkbox09" id="checkbox09" class="css-checkbox"><label for="checkbox09" class="css-label">Lorem ipsum</label>
-                                        </div>
+                                        @Html.Raw(@Ichup.Config.getF3Ck(@ViewBag.f3)) 
                                     </div>
                                 </div>
                             </div>
@@ -98,22 +85,14 @@
                                 <div class="panel-heading" role="tab" id="heading4">
                                     <h4 class="panel-title">
                                         <a role="button" data-toggle="collapse" data-parent="" href="#collapse4" aria-expanded="false" aria-controls="collapse4">
-                                            Lorem ipsum
+                                            Người
                                             <i class="fa pull-right"></i>
                                         </a>
                                     </h4>
                                 </div>
                                 <div id="collapse4" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading4">
                                     <div class="panel-body">
-                                        <div class="item-checkbox">
-                                            <input type="checkbox" name="checkbox10" id="checkbox10" checked class="css-checkbox"><label for="checkbox10" class="css-label">Lorem ipsum</label>
-                                        </div>
-                                        <div class="item-checkbox">
-                                            <input type="checkbox" name="checkbox11" id="checkbox11" class="css-checkbox"><label for="checkbox11" class="css-label">Lorem ipsum</label>
-                                        </div>
-                                        <div class="item-checkbox">
-                                            <input type="checkbox" name="checkbox12" id="checkbox12" class="css-checkbox"><label for="checkbox12" class="css-label">Lorem ipsum</label>
-                                        </div>
+                                        @Html.Raw(@Ichup.Config.getF4Ck(@ViewBag.f4)) 
                                     </div>
                                 </div>
                             </div>
@@ -121,22 +100,14 @@
                                 <div class="panel-heading" role="tab" id="heading5">
                                     <h4 class="panel-title">
                                         <a role="button" data-toggle="collapse" data-parent="" href="#collapse5" aria-expanded="false" aria-controls="collapse5">
-                                            Lorem ipsum
+                                            Góc chụp
                                             <i class="fa pull-right"></i>
                                         </a>
                                     </h4>
                                 </div>
                                 <div id="collapse5" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading5">
                                     <div class="panel-body">
-                                        <div class="item-checkbox">
-                                            <input type="checkbox" name="checkbox13" id="checkbox13" checked class="css-checkbox"><label for="checkbox13" class="css-label">Lorem ipsum</label>
-                                        </div>
-                                        <div class="item-checkbox">
-                                            <input type="checkbox" name="checkbox14" id="checkbox14" class="css-checkbox"><label for="checkbox14" class="css-label">Lorem ipsum</label>
-                                        </div>
-                                        <div class="item-checkbox">
-                                            <input type="checkbox" name="checkbox15" id="checkbox15" class="css-checkbox"><label for="checkbox15" class="css-label">Lorem ipsum</label>
-                                        </div>
+                                        @Html.Raw(@Ichup.Config.getF5Ck(@ViewBag.f5))
                                     </div>
                                 </div>
                             </div>
@@ -144,77 +115,24 @@
                                 <div class="panel-heading" role="tab" id="heading6">
                                     <h4 class="panel-title">
                                         <a role="button" data-toggle="collapse" data-parent="" href="#collapse6" aria-expanded="false" aria-controls="collapse6">
-                                            Lorem ipsum
+                                            Địa điểm
                                             <i class="fa pull-right"></i>
                                         </a>
                                     </h4>
                                 </div>
                                 <div id="collapse6" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading6">
                                     <div class="panel-body">
-                                        <div class="item-checkbox">
-                                            <input type="checkbox" name="checkbox16" id="checkbox16" checked class="css-checkbox"><label for="checkbox16" class="css-label">Lorem ipsum</label>
-                                        </div>
-                                        <div class="item-checkbox">
-                                            <input type="checkbox" name="checkbox17" id="checkbox17" class="css-checkbox"><label for="checkbox17" class="css-label">Lorem ipsum</label>
-                                        </div>
-                                        <div class="item-checkbox">
-                                            <input type="checkbox" name="checkbox18" id="checkbox18" class="css-checkbox"><label for="checkbox18" class="css-label">Lorem ipsum</label>
-                                        </div>
-
-                                        <div class="item-checkbox">
-                                            <input type="checkbox" name="checkbox19" id="checkbox19" checked class="css-checkbox"><label for="checkbox19" class="css-label">Lorem ipsum</label>
-                                        </div>
-                                        <div class="item-checkbox">
-                                            <input type="checkbox" name="checkbox20" id="checkbox20" class="css-checkbox"><label for="checkbox20" class="css-label">Lorem ipsum</label>
-                                        </div>
-                                        <div class="item-checkbox">
-                                            <input type="checkbox" name="checkbox21" id="checkbox21" class="css-checkbox"><label for="checkbox21" class="css-label">Lorem ipsum</label>
-                                        </div>
-
-                                        <div class="item-checkbox">
-                                            <input type="checkbox" name="checkbox22" id="checkbox22" class="css-checkbox"><label for="checkbox22" class="css-label">Lorem ipsum</label>
-                                        </div>
-                                        <div class="item-checkbox">
-                                            <input type="checkbox" name="checkbox23" id="checkbox23" class="css-checkbox"><label for="checkbox23" class="css-label">Lorem ipsum</label>
-                                        </div>
-                                        <div class="item-checkbox">
-                                            <input type="checkbox" name="checkbox24" id="checkbox24" class="css-checkbox"><label for="checkbox24" class="css-label">Lorem ipsum</label>
-                                        </div>
-                                        <div class="item-checkbox">
-                                            <input type="checkbox" name="checkbox25" id="checkbox25" class="css-checkbox"><label for="checkbox25" class="css-label">Lorem ipsum</label>
-                                        </div>
+                                        <input type="text" id="address" name="address" value="@ViewBag.address">
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="panel panel-menu-left">
-                                <div class="panel-heading" role="tab" id="heading7">
-                                    <h4 class="panel-title">
-                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="" href="#collapse7" aria-expanded="false" aria-controls="collapse7">
-                                            Lorem ipsum
-                                            <i class="fa pull-right"></i>
-                                        </a>
-                                    </h4>
-                                </div>
-                                <div id="collapse7" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading7">
-                                    <div class="panel-body">
-                                        <div class="item-checkbox">
-                                            <input type="checkbox" name="checkbox26" id="checkbox26" checked class="css-checkbox"><label for="checkbox26" class="css-label">Lorem ipsum</label>
-                                        </div>
-                                        <div class="item-checkbox">
-                                            <input type="checkbox" name="checkbox27" id="checkbox27" class="css-checkbox"><label for="checkbox27" class="css-label">Lorem ipsum</label>
-                                        </div>
-                                        <div class="item-checkbox">
-                                            <input type="checkbox" name="checkbox29" id="checkbox28" class="css-checkbox"><label for="checkbox28" class="css-label">Lorem ipsum</label>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            
                         </div>
 
-                        <div class="btn1-menu-left">Lorem ipsum dolor <i class="fa fa-angle-down pull-right"></i></div>
+                        @*<div class="btn1-menu-left">Lorem ipsum dolor <i class="fa fa-angle-down pull-right"></i></div>*@
 
-                        <div class="btn2-menu-left">Lorem ipsum dolor</div>
+                        <div class="btn2-menu-left">Xóa bộ lọc</div>
                     </div>
 
 
@@ -227,55 +145,29 @@
                     <div class="input-group">
 
                         <div class="input-group-btn">
-                            <button id="dropdown-option-index" type="button" class="btn btn-default dropdown-toggle dropdown-option-index" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Lorem ipsum <span class="fa fa-angle-down"></span> <span class="sr-only">Toggle Dropdown</span> </button>
+                            <button id="dropdown-option-index" type="button" class="btn btn-default dropdown-toggle dropdown-option-index" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tất cả các loại <span class="fa fa-angle-down"></span> <span class="sr-only">Toggle Dropdown</span> </button>
                             <div id="ul-dropdown-option-index" class="ul-dropdown-option-index">
                                 <div class="item-checkbox">
-                                    <input type="checkbox" name="checkbox30" id="checkbox30" checked class="css-checkbox"><label for="checkbox30" class="css-label">Lorem ipsum</label>
+                                    <input type="checkbox" name="checkbox30" id="checkbox30" checked class="css-checkbox">Ảnh số
                                 </div>
                                 <div class="item-checkbox">
-                                    <input type="checkbox" name="checkbox31" id="checkbox31" class="css-checkbox"><label for="checkbox31" class="css-label">Lorem ipsum</label>
+                                    <input type="checkbox" name="checkbox31" id="checkbox31" class="css-checkbox">Vector
                                 </div>
                                 <div class="item-checkbox">
-                                    <input type="checkbox" name="checkbox32" id="checkbox32" class="css-checkbox"><label for="checkbox32" class="css-label">Lorem ipsum</label>
+                                    <input type="checkbox" name="checkbox32" id="checkbox32" class="css-checkbox">Video
                                 </div>
                             </div>
                         </div>
                         <div class="group-input-search-index">
-                            <input id="input-search-index" type="text" class="form-control input-search-index" aria-label="Text input with segmented button dropdown">
-                            <div id="ul-input-search-index" class="ul-input-search-index">
-                                <div class="item-input-search">
-                                    Lorem
-                                </div>
-                                <div class="item-input-search">
-                                    Lorem ipsum
-                                </div>
-                                <div class="item-input-search">
-                                    Lorem ipsum
-                                </div>
-                                <div class="item-input-search">
-                                    Lorem ipsum
-                                </div>
-                                <div class="item-input-search">
-                                    Lorem ipsum dolor
-                                </div>
-                                <div class="item-input-search">
-                                    Lorem ipsum dolor sit
-                                </div>
-                                <div class="item-input-search">
-                                    Lorem ipsum dolor sit amet
-                                </div>
-                            </div>
+                            <input id="input-search-index" type="text" placeholder="Nhập từ khóa" value="@ViewBag.keyword" class="form-control input-search-index" aria-label="Gõ từ khóa">
+                            
                         </div>
 
                         <div class="input-group-btn">
-                            <button type="button" class="btn btn-default button-search-index"><i class="fa fa-search"></i></button>
+                            <button type="button" class="btn btn-default button-search-index" onclick="search();"><i class="fa fa-search"></i></button>
 
                         </div>
-
-
-
                     </div>
-
 
                 </div>
             </div>
@@ -300,13 +192,35 @@
 
                 <div id="gallery-respon" class="col-md-12">
                     <div class="col-xs-12 col-md-6 tag-top">
-                        <div class="title-tag">Lorem ipsum: <span>Lorem</span>  3785 dolor sit ame</div>
+                        <div class="title-tag"><h4 class="title">Tìm thấy (@Model.TotalItemCount) - <span>ảnh</span></h4></div>
+                        <div class="span4">
+                            <div class="portfolio-controllers-container">
+                              <p class="pull-left sort-title">Sắp xếp &nbsp;</p>
+                              <div class="btn-group">
+                                <button class="btn btn-large" id="order">Phù hợp nhất</button>
+                                <button class="btn btn-large dropdown-toggle" data-toggle="dropdown">
+                                  <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" id="filters">
+                                  <!-- dropdown menu links -->
+                                  <li><a onclick="setorder('RANK','Desc');"   id="order1">Phù hợp nhất</a></li>
+                                  <li><a onclick="setorder('id','Desc');" id="order2">Mới nhất</a></li>
+                                  <li><a onclick="setorder('id','Asc');" id="order3">Cũ nhất</a></li>
+                                  <li><a onclick="setorder('total_views','Desc');" id="order4">Xem nhiều nhất</a></li>
+                                </ul>
+                              </div> <!-- end btn-group -->
+                            </div> <!-- end portfolio-controllers-container -->
+                          </div> <!-- end span4 -->
                         <div class="list-tag">
-                            <span class="label label-default">Lorem X</span>
+                            @*<span class="label label-default">Lorem X</span>
                             <span class="label label-default">Lorem X</span>
                             <span class="label label-default">Lorem ipsum </span>
-                            <span class="label">Lorem X</span>
-
+                            <span class="label">Lorem X</span>*@
+                            @*<section class="refinements-summary">*@
+                                @Html.Raw(Ichup.Config.tags(allFilter))
+                                @if (allFilter != "" && allFilter != null)
+                                {<span style="cursor:pointer;" onclick="removeAllFilter();" class="label label-default">Xóa bộ lọc X</span>}
+                            @*</section>*@
                         </div>
                     </div>
                     <div class="col-xs-12 col-md-6 pagination-top">
@@ -587,227 +501,14 @@
             </div>
         </div>-->
     </section><!-- end news-index-->
-@Html.Partial("~/Views/_imagepage.cshtml")
-<section class="search-results">
-      <div class="container">
-        <div class="row">
-          <aside class="span3">
-            <div class="widgets-container">
-              <div class="widget">
-                @*<form action="" class="search-form">
-                    <div class="input-append">
-                      <input class="input-medium" id="keyword" type="text" placeholder="Nhập từ khóa" value="@ViewBag.keyword">
-                      <button class="btn" type="button"><i class="icon-search"></i></button>
-                    </div> <!-- end input-append -->
-                  </form> <!-- end search form -->*@
-              </div> <!-- end widget -->
-              <div class="widget" style="border-bottom:#ea2b2b solid 1px;">
-                <h4 class="title">Giá bán<span onclick="opendv(0);" style="float:right;position:relative;padding-right:3px;cursor:pointer;font-size:1.5rem;font-family: 'Helvetica Neue';line-height: 1.5rem;" id="dvfs0">+</span>
-                     <span onclick="closedv(0);" style="float:right;position:relative;display:none;padding-right:3px;cursor:pointer;font-size:1.5rem;font-family: 'Helvetica Neue';line-height: 1.5rem;" id="dvfh0">-</span></h4>
-                 <div id="dvf0" style="display:none;">
-                     @Html.Raw(@Ichup.Config.getF0Ck(@ViewBag.f0))                        
-                  </div><!-- end ui-slider -->
-              </div> <!-- end widget --> 
-              <div class="widget" style="border-bottom:#ea2b2b solid 1px;">
-                <h4 class="title">Loại ảnh<span onclick="opendv(1);" style="float:right;position:relative;padding-right:3px;cursor:pointer;font-size:1.5rem;font-family: 'Helvetica Neue';line-height: 1.5rem;" id="dvfs1">+</span>
-                     <span onclick="closedv(1);" style="float:right;position:relative;display:none;padding-right:3px;cursor:pointer;font-size:1.5rem;font-family: 'Helvetica Neue';line-height: 1.5rem;" id="dvfh1">-</span></h4>
-                 <div id="dvf1" style="display:none;">
-                     @Html.Raw(@Ichup.Config.getF1Ck(@ViewBag.f1))   
-                  </div><!-- end ui-slider -->
-              </div> <!-- end widget --> 
-              <div class="widget" style="border-bottom:#ea2b2b solid 1px;">
-                <h4 class="title">Kiểu ảnh<span onclick="opendv(2);" style="float:right;position:relative;padding-right:3px;cursor:pointer;font-size:1.5rem;font-family: 'Helvetica Neue';line-height: 1.5rem;" id="dvfs2">+</span>
-                     <span onclick="closedv(2);" style="float:right;position:relative;display:none;padding-right:3px;cursor:pointer;font-size:1.5rem;font-family: 'Helvetica Neue';line-height: 1.5rem;" id="dvfh2">-</span></h4>
-                 <div id="dvf2" style="display:none;">
-                     @*<input type="checkbox" id="f-2_1" value="dọc" onchange="search();">dọc 
-                     <input type="checkbox" id="f-2_2" value="ngang" onchange="search();">ngang
-                     <input type="checkbox" id="f-2_3" value="rộng" onchange="search();">rộng       *@   
-                     @Html.Raw(@Ichup.Config.getF2Ck(@ViewBag.f2))   
-                  </div><!-- end ui-slider -->
-              </div> <!-- end widget --> 
-              @*<div class="widget">
-                <h4 class="title">Price Range</h4>
-                 <div class="noUiSlider horizontal">                   
-                  </div><!-- end ui-slider -->
 
-              </div> <!-- end widget --> *@
-
-              <div class="widget" style="border-bottom:#ea2b2b solid 1px;">
-                <h4 class="title">Danh mục<span onclick="opendv(3);" style="float:right;position:relative;padding-right:3px;cursor:pointer;font-size:1.5rem;font-family: 'Helvetica Neue';line-height: 1.5rem;" id="dvfs3">+</span>
-                     <span onclick="closedv(3);" style="float:right;position:relative;display:none;padding-right:3px;cursor:pointer;font-size:1.5rem;font-family: 'Helvetica Neue';line-height: 1.5rem;" id="dvfh3">-</span></h4>
-                 <div id="dvf3" style="display:none;">
-                 @Html.Raw(@Ichup.Config.getF3Ck(@ViewBag.f3))
-                  </div>
-              </div> <!-- end widget -->
-              <div class="widget" style="border-bottom:#ea2b2b solid 1px;">
-                <h4 class="title">Người<span onclick="opendv(4);" style="float:right;position:relative;padding-right:3px;cursor:pointer;font-size:1.5rem;font-family: 'Helvetica Neue';line-height: 1.5rem;" id="dvfs4">+</span>
-                     <span onclick="closedv(4);" style="float:right;position:relative;display:none;padding-right:3px;cursor:pointer;font-size:1.5rem;font-family: 'Helvetica Neue';line-height: 1.5rem;" id="dvfh4">-</span></h4>
-                 <div id="dvf4" style="display:none;">
-                 @Html.Raw(@Ichup.Config.getF4Ck(@ViewBag.f4))
-                  </div>
-              </div> <!-- end widget -->
-              <div class="widget">
-                <h4 class="title">Góc chụp<span onclick="opendv(5);" style="float:right;position:relative;padding-right:3px;cursor:pointer;font-size:1.5rem;font-family: 'Helvetica Neue';line-height: 1.5rem;" id="dvfs5">+</span>
-                     <span onclick="closedv(5);" style="float:right;position:relative;display:none;padding-right:3px;cursor:pointer;font-size:1.5rem;font-family: 'Helvetica Neue';line-height: 1.5rem;" id="dvfh5">-</span></h4>
-                   <div id="dvf5" style="display:none;">
-                 @Html.Raw(@Ichup.Config.getF5Ck(@ViewBag.f5))
-                  </div>
-              </div> <!-- end widget -->
-               @*<div class="widget">
-                <h4 class="title">License Types</h4>
-                 <form class="license-types">
-                   <label class="checkbox">
-                     <input type="checkbox" value="" checked>
-                     Free
-                   </label>
-
-                   <label class="checkbox">
-                     <input type="checkbox" value="">
-                     Creative
-                   </label>
-
-                   <label class="checkbox">
-                     <input type="checkbox" value="">
-                     Editorial
-                   </label>
-
-                 </form>
-
-                </div> <!-- end widget -->*@
-
-
-
-            </div> <!-- end widgets-container -->
-          </aside> <!-- end span3 -->
-          <div class="search-result-title">
-            <div class="span9">
-                <div class="row-fluid">
-                  <div class="span8">
-                    <h4 class="title">Tìm thấy (@Model.TotalItemCount) - <span>ảnh</span></h4>
-                  </div> <!-- end span8 -->
-                  <div class="span4">
-                    <div class="portfolio-controllers-container">
-                      <p class="pull-left sort-title">Sắp xếp -</p>
-                      <div class="btn-group">
-                        <button class="btn btn-large" id="order">Phù hợp nhất</button>
-                        <button class="btn btn-large dropdown-toggle" data-toggle="dropdown">
-                          <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" id="filters">
-                          <!-- dropdown menu links -->
-                          <li><a onclick="setorder('RANK','Desc');"   id="order1">Phù hợp nhất</a></li>
-                          <li><a onclick="setorder('id','Desc');" id="order2">Mới nhất</a></li>
-                          <li><a onclick="setorder('id','Asc');" id="order3">Cũ nhất</a></li>
-                          <li><a onclick="setorder('total_views','Desc');" id="order4">Xem nhiều nhất</a></li>
-                        </ul>
-                      </div> <!-- end btn-group -->
-                    </div> <!-- end portfolio-controllers-container -->
-                  </div> <!-- end span4 -->
-                </div> <!-- end row-fluid -->
-                    
-                  <section class="top-images v2">
-
-                      <div class="images-container v3">
-                        <div class="row">
-                          <div id="portfolio-container">
-                            <section class="refinements-summary">
-                                @Html.Raw(Ichup.Config.tags(allFilter))
-                                @if (allFilter != "" && allFilter != null)
-                                {<a style="cursor:pointer;" onclick="removeAllFilter();">xóa bộ lọc</a>}
-                            </section>
-                            @foreach (var item in Model) { 
-                                <text>
-                                    <div class="span3 transition metal">
-                                    <figure class="top-img">
-                                      <img src="@Ichup.Config.domain/@item.link_thumbail_small" alt="img">
-                                      <figcaption class="img-meta">
-                                        <div class="row-fluid">
-                                          <div class="span8">
-                                            <a onclick="imagepage(@item.id)" class="img-id">#@item.id</a>
-                                            @*<a href="#" class="img-tags">@item.filter_3</a>*@
-                                          </div>
-                                          <div class="span4">
-                                            <a href="#" class="btn download-btn"><i class="icon-download"></i></a>
-                                            @if (typeUser>=3){
-                                                <a onclick="del(@item.id)" class="btn download-btn">Xóa</a>
-                                                <a href="/Photos/User?id=@item.member_id&keyword=@item.keywords" class="btn download-btn">Sửa</a>
-                                            }
-                                          </div>
-                                        </div>
-                                        <div class="roll-over">
-                                        <a onclick="imagepage(@item.id)" class="btn"><span class="bucket">&#128092;</span></a>
-                                      </div> <!-- end roll-over -->
-                                      </figcaption> <!-- end img-meta -->
-                                    </figure> <!-- end top-img -->
-                                  </div><!--  end span3 -->
-                                </text>
-                            }
-                          </div> <!-- end id="portfolio-container" -->
-
-                        </div> <!-- end row-fluid -->
-                      </div> <!-- end images-container -->
-
-                    
-                  </section> <!-- end top-images -->
-
-                   <section class="main-pagination">
-                      <div class="row-fluid">
-                        <div class="span12">
-                            <div class="inner-pagination">
-                                <div class="pagination ">
-                                  <ul>
-                                    @for (int i = 1; i <= Model.PageCount; i++)
-                                    {
-                                        <li ><a onclick="setpage(@i);" style="cursor:pointer;">@i</a></li>
-                                    }
-                                    @*<li><a href="#" class="btn prev"><i class="icon-chevron-left"></i></a></li>
-                                    <li><a href="#">1</a></li>
-                                    <li><a href="#">2</a></li>
-                                    <li><a href="#">3</a></li>
-                                    <li><a href="#">4</a></li>
-                                    <li><a href="#">5</a></li>
-                                    <li><a href="#">6</a></li>
-                                    <li><a href="#">7</a></li>
-                                    <li><a href="#">8</a></li>
-                                    <li><a href="#">9</a></li>
-                                    <li><a href="#" class="btn next"><i class="icon-chevron-right"></i></a></li>*@
-                                  </ul>
-                                </div> <!-- end pagination -->
-                            </div> <!-- end inner-pagination -->
-                        </div> <!-- end span9 -->
-                        @*<div class="span3">
-                          <div class="portfolio-controllers-container v2">
-                            <p class="pull-left sort-title">Images per page-</p>
-                            <div class="btn-group dropup">
-                              <button class="btn btn-large">15</button>
-                              <button class="btn btn-large dropdown-toggle" data-toggle="dropdown">
-                                <span class="caret"></span>
-                              </button>
-                              <ul class="dropdown-menu">
-                                <!-- dropdown menu links -->
-                                <li><a href="#">20</a></li>
-                                <li><a href="#">25</a></li>
-                                <li><a href="#">35</a></li>
-                              </ul>
-                            </div> <!-- end btn-group -->
-                          </div> <!-- end portfolio-controllers-container -->
-                            
-                        </div> <!-- end span3 -->*@
-                      </div> <!-- end row -->
-                  </section> <!-- end main-pagination -->
-
-                
-            </div> <!-- end span9 -->
-          </div> <!-- end search-result-title -->
-        </div> <!-- end row -->
-      </div> <!-- end container -->
-    </section> <!-- end search-results -->
   
     <!-- ============================  Search Results Ends ============================ -->
 <script>
     var pg=@ViewBag.page;
     var order="@ViewBag.order";
     var to="@ViewBag.to";
+    var address="@ViewBag.address";
     if (order.toString().indexOf("RANK")>=0){
         $("#order1").addClass("selected");
         $("#order").html("Phù hợp nhất");
@@ -842,7 +543,7 @@
     }
     function search() {
         var url = "/Search?";
-        var k = $("#skeyword").val();
+        var k = $("#input-search-index").val();
         if (k == "") {
             return;
         }
@@ -882,7 +583,7 @@
                 f5 += document.getElementById("f-5_" + i).value + ",";
             }
         }
-        url += "k=" + k + "&f0=" + f0 +"&f1=" + f1 + "&f2=" + f2 + "&f3=" + f3 + "&f4=" + f4 + "&f5=" + f5+"&order="+order+"&to="+to+"&pg="+pg;
+        url += "k=" + k + "&f0=" + f0 +"&f1=" + f1 + "&f2=" + f2 + "&f3=" + f3 + "&f4=" + f4 + "&f5=" + f5+"&address="+address+"&order="+order+"&to="+to+"&pg="+pg;
         window.location.href = url;
     }
     var currentId = -1;
@@ -936,26 +637,5 @@
         });
         search();
     }
-    function del(id){
-        if (!confirm("Bạn có chắc chắn xóa?"))
-        {
-            return;
-        }
-        var formdata = new FormData(); //FormData object
-        formdata.append("id", id);
-        var xhr = new XMLHttpRequest();
-        xhr.open('POST', '/Photos/Del');
-        xhr.send(formdata);
-        var content = "";
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState == 4 && xhr.status == 200) {
-                if (xhr.responseText == "1") {
-                    alert("xóa ảnh thành công");
-                } else {
-                    
-                }
-            }
-        }
-
-    }
+    
 </script>
