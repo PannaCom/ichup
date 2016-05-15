@@ -140,7 +140,7 @@ namespace Ichup
             string schecked = "";
             
              if (have.Equals("0")) schecked = "checked"; else schecked = "";
-             val += "<input type=\"checkbox\" id=\"f-" + id + "-0_1\" value=\"0\"  " + schecked + ">Miễn phí";
+             val += "<div class=\"item-checkbox\"><input type=\"checkbox\" id=\"f-" + id + "-0_1\" value=\"0\"  " + schecked + " class=\"css-checkbox\">Miễn phí</div>";
             
             return val;
         }

@@ -223,8 +223,7 @@ trong ảnh của bạn. Hướng dẫn</div>
                                 <div class="lable-1">
                                     <input type="text" autocomplete="on"  id="address_@item.id" name="address_@item.id" value="@item.address" style="width:100%;"/>
                                     <input type="hidden" id="lon_@item.id" name="lon_@item.id" value="@item.lon"/>
-                                    <input type="hidden" id="lat_@item.id" name="lat_@item.id" value="@item.lat"/>
-                                    
+                                    <input type="hidden" id="lat_@item.id" name="lat_@item.id" value="@item.lat"/>                                    
                                     @*<div class="map_canvas" style="display:none;"></div>*@
                                     <script>
                                         $(function () {
@@ -248,6 +247,11 @@ trong ảnh của bạn. Hướng dẫn</div>
                                         });
                                     </script>
                                 </div>
+                               <div class="text margin-top-30 margin-bottom-5">Giá bán</div>
+                                <div class="lable-1">
+                                    @Html.Raw(@Ichup.Config.getF0CkUser(@item.id,@item.price.ToString()))
+                                </div>
+                               
                             </div>
                         </div>
 
@@ -300,7 +304,7 @@ trong ảnh của bạn. Hướng dẫn</div>
         //if (document.getElementById("sale_type_" + id+"_2").checked) sale_type=1;;
         //alert(document.getElementById("sale_type_" + id+"_2").checked);
         //return;
-        //if (document.getElementById("f-" + id+"-0_1").checked) price=0;
+        if (document.getElementById("f-" + id+"-0_1").checked) price=0;
         formdata.append("id", id);
         formdata.append("filter_1", filter_1);
         formdata.append("filter_2", filter_2);
