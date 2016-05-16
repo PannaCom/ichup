@@ -1482,6 +1482,7 @@
     <Content Include="Views\Members\Reset.cshtml" />
     <Content Include="Views\_displayimage.cshtml" />
     <Content Include="Views\Members\Login2.cshtml" />
+    <Content Include="Views\Home\Price.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

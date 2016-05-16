@@ -17,7 +17,9 @@ namespace Ichup.Controllers
             
             return View();
         }
-
+        public ActionResult Price() {
+            return View();
+        }
         public ActionResult About()
         {
             ViewBag.Message = "Your app description page.";
