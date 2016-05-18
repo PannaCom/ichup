@@ -26,7 +26,12 @@ namespace Ichup.Controllers
 
             return View();
         }
+        public ActionResult Rule()
+        {
+            ViewBag.Message = "Your app description page.";
 
+            return View();
+        }
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
