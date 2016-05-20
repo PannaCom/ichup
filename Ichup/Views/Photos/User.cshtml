@@ -159,10 +159,11 @@ trong ảnh của bạn. Hướng dẫn</div>
                         <div class="item-12">
                             <div class="images"><img src="..@item.link_thumbail_big" alt="img" style="border-radius:11px;width:285px;height:202px;" /></div>
                             <div class="checkbox">
-                                <input type="checkbox" name="checkboxG6" id="checkboxG6" class="css-checkbox" /><label for="checkboxG6" class="css-label">Chọn ảnh này</label>
+                                <input type="checkbox" name="checkboxG6" id="checkboxG6" class="css-checkbox" />Chọn ảnh này
                             </div>
                             <div class="div-submit margin-top-125">
                                 <button type="button" class="btn-submit" onclick="save(@item.id)">Save</button>
+                                <button type="button" class="btn-submit" onclick="del(@item.id)">Delete</button>
                             </div>
                             <div class="clear"></div>
                         </div>
@@ -348,11 +349,8 @@ trong ảnh của bạn. Hướng dẫn</div>
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
                 if (xhr.responseText == "1") {
-                    //alert("xóa ảnh thành công");
-                    $("#div-"+id).html("");
-                    $("#div-"+id).css("background-color","red");
-                    $("#div-"+id+"-2").html("");
-                    $("#div-"+id+"-2").css("background-color","red");
+                    alert("xóa ảnh thành công");
+                    window.location.reload();
                 } else {
                     alert("Chương trình đang cập nhật, xin quay lại sau!");
                 }

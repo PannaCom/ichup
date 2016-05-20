@@ -27,6 +27,7 @@
                 <h1>
                     Upload ảnh của bạn
                 </h1>
+                <img id="loadingimg" src="/Images/loading.gif" style="display:none;width:50px;height:50px;text-align:center;" />
             </div>
             <div class="bg-11">
                 <div class="col-md-12 col-center">
@@ -57,7 +58,7 @@
             <div class="footer-11">
                 <div class="col-md-3 col-md-offset-3">
                     <div class="checkbox">
-                        <input type="checkbox" name="checkboxG6" id="checkboxG6" class="css-checkbox" /><label for="checkboxG6" class="css-label">Tôi đã đọc và đồng ý với <a href="#"> Bản quyền và điều khoản sử dụng</a> của website bananhso.com và đồng ý đăng ký</label>
+                        <input type="checkbox" name="checkboxG6" id="checkboxG6" class="css-checkbox" />Tôi đã đọc và đồng ý với <a href="/Home/Rule"> Bản quyền và điều khoản sử dụng</a> của website bananhso.com và đồng ý đăng ký
                     </div>
                 </div>
 
@@ -210,6 +211,7 @@
         if (totalindex >= fileInput.files.length) return;
         //alert(totalindex);
         $("#notice").html("Đang upload xin chờ");
+        $("#loadingimg").show();
         filename = fileInput.files[totalindex].name;
         fileobj = fileInput.files[totalindex];
         //alert(filename + "," + fileobj);
@@ -237,7 +239,7 @@
         //alert("222");
         xhr.onreadystatechange = function () {
             if (xhr.readyState == 4 && xhr.status == 200) {
-                alert(xhr.responseText);
+                //alert(xhr.responseText);
                 var str = xhr.responseText.split(":");
                 var indexUploaded = totalItemImage + 1;
                 $('#img_' + totalItemImage).html("<a href=\"#\"><img src=\"" + str[0] + "\" style=\"height:86px;width:122px;\" id=\"image_" + totalItemImage + "\"></a>");
@@ -245,6 +247,7 @@
                 $('#des_' + totalItemImage).html(str[2]);
                 $("#notice").html("Đã upload xong ảnh " + indexUploaded);
                 newupload(filename, fileobj);
+                $("#loadingimg").hide();
             }
         }
         
