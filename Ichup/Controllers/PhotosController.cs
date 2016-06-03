@@ -112,20 +112,56 @@ namespace Ichup.Controllers
         public string downloadfile(int id,int type) {
             try
             {
+                string filePath = "";
                 image img = db.images.Find(id);
                 string link = img.link;
                 string download = "total_download=total_download+1";
                 if (type == 3) link = img.link;
                 if (type == 2) { link = img.link_big; download = "total_download_big=total_download_big+1"; }
                 if (type == 1) { link = img.link_small; download = "total_download_small=total_download_small+1"; }
+                //link = img.link;
                 string query = "update images set " + download + " where id=" + id;
                 db.Database.ExecuteSqlCommand(query);
                 //link=Config.domain + link;
-                System.Web.HttpContext.Current.Response.ContentType = "application/force-download";
-                System.Web.HttpContext.Current.Response.AddHeader("content-disposition", "attachment; filename=" + link);
-                System.Web.HttpContext.Current.Response.ContentType = "image/jpeg";
-                System.Web.HttpContext.Current.Response.TransmitFile(Server.MapPath(link));
-                System.Web.HttpContext.Current.Response.End();
+                //System.Web.HttpContext.Current.Response.ContentType = "application/force-download";
+                //System.Web.HttpContext.Current.Response.AddHeader("content-disposition", "attachment; filename=" + link);
+                //System.Web.HttpContext.Current.Response.ContentType = "image/jpeg";
+                //System.Web.HttpContext.Current.Response.TransmitFile(Server.MapPath(link));
+                //System.Web.HttpContext.Current.Response.End();
+                try
+                {
+                    if (type == 3)
+                    {
+                        string[] scopes = new string[] { DriveService.Scope.Drive };
+                        string keyFilePath = HttpContext.Server.MapPath("~/GooglAPI-929de187bc0b.p12");
+                        var serviceAccountEmail = "googlapi@googlapi-1330.iam.gserviceaccount.com";//"googlapi@strong-return-132923.iam.gserviceaccount.com";
+                        var certificate = new X509Certificate2(keyFilePath, "notasecret", X509KeyStorageFlags.Exportable);//X509Certificate2(keyFilePath, "notasecret", X509KeyStorageFlags.Exportable);
+                        var credential = new ServiceAccountCredential(new ServiceAccountCredential.Initializer(serviceAccountEmail)
+                        {
+                            Scopes = scopes
+                        }.FromCertificate(certificate));
+
+                        var service = new DriveService(new BaseClientService.Initializer()
+                        {
+                            HttpClientInitializer = credential,
+                            ApplicationName = "GooglAPI",
+                        });
+
+                        filePath = HttpContext.Server.MapPath("../Images/Download/");//HttpContext.Server.MapPath(
+                        downloadGDFile(service, link, filePath);
+                    }
+                    if (type == 3) filePath = "/Images/Download/";
+                    System.Web.HttpContext.Current.Response.ContentType = "application/force-download";
+                    System.Web.HttpContext.Current.Response.AddHeader("content-disposition", "attachment; filename=" + link+".jpg");
+                    System.Web.HttpContext.Current.Response.ContentType = "image/jpeg";
+                    System.Web.HttpContext.Current.Response.TransmitFile(filePath + link + ".jpg");
+                    System.Web.HttpContext.Current.Response.End();
+                    return "1";
+                }
+                catch (Exception ex)
+                {
+                    return "0";
+                }
             }
             catch (Exception ex) {
                 return "0";
@@ -350,7 +386,61 @@ namespace Ichup.Controllers
                 return null;
             }
         }
+        /// <summary>
+        /// Download a file
+        /// Documentation: https://developers.google.com/drive/v2/reference/files/get
+        /// </summary>
+        /// <param name="_service">a Valid authenticated DriveService</param>
+        /// <param name="_fileResource">File resource of the file to download</param>
+        /// <param name="_saveTo">location of where to save the file including the file name to save it as.</param>
+        /// <returns></returns>
+        public static Boolean downloadFileFromIdGoogleDrive(DriveService _service, Google.Apis.Drive.v2.Data.File _fileResource, string _saveTo)
+        {
 
+            if (!String.IsNullOrEmpty(_fileResource.DownloadUrl))
+            {
+                try
+                {
+                    
+                    var x = _service.HttpClient.GetByteArrayAsync(_fileResource.DownloadUrl);
+                    byte[] arrBytes = x.Result;
+                    System.IO.File.WriteAllBytes(_saveTo, arrBytes);//_saveTo
+                    return true;
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("An error occurred: " + e.Message);
+                    return false;
+                }
+            }
+            else
+            {
+                // The file doesn't have any content stored on Drive.
+                return false;
+            }
+        }
+        public string downloadGDFile(DriveService service, string id_gd_file,string path)
+        {
+            //Google.Apis.Drive.v2.Data.File body = new Google.Apis.Drive.v2.Data.File();
+            FilesResource.GetRequest getF = new FilesResource.GetRequest(service, id_gd_file);
+            Google.Apis.Drive.v2.Data.File f = getF.Execute();
+            bool downloadable = downloadFileFromIdGoogleDrive(service, f, path + id_gd_file+".jpg");
+            ////body.DownloadUrl=
+            //try
+            //{
+            //    FilesResource.GetRequest request = service.Files.Get(id_gd_file);//service.Files.Insert(body, stream, GetMimeType(filePath));
+            //    request.Download(
+            //    string file_id = request.ResponseBody.Id;
+
+            //    return file_id;
+            //}
+            //catch (Exception e)
+            //{
+            //    //Console.WriteLine("An error occurred: " + e.Message);
+            //    return null;
+            //}
+            return downloadable.ToString();
+        }
         public Permission InsertPermission(DriveService service, String fileId, String who, String type, String role)
         {
             Permission newPermission = new Permission();

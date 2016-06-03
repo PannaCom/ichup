@@ -1,0 +1,331 @@
+﻿@model PagedList.IPagedList<Ichup.Models.image>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "User";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var totalItemImage = 0;
+}
+<!-- ============================  Categories Start ============================ -->
+    <style>
+        tr {
+            border-bottom:1px solid #0ff;
+        }
+    </style>
+    <script>
+        isLoadedCat=false;
+       
+        acategory=@Html.Raw(@ViewBag.acategory);
+
+        function setValueDefault(id,filter1,filter2,filter3,filter4,filter5){
+            var index=0;
+            var i=0;
+            for(i=0;i<3;i++){
+                index=i+1;
+                if (filter1.indexOf(a1[i])>=0){
+                    document.getElementById("f-"+id+"-1_"+index).checked=true;
+                }
+            }
+            for(i=0;i<3;i++){
+                index=i+1;
+                if (filter2.indexOf(a2[i])>=0){
+                    document.getElementById("f-"+id+"-2_"+index).checked=true;
+                }
+            }
+            //console.log(acategory.length);
+            //console.log(filter3);
+            for(i=0;i<acategory.length;i++){
+                index=i+1;
+                //console.log(filter3);
+                if (filter3.indexOf(acategory[i]+", ")>=0){
+                    document.getElementById("f-"+id+"-3_"+index).checked=true;
+                }
+            }
+        
+        }
+    </script>
+    <section class="search-index-08">
+        <div class="container">
+            <div class="col-md-12">
+                <ul class="post-menu-cat">
+                    <li class="active"><a class="col-xs-12 col-sm-4 col-md-2" href="/Photos/User">Upload ảnh/Video</a></li>
+                    <li><a class="col-xs-12 col-sm-4 col-md-2" href="/Photos/User">Gán từ khóa</a></li>
+                    <li><a class="col-xs-12 col-sm-4 col-md-2" href="#">Quản lý ảnh/Video</a></li>
+                    <li><a class="col-xs-12 col-sm-4 col-md-2" href="#">Lịch sử ảnh đã mua</a></li>
+                    <li><a class="col-xs-12 col-sm-4 col-md-2" href="#">Thông tin thanh toán</a></li>
+                    <li><a class="col-xs-12 col-sm-4 col-md-2" href="#">Quản lý tài khoản</a></li>
+
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </section>
+    
+<section class="section-10">
+
+        <div class="container">
+            <div class="col-md-12 col-center">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="number-12">
+                            <h2>GÁN TỪ KHÓA</h2>
+                            Nếu khách hàng không tìm thấy ảnh họ cần, họ sẽ không thể mua. Mô tả chính xác và từ khóa đúng
+giúp bức ảnh của bạn sẽ được tìm thấy dễ hơn, và có thể bán được nhiều hơn. Hướng dẫn
+                        </div>
+                        <div class="col-md-8">
+                            <div class="text-section-10">
+                                <div class="title">Hình ảnh</div>
+                                <div class="checkbox fl-left">
+                                    <input type="checkbox" name="checkboxG6" id="checkboxG6" class="css-checkbox" /><label for="checkboxG6" class="css-label"></label>
+                                </div>
+                                <div class="text">
+                                    Chọn tất cả
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <div class="col-md-4 border-lr-12">
+                        <div class="number-12">
+                            <h2>2</h2>
+
+                        </div>
+                        <div class="text-section-10">
+                            <div class="title">Phân loại nhóm</div>
+
+                            <div class="text">
+                                Đánh dấu vào từng ô để mô tả bức ảnh của bạn Một bức ảnh có thể thuộc nhiều chủ đề khác nhau
+
+                            </div>
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="number-12">
+                            <h2>3</h2>
+
+                        </div>
+                        <div class="text-section-10">
+                            <div class="title">Bước 3</div>
+
+                            <div class="text">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, Lorem ipsum dolor sit amet, consectetur adipiscing elit,</div>
+
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+    @*<section class="picture-categories">
+
+      <div class="container">
+        <div class="row">
+          <div class="span12">
+            <div class="single-image-container">
+              <div class="row-fluid">
+                <div class="span1">
+
+                  <h4 class="title">Quản lý ảnh</h4>                  
+                </div> <!-- end span1 -->
+
+                <div class="span11">
+                    <ul class="nav nav-tabs">
+                      <li class="active"><a href="#"><i class="icon-picture icon-large"></i></a></li>
+                      <li><a href="#"><i class="icon-facetime-video icon-large"></i></a></li>
+                      <li><a href="#"><i class="icon-music icon-large"></i></a></li>
+                      <li><span style="color:red;">Đánh dấu vào các thuộc tính ảnh giúp user tìm được ảnh nhiều hơn!</span></li>
+                    </ul>
+                </div> <!-- end span8 -->
+               
+              </div><!--  end row-fluid -->
+            </div> <!-- end single-image-container -->
+          </div> <!-- end span12 -->
+
+        </div> <!-- end row -->
+
+        <div class="single-image-title v2">
+          <div class="row">
+            <div class="span12">
+              
+            </div> <!--end span12-->
+          </div> <!-- end row -->
+        </div> <!-- end single-image-title -->
+      </div> <!-- end container -->
+
+    </section> <!-- end picture-categories -->*@
+
+
+
+    <!-- ============================  Categories End ============================ -->
+
+    <!-- ============================  Image Decription Starts ============================ -->
+
+
+    <section class="image-decription-container">
+      <div class="container">
+        <div class="input-append">
+            <input  style="width:500px;" type="text" placeholder="Nhập từ khóa" id="skeyword2" value="@ViewBag.keyword">
+            <button class="btn" type="button" onclick="csearch();"><i class="icon-search"></i></button>
+        </div> <!-- end input-append -->
+        <div class="row" style="text-align:center;">
+            @foreach(var item in Model){
+                
+                <text>
+                    <div class="span5" style="height:373px;position:relative;" id="div-@item.id">
+                        <figure>
+                          <img src="@Ichup.Config.domain/@item.link_thumbail_big" alt="img" style="border-radius:11px;" />
+                        </figure>
+                        <div style="position:absolute;float:right;top:0px;right:0px;color:red;">File ID:#@item.id</div>
+                    </div> <!-- end span6 -->
+                    <div class="span6" style="height:373px;background-color:#0ff;" id="div-@item.id-2">
+                        <table>
+                             <tr><td align="left" width="70"><b>Từ khóa:</b></td><td align="left"><input type="text" id="keyword_@item.id" name="keyword_@item.id" value="@item.keywords" style="width:100%;"></td></tr>
+                             <tr><td align="left" width="70"><b>Giá bán:</b></td><td align="left">Mặc định 1000,000. Nếu bạn muốn miễn phía xin click vào đây @Html.Raw(@Ichup.Config.getF0CkUser(@item.id,@item.price.ToString()))</td></tr>
+                             <tr><td align="left" width="70"><b>Thống kê:</b></td><td align="left">Số lượt mua ảnh:@item.total_buy, Số lượt xem ảnh: @item.total_views, Kích cỡ: @item.width x @item.height</td></tr>
+                             @*<tr><td align="left" width="70">Giá bán</td><td align="left"><input type="text" id="price_@item.id" name="price_@item.id" value="@item.price" onblur="checkPrice(this);"></td></tr>*@
+                             @*<tr><td align="left" width="70">Kiểu bán</td><td align="left">@Html.Raw(@Ichup.Config.getSaleType(@item.id,@item.sale_type))</td></tr>*@
+                             <tr><td colspan="2"><b style="color:red;">Đánh dấu vào các thuộc tính mà ảnh này có - Tạo thuộc tính cho ảnh</b></td></tr>
+                             <tr>
+                                 <td align="left"><b>Loại ảnh:</b></td>
+                                 <td align="left">@Html.Raw(@Ichup.Config.getF1CkUser(@item.id,@item.filter_1))</td>
+                             </tr>   
+                            <tr>
+                                 <td align="left"><b>Kiểu ảnh:</b></td>
+                                 <td align="left">@Html.Raw(@Ichup.Config.getF2CkUser(@item.id,@item.filter_2))</td>
+                             </tr>  
+                            <tr>
+                                 <td align="left"><b>Nhóm ảnh:</b></td>
+                                 <td align="left" id="category_ck_list_@item.id">@Html.Raw(@Ichup.Config.getF3CkUser(@item.id,@item.filter_3))</td>
+                             </tr>  
+                            <tr>
+                                 <td align="left"><b>Người:</b></td>
+                                 <td align="left">@Html.Raw(@Ichup.Config.getF4CkUser(@item.id,@item.filter_4))
+                                 </td>
+                             </tr> 
+                             <tr>
+                                 <td align="left"><b>Góc chụp:</b></td>
+                                 <td align="left">@Html.Raw(@Ichup.Config.getF5CkUser(@item.id,@item.filter_5))</td>
+                             </tr>
+                            <tr><td colspan="2"><input type="button" value="Save" class="btn btn-primary" onclick="save(@item.id);"><input type="button" class="btn btn-primary" value="Delete" onclick="del(@item.id);"></td></tr>
+                        </table>
+                    </div>
+                    <hr class="post-separator" style="width:100%;color:#ff6a00;border: 0;border-top: 1px solid red;border-bottom: 1px solid #fff;">
+                    @*<script>setValueDefault(@item.id,"@Html.Raw(@item.filter_1)","@Html.Raw(@item.filter_2)","@Html.Raw(@item.filter_3)","@Html.Raw(@item.filter_4)","@Html.Raw(@item.filter_5)");</script>*@
+                </text>
+                totalItemImage++;
+            }
+        </div> <!-- end row -->
+      </div> <!-- end container -->
+    </section> <!-- end image-description-container -->
+    <section class="main-pagination">
+                      <div class="row-fluid">
+                        <div class="span12">
+                            <div class="inner-pagination">
+                                <div class="pagination ">
+                                  <ul>
+                                    @for (int i = 1; i <= Model.PageCount; i++){
+                                        <li ><a href="/Photos/User?keyword=@ViewBag.keyword&id=@ViewBag.id&page=@i" style="cursor:pointer;">@i</a></li>
+                                    }
+                                  </ul>
+                                </div> <!-- end pagination -->
+                            </div> <!-- end inner-pagination -->
+                        </div> <!-- end span9 -->
+                       
+                      </div> <!-- end row -->
+                  </section> <!-- end main-pagination -->
+<script>
+    
+    
+    var totalItemImage=@totalItemImage;
+    function save(id){
+        var formdata = new FormData(); //FormData object
+        var filter_1=getValueOfField(id,1);
+        var filter_2=getValueOfField(id,2);
+        var filter_3=getValueOfField(id,3);
+        var filter_4=getValueOfField(id,4);
+        var filter_5=getValueOfField(id,5);
+       
+        if (document.getElementById("keyword_" + id) && document.getElementById("keyword_" + id).value == "") {
+                alert("Nhập từ khóa cho ảnh này!");
+                document.getElementById("keyword_" + id).focus();
+                return;
+            }
+        //if (document.getElementById("price_" + id) && document.getElementById("price_" + id).value == "") {
+        //        alert("Nhập giá cho ảnh này!");
+        //        document.getElementById("price_" + id).focus();
+        //        return;
+        //}
+        var sale_type=0;
+        var price=1000000;
+        //if (document.getElementById("sale_type_" + id+"_2").checked) sale_type=1;;
+        //alert(document.getElementById("sale_type_" + id+"_2").checked);
+        //return;
+        if (document.getElementById("f-" + id+"-0_1").checked) price=0;
+        formdata.append("id", id);
+        formdata.append("filter_1", filter_1);
+        formdata.append("filter_2", filter_2);
+        formdata.append("filter_3", filter_3);
+        formdata.append("filter_4", filter_4);
+        formdata.append("filter_5", filter_5);
+        formdata.append("keywords", document.getElementById("keyword_" + id).value );
+        formdata.append("price", price);
+        formdata.append("sale_type", 0);
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/Photos/UpdateFilter');
+        xhr.send(formdata);
+        var content = "";
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                if (xhr.responseText == "1") {
+                    alert("Cập nhật thành công");
+                    //window.location.href = "/Photos/User/1";
+                } else {
+                    alert("Chương trình đang cập nhật, xin quay lại sau!");
+                }
+            }
+        }
+
+    }
+    function del(id){
+        if (!confirm("Bạn có chắc chắn xóa?"))
+        {
+            return;
+        }
+        var formdata = new FormData(); //FormData object
+        formdata.append("id", id);
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/Photos/Del');
+        xhr.send(formdata);
+        var content = "";
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                if (xhr.responseText == "1") {
+                    //alert("xóa ảnh thành công");
+                    $("#div-"+id).html("");
+                    $("#div-"+id).css("background-color","red");
+                    $("#div-"+id+"-2").html("");
+                    $("#div-"+id+"-2").css("background-color","red");
+                } else {
+                    alert("Chương trình đang cập nhật, xin quay lại sau!");
+                }
+            }
+        }
+
+    }
+    function getValueOfField(id,index){
+        var value="";
+        for(var i=1;i<=20;i++){
+            if(document.getElementById("f-"+id+"-"+index+"_"+i)){
+                if (document.getElementById("f-"+id+"-"+index+"_"+i).checked){
+                    value+=document.getElementById("f-"+id+"-"+index+"_"+i).value+", ";
+                }
+            }
+        }
+        return value;
+    }
+</script>

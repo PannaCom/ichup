@@ -2,7 +2,7 @@
 var acategory = [];
 var a1 = ["ảnh, ", "vector, ", "illustrator, "];
 var a2 = ["dọc, ", "ngang, ", "rộng, "];
-var _domain_ = "http://ichup.binhyen.net/";
+var _domain_ = "http://bananhso.com";
 function getCategoryCk(id) {
     //console.log(acategory.length + "," + isLoadedCat);
     if (!isLoadedCat) {
@@ -58,16 +58,18 @@ function formatCurrency(number) {
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
 }
 function downloadimage() {
-    var type = 1;
+    var type = 3;
 
-    if (document.getElementById("image_chk3").checked) {
-        type = 3;
-    } else if (document.getElementById("image_chk2").checked) {
-        type = 2;
-    }
-    else if (document.getElementById("image_chk1").checked) {
-        type = 1;
-    }
+    //if (document.getElementById("image_chk3").checked) {
+    //    type = 3;
+    //} else if (document.getElementById("image_chk2").checked) {
+    //    type = 2;
+    //}
+    //else if (document.getElementById("image_chk1").checked) {
+    //    type = 1;
+    //}
+    document.getElementById("downloadimagedv").disabled = true;
+    document.getElementById("downloadimagedv").innerHTML = "Đang download, xin đợi....";
     window.open("/Photos/downloadfile?id=" + currentId + "&type=" + type, "_self");
     //var formdata = new FormData(); //FormData object
     //formdata.append("id", currentId);

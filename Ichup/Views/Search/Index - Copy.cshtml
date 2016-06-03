@@ -1,0 +1,961 @@
+﻿
+@model PagedList.IPagedList<Ichup.Controllers.SearchController.searchitem>
+@using PagedList.Mvc; 
+@{
+    ViewBag.Title = "Kết quả tìm kiếm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    string allFilter = ViewBag.f0 + ViewBag.f1 + ViewBag.f2 + ViewBag.f3 + ViewBag.f4 + ViewBag.f5;
+    int typeUser = 0;
+    typeUser=int.Parse(ViewBag.typeUser.ToString());
+    
+}
+<section class="search-index-08">
+        <div class="container">
+
+
+            <div class="col-md-12">
+                <div class="col-md-2 menu-left">
+
+                    <button type="button" id="dropdown-menu-left" class="btn btn-default dropdown-toggle dropdown-menu-left" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tìm kiếm nâng cao<span class="fa fa-angle-down"></span> <span class="sr-only">Toggle Dropdown</span> </button>
+                    <div id="ul-dropdown-menu-left" class="ul-dropdown-menu-left">
+                        <div class="panel-group" id="" role="tablist" aria-multiselectable="true">
+                            <div class="panel panel-menu-left">
+                                <div class="panel-heading" role="tab" id="heading1">
+                                    <h4 class="panel-title">
+                                        <a role="button" data-toggle="collapse" data-parent="" href="#collapse1" aria-expanded="true" aria-controls="collapse1">
+                                            Tất cả các loại
+
+                                            <i class="fa pull-right"></i>
+                                        </a>
+
+                                    </h4>
+                                </div>
+                                <div id="collapse1" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading1">
+                                    <div class="panel-body">
+                                        <div class="item-checkbox">
+                                            <input type="checkbox" name="checkbox01" id="checkbox01" checked class="css-checkbox"><label for="checkbox01" class="css-label">Ảnh số</label>
+                                        </div>
+                                        <div class="item-checkbox">
+                                            <input type="checkbox" name="checkbox02" id="checkbox02" class="css-checkbox"><label for="checkbox02" class="css-label">Vector</label>
+                                        </div>
+                                        <div class="item-checkbox">
+                                            <input type="checkbox" name="checkbox03" id="checkbox03" class="css-checkbox"><label for="checkbox03" class="css-label">Video</label>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-menu-left">
+                                <div class="panel-heading" role="tab" id="heading2">
+                                    <h4 class="panel-title">
+                                        <a role="button" data-toggle="collapse" data-parent="" href="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                                            Lorem ipsum
+                                            <i class="fa pull-right"></i>
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapse2" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading2">
+                                    <div class="panel-body">
+                                        <div class="item-checkbox">
+                                            <input type="checkbox" name="checkbox04" id="checkbox04" checked class="css-checkbox"><label for="checkbox04" class="css-label">Lorem ipsum</label>
+                                        </div>
+                                        <div class="item-checkbox">
+                                            <input type="checkbox" name="checkbox05" id="checkbox05" class="css-checkbox"><label for="checkbox05" class="css-label">Lorem ipsum</label>
+                                        </div>
+                                        <div class="item-checkbox">
+                                            <input type="checkbox" name="checkbox06" id="checkbox06" class="css-checkbox"><label for="checkbox06" class="css-label">Lorem ipsum</label>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-menu-left">
+                                <div class="panel-heading" role="tab" id="heading3">
+                                    <h4 class="panel-title">
+                                        <a role="button" data-toggle="collapse" data-parent="" href="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                                            Lorem ipsum
+                                            <i class="fa pull-right"></i>
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapse3" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading3">
+                                    <div class="panel-body">
+                                        <div class="item-checkbox">
+                                            <input type="checkbox" name="checkbox07" id="checkbox07" checked class="css-checkbox"><label for="checkbox07" class="css-label">Lorem ipsum</label>
+                                        </div>
+                                        <div class="item-checkbox">
+                                            <input type="checkbox" name="checkbox08" id="checkbox08" class="css-checkbox"><label for="checkbox08" class="css-label">Lorem ipsum</label>
+                                        </div>
+                                        <div class="item-checkbox">
+                                            <input type="checkbox" name="checkbox09" id="checkbox09" class="css-checkbox"><label for="checkbox09" class="css-label">Lorem ipsum</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-menu-left">
+                                <div class="panel-heading" role="tab" id="heading4">
+                                    <h4 class="panel-title">
+                                        <a role="button" data-toggle="collapse" data-parent="" href="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                                            Lorem ipsum
+                                            <i class="fa pull-right"></i>
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapse4" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading4">
+                                    <div class="panel-body">
+                                        <div class="item-checkbox">
+                                            <input type="checkbox" name="checkbox10" id="checkbox10" checked class="css-checkbox"><label for="checkbox10" class="css-label">Lorem ipsum</label>
+                                        </div>
+                                        <div class="item-checkbox">
+                                            <input type="checkbox" name="checkbox11" id="checkbox11" class="css-checkbox"><label for="checkbox11" class="css-label">Lorem ipsum</label>
+                                        </div>
+                                        <div class="item-checkbox">
+                                            <input type="checkbox" name="checkbox12" id="checkbox12" class="css-checkbox"><label for="checkbox12" class="css-label">Lorem ipsum</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-menu-left">
+                                <div class="panel-heading" role="tab" id="heading5">
+                                    <h4 class="panel-title">
+                                        <a role="button" data-toggle="collapse" data-parent="" href="#collapse5" aria-expanded="false" aria-controls="collapse5">
+                                            Lorem ipsum
+                                            <i class="fa pull-right"></i>
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapse5" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading5">
+                                    <div class="panel-body">
+                                        <div class="item-checkbox">
+                                            <input type="checkbox" name="checkbox13" id="checkbox13" checked class="css-checkbox"><label for="checkbox13" class="css-label">Lorem ipsum</label>
+                                        </div>
+                                        <div class="item-checkbox">
+                                            <input type="checkbox" name="checkbox14" id="checkbox14" class="css-checkbox"><label for="checkbox14" class="css-label">Lorem ipsum</label>
+                                        </div>
+                                        <div class="item-checkbox">
+                                            <input type="checkbox" name="checkbox15" id="checkbox15" class="css-checkbox"><label for="checkbox15" class="css-label">Lorem ipsum</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-menu-left">
+                                <div class="panel-heading" role="tab" id="heading6">
+                                    <h4 class="panel-title">
+                                        <a role="button" data-toggle="collapse" data-parent="" href="#collapse6" aria-expanded="false" aria-controls="collapse6">
+                                            Lorem ipsum
+                                            <i class="fa pull-right"></i>
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapse6" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading6">
+                                    <div class="panel-body">
+                                        <div class="item-checkbox">
+                                            <input type="checkbox" name="checkbox16" id="checkbox16" checked class="css-checkbox"><label for="checkbox16" class="css-label">Lorem ipsum</label>
+                                        </div>
+                                        <div class="item-checkbox">
+                                            <input type="checkbox" name="checkbox17" id="checkbox17" class="css-checkbox"><label for="checkbox17" class="css-label">Lorem ipsum</label>
+                                        </div>
+                                        <div class="item-checkbox">
+                                            <input type="checkbox" name="checkbox18" id="checkbox18" class="css-checkbox"><label for="checkbox18" class="css-label">Lorem ipsum</label>
+                                        </div>
+
+                                        <div class="item-checkbox">
+                                            <input type="checkbox" name="checkbox19" id="checkbox19" checked class="css-checkbox"><label for="checkbox19" class="css-label">Lorem ipsum</label>
+                                        </div>
+                                        <div class="item-checkbox">
+                                            <input type="checkbox" name="checkbox20" id="checkbox20" class="css-checkbox"><label for="checkbox20" class="css-label">Lorem ipsum</label>
+                                        </div>
+                                        <div class="item-checkbox">
+                                            <input type="checkbox" name="checkbox21" id="checkbox21" class="css-checkbox"><label for="checkbox21" class="css-label">Lorem ipsum</label>
+                                        </div>
+
+                                        <div class="item-checkbox">
+                                            <input type="checkbox" name="checkbox22" id="checkbox22" class="css-checkbox"><label for="checkbox22" class="css-label">Lorem ipsum</label>
+                                        </div>
+                                        <div class="item-checkbox">
+                                            <input type="checkbox" name="checkbox23" id="checkbox23" class="css-checkbox"><label for="checkbox23" class="css-label">Lorem ipsum</label>
+                                        </div>
+                                        <div class="item-checkbox">
+                                            <input type="checkbox" name="checkbox24" id="checkbox24" class="css-checkbox"><label for="checkbox24" class="css-label">Lorem ipsum</label>
+                                        </div>
+                                        <div class="item-checkbox">
+                                            <input type="checkbox" name="checkbox25" id="checkbox25" class="css-checkbox"><label for="checkbox25" class="css-label">Lorem ipsum</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="panel panel-menu-left">
+                                <div class="panel-heading" role="tab" id="heading7">
+                                    <h4 class="panel-title">
+                                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="" href="#collapse7" aria-expanded="false" aria-controls="collapse7">
+                                            Lorem ipsum
+                                            <i class="fa pull-right"></i>
+                                        </a>
+                                    </h4>
+                                </div>
+                                <div id="collapse7" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading7">
+                                    <div class="panel-body">
+                                        <div class="item-checkbox">
+                                            <input type="checkbox" name="checkbox26" id="checkbox26" checked class="css-checkbox"><label for="checkbox26" class="css-label">Lorem ipsum</label>
+                                        </div>
+                                        <div class="item-checkbox">
+                                            <input type="checkbox" name="checkbox27" id="checkbox27" class="css-checkbox"><label for="checkbox27" class="css-label">Lorem ipsum</label>
+                                        </div>
+                                        <div class="item-checkbox">
+                                            <input type="checkbox" name="checkbox29" id="checkbox28" class="css-checkbox"><label for="checkbox28" class="css-label">Lorem ipsum</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="btn1-menu-left">Lorem ipsum dolor <i class="fa fa-angle-down pull-right"></i></div>
+
+                        <div class="btn2-menu-left">Lorem ipsum dolor</div>
+                    </div>
+
+
+
+
+                </div>
+
+                <div class="col-md-8" style="padding:0">
+
+                    <div class="input-group">
+
+                        <div class="input-group-btn">
+                            <button id="dropdown-option-index" type="button" class="btn btn-default dropdown-toggle dropdown-option-index" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tất cả các loại <span class="fa fa-angle-down"></span> <span class="sr-only">Toggle Dropdown</span> </button>
+                            <div id="ul-dropdown-option-index" class="ul-dropdown-option-index">
+                                <div class="item-checkbox">
+                                    <input type="checkbox" name="checkbox30" id="checkbox30" checked class="css-checkbox"><label for="checkbox30" class="css-label">Ảnh số</label>
+                                </div>
+                                <div class="item-checkbox">
+                                    <input type="checkbox" name="checkbox31" id="checkbox31" class="css-checkbox"><label for="checkbox31" class="css-label">Vector</label>
+                                </div>
+                                <div class="item-checkbox">
+                                    <input type="checkbox" name="checkbox32" id="checkbox32" class="css-checkbox"><label for="checkbox32" class="css-label">Video</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="group-input-search-index">
+                            <input id="input-search-index" type="text" class="form-control input-search-index" aria-label="Text input with segmented button dropdown">
+                            <div id="ul-input-search-index" class="ul-input-search-index">
+                                <div class="item-input-search">
+                                    Lorem
+                                </div>
+                                <div class="item-input-search">
+                                    Lorem ipsum
+                                </div>
+                                <div class="item-input-search">
+                                    Lorem ipsum
+                                </div>
+                                <div class="item-input-search">
+                                    Lorem ipsum
+                                </div>
+                                <div class="item-input-search">
+                                    Lorem ipsum dolor
+                                </div>
+                                <div class="item-input-search">
+                                    Lorem ipsum dolor sit
+                                </div>
+                                <div class="item-input-search">
+                                    Lorem ipsum dolor sit amet
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-default button-search-index"><i class="fa fa-search"></i></button>
+
+                        </div>
+
+
+
+                    </div>
+
+
+                </div>
+            </div>
+
+
+
+
+
+
+        </div>
+
+    </section>
+
+
+
+
+    <section class="gallery-index-08">
+
+        <div class="container">
+            <div class="row">
+
+
+                <div id="gallery-respon" class="col-md-12">
+                    <div class="col-xs-12 col-md-6 tag-top">
+                        <div class="title-tag">Lorem ipsum: <span>Lorem</span>  3785 dolor sit ame</div>
+                        <div class="list-tag">
+                            <span class="label label-default">Lorem X</span>
+                            <span class="label label-default">Lorem X</span>
+                            <span class="label label-default">Lorem ipsum </span>
+                            <span class="label">Lorem X</span>
+
+                        </div>
+                    </div>
+                    <div class="col-xs-12 col-md-6 pagination-top">
+                        <nav class="nav-pagination pull-right">
+                            <ul class="pagination">
+                                <li><span href="#" aria-label="Previous">Trang</span></li>
+                                <li><a href="#">1</a></li>
+                                <li><span href="#">trong số 325</span></li>
+
+                                <li><a href="#" class="bg-arrow">›</a></li>
+                                <li><a href="#" class="bg-arrow" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                            </ul>
+                        </nav>
+                    </div>
+
+
+                    <div class="clearfix"></div>
+
+                    <div class="list-gallery-index-08 row">
+                        <div class="col-xs-12 col-sm-6 col-md-3 gallery-item">
+                            <div class="gallery-item-thumb img-resize"><a href="#"><img src="img/ind-post-01.jpg" alt="#"></a></div>
+
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3 gallery-item">
+                            <div class="gallery-item-thumb img-resize"><a href="#"><img src="img/ind-post-02.jpg" alt="#"></a></div>
+
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3 gallery-item">
+                            <div class="gallery-item-thumb img-resize"><a href="#"><img src="img/ind-post-03.jpg" alt="#"></a></div>
+
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3 gallery-item">
+                            <div class="gallery-item-thumb img-resize"><a href="#"><img src="img/ind-post-04.jpg" alt="#"></a></div>
+
+                        </div>
+                        <div id="html-show-description">
+                            <div class="clearfix"></div>
+                            <div class="col-md-12">
+
+                                <!--<div class="arrow-gallery-desc col-xs-12 col-sm-6 col-md-3 col-md-offset-0"></div>-->
+                                <div class="arrow-gallery-desc col-xs-12 col-sm-6 col-md-3 col-md-offset-3"></div>
+                                <!--<div class="arrow-gallery-desc col-xs-12 col-sm-6 col-md-3 col-md-offset-6"></div>
+                                <div class="arrow-gallery-desc col-xs-12 col-sm-6 col-md-3 col-md-offset-3"></div>-->
+
+                                <div class="gallery-desc">
+
+
+                                    <div class="col-xs-12 col-md-6">
+                                        <div class="images-big">
+                                            <img src="img/ind-post-04.jpg" alt="#">
+                                            <div class="text-over">
+                                                <div class="col-xs-6 col-sm-4 col-md-3">
+                                                    ID# 1244
+                                                </div>
+                                                <div class="col-xs-6 col-sm-4 col-md-3">
+                                                    Tải ảnh <i class="fa fa-chevron-circle-down"></i>
+                                                </div>
+                                                <div class="col-xs-6 col-sm-4 col-md-3">
+                                                    Nhúng ảnh <i class="fa fa-cloud-upload"></i>
+                                                </div>
+                                                <div class="col-xs-6 col-sm-4 col-md-3">
+                                                    Chia sẻ <i class="fa fa-facebook-square"></i> <i class="fa fa-twitter-square"></i> <i class="fa fa-google-plus-square"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-6">
+                                        <div class="images-desc">
+
+                                            <div class="row">
+                                                <div class="col-xs-4 col-sm-3 col-md-3">
+                                                    Nội dung:
+                                                </div>
+                                                <div class="col-xs-8 col-sm-9 col-md-9">
+                                                    Lorem ipsum dolor sit amet
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-4 col-sm-3 col-md-3">
+                                                    Mã số:
+                                                </div>
+                                                <div class="col-xs-8 col-sm-9 col-md-9">
+                                                    Lorem ipsum dolor sit amet
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-4 col-sm-3 col-md-3">
+                                                    Tiêu đề:
+                                                </div>
+                                                <div class="col-xs-8 col-sm-9 col-md-9">
+                                                    tiêu đề, nội dung, khách hàng... <a href="#">xem tất cả <i class="fa fa-chevron-circle-right"></i></a>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <table class="table">
+                                                        <tbody>
+                                                        <thead> <tr> <th>Lorem</th> <th>Lorem ipsum</th> <th>Lorem ipsum</th> <th>Lorem ipsum</th> </tr> </thead>
+                                                        <tr> <td>Lorem</td> <td>123124</td> <td>0.25</td> <td>Lorem</td> </tr>
+                                                        <tr> <td>Lorem</td> <td>123124</td> <td>0.25</td> <td>Lorem</td> </tr>
+                                                        <tr> <td>Lorem</td> <td>123124</td> <td>0.25</td> <td>Lorem</td> </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="row table-desc">
+                                                <div class="arrow-table-desc"></div>
+
+                                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                                    Lorem ipsum dolor <a href="#"> Lorem ipsum</a>
+                                                </div>
+                                                <div class="col-xs-12 col-sm-6 col-md-6">
+                                                    Lorem ipsum 123.456
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+
+                                                    <div class="col-xs-12 col-sm-4 col-md-4 btn1-images-desc">Lorem ipsum dolor</div>
+                                                    <div class="col-xs-12 col-sm-4 col-md-4 btn2-images-desc"><a href="#"> Lorem ipsum dolor <i class="fa fa-chevron-circle-down"></i></a></div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+
+                                    <ul class="col-xs-12 col-md-12 title-images-list">
+                                        <li class="active"><a href="#">Thông tin loại 1</a></li>
+                                        <li><a href="#">Thông tin loại 2</a></li>
+
+                                    </ul>
+
+
+                                    <div class="col-xs-12 col-md-12 images-list">
+                                        <div class="col-xs-6 col-sm-4 col-md-2 images-list-item">
+                                            <div class="images-list-item-thumb img-resize"><a href="#"><img src="img/ind-post-01.jpg" alt="#"></a></div>
+                                        </div>
+                                        <div class="col-xs-6 col-sm-4 col-md-2 images-list-item">
+                                            <div class="images-list-item-thumb img-resize"><a href="#"><img src="img/ind-post-02.jpg" alt="#"></a></div>
+                                        </div>
+
+                                        <div class="col-xs-6 col-sm-4 col-md-2 images-list-item">
+                                            <div class="images-list-item-thumb img-resize"><a href="#"><img src="img/ind-post-04.jpg" alt="#"></a></div>
+                                        </div>
+                                        <div class="col-xs-6 col-sm-4 col-md-2 images-list-item">
+                                            <div class="images-list-item-thumb img-resize"><a href="#"><img src="img/ind-post-05.jpg" alt="#"></a></div>
+                                        </div>
+                                        <div class="col-xs-6 col-sm-4 col-md-2 images-list-item">
+                                            <div class="images-list-item-thumb img-resize"><a href="#"><img src="img/ind-post-08.jpg" alt="#"></a></div>
+                                        </div>
+
+
+
+                                        <div class="col-xs-6 col-sm-4 col-md-2 images-list-item">
+
+                                            <div class="images-list-item-thumb img-resize">
+                                                <div class="text-over">
+                                                    Xem tất cả
+                                                </div>
+                                                <a href="#"><img src="img/ind-post-03.jpg" alt="#"></a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3 gallery-item">
+                            <div class="gallery-item-thumb img-resize"><a href="#"><img src="img/ind-post-05.jpg" alt="#"></a></div>
+
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3 gallery-item">
+                            <div class="gallery-item-thumb img-resize"><a href="#"><img src="img/ind-post-06.jpg" alt="#"></a></div>
+
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3 gallery-item">
+                            <div class="gallery-item-thumb img-resize"><a href="#"><img src="img/ind-post-07.jpg" alt="#"></a></div>
+
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3 gallery-item">
+                            <div class="gallery-item-thumb img-resize"><a href="#"><img src="img/ind-post-08.jpg" alt="#"></a></div>
+
+                        </div>
+
+                        <div class="col-xs-12 col-sm-6 col-md-3 gallery-item">
+                            <div class="gallery-item-thumb img-resize"><a href="#"><img src="img/ind-post-01.jpg" alt="#"></a></div>
+
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3 gallery-item">
+                            <div class="gallery-item-thumb img-resize"><a href="#"><img src="img/ind-post-02.jpg" alt="#"></a></div>
+
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3 gallery-item">
+                            <div class="gallery-item-thumb img-resize"><a href="#"><img src="img/ind-post-03.jpg" alt="#"></a></div>
+
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3 gallery-item">
+                            <div class="gallery-item-thumb img-resize"><a href="#"><img src="img/ind-post-04.jpg" alt="#"></a></div>
+
+                        </div>
+
+                        <div class="col-xs-12 col-sm-6 col-md-3 gallery-item">
+                            <div class="gallery-item-thumb img-resize"><a href="#"><img src="img/ind-post-05.jpg" alt="#"></a></div>
+
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3 gallery-item">
+                            <div class="gallery-item-thumb img-resize"><a href="#"><img src="img/ind-post-06.jpg" alt="#"></a></div>
+
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3 gallery-item">
+                            <div class="gallery-item-thumb img-resize"><a href="#"><img src="img/ind-post-07.jpg" alt="#"></a></div>
+
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3 gallery-item">
+                            <div class="gallery-item-thumb img-resize"><a href="#"><img src="img/ind-post-08.jpg" alt="#"></a></div>
+
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3 gallery-item">
+                            <div class="gallery-item-thumb img-resize"><a href="#"><img src="img/ind-post-01.jpg" alt="#"></a></div>
+
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3 gallery-item">
+                            <div class="gallery-item-thumb img-resize"><a href="#"><img src="img/ind-post-02.jpg" alt="#"></a></div>
+
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3 gallery-item">
+                            <div class="gallery-item-thumb img-resize"><a href="#"><img src="img/ind-post-03.jpg" alt="#"></a></div>
+
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3 gallery-item">
+                            <div class="gallery-item-thumb img-resize"><a href="#"><img src="img/ind-post-04.jpg" alt="#"></a></div>
+
+                        </div>
+
+                        <div class="col-xs-12 col-sm-6 col-md-3 gallery-item">
+                            <div class="gallery-item-thumb img-resize"><a href="#"><img src="img/ind-post-05.jpg" alt="#"></a></div>
+
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3 gallery-item">
+                            <div class="gallery-item-thumb img-resize"><a href="#"><img src="img/ind-post-06.jpg" alt="#"></a></div>
+
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3 gallery-item">
+                            <div class="gallery-item-thumb img-resize"><a href="#"><img src="img/ind-post-07.jpg" alt="#"></a></div>
+
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-3 gallery-item">
+                            <div class="gallery-item-thumb img-resize"><a href="#"><img src="img/ind-post-08.jpg" alt="#"></a></div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="clearfix"></div>
+                    <nav class="nav-pagination pull-right">
+                        <ul class="pagination">
+                            <li><span href="#" aria-label="Previous">Trang</span></li>
+                            <li><a href="#">1</a></li>
+                            <li><span href="#">trong số 325</span></li>
+
+                            <li><a href="#" class="bg-arrow">›</a></li>
+                            <li><a href="#" class="bg-arrow" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+                        </ul>
+                    </nav>
+                </div>
+
+            </div>
+        </div>
+        <!--<div class="bg-wrapper-stripes">
+            <div class="container container-end">
+
+            </div>
+        </div>-->
+    </section><!-- end news-index-->
+@Html.Partial("~/Views/_imagepage.cshtml")
+<section class="search-results">
+      <div class="container">
+        <div class="row">
+          <aside class="span3">
+            <div class="widgets-container">
+              <div class="widget">
+                @*<form action="" class="search-form">
+                    <div class="input-append">
+                      <input class="input-medium" id="keyword" type="text" placeholder="Nhập từ khóa" value="@ViewBag.keyword">
+                      <button class="btn" type="button"><i class="icon-search"></i></button>
+                    </div> <!-- end input-append -->
+                  </form> <!-- end search form -->*@
+              </div> <!-- end widget -->
+              <div class="widget" style="border-bottom:#ea2b2b solid 1px;">
+                <h4 class="title">Giá bán<span onclick="opendv(0);" style="float:right;position:relative;padding-right:3px;cursor:pointer;font-size:1.5rem;font-family: 'Helvetica Neue';line-height: 1.5rem;" id="dvfs0">+</span>
+                     <span onclick="closedv(0);" style="float:right;position:relative;display:none;padding-right:3px;cursor:pointer;font-size:1.5rem;font-family: 'Helvetica Neue';line-height: 1.5rem;" id="dvfh0">-</span></h4>
+                 <div id="dvf0" style="display:none;">
+                     @Html.Raw(@Ichup.Config.getF0Ck(@ViewBag.f0))                        
+                  </div><!-- end ui-slider -->
+              </div> <!-- end widget --> 
+              <div class="widget" style="border-bottom:#ea2b2b solid 1px;">
+                <h4 class="title">Loại ảnh<span onclick="opendv(1);" style="float:right;position:relative;padding-right:3px;cursor:pointer;font-size:1.5rem;font-family: 'Helvetica Neue';line-height: 1.5rem;" id="dvfs1">+</span>
+                     <span onclick="closedv(1);" style="float:right;position:relative;display:none;padding-right:3px;cursor:pointer;font-size:1.5rem;font-family: 'Helvetica Neue';line-height: 1.5rem;" id="dvfh1">-</span></h4>
+                 <div id="dvf1" style="display:none;">
+                     @Html.Raw(@Ichup.Config.getF1Ck(@ViewBag.f1))   
+                  </div><!-- end ui-slider -->
+              </div> <!-- end widget --> 
+              <div class="widget" style="border-bottom:#ea2b2b solid 1px;">
+                <h4 class="title">Kiểu ảnh<span onclick="opendv(2);" style="float:right;position:relative;padding-right:3px;cursor:pointer;font-size:1.5rem;font-family: 'Helvetica Neue';line-height: 1.5rem;" id="dvfs2">+</span>
+                     <span onclick="closedv(2);" style="float:right;position:relative;display:none;padding-right:3px;cursor:pointer;font-size:1.5rem;font-family: 'Helvetica Neue';line-height: 1.5rem;" id="dvfh2">-</span></h4>
+                 <div id="dvf2" style="display:none;">
+                     @*<input type="checkbox" id="f-2_1" value="dọc" onchange="search();">dọc 
+                     <input type="checkbox" id="f-2_2" value="ngang" onchange="search();">ngang
+                     <input type="checkbox" id="f-2_3" value="rộng" onchange="search();">rộng       *@   
+                     @Html.Raw(@Ichup.Config.getF2Ck(@ViewBag.f2))   
+                  </div><!-- end ui-slider -->
+              </div> <!-- end widget --> 
+              @*<div class="widget">
+                <h4 class="title">Price Range</h4>
+                 <div class="noUiSlider horizontal">                   
+                  </div><!-- end ui-slider -->
+
+              </div> <!-- end widget --> *@
+
+              <div class="widget" style="border-bottom:#ea2b2b solid 1px;">
+                <h4 class="title">Danh mục<span onclick="opendv(3);" style="float:right;position:relative;padding-right:3px;cursor:pointer;font-size:1.5rem;font-family: 'Helvetica Neue';line-height: 1.5rem;" id="dvfs3">+</span>
+                     <span onclick="closedv(3);" style="float:right;position:relative;display:none;padding-right:3px;cursor:pointer;font-size:1.5rem;font-family: 'Helvetica Neue';line-height: 1.5rem;" id="dvfh3">-</span></h4>
+                 <div id="dvf3" style="display:none;">
+                 @Html.Raw(@Ichup.Config.getF3Ck(@ViewBag.f3))
+                  </div>
+              </div> <!-- end widget -->
+              <div class="widget" style="border-bottom:#ea2b2b solid 1px;">
+                <h4 class="title">Người<span onclick="opendv(4);" style="float:right;position:relative;padding-right:3px;cursor:pointer;font-size:1.5rem;font-family: 'Helvetica Neue';line-height: 1.5rem;" id="dvfs4">+</span>
+                     <span onclick="closedv(4);" style="float:right;position:relative;display:none;padding-right:3px;cursor:pointer;font-size:1.5rem;font-family: 'Helvetica Neue';line-height: 1.5rem;" id="dvfh4">-</span></h4>
+                 <div id="dvf4" style="display:none;">
+                 @Html.Raw(@Ichup.Config.getF4Ck(@ViewBag.f4))
+                  </div>
+              </div> <!-- end widget -->
+              <div class="widget">
+                <h4 class="title">Góc chụp<span onclick="opendv(5);" style="float:right;position:relative;padding-right:3px;cursor:pointer;font-size:1.5rem;font-family: 'Helvetica Neue';line-height: 1.5rem;" id="dvfs5">+</span>
+                     <span onclick="closedv(5);" style="float:right;position:relative;display:none;padding-right:3px;cursor:pointer;font-size:1.5rem;font-family: 'Helvetica Neue';line-height: 1.5rem;" id="dvfh5">-</span></h4>
+                   <div id="dvf5" style="display:none;">
+                 @Html.Raw(@Ichup.Config.getF5Ck(@ViewBag.f5))
+                  </div>
+              </div> <!-- end widget -->
+               @*<div class="widget">
+                <h4 class="title">License Types</h4>
+                 <form class="license-types">
+                   <label class="checkbox">
+                     <input type="checkbox" value="" checked>
+                     Free
+                   </label>
+
+                   <label class="checkbox">
+                     <input type="checkbox" value="">
+                     Creative
+                   </label>
+
+                   <label class="checkbox">
+                     <input type="checkbox" value="">
+                     Editorial
+                   </label>
+
+                 </form>
+
+                </div> <!-- end widget -->*@
+
+
+
+            </div> <!-- end widgets-container -->
+          </aside> <!-- end span3 -->
+          <div class="search-result-title">
+            <div class="span9">
+                <div class="row-fluid">
+                  <div class="span8">
+                    <h4 class="title">Tìm thấy (@Model.TotalItemCount) - <span>ảnh</span></h4>
+                  </div> <!-- end span8 -->
+                  <div class="span4">
+                    <div class="portfolio-controllers-container">
+                      <p class="pull-left sort-title">Sắp xếp -</p>
+                      <div class="btn-group">
+                        <button class="btn btn-large" id="order">Phù hợp nhất</button>
+                        <button class="btn btn-large dropdown-toggle" data-toggle="dropdown">
+                          <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" id="filters">
+                          <!-- dropdown menu links -->
+                          <li><a onclick="setorder('RANK','Desc');"   id="order1">Phù hợp nhất</a></li>
+                          <li><a onclick="setorder('id','Desc');" id="order2">Mới nhất</a></li>
+                          <li><a onclick="setorder('id','Asc');" id="order3">Cũ nhất</a></li>
+                          <li><a onclick="setorder('total_views','Desc');" id="order4">Xem nhiều nhất</a></li>
+                        </ul>
+                      </div> <!-- end btn-group -->
+                    </div> <!-- end portfolio-controllers-container -->
+                  </div> <!-- end span4 -->
+                </div> <!-- end row-fluid -->
+                    
+                  <section class="top-images v2">
+
+                      <div class="images-container v3">
+                        <div class="row">
+                          <div id="portfolio-container">
+                            <section class="refinements-summary">
+                                @Html.Raw(Ichup.Config.tags(allFilter))
+                                @if (allFilter != "" && allFilter != null)
+                                {<a style="cursor:pointer;" onclick="removeAllFilter();">xóa bộ lọc</a>}
+                            </section>
+                            @foreach (var item in Model) { 
+                                <text>
+                                    <div class="span3 transition metal">
+                                    <figure class="top-img">
+                                      <img src="@Ichup.Config.domain/@item.link_thumbail_small" alt="img">
+                                      <figcaption class="img-meta">
+                                        <div class="row-fluid">
+                                          <div class="span8">
+                                            <a onclick="imagepage(@item.id)" class="img-id">#@item.id</a>
+                                            @*<a href="#" class="img-tags">@item.filter_3</a>*@
+                                          </div>
+                                          <div class="span4">
+                                            <a href="#" class="btn download-btn"><i class="icon-download"></i></a>
+                                            @if (typeUser>=3){
+                                                <a onclick="del(@item.id)" class="btn download-btn">Xóa</a>
+                                                <a href="/Photos/User?id=@item.member_id&keyword=@item.keywords" class="btn download-btn">Sửa</a>
+                                            }
+                                          </div>
+                                        </div>
+                                        <div class="roll-over">
+                                        <a onclick="imagepage(@item.id)" class="btn"><span class="bucket">&#128092;</span></a>
+                                      </div> <!-- end roll-over -->
+                                      </figcaption> <!-- end img-meta -->
+                                    </figure> <!-- end top-img -->
+                                  </div><!--  end span3 -->
+                                </text>
+                            }
+                          </div> <!-- end id="portfolio-container" -->
+
+                        </div> <!-- end row-fluid -->
+                      </div> <!-- end images-container -->
+
+                    
+                  </section> <!-- end top-images -->
+
+                   <section class="main-pagination">
+                      <div class="row-fluid">
+                        <div class="span12">
+                            <div class="inner-pagination">
+                                <div class="pagination ">
+                                  <ul>
+                                    @for (int i = 1; i <= Model.PageCount; i++)
+                                    {
+                                        <li ><a onclick="setpage(@i);" style="cursor:pointer;">@i</a></li>
+                                    }
+                                    @*<li><a href="#" class="btn prev"><i class="icon-chevron-left"></i></a></li>
+                                    <li><a href="#">1</a></li>
+                                    <li><a href="#">2</a></li>
+                                    <li><a href="#">3</a></li>
+                                    <li><a href="#">4</a></li>
+                                    <li><a href="#">5</a></li>
+                                    <li><a href="#">6</a></li>
+                                    <li><a href="#">7</a></li>
+                                    <li><a href="#">8</a></li>
+                                    <li><a href="#">9</a></li>
+                                    <li><a href="#" class="btn next"><i class="icon-chevron-right"></i></a></li>*@
+                                  </ul>
+                                </div> <!-- end pagination -->
+                            </div> <!-- end inner-pagination -->
+                        </div> <!-- end span9 -->
+                        @*<div class="span3">
+                          <div class="portfolio-controllers-container v2">
+                            <p class="pull-left sort-title">Images per page-</p>
+                            <div class="btn-group dropup">
+                              <button class="btn btn-large">15</button>
+                              <button class="btn btn-large dropdown-toggle" data-toggle="dropdown">
+                                <span class="caret"></span>
+                              </button>
+                              <ul class="dropdown-menu">
+                                <!-- dropdown menu links -->
+                                <li><a href="#">20</a></li>
+                                <li><a href="#">25</a></li>
+                                <li><a href="#">35</a></li>
+                              </ul>
+                            </div> <!-- end btn-group -->
+                          </div> <!-- end portfolio-controllers-container -->
+                            
+                        </div> <!-- end span3 -->*@
+                      </div> <!-- end row -->
+                  </section> <!-- end main-pagination -->
+
+                
+            </div> <!-- end span9 -->
+          </div> <!-- end search-result-title -->
+        </div> <!-- end row -->
+      </div> <!-- end container -->
+    </section> <!-- end search-results -->
+  
+    <!-- ============================  Search Results Ends ============================ -->
+<script>
+    var pg=@ViewBag.page;
+    var order="@ViewBag.order";
+    var to="@ViewBag.to";
+    if (order.toString().indexOf("RANK")>=0){
+        $("#order1").addClass("selected");
+        $("#order").html("Phù hợp nhất");
+    }
+    if (order.toString().indexOf("id")>=0 && to.toString().indexOf("Desc")>=0){
+        $("#order2").addClass("selected");
+        $("#order").html("Mới nhất");
+    }
+    if (order.toString().indexOf("id")>=0 && to.toString().indexOf("Asc")>=0){
+        $("#order3").addClass("selected");
+        $("#order").html("Cũ nhất");
+    }
+    if (order.toString().indexOf("total_views")>=0){
+        $("#order4").addClass("selected");
+        $("#order").html("Xem nhiều nhất");
+    }
+    if ("@ViewBag.f0"!=""){opendv(0);}
+    if ("@ViewBag.f1"!=""){opendv(1);}
+    if ("@ViewBag.f2"!=""){opendv(2);}
+    if ("@ViewBag.f3"!=""){opendv(3);}
+    if ("@ViewBag.f4"!=""){opendv(4);}
+    if ("@ViewBag.f5"!=""){opendv(5);}
+    function setorder(field,t) {
+        order=field;
+        to=t;
+        pg=1;
+        search();
+    }
+    function setpage(page) {
+        pg=page;
+        search();
+    }
+    function search() {
+        var url = "/Search?";
+        var k = $("#skeyword").val();
+        if (k == "") {
+            return;
+        }
+        var f0="";
+        var f1="";
+        var f2="";
+        var f3="";
+        var f4="";
+        var f5="";
+        for (var i = 1; i <= 2; i++) {
+            if (document.getElementById("f-0_" + i).checked){
+                f0 += document.getElementById("f-0_" + i).value + ",";
+            }
+        }
+        for (var i = 1; i <= 3; i++) {
+            if (document.getElementById("f-1_" + i).checked){
+                f1 += document.getElementById("f-1_" + i).value + ",";
+            }
+        }
+        for (var i = 1; i <= 3; i++) {
+            if (document.getElementById("f-2_" + i).checked){
+                f2 += document.getElementById("f-2_" + i).value + ",";
+            }
+        }
+        for (var i = 1; i <= 30; i++) {
+            if (document.getElementById("f-3_" + i) && document.getElementById("f-3_" + i).checked) {
+                f3 += document.getElementById("f-3_" + i).value + ",";
+            }
+        }
+        for (var i = 1; i <= 9; i++) {
+            if (document.getElementById("f-4_" + i) && document.getElementById("f-4_" + i).checked) {
+                f4 += document.getElementById("f-4_" + i).value + ",";
+            }
+        }
+        for (var i = 1; i <= 5; i++) {
+            if (document.getElementById("f-5_" + i) && document.getElementById("f-5_" + i).checked) {
+                f5 += document.getElementById("f-5_" + i).value + ",";
+            }
+        }
+        url += "k=" + k + "&f0=" + f0 +"&f1=" + f1 + "&f2=" + f2 + "&f3=" + f3 + "&f4=" + f4 + "&f5=" + f5+"&order="+order+"&to="+to+"&pg="+pg;
+        window.location.href = url;
+    }
+    var currentId = -1;
+    function removeFilter(key){
+        for (var i = 1; i <= 2; i++) {
+            if (document.getElementById("f-0_" + i).checked && document.getElementById("f-0_" + i).value==key){
+                document.getElementById("f-0_" + i).checked=false;
+                search();
+                break;
+            }
+        }
+        for (var i = 1; i <= 3; i++) {
+            if (document.getElementById("f-1_" + i).checked && document.getElementById("f-1_" + i).value==key){
+                document.getElementById("f-1_" + i).checked=false;
+                search();
+                break;
+            }
+        }
+        for (var i = 1; i <= 3; i++) {
+            if (document.getElementById("f-2_" + i).checked && document.getElementById("f-2_" + i).value==key){
+                document.getElementById("f-2_" + i).checked=false;
+                search();
+                break;
+            }
+        }
+        for (var i = 1; i <= 30; i++) {
+            if (document.getElementById("f-3_" + i).checked && document.getElementById("f-3_" + i).value==key){
+                document.getElementById("f-3_" + i).checked=false;
+                search();
+                break;
+            }
+        }
+        for (var i = 1; i <= 9; i++) {
+            if (document.getElementById("f-4_" + i).checked && document.getElementById("f-4_" + i).value==key){
+                document.getElementById("f-4_" + i).checked=false;
+                search();
+                break;
+            }
+        }
+        for (var i = 1; i <= 5; i++) {
+            if (document.getElementById("f-5_" + i).checked && document.getElementById("f-5_" + i).value==key){
+                document.getElementById("f-5_" + i).checked=false;
+                search();
+                break;
+            }
+        }
+    }
+    function removeAllFilter(){
+        $(':checkbox').each(function(i,item){
+            $(item).attr('checked', false);
+        });
+        search();
+    }
+    function del(id){
+        if (!confirm("Bạn có chắc chắn xóa?"))
+        {
+            return;
+        }
+        var formdata = new FormData(); //FormData object
+        formdata.append("id", id);
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/Photos/Del');
+        xhr.send(formdata);
+        var content = "";
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                if (xhr.responseText == "1") {
+                    alert("xóa ảnh thành công");
+                } else {
+                    
+                }
+            }
+        }
+
+    }
+</script>
