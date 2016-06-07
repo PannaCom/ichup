@@ -17,6 +17,7 @@ using System.Security.Cryptography.X509Certificates;
 using Google.Apis.Auth.OAuth2;
 using Google.Apis.Services;
 using Google.Apis.Drive.v2.Data;
+using System.Threading.Tasks;
 namespace Ichup.Controllers
 {
     public class PhotosController : Controller
@@ -208,7 +209,7 @@ namespace Ichup.Controllers
         }
         [HttpPost]
         [AcceptVerbs(HttpVerbs.Post)]
-        public string UploadImageProcess(HttpPostedFileBase file, bool autoname, bool free,int member_id)
+        public async Task<string> UploadImageProcess(HttpPostedFileBase file, bool autoname, bool free, int member_id)
         {
             if (Config.getCookie("logged") == "") return "0";
             string guid = Guid.NewGuid().ToString();
@@ -274,7 +275,8 @@ namespace Ichup.Controllers
                 var test = System.Drawing.Image.FromFile(fullPath);
                 FileInfo f = new FileInfo(fullPath);
 
-                string GGDRIVE_FILE_ID = uploadGoogleDrive(fullPath);
+                Task<string> tsk = uploadGoogleDrive(fullPath);
+                string GGDRIVE_FILE_ID = tsk.Result;// uploadGoogleDrive(fullPath);
                 //Link download https://drive.google.com/file/d/GGDRIVE_FILE_ID
                 long size_file = f.Length;
                 string filter_2 = "ngang";
@@ -323,7 +325,7 @@ namespace Ichup.Controllers
 
             return path1 + ":" + new_id + ":" + basicname;// Config.ImagePath + "/" + nameFile;
         }
-        public string uploadGoogleDrive(string filename)
+        public async Task<string> uploadGoogleDrive(string filename)
         {
             try
             {

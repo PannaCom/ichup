@@ -245,7 +245,7 @@
                 $('#img_' + totalItemImage).html("<a href=\"#\"><img src=\"" + str[0] + "\" style=\"height:86px;width:122px;\" id=\"image_" + totalItemImage + "\"></a>");
                 $('#id_' + totalItemImage).val(str[1]);
                 $('#des_' + totalItemImage).html(str[2]);
-                $("#notice").html("Đã upload xong ảnh " + indexUploaded);
+                $("#notice").html("Đã upload xong ảnh " + indexUploaded+", <a href='/Photos/User/'>chuyển sang gán từ khóa cho ảnh</a>");
                 newupload(filename, fileobj);
                 $("#loadingimg").hide();
             }
