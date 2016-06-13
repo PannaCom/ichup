@@ -18,6 +18,8 @@ using Google.Apis.Auth.OAuth2;
 using Google.Apis.Services;
 using Google.Apis.Drive.v2.Data;
 using System.Threading.Tasks;
+using System.ComponentModel;
+
 namespace Ichup.Controllers
 {
     public class PhotosController : Controller
@@ -25,6 +27,8 @@ namespace Ichup.Controllers
         //
         // GET: /Photos/
         ichupEntities db = new ichupEntities();
+        private string _fullPath_ = "";
+        private string _fileName_ = "";
         public ActionResult Index()
         {
             return View();
@@ -207,6 +211,10 @@ namespace Ichup.Controllers
             }
             return "0";
         }
+        SprightlySoftAWS.S3.CalculateHash MyCalculateHash;
+        SprightlySoftAWS.S3.Upload MyUpload;
+        System.ComponentModel.BackgroundWorker UploadBackgroundWorker;
+        System.ComponentModel.BackgroundWorker CalculateHashBackgroundWorker;
         [HttpPost]
         [AcceptVerbs(HttpVerbs.Post)]
         public async Task<string> UploadImageProcess(HttpPostedFileBase file, bool autoname, bool free, int member_id)
@@ -216,7 +224,7 @@ namespace Ichup.Controllers
             string code = Config.genCode();
             string physicalPath = HttpContext.Server.MapPath("../" + Config.ImagePath + "\\");
             string nameFile = String.Format("{0}.jpg", guid + "-" + code);
-            
+            _fileName_ = nameFile;
             string nameFile1 = String.Format("{0}.jpg", guid+"-tb-small");
             string nameFile1_2 = String.Format("{0}.jpg", guid + "-small-"+Config.genCode());
             string nameFile2 = String.Format("{0}.jpg", guid + "-tb-big");
@@ -271,13 +279,15 @@ namespace Ichup.Controllers
                     FontSize = 12,
                     FontColor = Color.WhiteSmoke
                 }).Save(w2);
+                iFF.Reset();
                 iFF = null;
                 var test = System.Drawing.Image.FromFile(fullPath);
                 FileInfo f = new FileInfo(fullPath);
-
-                Task<string> tsk = uploadGoogleDrive(fullPath);
-                string GGDRIVE_FILE_ID = tsk.Result;// uploadGoogleDrive(fullPath);
-                //Link download https://drive.google.com/file/d/GGDRIVE_FILE_ID
+                _fullPath_ = fullPath;
+                init();
+                //Task<string> tsk = uploadGoogleDrive(fullPath);
+                //string GGDRIVE_FILE_ID = tsk.Result;
+                ////Link download https://drive.google.com/file/d/GGDRIVE_FILE_ID
                 long size_file = f.Length;
                 string filter_2 = "ngang";
                 if (test.Height > test.Width) filter_2 = "dọc";
@@ -286,7 +296,7 @@ namespace Ichup.Controllers
                 image img = new image();
                 img.status = 0;
                 img.keywords = basicname;
-                img.link = GGDRIVE_FILE_ID;//Config.ImagePath + nameFile;
+                img.link = nameFile;// GGDRIVE_FILE_ID;//Config.ImagePath + nameFile;
                 img.link_thumbail_big = Config.ImagePath + nameFile2;
                 img.link_big = Config.ImagePath + nameFile2_2;
                 img.link_thumbail_small = Config.ImagePath + nameFile1;
@@ -310,20 +320,155 @@ namespace Ichup.Controllers
                 db.images.Add(img);
                 db.SaveChanges();
                 new_id = img.id.ToString();
-                test = null;          
-      
+                test = null;
+                f = null;
                 break;
             }
-            try
-            {
-                if (System.IO.File.Exists(fullPath))
-                {
-                    System.IO.File.Delete(fullPath);
-                }
-            }
-            catch (Exception ex2) { }
+            
 
             return path1 + ":" + new_id + ":" + basicname;// Config.ImagePath + "/" + nameFile;
+        }
+        public void init()
+        {
+            MyCalculateHash = new SprightlySoftAWS.S3.CalculateHash();
+            //yCalculateHash.ProgressChangedEvent += MyCalculateHash_ProgressChangedEvent;
+
+            MyUpload = new SprightlySoftAWS.S3.Upload();
+            //MyUpload.ProgressChangedEvent += MyUpload_ProgressChangedEvent;
+
+            CalculateHashBackgroundWorker = new System.ComponentModel.BackgroundWorker();
+            CalculateHashBackgroundWorker.DoWork += CalculateHashBackgroundWorker_DoWork;
+            CalculateHashBackgroundWorker.RunWorkerCompleted += CalculateHashBackgroundWorker_RunWorkerCompleted;
+
+            UploadBackgroundWorker = new System.ComponentModel.BackgroundWorker();
+            UploadBackgroundWorker.DoWork += UploadBackgroundWorker_DoWork;
+            UploadBackgroundWorker.RunWorkerCompleted += UploadBackgroundWorker_RunWorkerCompleted;
+            //Application.DoEvents();
+
+            //Run the hash calculation in a BackgroundWorker process.  Calculating the hash of a
+            //large file will take a while.  Running the process in a BackgroundWorker will prevent
+            //the form from locking up.
+
+            //Use a hash table to pass parameters to the function in the BackgroundWorker.
+            Task task = new Task(ProcessDataAsync);
+            task.Start();
+            task.Wait();
+        }
+        public async void ProcessDataAsync()
+        {
+            // Start the HandleFile method.
+            Task<string> task = ok();
+            string x = await task;
+
+        }
+        public async Task<string> ok()
+        {
+            System.Collections.Hashtable CalculateHashHashTable = new System.Collections.Hashtable();
+            CalculateHashHashTable.Add("LocalFileName", _fullPath_);
+            CalculateHashBackgroundWorker.RunWorkerAsync(CalculateHashHashTable);
+            return "ok";
+        }
+        private void CalculateHashBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            //Call the CalculateMD5FromFile function and set the result.  When the function is complete
+            //the RunWorkerCompleted event will fire.  Use the LocalFileName value from the passed hash table.
+            System.Collections.Hashtable CalculateHashHashTable = e.Argument as System.Collections.Hashtable;
+            e.Result = MyCalculateHash.CalculateMD5FromFile(CalculateHashHashTable["LocalFileName"].ToString());
+        }
+        private void CalculateHashBackgroundWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            //If the CalculateMD5FromFile function was successful upload the file.
+            if (MyCalculateHash.ErrorNumber == 0)
+            {
+
+
+                //Set the extra request headers to send with the upload
+                Dictionary<String, String> ExtraRequestHeaders = new Dictionary<String, String>();
+
+                ExtraRequestHeaders.Add("Content-Type", "image/jpeg");
+                //ExtraRequestHeaders.Add("x-amz-acl", "public-read");
+
+
+                //Use the MD5 hash that was calculated previously.
+                ExtraRequestHeaders.Add("Content-MD5", e.Result.ToString());
+
+
+
+                String RequestURL;
+                RequestURL = MyUpload.BuildS3RequestURL(true, "s3.amazonaws.com", "bananhso", _fileName_, "");
+
+                String RequestMethod = "PUT";
+
+                ExtraRequestHeaders.Add("x-amz-date", DateTime.UtcNow.ToString("r"));
+
+                String AuthorizationValue;
+                AuthorizationValue = MyUpload.GetS3AuthorizationValue(RequestURL, RequestMethod, ExtraRequestHeaders, "AKIAIR2TUTKM6EM5Q6WQ", "Uc5myRRoncvKFGXrL9gzaK5YwHYh6OXAUqZal4Tu");
+                ExtraRequestHeaders.Add("Authorization", AuthorizationValue);
+
+                //Create a hash table of of parameters to sent to the upload function.
+                System.Collections.Hashtable UploadHashTable = new System.Collections.Hashtable();
+                UploadHashTable.Add("RequestURL", RequestURL);
+                UploadHashTable.Add("RequestMethod", RequestMethod);
+                UploadHashTable.Add("ExtraRequestHeaders", ExtraRequestHeaders);
+                UploadHashTable.Add("LocalFileName", _fullPath_);
+
+                //Run the UploadFile call in a BackgroundWorker to prevent the Window from freezing.
+                UploadBackgroundWorker.RunWorkerAsync(UploadHashTable);
+            }
+            else
+            {
+
+            }
+        }
+        private void UploadBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            //Run the UploadFile call.
+            System.Collections.Hashtable UploadHashTable = e.Argument as System.Collections.Hashtable;
+            e.Result = MyUpload.UploadFile(UploadHashTable["RequestURL"].ToString(), UploadHashTable["RequestMethod"].ToString(), UploadHashTable["ExtraRequestHeaders"] as Dictionary<String, String>, UploadHashTable["LocalFileName"].ToString());
+        }
+        private void UploadBackgroundWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            //System.Diagnostics.Debug.Print("");
+            //System.Diagnostics.Debug.Print(MyUpload.LogData);
+            //System.Diagnostics.Debug.Print("");
+
+            //EnableDisableEnd();
+
+            if (Convert.ToBoolean(e.Result) == true)
+            {
+                //MessageBox.Show("Upload complete.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                try
+                {
+
+                    if (System.IO.File.Exists(_fullPath_))
+                    {
+                        System.IO.File.Delete(_fullPath_);
+                    }
+                }
+                catch (Exception ex2) { }
+            }
+            else
+            {
+                //Show the error message.
+                String ResponseMessage;
+
+                if (MyUpload.ResponseString == "")
+                {
+                    ResponseMessage = MyUpload.ErrorDescription;
+                }
+                else
+                {
+                    System.Xml.XmlDocument XmlDoc = new System.Xml.XmlDocument();
+                    XmlDoc.LoadXml(MyUpload.ResponseString);
+
+                    System.Xml.XmlNode XmlNode;
+                    XmlNode = XmlDoc.SelectSingleNode("/Error/Message");
+
+                    ResponseMessage = XmlNode.InnerText;
+                }
+
+                //MessageBox.Show(ResponseMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         public async Task<string> uploadGoogleDrive(string filename)
         {
