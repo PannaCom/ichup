@@ -17,10 +17,11 @@ namespace Ichup.Controllers
         System.ComponentModel.BackgroundWorker CalculateHashBackgroundWorker;
         public ActionResult Index()
         {
-            upload();
+            init();
             return View();
         }
-        public void upload() {
+      
+        public void init() {
             MyCalculateHash = new SprightlySoftAWS.S3.CalculateHash();
             //yCalculateHash.ProgressChangedEvent += MyCalculateHash_ProgressChangedEvent;
 
@@ -41,8 +42,16 @@ namespace Ichup.Controllers
             //the form from locking up.
 
             //Use a hash table to pass parameters to the function in the BackgroundWorker.
-            ok();
-           
+            Task task = new Task(ProcessDataAsync);
+            task.Start();
+            task.Wait();
+        }
+        public async void ProcessDataAsync()
+        {
+            // Start the HandleFile method.
+            Task<string> task = ok();
+            string x = await task;
+            
         }
         public async Task<string> ok()
         {
@@ -78,7 +87,7 @@ namespace Ichup.Controllers
                
 
                 String RequestURL;
-                RequestURL = MyUpload.BuildS3RequestURL(true, "s3.amazonaws.com", "bananhso", "E:\\My\\AnhCuoi\\testok.jpg", "");
+                RequestURL = MyUpload.BuildS3RequestURL(true, "s3.amazonaws.com", "bananhso", "testok.jpg", "");
 
                 String RequestMethod = "PUT";
 
