@@ -284,9 +284,10 @@ namespace Ichup.Controllers
                 var test = System.Drawing.Image.FromFile(fullPath);
                 FileInfo f = new FileInfo(fullPath);
                 _fullPath_ = fullPath;
-                init();
-                //Task<string> tsk = uploadGoogleDrive(fullPath);
-                //string GGDRIVE_FILE_ID = tsk.Result;
+
+
+                Task<string> tsk = uploadGoogleDrive(fullPath);
+                string GGDRIVE_FILE_ID = tsk.Result;
                 ////Link download https://drive.google.com/file/d/GGDRIVE_FILE_ID
                 long size_file = f.Length;
                 string filter_2 = "ngang";
@@ -296,7 +297,7 @@ namespace Ichup.Controllers
                 image img = new image();
                 img.status = 0;
                 img.keywords = basicname;
-                img.link = nameFile;// GGDRIVE_FILE_ID;//Config.ImagePath + nameFile;
+                img.link = GGDRIVE_FILE_ID;//nameFile ;//Config.ImagePath + nameFile;
                 img.link_thumbail_big = Config.ImagePath + nameFile2;
                 img.link_big = Config.ImagePath + nameFile2_2;
                 img.link_thumbail_small = Config.ImagePath + nameFile1;
@@ -324,11 +325,13 @@ namespace Ichup.Controllers
                 f = null;
                 break;
             }
-            
-
+            //await init();
+            //while (_fullPath_ != "") {
+                
+            //}
             return path1 + ":" + new_id + ":" + basicname;// Config.ImagePath + "/" + nameFile;
         }
-        public void init()
+        public async Task init()
         {
             MyCalculateHash = new SprightlySoftAWS.S3.CalculateHash();
             //yCalculateHash.ProgressChangedEvent += MyCalculateHash_ProgressChangedEvent;
@@ -344,7 +347,9 @@ namespace Ichup.Controllers
             UploadBackgroundWorker.DoWork += UploadBackgroundWorker_DoWork;
             UploadBackgroundWorker.RunWorkerCompleted += UploadBackgroundWorker_RunWorkerCompleted;
             //Application.DoEvents();
-
+            StreamWriter SW = new StreamWriter(HttpContext.Server.MapPath("../") + "init.txt");
+            SW.WriteLine("public void init()");
+            SW.Close();
             //Run the hash calculation in a BackgroundWorker process.  Calculating the hash of a
             //large file will take a while.  Running the process in a BackgroundWorker will prevent
             //the form from locking up.
@@ -353,6 +358,7 @@ namespace Ichup.Controllers
             Task task = new Task(ProcessDataAsync);
             task.Start();
             task.Wait();
+           
         }
         public async void ProcessDataAsync()
         {
@@ -366,6 +372,9 @@ namespace Ichup.Controllers
             System.Collections.Hashtable CalculateHashHashTable = new System.Collections.Hashtable();
             CalculateHashHashTable.Add("LocalFileName", _fullPath_);
             CalculateHashBackgroundWorker.RunWorkerAsync(CalculateHashHashTable);
+            StreamWriter SW = new StreamWriter(HttpContext.Server.MapPath("../") + "ok.txt");
+            SW.WriteLine("public async Task<string> ok()");
+            SW.Close();
             return "ok";
         }
         private void CalculateHashBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -380,7 +389,9 @@ namespace Ichup.Controllers
             //If the CalculateMD5FromFile function was successful upload the file.
             if (MyCalculateHash.ErrorNumber == 0)
             {
-
+                StreamWriter SW = new StreamWriter(HttpContext.Server.MapPath("../") + "startupload1.txt");
+                SW.WriteLine("0k");
+                SW.Close();
 
                 //Set the extra request headers to send with the upload
                 Dictionary<String, String> ExtraRequestHeaders = new Dictionary<String, String>();
@@ -404,7 +415,9 @@ namespace Ichup.Controllers
                 String AuthorizationValue;
                 AuthorizationValue = MyUpload.GetS3AuthorizationValue(RequestURL, RequestMethod, ExtraRequestHeaders, "AKIAIR2TUTKM6EM5Q6WQ", "Uc5myRRoncvKFGXrL9gzaK5YwHYh6OXAUqZal4Tu");
                 ExtraRequestHeaders.Add("Authorization", AuthorizationValue);
-
+                SW = new StreamWriter(HttpContext.Server.MapPath("../") + "startupload2.txt");
+                SW.WriteLine(_fullPath_);
+                SW.Close();
                 //Create a hash table of of parameters to sent to the upload function.
                 System.Collections.Hashtable UploadHashTable = new System.Collections.Hashtable();
                 UploadHashTable.Add("RequestURL", RequestURL);
@@ -413,11 +426,19 @@ namespace Ichup.Controllers
                 UploadHashTable.Add("LocalFileName", _fullPath_);
 
                 //Run the UploadFile call in a BackgroundWorker to prevent the Window from freezing.
+                try{
                 UploadBackgroundWorker.RunWorkerAsync(UploadHashTable);
+                }
+                catch (Exception notup) {
+                    _fullPath_ = "";
+                }
+                SW = new StreamWriter(HttpContext.Server.MapPath("../") +"CalculateHashBackgroundWorker_RunWorkerCompleted.txt");
+                SW.WriteLine("private void CalculateHashBackgroundWorker_RunWorkerCompleted");
+                SW.Close();
             }
             else
             {
-
+                _fullPath_ = "";
             }
         }
         private void UploadBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
@@ -437,18 +458,23 @@ namespace Ichup.Controllers
             if (Convert.ToBoolean(e.Result) == true)
             {
                 //MessageBox.Show("Upload complete.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                try
-                {
+                StreamWriter SW = new StreamWriter(HttpContext.Server.MapPath("../") +"uploadok.txt");
+                SW.WriteLine("uploadok");
+                SW.Close();
+                //try
+                //{
 
-                    if (System.IO.File.Exists(_fullPath_))
-                    {
-                        System.IO.File.Delete(_fullPath_);
-                    }
-                }
-                catch (Exception ex2) { }
+                //    if (System.IO.File.Exists(_fullPath_))
+                //    {
+                //        System.IO.File.Delete(_fullPath_);
+                //    }
+                //}
+                //catch (Exception ex2) { }
+                _fullPath_ = "";
             }
             else
             {
+                _fullPath_ = "";
                 //Show the error message.
                 String ResponseMessage;
 
@@ -466,7 +492,9 @@ namespace Ichup.Controllers
 
                     ResponseMessage = XmlNode.InnerText;
                 }
-
+                StreamWriter SW = new StreamWriter(HttpContext.Server.MapPath("../") + "upload.txt");
+                SW.WriteLine(ResponseMessage);
+                SW.Close();
                 //MessageBox.Show(ResponseMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

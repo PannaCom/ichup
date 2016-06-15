@@ -32,7 +32,7 @@
             <div class="bg-11">
                 <div class="col-md-12 col-center">
                     <div class="col-md-5 col-center">
-                        <div > Chọn file ảnh để upload(có thể chọn nhiều file một lúc)<input type="file" name="imageFile" id="imageFile" multiple="multiple"  runat="server" >
+                        <div > Chọn file ảnh để upload(tối đa 10 ảnh 1 lúc)<input type="file" name="imageFile" id="imageFile" multiple="multiple"  runat="server" >
                         <div  id="notice"></div>
                     </div>
                     <div class="gallery-index-08">
@@ -180,6 +180,10 @@
     function uploadProcess() {
         if (document.getElementById("checkboxG6").checked==false){
             alert("Bạn chưa đồng ý với điều khoản của bán ảnh số. Xin click vào đồng ý!");
+            return;
+        }
+        if (fileInput.files.length>10){
+            alert("Mỗi lần bạn chỉ được upload tối đa 10 ảnh!");
             return;
         }
         for (i = totalItemImage+1; i < fileInput.files.length + totalItemImage+1; i++) {
