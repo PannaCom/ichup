@@ -5,6 +5,9 @@ using System.Web;
 using System.Web.Mvc;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using Amazon.S3;
+using Amazon.S3.Model;
+using System.IO;
 namespace Ichup.Controllers
 {
     public class AWSController : Controller
@@ -17,10 +20,37 @@ namespace Ichup.Controllers
         System.ComponentModel.BackgroundWorker CalculateHashBackgroundWorker;
         public ActionResult Index()
         {
-            init();
+            //init();
             return View();
         }
-      
+        public void downdload()
+        {
+            
+            string existingBucketName = "bananhso";// + _fileName_
+            string keyName="AKIAIR2TUTKM6EM5Q6WQ";
+            string keySecret = "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";
+            IAmazonS3 client = new AmazonS3Client(keyName, keySecret, Amazon.RegionEndpoint.USEast1);
+
+                GetObjectRequest request = new GetObjectRequest();
+                request.BucketName = existingBucketName;
+                request.EtagToMatch = "59e8f4559df78be3d68855c7a80ebbec";
+                request.ByteRange = new ByteRange(0, 10);
+                //{
+                //    BucketName = existingBucketName,
+                //    Key = keyName
+                //};
+
+                using (GetObjectResponse response = client.GetObject(request))  
+                {
+                    
+                    string dest = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), keyName);
+                    if (!System.IO.File.Exists(dest))
+                    {
+                        response.WriteResponseStreamToFile(dest);
+                    }
+                }
+         
+        }
         public void init() {
             MyCalculateHash = new SprightlySoftAWS.S3.CalculateHash();
             //yCalculateHash.ProgressChangedEvent += MyCalculateHash_ProgressChangedEvent;

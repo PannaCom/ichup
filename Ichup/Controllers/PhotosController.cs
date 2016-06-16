@@ -19,6 +19,8 @@ using Google.Apis.Services;
 using Google.Apis.Drive.v2.Data;
 using System.Threading.Tasks;
 using System.ComponentModel;
+using Amazon.S3;
+using Amazon.S3.Model;
 
 namespace Ichup.Controllers
 {
@@ -286,8 +288,8 @@ namespace Ichup.Controllers
                 _fullPath_ = fullPath;
 
 
-                Task<string> tsk = uploadGoogleDrive(fullPath);
-                string GGDRIVE_FILE_ID = tsk.Result;
+                //Task<string> tsk = uploadGoogleDrive(fullPath);
+                //string GGDRIVE_FILE_ID = tsk.Result;
                 ////Link download https://drive.google.com/file/d/GGDRIVE_FILE_ID
                 long size_file = f.Length;
                 string filter_2 = "ngang";
@@ -297,7 +299,7 @@ namespace Ichup.Controllers
                 image img = new image();
                 img.status = 0;
                 img.keywords = basicname;
-                img.link = GGDRIVE_FILE_ID;//nameFile ;//Config.ImagePath + nameFile;
+                img.link = nameFile;// GGDRIVE_FILE_ID;//Config.ImagePath + nameFile;
                 img.link_thumbail_big = Config.ImagePath + nameFile2;
                 img.link_big = Config.ImagePath + nameFile2_2;
                 img.link_thumbail_small = Config.ImagePath + nameFile1;
@@ -325,12 +327,108 @@ namespace Ichup.Controllers
                 f = null;
                 break;
             }
-            //await init();
-            //while (_fullPath_ != "") {
-                
+            init2();
+            //while (_fullPath_ != "")
+            //{
+
             //}
             return path1 + ":" + new_id + ":" + basicname;// Config.ImagePath + "/" + nameFile;
         }
+        public void init2()
+        {
+            string existingBucketName = "bananhso";// + _fileName_
+            string keyName="AKIAIR2TUTKM6EM5Q6WQ";
+            string keySecret = "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";
+            IAmazonS3 client = new AmazonS3Client(keyName, keySecret, Amazon.RegionEndpoint.USEast1);
+            
+             PutObjectRequest putRequest1 = new PutObjectRequest
+                {
+                    BucketName = existingBucketName,
+                    Key = keyName,
+                    ContentBody = "sample text" 
+                };
+
+                PutObjectResponse response1 = client.PutObject(putRequest1);
+
+                // 2. Put object-set ContentType and add metadata.
+                PutObjectRequest putRequest2 = new PutObjectRequest
+                {
+                    BucketName = existingBucketName,
+                    Key = keyName,                   
+                    FilePath = _fullPath_,
+                    ContentType = "image/jpeg"
+                };
+                putRequest2.Metadata.Add("x-amz-meta-title", _fileName_);
+                //putRequest2.
+                
+                PutObjectResponse response2 = client.PutObject(putRequest2);
+                _fileName_ = response2.ETag;
+            //IAmazonS3 s3Client = new AmazonS3Client(keyName, keySecret, Amazon.RegionEndpoint.USEast1);//,keyAmazon.RegionEndpoint.USEast1
+
+            //// List to store upload part responses.
+            //List<UploadPartResponse> uploadResponses = new List<UploadPartResponse>();
+
+            //// 1. Initialize.
+            //InitiateMultipartUploadRequest initiateRequest = new InitiateMultipartUploadRequest
+            //    {
+            //        BucketName = existingBucketName,
+            //        Key = keyName
+            //    };
+
+            //InitiateMultipartUploadResponse initResponse =s3Client.InitiateMultipartUpload(initiateRequest);
+
+            //// 2. Upload Parts.
+            //long contentLength = new FileInfo(_fullPath_).Length;
+            //long partSize = 5 * (long)Math.Pow(2, 20); //5242880; // 5 MB
+           
+
+            //try
+            //{
+            //    long filePosition = 0;
+            //    for (int i = 1; filePosition < contentLength; i++)
+            //    {
+            //        //"AKIAIR2TUTKM6EM5Q6WQ", "Uc5myRRoncvKFGXrL9gzaK5YwHYh6OXAUqZal4Tu"
+            //        // Create request to upload a part.
+            //        UploadPartRequest uploadRequest = new UploadPartRequest
+            //                        {
+            //                            BucketName = existingBucketName,
+            //                            Key = keyName,                                        
+            //                            UploadId = initResponse.UploadId,
+            //                            PartNumber = i,
+            //                            PartSize = partSize,
+            //                            FilePosition = filePosition,
+            //                            FilePath = _fullPath_
+            //                        };
+
+            //        // Upload part and add response to our list.
+            //         uploadResponses.Add(s3Client.UploadPart(uploadRequest));
+
+            //        filePosition += partSize;
+            //    }
+
+            //    // Step 3: complete.
+            //    CompleteMultipartUploadRequest completeRequest = new CompleteMultipartUploadRequest
+            //       {
+            //           BucketName = existingBucketName,
+            //           Key = keyName,
+            //           UploadId = initResponse.UploadId,
+            //        };
+
+            //    CompleteMultipartUploadResponse completeUploadResponse =s3Client.CompleteMultipartUpload(completeRequest);
+            //}
+            //catch (Exception exceptionupload)
+            //{
+            //    //Console.WriteLine("Exception occurred: {0}", exception.Message);
+            //    AbortMultipartUploadRequest abortMPURequest = new AbortMultipartUploadRequest
+            //    {
+            //        BucketName = existingBucketName,
+            //        Key = keyName,
+            //        UploadId = initResponse.UploadId
+            //    };
+            //    s3Client.AbortMultipartUpload(abortMPURequest);
+            //}
+        }
+
         public async Task init()
         {
             MyCalculateHash = new SprightlySoftAWS.S3.CalculateHash();
