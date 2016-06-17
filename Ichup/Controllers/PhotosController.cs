@@ -337,15 +337,16 @@ namespace Ichup.Controllers
         public void init2()
         {
             string existingBucketName = "bananhso";// + _fileName_
-            string keyName="AKIAIR2TUTKM6EM5Q6WQ";
+            string keyName = _fileName_;
+            string keyId = "AKIAIR2TUTKM6EM5Q6WQ";
             string keySecret = "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";
-            IAmazonS3 client = new AmazonS3Client(keyName, keySecret, Amazon.RegionEndpoint.USEast1);
+            IAmazonS3 client = new AmazonS3Client(keyId, keySecret, Amazon.RegionEndpoint.USEast1);
             
              PutObjectRequest putRequest1 = new PutObjectRequest
                 {
                     BucketName = existingBucketName,
                     Key = keyName,
-                    ContentBody = "sample text" 
+                    //ContentBody = "sample text" 
                 };
 
                 PutObjectResponse response1 = client.PutObject(putRequest1);
@@ -356,13 +357,16 @@ namespace Ichup.Controllers
                     BucketName = existingBucketName,
                     Key = keyName,                   
                     FilePath = _fullPath_,
-                    ContentType = "image/jpeg"
-                };
+                    ContentType = "image/jpeg",
+
+                };// AutoCloseStream = true,StorageClass = S3StorageClass.ReducedRedundancy  ,CannedACL = S3CannedACL.PublicRead,
                 putRequest2.Metadata.Add("x-amz-meta-title", _fileName_);
                 //putRequest2.
-                
-                PutObjectResponse response2 = client.PutObject(putRequest2);
-                _fileName_ = response2.ETag;
+                try { 
+                    PutObjectResponse response2 = client.PutObject(putRequest2);
+                    _fileName_ = response2.ETag;
+                }
+                catch (Exception exupload) { }
             //IAmazonS3 s3Client = new AmazonS3Client(keyName, keySecret, Amazon.RegionEndpoint.USEast1);//,keyAmazon.RegionEndpoint.USEast1
 
             //// List to store upload part responses.

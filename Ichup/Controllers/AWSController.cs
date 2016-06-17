@@ -23,18 +23,21 @@ namespace Ichup.Controllers
             //init();
             return View();
         }
-        public void downdload()
+        public void download()
         {
             
             string existingBucketName = "bananhso";// + _fileName_
-            string keyName="AKIAIR2TUTKM6EM5Q6WQ";
+            string keyName = "ae3b2cb3-58fd-4c75-ad40-ca6347868ffe-0b71b614.jpg";
+            string keyId = "AKIAIR2TUTKM6EM5Q6WQ";
             string keySecret = "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";
-            IAmazonS3 client = new AmazonS3Client(keyName, keySecret, Amazon.RegionEndpoint.USEast1);
+            IAmazonS3 client = new AmazonS3Client(keyId, keySecret, Amazon.RegionEndpoint.USEast1);
 
                 GetObjectRequest request = new GetObjectRequest();
                 request.BucketName = existingBucketName;
-                request.EtagToMatch = "59e8f4559df78be3d68855c7a80ebbec";
+                //request.EtagToMatch = "d1e217a67c10d2497f068f2895ec80f2";
+                request.Key = keyName;
                 request.ByteRange = new ByteRange(0, 10);
+                //request.Key = keyName;
                 //{
                 //    BucketName = existingBucketName,
                 //    Key = keyName
@@ -42,14 +45,208 @@ namespace Ichup.Controllers
 
                 using (GetObjectResponse response = client.GetObject(request))  
                 {
-                    
-                    string dest = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), keyName);
-                    if (!System.IO.File.Exists(dest))
-                    {
-                        response.WriteResponseStreamToFile(dest);
-                    }
+                    string dest=HttpContext.Server.MapPath("../Images/Download/" + keyName);
+                    response.WriteResponseStreamToFile(dest, false);
+                    //string dest = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), keyName);
+                    //if (!System.IO.File.Exists(dest))
+                    //{
+                    //    response.WriteResponseStreamToFile(dest);
+                    //}
+                    System.Web.HttpContext.Current.Response.Clear();
+                    System.Web.HttpContext.Current.Response.AppendHeader("content-disposition", "attachment; filename=" + keyName + ".jpg");
+                    System.Web.HttpContext.Current.Response.ContentType = "application/octet-stream";
+                    System.Web.HttpContext.Current.Response.TransmitFile(dest);
+                    System.Web.HttpContext.Current.Response.Flush();
+                    System.Web.HttpContext.Current.Response.End();
+
+                    // Clean up temporary file.
+                    System.IO.File.Delete(dest);
                 }
          
+        }
+        public void DownloadS3Object()
+        {
+            string awsBucketName="bananhso";
+            string keyName = "AKIAIR2TUTKM6EM5Q6WQ";
+            string keySecret = "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";
+            using (var client = new AmazonS3Client(keyName, keySecret, Amazon.RegionEndpoint.USEast1))
+            {
+                Stream imageStream = new MemoryStream();
+                //GetObjectRequest request = new GetObjectRequest { BucketName = awsBucketName, Key = keyName };
+                GetObjectRequest request = new GetObjectRequest();
+                request.BucketName = awsBucketName;
+                request.EtagToMatch = "59e8f4559df78be3d68855c7a80ebbec";
+                request.ByteRange = new ByteRange(0, 10);
+                request.Key = "AKIAIR2TUTKM6EM5Q6WQ";
+                //client.GetObject(request);
+                using (GetObjectResponse response = client.GetObject(request))
+                {
+                    response.ResponseStream.CopyTo(imageStream);
+                }
+                imageStream.Position = 0;
+                //save
+                string dest = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), keyName) + ".jpg";
+                if (!System.IO.File.Exists(dest))
+                {
+                    using (Stream output = new FileStream(dest, FileMode.CreateNew))//+"mycat.jpg"
+                    {
+                        byte[] buffer = new byte[32 * 1024];
+                        int read;
+
+                        while ((read = imageStream.Read(buffer, 0, buffer.Length)) > 0)
+                        {
+                            output.Write(buffer, 0, read);
+                        }
+                    }
+                }
+                
+                // Clean up temporary file.
+                // System.IO.File.Delete(dest);
+                //return imageStream;
+            }
+        }
+        SprightlySoftAWS.S3.Download MyDownload;
+        System.ComponentModel.BackgroundWorker DownloadBackgroundWorker;
+        string _fileName = "";
+        string dest = "";
+        public string test(string filename)
+        {
+            _fileName = filename;
+            initDownload();
+            RedirectToAction("AWS", "downloadstepfinal?_fileName=" + _fileName + "&dest=" + dest);
+            return "ok";
+        }
+        public async Task initDownload()
+        {
+            MyDownload = new SprightlySoftAWS.S3.Download();
+            MyDownload.ProgressChangedEvent += MyDownload_ProgressChangedEvent;
+
+            DownloadBackgroundWorker = new System.ComponentModel.BackgroundWorker();
+            DownloadBackgroundWorker.DoWork += DownloadBackgroundWorker_DoWork;
+            DownloadBackgroundWorker.RunWorkerCompleted += DownloadBackgroundWorker_RunWorkerCompleted;
+            Task task = new Task(ProcessDataAsync2);
+            task.Start();
+            task.Wait();
+        }
+        public async void ProcessDataAsync2()
+        {
+            // Start the HandleFile method.
+            Task<string> task = ok2();
+            string x = await task;
+
+        }
+        public async Task<string> ok2()
+        {
+            downloadFile(_fileName);
+            return "ok";
+        }
+        public void downloadFile(string filename) {
+            dest = HttpContext.Server.MapPath("../Images/Download/" + filename);
+
+            String RequestURL;
+            RequestURL = MyDownload.BuildS3RequestURL(true, "s3.amazonaws.com", "bananhso", filename, "");
+
+            String RequestMethod = "GET";
+
+            Dictionary<String, String> ExtraRequestHeaders = new Dictionary<String, String>();
+            ExtraRequestHeaders.Add("x-amz-date", DateTime.UtcNow.ToString("r"));
+
+            String AuthorizationValue;
+            AuthorizationValue = MyDownload.GetS3AuthorizationValue(RequestURL, RequestMethod, ExtraRequestHeaders, "AKIAIR2TUTKM6EM5Q6WQ", "Uc5myRRoncvKFGXrL9gzaK5YwHYh6OXAUqZal4Tu");
+            ExtraRequestHeaders.Add("Authorization", AuthorizationValue);
+
+            //Use a hash table to pass parameters to the function in the BackgroundWorker.
+            System.Collections.Hashtable DownloadHashTable = new System.Collections.Hashtable();
+            DownloadHashTable.Add("RequestURL", RequestURL);
+            DownloadHashTable.Add("RequestMethod", RequestMethod);
+            DownloadHashTable.Add("ExtraRequestHeaders", ExtraRequestHeaders);
+            DownloadHashTable.Add("LocalFileName", dest);
+
+
+            //Run the DownloadFile function in a BackgroundWorker process.  Downloading a large
+            //file may take a long time.  Running the process in a BackgroundWorker will prevent
+            //the Window from locking up.
+            DownloadBackgroundWorker.RunWorkerAsync(DownloadHashTable);
+        }
+        private void DownloadBackgroundWorker_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            //System.Diagnostics.Debug.Print("");
+            //System.Diagnostics.Debug.Print(MyDownload.LogData);
+            //System.Diagnostics.Debug.Print("");
+
+            //EnableDisableEnd();
+
+            if (Convert.ToBoolean(e.Result) == true)
+            {
+                //MessageBox.Show("Download complete.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //RedirectToAction("AWS", "downloadstepfinal?_fileName=" + _fileName + "&dest=" + dest);
+            }
+            else
+            {
+                //Delete a partially downloaded file
+                //if (System.IO.File.Exists(TextBoxDownloadFileName.Text) == true)
+                //{
+                //    System.IO.File.Delete(TextBoxDownloadFileName.Text);
+                //}
+
+                //Show the error message.
+                String ResponseMessage;
+
+                if (MyDownload.ResponseString == "")
+                {
+                    ResponseMessage = MyDownload.ErrorDescription;
+                }
+                else
+                {
+                    System.Xml.XmlDocument XmlDoc = new System.Xml.XmlDocument();
+                    XmlDoc.LoadXml(MyDownload.ResponseString);
+
+                    System.Xml.XmlNode XmlNode;
+                    XmlNode = XmlDoc.SelectSingleNode("/Error/Message");
+
+                    ResponseMessage = XmlNode.InnerText;
+                }
+
+                //MessageBox.Show(ResponseMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        public ActionResult downloadstepfinal(string _fileName, string dest)
+        {
+                System.Web.HttpContext.Current.Response.Clear();
+                System.Web.HttpContext.Current.Response.AppendHeader("content-disposition", "attachment; filename=" + _fileName + ".jpg");
+                System.Web.HttpContext.Current.Response.ContentType = "application/octet-stream";
+                System.Web.HttpContext.Current.Response.TransmitFile(dest);
+                System.Web.HttpContext.Current.Response.Flush();
+                System.Web.HttpContext.Current.Response.End();
+                return View();
+        }
+        private void DownloadBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            System.Collections.Hashtable DownloadHashTable = e.Argument as System.Collections.Hashtable;
+
+            //Call the DownloadFile function and set the result.  When the function is complete
+            //the RunWorkerCompleted event will fire.  Use the parameters that were passed in the 
+            //hash table.
+            e.Result = MyDownload.DownloadFile(DownloadHashTable["RequestURL"].ToString(), DownloadHashTable["RequestMethod"].ToString(), DownloadHashTable["ExtraRequestHeaders"] as Dictionary<String, String>, DownloadHashTable["LocalFileName"].ToString(), false);
+        }
+        private void MyDownload_ProgressChangedEvent()
+        {
+            //if (this.InvokeRequired == true)
+            //{
+            //    this.BeginInvoke(new MethodInvoker(delegate() { MyDownload_ProgressChangedEvent(); }));
+            //}
+            //else
+            //{
+            //    //Set the progress bar when the ProgressChangedEvent is fired.
+            //    if (MyDownload.BytesTotal > 0)
+            //    {
+            //        decimal MyDecimal = (Convert.ToDecimal(MyDownload.BytesTransfered) / Convert.ToDecimal(MyDownload.BytesTotal)) * 100;
+            //        ProgressBarTransfered.Value = Convert.ToInt32(MyDecimal);
+
+            //        SprightlySoftAWS.S3.Helper MyHelper = new SprightlySoftAWS.S3.Helper();
+            //        LabelBytesTransfered.Text = MyHelper.FormatByteSize(MyDownload.BytesTransfered) + " / " + MyHelper.FormatByteSize(MyDownload.BytesTotal);
+            //    }
+            //}
         }
         public void init() {
             MyCalculateHash = new SprightlySoftAWS.S3.CalculateHash();
