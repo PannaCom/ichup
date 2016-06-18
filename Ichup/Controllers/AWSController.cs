@@ -109,12 +109,19 @@ namespace Ichup.Controllers
         System.ComponentModel.BackgroundWorker DownloadBackgroundWorker;
         string _fileName = "";
         string dest = "";
-        public string test(string filename)
+        string dest2 = "";
+        private string notFound = "";
+        public ActionResult getFile(string filename)
         {
             _fileName = filename;
+            ViewBag.filename = filename;
+            dest = HttpContext.Server.MapPath("../Images/Download/" + filename);
+            dest2 = "../Images/Download/" + filename;
+            ViewBag.dest = dest2;
+            if (System.IO.File.Exists(dest)) return RedirectToAction("downloadstepfinal", "AWS", new { filename = _fileName, dest = dest2 });
             initDownload();
-            RedirectToAction("AWS", "downloadstepfinal?_fileName=" + _fileName + "&dest=" + dest);
-            return "ok";
+            //return RedirectToAction("downloadstepfinal", "AWS", new { filename = _fileName, dest = dest2 });
+            return View();
         }
         public async Task initDownload()
         {
@@ -141,20 +148,19 @@ namespace Ichup.Controllers
             return "ok";
         }
         public void downloadFile(string filename) {
-            dest = HttpContext.Server.MapPath("../Images/Download/" + filename);
-
+            //dest = HttpContext.Server.MapPath("../Images/Download/" + filename);
+            //if (System.IO.File.Exists(dest)) return;
             String RequestURL;
             RequestURL = MyDownload.BuildS3RequestURL(true, "s3.amazonaws.com", "bananhso", filename, "");
-
             String RequestMethod = "GET";
-
             Dictionary<String, String> ExtraRequestHeaders = new Dictionary<String, String>();
             ExtraRequestHeaders.Add("x-amz-date", DateTime.UtcNow.ToString("r"));
+            //ExtraRequestHeaders.Add("x-amz-acl", "public-read");
 
             String AuthorizationValue;
             AuthorizationValue = MyDownload.GetS3AuthorizationValue(RequestURL, RequestMethod, ExtraRequestHeaders, "AKIAIR2TUTKM6EM5Q6WQ", "Uc5myRRoncvKFGXrL9gzaK5YwHYh6OXAUqZal4Tu");
             ExtraRequestHeaders.Add("Authorization", AuthorizationValue);
-
+           
             //Use a hash table to pass parameters to the function in the BackgroundWorker.
             System.Collections.Hashtable DownloadHashTable = new System.Collections.Hashtable();
             DownloadHashTable.Add("RequestURL", RequestURL);
@@ -180,6 +186,7 @@ namespace Ichup.Controllers
             {
                 //MessageBox.Show("Download complete.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 //RedirectToAction("AWS", "downloadstepfinal?_fileName=" + _fileName + "&dest=" + dest);
+                //return RedirectToAction("downloadstepfinal", "AWS", new { filename = _fileName, dest = dest2 });
             }
             else
             {
@@ -188,7 +195,7 @@ namespace Ichup.Controllers
                 //{
                 //    System.IO.File.Delete(TextBoxDownloadFileName.Text);
                 //}
-
+                notFound = "-1";
                 //Show the error message.
                 String ResponseMessage;
 
@@ -210,7 +217,7 @@ namespace Ichup.Controllers
                 //MessageBox.Show(ResponseMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        public ActionResult downloadstepfinal(string _fileName, string dest)
+        public ActionResult downloadstepfinal(string fileName, string dest)
         {
                 System.Web.HttpContext.Current.Response.Clear();
                 System.Web.HttpContext.Current.Response.AppendHeader("content-disposition", "attachment; filename=" + _fileName + ".jpg");
@@ -220,6 +227,7 @@ namespace Ichup.Controllers
                 System.Web.HttpContext.Current.Response.End();
                 return View();
         }
+
         private void DownloadBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             System.Collections.Hashtable DownloadHashTable = e.Argument as System.Collections.Hashtable;
@@ -247,6 +255,11 @@ namespace Ichup.Controllers
             //        LabelBytesTransfered.Text = MyHelper.FormatByteSize(MyDownload.BytesTransfered) + " / " + MyHelper.FormatByteSize(MyDownload.BytesTotal);
             //    }
             //}
+        }
+        public string checkFile(string filename){
+            dest = HttpContext.Server.MapPath("../Images/Download/" + filename);
+            if (notFound == "-1") return "-1";
+            if (System.IO.File.Exists(dest)) return "1"; else return "0";
         }
         public void init() {
             MyCalculateHash = new SprightlySoftAWS.S3.CalculateHash();

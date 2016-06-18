@@ -286,7 +286,7 @@ namespace Ichup.Controllers
                 var test = System.Drawing.Image.FromFile(fullPath);
                 FileInfo f = new FileInfo(fullPath);
                 _fullPath_ = fullPath;
-
+                init2();
 
                 //Task<string> tsk = uploadGoogleDrive(fullPath);
                 //string GGDRIVE_FILE_ID = tsk.Result;
@@ -327,7 +327,7 @@ namespace Ichup.Controllers
                 f = null;
                 break;
             }
-            init2();
+           
             //while (_fullPath_ != "")
             //{
 
@@ -358,13 +358,19 @@ namespace Ichup.Controllers
                     Key = keyName,                   
                     FilePath = _fullPath_,
                     ContentType = "image/jpeg",
-
+                    CannedACL = S3CannedACL.PublicRead,
                 };// AutoCloseStream = true,StorageClass = S3StorageClass.ReducedRedundancy  ,CannedACL = S3CannedACL.PublicRead,
                 putRequest2.Metadata.Add("x-amz-meta-title", _fileName_);
                 //putRequest2.
                 try { 
                     PutObjectResponse response2 = client.PutObject(putRequest2);
-                    _fileName_ = response2.ETag;
+                    //_fileName_ = response2.ETag;
+                    //PutACLRequest PAR = new PutACLRequest();
+                    //PAR.BucketName = "bananhso";
+                    //PAR.Key = _fileName_;
+                    //PAR.CannedACL = S3CannedACL.PublicRead;
+                    //client.PutACL(PAR);
+                    
                 }
                 catch (Exception exupload) { }
             //IAmazonS3 s3Client = new AmazonS3Client(keyName, keySecret, Amazon.RegionEndpoint.USEast1);//,keyAmazon.RegionEndpoint.USEast1
