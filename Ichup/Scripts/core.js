@@ -70,7 +70,8 @@ function downloadimage() {
     //}
     document.getElementById("downloadimagedv").disabled = true;
     document.getElementById("downloadimagedv").innerHTML = "Đang download, xin đợi....";
-    window.open("/Photos/downloadfile?id=" + currentId + "&type=" + type, "_self");
+    //window.open("/Photos/downloadfile?id=" + currentId + "&type=" + type, "_self");
+    window.open("/File/download?id=" + currentId, "_self");
     //var formdata = new FormData(); //FormData object
     //formdata.append("id", currentId);
     //var xhr = new XMLHttpRequest();
