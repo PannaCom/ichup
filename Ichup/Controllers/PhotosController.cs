@@ -298,7 +298,7 @@ namespace Ichup.Controllers
                 //Add vào db
                 image img = new image();
                 img.status = 0;
-                img.keywords = basicname;
+                img.keywords = "";
                 img.link = nameFile;// GGDRIVE_FILE_ID;//Config.ImagePath + nameFile;
                 img.link_thumbail_big = Config.ImagePath + nameFile2;
                 img.link_big = Config.ImagePath + nameFile2_2;

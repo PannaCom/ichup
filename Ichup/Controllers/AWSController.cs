@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Amazon.S3;
 using Amazon.S3.Model;
 using System.IO;
+using Ichup.Models;
 namespace Ichup.Controllers
 {
     public class AWSController : Controller
@@ -23,11 +24,24 @@ namespace Ichup.Controllers
             //init();
             return View();
         }
-        public void download()
+        public ActionResult download(string filename)
         {
             
+            string dest = HttpContext.Server.MapPath("../Images/Download/" + filename);
+         
+            //string dest = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), keyName);
+            if (System.IO.File.Exists(dest))
+            {
+                System.Web.HttpContext.Current.Response.Clear();
+                System.Web.HttpContext.Current.Response.AppendHeader("content-disposition", "attachment; filename=" + filename);
+                System.Web.HttpContext.Current.Response.ContentType = "application/octet-stream";
+                System.Web.HttpContext.Current.Response.TransmitFile("../Images/Download/" + filename);
+                System.Web.HttpContext.Current.Response.Flush();
+                System.Web.HttpContext.Current.Response.End();
+                return View();
+            }
+            
             string existingBucketName = "bananhso";// + _fileName_
-            string keyName = "ae3b2cb3-58fd-4c75-ad40-ca6347868ffe-0b71b614.jpg";
             string keyId = "AKIAIR2TUTKM6EM5Q6WQ";
             string keySecret = "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";
             IAmazonS3 client = new AmazonS3Client(keyId, keySecret, Amazon.RegionEndpoint.USEast1);
@@ -35,9 +49,10 @@ namespace Ichup.Controllers
                 GetObjectRequest request = new GetObjectRequest();
                 request.BucketName = existingBucketName;
                 //request.EtagToMatch = "d1e217a67c10d2497f068f2895ec80f2";
-                request.Key = keyName;
-                request.ByteRange = new ByteRange(0, 10);
-                //request.Key = keyName;
+                request.Key = filename;
+          
+                //request.ByteRange = new ByteRange(0, 10);
+                
                 //{
                 //    BucketName = existingBucketName,
                 //    Key = keyName
@@ -45,7 +60,22 @@ namespace Ichup.Controllers
 
                 using (GetObjectResponse response = client.GetObject(request))  
                 {
-                    string dest=HttpContext.Server.MapPath("../Images/Download/" + keyName);
+                    //Stream imageStream = new MemoryStream();
+                    //response.ResponseStream.CopyTo(imageStream);
+                    //if (!System.IO.File.Exists(dest))
+                    //{
+                    //    using (Stream output = new FileStream(dest, FileMode.CreateNew))//+"mycat.jpg"
+                    //    {
+                    //        byte[] buffer = new byte[32 * 1024];
+                    //        int read;
+
+                    //        while ((read = imageStream.Read(buffer, 0, buffer.Length)) > 0)
+                    //        {
+                    //            output.Write(buffer, 0, read);
+                    //        }
+                    //    }
+                    //}
+                  
                     response.WriteResponseStreamToFile(dest, false);
                     //string dest = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), keyName);
                     //if (!System.IO.File.Exists(dest))
@@ -53,16 +83,15 @@ namespace Ichup.Controllers
                     //    response.WriteResponseStreamToFile(dest);
                     //}
                     System.Web.HttpContext.Current.Response.Clear();
-                    System.Web.HttpContext.Current.Response.AppendHeader("content-disposition", "attachment; filename=" + keyName + ".jpg");
+                    System.Web.HttpContext.Current.Response.AppendHeader("content-disposition", "attachment; filename=" + filename);
                     System.Web.HttpContext.Current.Response.ContentType = "application/octet-stream";
                     System.Web.HttpContext.Current.Response.TransmitFile(dest);
                     System.Web.HttpContext.Current.Response.Flush();
                     System.Web.HttpContext.Current.Response.End();
-
                     // Clean up temporary file.
-                    System.IO.File.Delete(dest);
+                    //System.IO.File.Delete(dest);
                 }
-         
+                return View();
         }
         public void DownloadS3Object()
         {

@@ -1,0 +1,27 @@
+﻿@{
+    ViewBag.Title = "getFile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div style="text-align:center;"><h1>Đang download xin đợi....</h1><img src="~/Images/loading.gif"></div>
+
+<script>
+    var refreshIntervalId = setInterval(autocheck, 5000);
+    function autocheck() {
+        $.ajax({
+            url: "/AWS/checkFile?filename=@ViewBag.filename",
+            cache: false
+        }).done(function (html) {
+            if (html == "1") {
+                window.location.href = "/AWS/downloadstepfinal?fileName=@ViewBag.filename&dest=@ViewBag.dest";
+            }
+            //if (html == "0") {
+            //    autocheck();
+            //}
+            if (html == "-1") {
+                clearInterval(refreshIntervalId);
+                alert("Không tồn tại file này!");
+            }
+        });
+    }
+
+</script>
