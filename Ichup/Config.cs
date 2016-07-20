@@ -164,13 +164,18 @@ namespace Ichup
         public static string getF1CkUser(long id,string have)
         {
             if (have == null) have = "";
-            string val = "";
+            string val = "<select id=\"f-" + id + "-1\">";
             string schecked = "";
+            
             for (int i = 0; i < f1ck.Length; i++)
             {
-                if (have.Contains(f1ck[i])) schecked = "checked"; else schecked = "";
-                val += "<div class=\"checkbox\"><input type=\"checkbox\" id=\"f-" + id + "-1_" + (i + 1) + "\" value=\"" + f1ck[i] + "\"  " + schecked + " class=\"css-checkbox\">" + f1ck[i]+"</div>";
+                if (have.Contains(f1ck[i])) schecked = "selected"; else schecked = "";
+                //val += "<div class=\"checkbox\"><input type=\"checkbox\" id=\"f-" + id + "-1_" + (i + 1) + "\" value=\"" + f1ck[i] + "\"  " + schecked + " class=\"css-checkbox\">" + f1ck[i]+"</div>";
+
+                val += "<option value=\"" + f1ck[i] + "\" " + schecked + ">" + f1ck[i] + "</option>";
+                
             }
+            val += "</select>";
             return val;
         }
         public static string getF1Ck(string have)
@@ -189,13 +194,14 @@ namespace Ichup
         public static string getF2CkUser(long id,string have)
         {
             if (have == null) have = "";
-            string val = "";
+            string val = "<select id=\"f-" + id + "-2\">";
             string schecked = "";
             for (int i = 0; i < f2ck.Length; i++)
             {
-                if (have.Contains(f2ck[i])) schecked = "checked"; else schecked = "";
-                val += "<div class=\"checkbox\"><input type=\"checkbox\" id=\"f-" + id + "-2_" + (i + 1) + "\" value=\"" + f2ck[i] + "\"  " + schecked + ">" + f2ck[i] + "</div>";
+                if (have.Contains(f2ck[i])) schecked = "selected"; else schecked = "";
+                val += "<option value=\"" + f2ck[i] + "\" " + schecked + ">" + f2ck[i] + "</option>";
             }
+            val += "</select>";
             return val;
         }
         public static string getF2Ck(string have)
@@ -215,17 +221,16 @@ namespace Ichup
         {
             if (have == null) have = "";
             var p = (from q in db.categories orderby q.name select q.name).ToList();
-            string val = "<table style=\"width:100%;\"><tr>";
+            string val = "<select id=\"f-" + id + "-3\">";
             string schecked = "";
 
             for (int i = 0; i < p.Count; i++)
             {
                 string name = p[i];
-                if (have.Contains(name)) schecked = "checked"; else schecked = "";
-                if (i % 4 == 0 && i>0) val += "</tr><tr>";
-                val += "<td width=25%><div class=\"checkbox\"><input value='" + name + "' id=f-" + id + "-3_" + (i + 1) + " type=checkbox " + schecked + ">" + name + "</div></td>";
+                if (have.Contains(name)) schecked = "selected"; else schecked = "";
+                val += "<option value=\"" + name + "\" " + schecked + ">" + name + "</option>";
             }
-            val += "</tr></table>";
+            val += "</select>";
             return val;
         }
         public static string getF3Ck(string have)
@@ -261,16 +266,14 @@ namespace Ichup
         public static string getF4CkUser(long id,string have)
         {
             if (have == null) have = "";
-            //string val = "";
+            string val = "<select id=\"f-" + id + "-4\">";
             string schecked = "";
-            string val = "<table style=\"width:100%;\"><tr>";
             for (int i = 0; i < f4ck.Length; i++)
             {
-                if (have.Contains(f4ck[i])) schecked = "checked"; else schecked = "";
-                if (i % 4 == 0 && i > 0) val += "</tr><tr>";
-                val += "<td width=25%><div class=\"checkbox\"><input type=\"checkbox\" id=\"f-" + id + "-4_" + (i + 1) + "\" value=\"" + f4ck[i] + "\"  " + schecked + ">" + f4ck[i] + "</div></td>";
+                if (have.Contains(f4ck[i])) schecked = "selected"; else schecked = "";
+                val += "<option value=\"" + f4ck[i] + "\" " + schecked + ">" + f4ck[i] + "</option>";
             }
-            val += "</tr></table>";
+            val += "</select>";
             return val;
         }
         public static string[] f5ck = new string[] { "chân dung", "bán thân", "chụp 3/4", "toàn thân", "khoảnh khắc" };
@@ -291,15 +294,14 @@ namespace Ichup
         public static string getF5CkUser(long id,string have)
         {
             if (have == null) have = "";
-            string val = "";
+            string val = "<select id=\"f-" + id + "-5\">";
             string schecked = "";
-
             for (int i = 0; i < f5ck.Length; i++)
             {
-                if (have.Contains(f5ck[i])) schecked = "checked"; else schecked = "";
-                val += "<div class=\"checkbox\"><input type=\"checkbox\" id=\"f-" + id + "-5_" + (i + 1) + "\" value=\"" + f5ck[i] + "\"  " + schecked + ">" + f5ck[i] + "</div>"; 
+                if (have.Contains(f5ck[i])) schecked = "selected"; else schecked = "";
+                val += "<option value=\"" + f5ck[i] + "\" " + schecked + ">" + f5ck[i] + "</option>";
             }
-
+            val += "</select>";
             return val;
         }
         public static string getSaleType(long id,byte? sale_type) {
