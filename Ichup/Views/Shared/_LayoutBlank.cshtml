@@ -1,0 +1,262 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+ <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+    <title>bananhso.com chuyên cung cấp ảnh stock, bán ảnh stock, bán ảnh làm lịch</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <script src="/Content/js/jquery.min.js"></script>
+    <script src="/Content/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" href="/Content/css/bootstrap.min.css" type="text/css" />
+    <link type="text/css" rel="stylesheet" href="/Content/css/base.css" />
+    <link type="text/css" rel="stylesheet" href="/Content/css/style.css" />
+    <link href="/Content/css/font-awesome.css" rel="stylesheet" />
+
+    <script src="/Content/js/owl.carousel.js"></script>
+    <link rel="stylesheet" href="/Content/css/owl.carousel.css">
+
+    <script src="/Scripts/jquery-1.8.2.js"></script>
+    @*<script src="/Scripts/jquery-1.8.2.min.js"></script>*@
+    <script src="/Scripts/jquery-ui-1.8.24.min.js"></script>
+    <script src="/Scripts/jquery-ui-1.8.24.js"></script>
+    <link rel="stylesheet" type="text/css" href="/Content/jquery-ui.css" />
+    <script src="/Scripts/core.js"></script>
+    <link rel="stylesheet" href="/Content/tags/bootstrap-tagsinput.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/themes/github.css">
+    <link rel="stylesheet" href="/Content/assets/app.css">
+</head>
+
+<body>
+    <header class="navbar navbar-static-top bs-docs-nav">
+        <!--"navbar-static-top" or "navbar-fixed-top": "big-slider" padding-top: 80:px-->
+        <div class="container">
+            <div class="navbar-header">
+                <button class="navbar-toggle collapsed" type="button" tabindex="1" accesskey="m" data-toggle="collapse" data-target="#bs-navbar" aria-controls="bs-navbar" aria-expanded="false">
+                    <span class="sr-only">toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/Home" class="navbar-brand"><img src="/Content/img/logo.png" alt=""> Bananhso.com</a>
+            </div>
+            <nav id="bs-navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-left">
+                    <li>
+                        <a href="/Photos/User"><i class="fa fa-camera"></i> Người bán ảnh</a>
+                    </li>
+                    <li>
+                        <a href="/Members/Login2">Đăng nhập</a>
+                    </li>
+                    <li>
+                        <a href="/Members/Login2">Đăng ký</a>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active">
+                        <a href="#"><i class="fa fa-user"></i> Người mua ảnh</a>
+                    </li>
+                    <li class="active">
+                        <a href="/Members/Login">Đăng nhập</a>
+                    </li>
+                    <li class="active">
+                        <a href="/Members/Login">Đăng ký</a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header><!-- end header-->
+    <!-- ============================  Navigation End ============================ -->
+    <div id="body">
+
+        <section class="content-wrapper main-content clear-fix">
+            @RenderBody()
+        </section>
+    </div>
+    <!-- ============================  FOOTER START ============================ -->
+
+    <section class="contact-text-index" style="background-color:#4d4e4e">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-10 col-center">
+                    <div class="col-xs-12 col-sm-4 col-md-4 item-contact-index">
+                        <div class="images"><i class="fa fa-facebook-square"></i></div>
+                        <div class="title">Công ty Cổ phần sáng tạo</div>
+                        <div class="content-meta">Tầng 2, tòa nhà Kim Hoàn, ngõ 19 Duy Tân</div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-md-4 item-contact-index">
+                        <div class="images"><i class="fa fa-phone-square"></i></div>
+                        <div class="title">04.1900.8798</div>
+                        <div class="content-meta">Điện thoại hỗ trợ 24/7</div>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 col-md-4 item-contact-index">
+                        <div class="images"><i class="fa fa-envelope-square"></i></div>
+                        <div class="title">Liên hệ</div>
+                        <div class="content-meta">bananhso@gmail.com</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-4 col-md-3 text-left">
+                    <ul>
+                        <li class="item-top"><a href="/Home/About">GIỚI THIỆU</a></li>
+                        <li><a href="/Home/About">Giới thiệu</a></li>
+                        <li><a href="#">Đăng ký</a></li>
+                        <li><a href="#">Bảng giá và hình thức thanh toán</a></li>
+                        <li><a href="#">Bản quyền và điều khoản sử dụng</a></li>
+                        <li><a href="#">Câu hỏi thường gặp</a></li>
+                    </ul>
+
+                    <ul>
+                        <li class="item-top"><a href="#">LIÊN KẾT</a></li>
+                        <li class="item-list-social">
+                            <a href="#"><i class="fa fa-facebook-square"></i></a>
+                            <a href="#"><i class="fa fa-twitter-square"></i></a>
+                            <a href="#"><i class="fa fa-google-plus-square"></i></a>
+                            <a href="#"><i class="fa fa-youtube-square"></i></a>
+                            <a href="#"><i class="fa fa-vimeo-square"></i></a>
+                        </li>
+
+                    </ul>
+
+                </div>
+                <div class="col-xs-12 col-sm-8 col-md-6 text-left">
+
+
+                    <ul class="row" style="margin:0 -15px">
+                        <li class="col-sm-12 item-top"><a href="#">ẢNH THEO CHỦ ĐỀ</a></li>
+                        @Html.Raw(@Ichup.Config.getCategory())
+                    </ul>
+                </div>
+                <div class="col-xs-12 col-sm-8 col-md-3 text-left">
+                    <ul>
+                        <li class="item-top"><a href="#">ĐĂNG KÝ</a></li>
+                    </ul>
+                    <form class="form-login-index">
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Tên đăng nhập">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Mật khẩu">
+                        </div>
+
+                        <div class="checkbox">
+                            <input type="checkbox" name="checkboxG6" id="checkboxG6" class="css-checkbox" /><label for="checkboxG6" class="css-label">Tôi đã đọc và đồng ý với <a href="/Home/Rule"> Bản quyền và điều khoản sử dụng</a> của website bananhso.com và đồng ý đăng ký</label>
+                        </div>
+                        <div class="div-submit">
+                            <button type="submit" class="btn-submit">Đăng ký</button>
+                        </div>
+
+                    </form>
+
+                </div>
+                <div class="clearfix"></div>
+
+                <div class="bottom-footer">
+                    <div class="col-xs-12 col-sm-12 text-left">
+                        © Bananhso.com. All rights reserved. Cơ quan chủ quản: Công ty cổ phần Sáng Tạo. Giấy phép số: 144/GP - BC do Bộ thông tin - Truyền thông cấp ngày 18/04/2007
+                    </div>
+
+
+
+                </div>
+            </div>
+
+        </div>
+    </footer><!-- end footer-->
+
+    <script src="/Content/js/script.js"></script>
+
+
+    <!-- ============================  FOOTER ENDS ============================ -->
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    @*<script src="~/Content/js/libraries/jquery.min.js"></script>*@
+    @*<script src="/Content/js/bootstrap.min.js"></script>*@
+    @*<script src="/Content/js/libraries/placeholders.js"></script>*@
+
+    @*<script src="/Content/js/main.js"></script>*@
+    <script>
+		var sl=0;
+		var index;
+		function changeBG(){
+			$('#mainbg').animate({opacity: 0.9}, 1000,changeBGDO).animate({opacity: 1}, 1000);
+		}
+		function changeBGDO(){
+			sl++;
+			sl=sl%3;
+			index=sl+1;
+			$('#mainbg').css("background-image","url('/Content/img/sl"+index+".jpg')");
+
+		}
+		setInterval(changeBG, 3000);
+		//document.addEventListener("keydown", autosearch);
+		function autosearch(e) {
+		    var keyCode = e.keyCode || e.which;//('which' in event) ? event.which : event.keyCode;
+		    var keyword = document.getElementById("skeyword").value;
+		    //alert(keyCode);
+		    if (keyCode == 13) {
+		        if (keyword == "") {
+		            alert("Bạn phải nhập từ khóa");
+		            return;
+		        }else{
+		            //var surl = "/Search/Index?k=" + keyword;
+		            //alert(url);
+		            //window.location.href = surl;
+		            //history.pushState('Search', 'Search', surl);
+		            bsearch();
+                }
+            }
+
+		}
+		function bsearch() {
+
+		    var k = document.getElementById("skeyword").value;
+
+		        if (k == "") {
+		            alert("Bạn phải nhập từ khóa");
+		            return;
+		        }
+		        var url = "/Search?k=" + k;
+		        //alert(url);
+		        window.location.href = url;
+
+
+		}
+    </script>
+    <script src="/Content/tags/bootstrap-tagsinput.min.js"></script>
+    <script src="/Content/tags/bootstrap-tagsinput-angular.min.js"></script>
+    <script src="/Content/assets/app.js"></script>
+    <script src="/Content/assets/app_bs3.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.20/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/js/rainbow.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/js/language/generic.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/js/language/html.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/rainbow/1.2.0/js/language/javascript.js"></script>
+  
+</body>
+</html>

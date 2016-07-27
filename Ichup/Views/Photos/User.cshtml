@@ -2,7 +2,7 @@
 @using PagedList.Mvc;
 @{
     ViewBag.Title = "User";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_LayoutBlank.cshtml";
     var totalItemImage = 0;
 }
 <!-- ============================  Categories Start ============================ -->
@@ -47,7 +47,7 @@
     </script>
 @*<input type="text" autocomplete="on" class="form-control" placeholder="địa điểm" id="location" required data-validation-required-message="địa điểm">*@
 <div class="map_canvas" style="display:none;"></div>
-    <section class="search-index-08">
+    @*<section class="search-index-08">
         <div class="container">
             <div class="col-md-12">
                 <ul class="post-menu-cat">
@@ -62,8 +62,8 @@
                 <div class="clearfix"></div>
             </div>
         </div>
-    </section>
-    <section class="section-09">
+    </section>*@
+    @*<section class="section-09">
         <div class="container">
             <div class="col-md-12 col-center">
                 <div class="headline">
@@ -136,7 +136,7 @@ giúp bức ảnh của bạn sẽ được tìm thấy dễ hơn, và có thể
                             <div class="title">Bước 3</div>
 
                             <div class="text">Dùng một câu ngắn gọn xúc tích mô tả ảnh của bạn. Hướng dẫn Sử dụng những từ khóa ngắn gọn (2-3 chữ) để liệt kê những thành phần
-trong ảnh của bạn. Hướng dẫn</div>
+                            trong ảnh của bạn. Hướng dẫn</div>
 
                         </div>
                         <div class="clearfix"></div>
@@ -146,7 +146,8 @@ trong ảnh của bạn. Hướng dẫn</div>
             </div>
         </div>
 
-    </section>
+    </section>*@
+<input type="text" value="Amsterdam,Washington,Sydney,Beijing,Cairo" data-role="tagsinput" />
  @foreach(var item in Model){
                 
                 <text>
@@ -155,9 +156,9 @@ trong ảnh của bạn. Hướng dẫn</div>
         <div class="container">
             <div class="col-md-12 col-center">
                 <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-2">
                         <div class="item-12">
-                            <div class="images"><img src="..@item.link_thumbail_big" alt="img" style="border-radius:11px;width:285px;height:202px;" /></div>
+                            <div class="images"><img src="@Ichup.Config.domain/@item.link_thumbail_big" alt="img" style="border-radius:11px;width:185px;height:102px;" /></div>
                             <div class="checkbox">
                                 <input type="checkbox" name="checkboxG6" id="checkboxG6" class="css-checkbox" />Chọn ảnh này
                             </div>
@@ -168,95 +169,71 @@ trong ảnh của bạn. Hướng dẫn</div>
                             <div class="clear"></div>
                         </div>
                     </div>
-                    <div class="col-md-4 border-lr-12">
-                        <div class="col-sm-6 col-md-4">
-                            <div class="item-center">
-                                <div class="text">Loại ảnh</div>
-                                @Html.Raw(@Ichup.Config.getF1CkUser(@item.id,@item.filter_1))
-                               
-                            </div>
-
-                        </div>
-
-                        <div class="col-sm-6 col-md-4">
-                            <div class="item-center">
-                               <div class="text">Kiểu ảnh</div>
-                                @Html.Raw(@Ichup.Config.getF2CkUser(@item.id,@item.filter_2))
-                            </div>
-
-                        </div>
-
-                        <div class="col-sm-6 col-md-4">
-                            <div class="item-center">
-                                <div class="text">Góc chụp</div>
-                                 @Html.Raw(@Ichup.Config.getF5CkUser(@item.id,@item.filter_5))
-                            </div>
-
-                        </div>
-
-                        <div class="col-md-12 margin-top-30">
-                            <div class="item-center">
-                                <div class="text">Chủ đề</div>
-                                 @Html.Raw(@Ichup.Config.getF3CkUser(@item.id,@item.filter_3))
-
-                            </div>
-                        </div>
-                        <div class="col-md-12 margin-top-30">
-                            <div class="item-center">
-                                <div class="text">Người</div>
-                                 @Html.Raw(@Ichup.Config.getF4CkUser(@item.id,@item.filter_4))
-
-                            </div>
-                        </div>
-                        
-
-
-                    </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="item-center">
                             <div class="text">Mô tả ảnh</div>
                             <div class="lable-1"><textarea id="name_@item.id" name="name_@item.id" placeholder="Mô tả ảnh" rows="2" cols="10">@item.name</textarea></div>
-                           <div class="lable-2">
-                                <div class="text margin-top-30 margin-bottom-5">Từ khóa</div>
-                                <div class="lable-1"><textarea id="keyword_@item.id" name="keyword_@item.id"  placeholder="Từ khóa cách nhau dấu ," rows="2" cols="10">@item.keywords2</textarea></div>
-                                @*<div class="text-label"><a href="#">Coppy nội dung</a><a href="#">Xóa Nội dung</a></div>*@
-                                <div class="text margin-top-30 margin-bottom-5">Địa điểm chụp ảnh này</div>
-                                <div class="lable-1">
-                                    <input type="text" autocomplete="on"  id="address_@item.id" name="address_@item.id" value="@item.address" style="width:100%;"/>
-                                    <input type="hidden" id="lon_@item.id" name="lon_@item.id" value="@item.lon"/>
-                                    <input type="hidden" id="lat_@item.id" name="lat_@item.id" value="@item.lat"/>                                    
-                                    @*<div class="map_canvas" style="display:none;"></div>*@
-                                    <script>
-                                        $(function () {
-                                            //var long;
-                                            //var lat;
-                                            var options = {
-                                                map: ".map_canvas"
-                                            };
-                                            $("#address_@item.id").geocomplete(options)
-                                              .bind("geocode:result", function (event, result) {
-                                                  $("#lon_@item.id").val(result.geometry.location.lng());
-                                                  $("#lat_@item.id").val(result.geometry.location.lat());
-                                                  //alert("long" + result.geometry.location.lng() + ", lat=" + result.geometry.location.lat());
-                                              })
-                                              .bind("geocode:error", function (event, status) {
-                                                  $.log("ERROR: " + status);
-                                              })
-                                              .bind("geocode:multiple", function (event, results) {
-                                                  $.log("Multiple: " + results.length + " results found");
-                                              });
-                                        });
-                                    </script>
+                            <div class="lable-2">
+                                <div class="text">Từ khóa</div>
+                                @*<div class="bootstrap-tagsinput">@item.keywords2</div>*@
+                                    <div class="lable-1"><input type="text" id="keyword_@item.id" name="keyword_@item.id" placeholder="Từ khóa cách nhau dấu ," value="@item.keywords2" data-role="tagsinput" size="30"></div>
+                                    @*<div class="text-label"><a href="#">Coppy nội dung</a><a href="#">Xóa Nội dung</a></div>*@
+                                    <div class="text">Địa điểm chụp ảnh này</div>
+                                    <div class="lable-1">
+                                        <input type="text" autocomplete="on" id="address_@item.id" name="address_@item.id" value="@item.address" style="width:100%;" />
+                                        <input type="hidden" id="lon_@item.id" name="lon_@item.id" value="@item.lon" />
+                                        <input type="hidden" id="lat_@item.id" name="lat_@item.id" value="@item.lat" />
+                                        @*<div class="map_canvas" style="display:none;"></div>*@
+                                        <script>
+                                            $(function () {
+                                                //var long;
+                                                //var lat;
+                                                var options = {
+                                                    map: ".map_canvas"
+                                                };
+                                                $("#address_@item.id").geocomplete(options)
+                                                  .bind("geocode:result", function (event, result) {
+                                                      $("#lon_@item.id").val(result.geometry.location.lng());
+                                                      $("#lat_@item.id").val(result.geometry.location.lat());
+                                                      //alert("long" + result.geometry.location.lng() + ", lat=" + result.geometry.location.lat());
+                                                  })
+                                                  .bind("geocode:error", function (event, status) {
+                                                      $.log("ERROR: " + status);
+                                                  })
+                                                  .bind("geocode:multiple", function (event, results) {
+                                                      $.log("Multiple: " + results.length + " results found");
+                                                  });
+                                            });
+                                        </script>
+                                    </div>
+                                    @*<div class="text margin-top-30 margin-bottom-5">Giá bán</div>
+            <div class="lable-1">
+                @Html.Raw(@Ichup.Config.getF0CkUser(@item.id, @item.price.ToString()))
+            </div>*@
+
                                 </div>
-                               <div class="text margin-top-30 margin-bottom-5">Giá bán</div>
-                                <div class="lable-1">
-                                    @Html.Raw(@Ichup.Config.getF0CkUser(@item.id,@item.price.ToString()))
-                                </div>
-                               
-                            </div>
                         </div>
+                    </div>
+                    <div class="col-md-4 border-lr-12">
+                        
+                            <div class="item-center">
+                                <div class="text">Loại ảnh</div>
+                                @Html.Raw(@Ichup.Config.getF1CkUser(@item.id, @item.filter_1))
+                                <div class="text">Kiểu ảnh</div>
+                                @Html.Raw(@Ichup.Config.getF2CkUser(@item.id, @item.filter_2))
+                                <div class="text">Góc chụp</div>
+                                @Html.Raw(@Ichup.Config.getF5CkUser(@item.id, @item.filter_5))
+                                <div class="text">Chủ đề</div>
+                                @Html.Raw(@Ichup.Config.getF3CkUser(@item.id, @item.filter_3))
+                                <div class="text">Người</div>
+                                @Html.Raw(@Ichup.Config.getF4CkUser(@item.id, @item.filter_4))
+                                @Html.Raw(@Ichup.Config.getF0CkUser(@item.id, @item.price.ToString()))
+                            </div>
+                      
+
 
                     </div>
+                    
 
 
                 </div>
