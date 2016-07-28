@@ -44,6 +44,7 @@
             }
         
         }
+        var sampleTags = ['c++', 'java', 'php', 'coldfusion', 'javascript', 'asp', 'ruby', 'python', 'c', 'scala', 'groovy', 'haskell', 'perl', 'erlang', 'apl', 'cobol', 'go', 'lua'];
     </script>
 @*<input type="text" autocomplete="on" class="form-control" placeholder="địa điểm" id="location" required data-validation-required-message="địa điểm">*@
 <div class="map_canvas" style="display:none;"></div>
@@ -147,7 +148,10 @@ giúp bức ảnh của bạn sẽ được tìm thấy dễ hơn, và có thể
         </div>
 
     </section>*@
-<input type="text" value="Amsterdam,Washington,Sydney,Beijing,Cairo" data-role="tagsinput" />
+@*<div class="bs-example">
+    <ul id="myTags"></ul>
+    <script>$('#myTags').tagit();</script>
+</div>*@
  @foreach(var item in Model){
                 
                 <text>
@@ -176,7 +180,20 @@ giúp bức ảnh của bạn sẽ được tìm thấy dễ hơn, và có thể
                             <div class="lable-2">
                                 <div class="text">Từ khóa</div>
                                 @*<div class="bootstrap-tagsinput">@item.keywords2</div>*@
-                                    <div class="lable-1"><input type="text" id="keyword_@item.id" name="keyword_@item.id" placeholder="Từ khóa cách nhau dấu ," value="@item.keywords2" data-role="tagsinput" size="30"></div>
+                                    <div class="lable-1">
+                                        <input type="text" id="keyword_@item.id" name="keyword_@item.id" value="@item.keywords2" style="display:none;">
+                                        <ul id="ukeyword_@item.id" name="ukeyword_@item.id" style="background:#ffffff;">@item.keywords2</ul>
+                                           <script>
+                                                    //var sampleTags_@item.id = "@item.keywords2".split(",");
+                                                        $('#keyword_@item.id').tagit();
+                                                        $('#ukeyword_@item.id').tagit({
+                                                        availableTags: sampleTags,
+                                                        // This will make Tag-it submit a single form value, as a comma-delimited field.
+                                                        singleField: true,
+                                                        singleFieldNode: $('#keyword_@item.id')
+                                                    });
+                                        </script>
+                                    </div>
                                     @*<div class="text-label"><a href="#">Coppy nội dung</a><a href="#">Xóa Nội dung</a></div>*@
                                     <div class="text">Địa điểm chụp ảnh này</div>
                                     <div class="lable-1">
