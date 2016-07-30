@@ -164,7 +164,7 @@ giúp bức ảnh của bạn sẽ được tìm thấy dễ hơn, và có thể
                         <div class="item-12">
                             <div class="images"><img src="@Ichup.Config.domain/@item.link_thumbail_big" alt="img" style="border-radius:11px;width:185px;height:102px;" /></div>
                             <div class="checkbox">
-                                <input type="checkbox" name="checkboxG6" id="checkboxG6" class="css-checkbox" />Chọn ảnh này
+                                <input type="checkbox" name="checkbox_@item.id" id="checkbox_@item.id" class="css-checkbox" />Chọn ảnh này
                             </div>
                             <div class="div-submit margin-top-125">
                                 <button type="button" class="btn-submit" onclick="save(@item.id)">Save</button>
@@ -182,10 +182,10 @@ giúp bức ảnh của bạn sẽ được tìm thấy dễ hơn, và có thể
                                 @*<div class="bootstrap-tagsinput">@item.keywords2</div>*@
                                     <div class="lable-1">
                                         <input type="text" id="keyword_@item.id" name="keyword_@item.id" value="@item.keywords2" style="display:none;">
-                                        <ul id="ukeyword_@item.id" name="ukeyword_@item.id" style="background:#ffffff;">@item.keywords2</ul>
+                                        <ul id="ukeyword_@item.id" name="ukeyword_@item.id" style="background:#ffffff;"></ul>
                                            <script>
                                                     //var sampleTags_@item.id = "@item.keywords2".split(",");
-                                                        $('#keyword_@item.id').tagit();
+                                                        //$('#keyword_@item.id').tagit();
                                                         $('#ukeyword_@item.id').tagit({
                                                         availableTags: sampleTags,
                                                         // This will make Tag-it submit a single form value, as a comma-delimited field.
@@ -276,6 +276,8 @@ giúp bức ảnh của bạn sẽ được tìm thấy dễ hơn, và có thể
     
     var totalItemImage=@totalItemImage;
     function save(id){
+        //alert(document.getElementById("keyword_" + id).value);
+        //return;
         var formdata = new FormData(); //FormData object
         var filter_1=getValueOfField(id,1);
         var filter_2=getValueOfField(id,2);
