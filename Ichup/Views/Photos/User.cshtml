@@ -4,6 +4,7 @@
     ViewBag.Title = "User";
     Layout = "~/Views/Shared/_LayoutBlank.cshtml";
     var totalItemImage = 0;
+    //var leng
 }
 <!-- ============================  Categories Start ============================ -->
     <style>
@@ -45,6 +46,21 @@
         
         }
         var sampleTags = ['c++', 'java', 'php', 'coldfusion', 'javascript', 'asp', 'ruby', 'python', 'c', 'scala', 'groovy', 'haskell', 'perl', 'erlang', 'apl', 'cobol', 'go', 'lua'];
+        function getAllChecked(id,index){
+            var selected = [];
+            var x = document.getElementsByName("checkboxImage");
+            var i;
+            for (i = 0; i < x.length; i++) {
+                if (x[i].type == "checkbox" && x[i].checked == false && x[i].attributes["index"].value==index) return;
+                if (x[i].type == "checkbox" && x[i].checked == true && x[i].attributes["idd"].value!=id) {
+                    //alert(x[i].attributes["idd"].value);
+                    $("#ukeyword_"+x[i].attributes["idd"].value).html($("#ukeyword_"+id).html());
+                    $("#keyword_"+x[i].attributes["idd"].value).html($("#keyword_"+id).html());
+                    //alert($("#ukeyword_"+x[i].attributes["idd"].value).html()+"-"+ x[i].attributes["idd"].value).html());
+                }
+               
+            }
+        }
     </script>
 @*<input type="text" autocomplete="on" class="form-control" placeholder="địa điểm" id="location" required data-validation-required-message="địa điểm">*@
 <div class="map_canvas" style="display:none;"></div>
@@ -164,7 +180,7 @@ giúp bức ảnh của bạn sẽ được tìm thấy dễ hơn, và có thể
                         <div class="item-12">
                             <div class="images"><img src="@Ichup.Config.domain/@item.link_thumbail_big" alt="img" style="border-radius:11px;width:185px;height:102px;" /></div>
                             <div class="checkbox">
-                                <input type="checkbox" name="checkbox_@item.id" id="checkbox_@item.id" class="css-checkbox" />Chọn ảnh này
+                                <input type="checkbox" name="checkboxImage" id="@item.id" idd="@item.id" index="@totalItemImage" class="css-checkbox" />Chọn ảnh này
                             </div>
                             <div class="div-submit margin-top-125">
                                 <button type="button" class="btn-submit" onclick="save(@item.id)">Save</button>
@@ -182,7 +198,7 @@ giúp bức ảnh của bạn sẽ được tìm thấy dễ hơn, và có thể
                                 @*<div class="bootstrap-tagsinput">@item.keywords2</div>*@
                                     <div class="lable-1">
                                         <input type="text" id="keyword_@item.id" name="keyword_@item.id" value="@item.keywords2" style="display:none;">
-                                        <ul id="ukeyword_@item.id" name="ukeyword_@item.id" style="background:#ffffff;"></ul>
+                                        <ul id="ukeyword_@item.id" name="ukeyword_@item.id" style="background:#ffffff;" onkeyup="getAllChecked(@item.id,@totalItemImage);"></ul>
                                            <script>
                                                     //var sampleTags_@item.id = "@item.keywords2".split(",");
                                                         //$('#keyword_@item.id').tagit();
