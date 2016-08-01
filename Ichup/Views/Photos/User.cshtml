@@ -11,6 +11,7 @@
         tr {
             border-bottom:1px solid #0ff;
         }
+        select{min-width:200px}
     </style>
     <script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
 	<script src="/Scripts/jquery.geocomplete.js"></script> 
@@ -183,8 +184,8 @@ giúp bức ảnh của bạn sẽ được tìm thấy dễ hơn, và có thể
                                 <input type="checkbox" name="checkboxImage" id="@item.id" idd="@item.id" index="@totalItemImage" class="css-checkbox" />Chọn ảnh này
                             </div>
                             <div class="div-submit margin-top-125">
-                                <button type="button" class="btn-submit" onclick="save(@item.id)">Save</button>
-                                <button type="button" class="btn-submit" onclick="del(@item.id)">Delete</button>
+                                <button type="button" class="btn" onclick="save(@item.id)">Save</button>
+                                <button type="button" class="btn" onclick="del(@item.id)">Delete</button>
                             </div>
                             <div class="clear"></div>
                         </div>
