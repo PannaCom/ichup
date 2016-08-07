@@ -251,9 +251,9 @@ giúp bức ảnh của bạn sẽ được tìm thấy dễ hơn, và có thể
                     <div class="col-md-4 border-lr-12">
                         
                             <div class="item-center">
-                                <div class="text">Loại ảnh</div>
+                                <div class="text" style="display:none;">Loại ảnh</div>
                                 @Html.Raw(@Ichup.Config.getF1CkUser(@item.id, @item.filter_1))
-                                <div class="text">Kiểu ảnh</div>
+                                <div class="text" style="display:none;">Kiểu ảnh</div>
                                 @Html.Raw(@Ichup.Config.getF2CkUser(@item.id, @item.filter_2))
                                 <div class="text">Góc chụp</div>
                                 @Html.Raw(@Ichup.Config.getF5CkUser(@item.id, @item.filter_5))
@@ -318,7 +318,7 @@ giúp bức ảnh của bạn sẽ được tìm thấy dễ hơn, và có thể
         //if (document.getElementById("sale_type_" + id+"_2").checked) sale_type=1;;
         //alert(document.getElementById("sale_type_" + id+"_2").checked);
         //return;
-        if (document.getElementById("f-" + id+"-0_1").checked) price=0;
+        if (document.getElementById("f-" + id+"-0").checked) price=0;
         formdata.append("id", id);
         formdata.append("filter_1", filter_1);
         formdata.append("filter_2", filter_2);
@@ -373,13 +373,18 @@ giúp bức ảnh của bạn sẽ được tìm thấy dễ hơn, và có thể
     }
     function getValueOfField(id,index){
         var value="";
-        for(var i=1;i<=20;i++){
-            if(document.getElementById("f-"+id+"-"+index+"_"+i)){
-                if (document.getElementById("f-"+id+"-"+index+"_"+i).checked){
-                    value+=document.getElementById("f-"+id+"-"+index+"_"+i).value+", ";
+        //for(var i=1;i<=20;i++){
+        //    if(document.getElementById("f-"+id+"-"+index+"_"+i)){
+        //        if (document.getElementById("f-"+id+"-"+index+"_"+i).checked){
+        //            value+=document.getElementById("f-"+id+"-"+index+"_"+i).value+", ";
+        //        }
+        //    }
+        //}
+        
+                if(document.getElementById("f-"+id+"-"+index)){
+                        value+=document.getElementById("f-"+id+"-"+index).value;
                 }
-            }
-        }
+          
         return value;
     }
     

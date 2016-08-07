@@ -191,7 +191,7 @@ namespace Ichup.Controllers
                 //db.Database.ExecuteSqlCommand(query);
                 image ig = db.images.Find(id);
                 ig.keywords2 = keywords;
-                ig.keywords = name + " " + keywords;
+                ig.keywords = name + " " + keywords + " " + filter_1 + " " + filter_2 + " " + filter_3 + " " + filter_4 + " " + filter_5;
                 ig.filter_1 = filter_1;
                 ig.filter_2 = filter_2;
                 ig.filter_3 = filter_3;
