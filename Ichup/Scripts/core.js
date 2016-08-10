@@ -114,6 +114,8 @@ function imagepage(id) {
                     var image_width_height = json_parsed.news[i].width + "x" + json_parsed.news[i].height;
                     var image_keyword = json_parsed.news[i].keywords;
                     $("#image_source").attr("src", src);
+                    $("#image_source").attr("width", "570px");
+                    $("#image_source").attr("height", "363px");
                     $("#image_id").html("File ID - #" + id);
                     $("#image_price").html(price);
                     $("#image_price2").html("Giá: " + formatCurrency(price));
@@ -138,3 +140,4 @@ function closedv(id) {
     $("#dvfh" + id).hide();
     $("#dvfs" + id).show();
 }
+//alert(window.location.href.indexOf("Photos/User"));

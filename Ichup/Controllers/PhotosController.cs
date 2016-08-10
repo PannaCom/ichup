@@ -69,6 +69,10 @@ namespace Ichup.Controllers
             }
             return "0";
         }
+        public ActionResult Grapher()
+        {
+            return View();
+        }
         public ActionResult User(string keyword,int? id,int? page) {
             if (Config.getCookie("userid") == "") return RedirectToAction("Login", "Members");
             else

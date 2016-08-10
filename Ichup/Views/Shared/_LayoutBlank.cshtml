@@ -54,26 +54,26 @@
             </div>
             <nav id="bs-navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-left">
-                    <li>
-                        <a href="/Photos/User"><i class="fa fa-camera"></i> Người bán ảnh</a>
+                    <li >
+                        <a href="/Photos/Upload" id="nba1"><i class="fa fa-camera"></i> Người bán ảnh</a>
                     </li>
-                    <li>
-                        <a href="/Members/Login2">Đăng nhập</a>
+                    <li >
+                        <a href="/Members/Login2" id="nba2">Đăng nhập</a>
                     </li>
-                    <li>
-                        <a href="/Members/Login2">Đăng ký</a>
+                    <li >
+                        <a href="/Members/Login2" id="nba3">Đăng ký</a>
                     </li>
                 </ul>
 
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="active">
-                        <a href="#"><i class="fa fa-user"></i> Người mua ảnh</a>
+                    <li >
+                        <a href="#" id="nma1"><i class="fa fa-user"></i> Người mua ảnh</a>
                     </li>
-                    <li class="active">
-                        <a href="/Members/Login">Đăng nhập</a>
+                    <li >
+                        <a href="/Members/Login" id="nma2">Đăng nhập</a>
                     </li>
-                    <li class="active">
-                        <a href="/Members/Login">Đăng ký</a>
+                    <li >
+                        <a href="/Members/Login" id="nma3">Đăng ký</a>
                     </li>
                 </ul>
             </nav>
@@ -247,6 +247,22 @@
 		        window.location.href = url;
 
 
+		}
+		if (window.location.href.indexOf("Photos/") >= 0) {
+		    //$("#nba1").addClass("active");
+		    //$("#nba2").addClass("active");
+		    //$("#nba3").addClass("active");
+		    //$("#nma1").removeClass("active");
+		    //$("#nma2").removeClass("active");
+		    //$("#nma3").removeClass("active");
+		    $("#nba1").html("Xin chao ");
+		    $("#nba1").css("color", "#ffffff");
+		    $("#nba2").css("color", "#ffffff");
+		    $("#nba3").css("color", "#ffffff");
+		    $("#nma1").css("color", "#676767");
+		    $("#nma2").css("color", "#676767");
+		    $("#nma3").css("color", "#676767");
+		    //alert(window.location.href.indexOf("Photos/User"));
 		}
     </script>
    
