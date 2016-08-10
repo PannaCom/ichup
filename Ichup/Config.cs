@@ -140,7 +140,7 @@ namespace Ichup
             string schecked = "";
             
              if (have.Equals("0")) schecked = "checked"; else schecked = "";
-             val += "<div class=\"item-checkbox\"><input type=\"checkbox\" id=\"f-" + id + "-0_1\" value=\"0\"  " + schecked + " class=\"css-checkbox\">Miễn phí</div>";
+             val += "<div class=\"item-checkbox\"><input type=\"checkbox\" id=\"f-" + id + "-0\" value=\"0\"  " + schecked + " class=\"css-checkbox\">&nbsp;Miễn phí</div>";
             
             return val;
         }
@@ -164,7 +164,7 @@ namespace Ichup
         public static string getF1CkUser(long id,string have)
         {
             if (have == null) have = "";
-            string val = "<select id=\"f-" + id + "-1\">";
+            string val = "<select id=\"f-" + id + "-1\" style=\"display:none;\">";
             string schecked = "";
             
             for (int i = 0; i < f1ck.Length; i++)
@@ -194,7 +194,7 @@ namespace Ichup
         public static string getF2CkUser(long id,string have)
         {
             if (have == null) have = "";
-            string val = "<select id=\"f-" + id + "-2\">";
+            string val = "<select id=\"f-" + id + "-2\" style=\"display:none;\">";
             string schecked = "";
             for (int i = 0; i < f2ck.Length; i++)
             {
