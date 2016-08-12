@@ -50,6 +50,9 @@ namespace Ichup.Controllers
             ViewBag.id = id;
             return View(m);
         }
+        public string getUserName() {
+            return Config.getCookie("logged");
+        }
         public ActionResult Login() {
             //ViewBag.id = 0;
             return View();
@@ -66,6 +69,7 @@ namespace Ichup.Controllers
             if (id!=null) {
                 Config.setCookie("logged", name);
                 Config.setCookie("userid", id.id.ToString());
+                //Config.setCookie("username", name);
                 Config.setCookie("type", id.type.ToString());
                 return "1"; 
             } else { return "0"; }

@@ -343,7 +343,7 @@ namespace Ichup
                 
                 for (int i = 0; i < p.Count; i++)
                 {
-                    string name = p[i].ToUpperInvariant();
+                    string name = p[i].ToLowerInvariant();
                     
                     val += "<li class=\"col-sm-4\"><a href=\"#\">"+name+"</a></li>";
                     //if (i % 2 == 0) val += "<br>";

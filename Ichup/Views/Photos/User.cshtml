@@ -179,7 +179,7 @@ giúp bức ảnh của bạn sẽ được tìm thấy dễ hơn, và có thể
                 <div class="row">
                     <div class="col-md-2">
                         <div class="item-12">
-                            <div class="images"><img src="@Ichup.Config.domain/@item.link_thumbail_big" alt="img" style="border-radius:11px;width:185px;height:102px;" /></div>
+                            <div class="images"><img src="@Ichup.Config.domain/@item.link_thumbail_big" alt="img" style="border:1px solid #808080;width:185px;height:102px;" /></div>
                             <div class="checkbox">
                                 <input type="checkbox" name="checkboxImage" id="@item.id" idd="@item.id" index="@totalItemImage" class="css-checkbox" />Chọn ảnh này
                             </div>
@@ -278,14 +278,21 @@ giúp bức ảnh của bạn sẽ được tìm thấy dễ hơn, và có thể
 </text>
                 totalItemImage++;
             }
+    <div class="clearfix"></div>
+    <nav class="nav-pagination">
+        <ul class="pagination">
+            <li><span href="#" aria-label="Previous">Trang</span></li>
+            @for (int i = 1; i <= Model.PageCount; i++)
+            {
+                <li><a href="/Photos/User?keyword=@ViewBag.keyword&id=@ViewBag.id&page=@i" style="cursor:pointer;">@i</a></li>
+            }
+            <li><span href="#">trong số @Model.PageCount</span></li>
 
-    <div class="pagination ">
-                                  <ul>
-                                    @for (int i = 1; i <= Model.PageCount; i++){
-                                        <li ><a href="/Photos/User?keyword=@ViewBag.keyword&id=@ViewBag.id&page=@i" style="cursor:pointer;">@i</a></li>
-                                    }
-                                  </ul>
-                                </div> <!-- end pagination -->
+            <li><a href="#" class="bg-arrow">›</a></li>
+            <li><a href="#" class="bg-arrow" aria-label="Next"><span aria-hidden="true">»</span></a></li>
+        </ul>
+    </nav>
+   
 
 
 <script>
