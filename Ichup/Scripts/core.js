@@ -99,7 +99,10 @@ function imagepage(id) {
     var content = "";
     $("#loadingimage").show();
     $("#imagepage").show();
+    $("#image_source").css("width", "50px");
+    $("#image_source").css("height", "50px");
     $("#image_source").attr("src", "/Images/loading.gif");
+    
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4 && xhr.status == 200) {
             if (xhr.responseText != "0") {
@@ -114,8 +117,8 @@ function imagepage(id) {
                     var image_width_height = json_parsed.news[i].width + "x" + json_parsed.news[i].height;
                     var image_keyword = json_parsed.news[i].keywords;
                     $("#image_source").attr("src", src);
-                    $("#image_source").attr("width", "570px");
-                    $("#image_source").attr("height", "363px");
+                    $("#image_source").css("width", "570px");
+                    $("#image_source").css("height", "363px");
                     $("#image_id").html("File ID - #" + id);
                     $("#image_price").html(price);
                     $("#image_price2").html("Giá: " + formatCurrency(price));
